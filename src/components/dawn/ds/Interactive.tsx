@@ -4,6 +4,9 @@ import { useState } from "react";
 import type { ControlState } from "@/lib/contrast";
 import { DW, focusForced, focusRing, slow, ui } from "./tokens";
 import { Tick } from "./Primitives";
+import { PlateIcon } from "../PlateArt";
+import { stopBase, stopState, type RouteNode } from "./Guide";
+import { t12, t14, t24 } from "./type";
 
 /* ---------- tabs ---------- */
 
@@ -139,5 +142,57 @@ export function PlateToggle({ label, icon, initial = false, force, checked, onCh
       {track}
       {text}
     </button>
+  );
+}
+
+/* ---------- route map ---------- */
+
+/** Along the way as a map: one key line threading every stop's icon; choose a stop to read about it beneath.
+ *  Arrow keys move along the line. On a phone the line slides sideways. */
+export function RouteMap({ nodes, idPrefix }: { nodes: RouteNode[]; idPrefix: string }) {
+  const [at, setAt] = useState(0);
+  const move = (e: React.KeyboardEvent<HTMLDivElement>, by: number) => {
+    e.preventDefault();
+    const next = Math.min(nodes.length - 1, Math.max(0, at + by));
+    setAt(next);
+    e.currentTarget.querySelectorAll("button")[next]?.focus();
+  };
+  const n = nodes[at];
+  return (
+    <div>
+      <p className={`${t12} text-[#4f5f66]`}>{nodes.length - 2} stops · choose one to read about it</p>
+      <div className="-mx-2 overflow-x-auto px-2 py-3 [scrollbar-width:none]">
+        <div
+          role="group"
+          aria-label="Stops along the way"
+          className="relative flex justify-between gap-3"
+          style={{ minWidth: `${nodes.length * 3.25}rem` }}
+          onKeyDown={(e) => {
+            if (e.key === "ArrowRight") move(e, 1);
+            if (e.key === "ArrowLeft") move(e, -1);
+          }}
+        >
+          <span aria-hidden="true" className="absolute inset-x-5 top-1/2 h-[2px] -translate-y-1/2 bg-[#22333a]" />
+          {nodes.map((s, i) => (
+            <button
+              key={i}
+              id={`${idPrefix}-stop-${i}`}
+              type="button"
+              aria-pressed={i === at}
+              aria-label={`${i + 1} of ${nodes.length}: ${s.name} (${s.label})`}
+              onClick={() => setAt(i)}
+              className={`${stopBase} ${s.end ? "rounded-full" : ""} ${slow} ${i === at ? stopState.selected : `${stopState.rest} hover:bg-[#c9dcdc] hover:shadow-none`} active:translate-y-px active:bg-[#8eaaa6] active:shadow-[inset_0_2px_4px_rgba(34,51,58,.45)] ${focusRing}`}
+            >
+              <PlateIcon name={s.icon} size={28} />
+            </button>
+          ))}
+        </div>
+      </div>
+      <div aria-live="polite" className="mt-2 min-h-28 border-t border-[#22333a]/20 pt-3">
+        <p className={`${t12} text-[#4f5f66]`}>{at + 1} of {nodes.length} · {n.label}</p>
+        <p className={`${t24} mt-1`}>{n.name}</p>
+        {n.note && <p className={`${t14} mt-1 text-[#4f5f66]`}>{n.note}</p>}
+      </div>
+    </div>
   );
 }

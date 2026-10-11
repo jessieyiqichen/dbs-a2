@@ -8,9 +8,9 @@ import { routes, stopSources } from "@/data/stops";
 import rawPhotos from "@/data/trailPhotos.json";
 import { creditLine, type TrailPhoto } from "@/components/dawn/Toned";
 import { EmbossStamp } from "@/components/dawn/PlateUI";
-import { PlateTabs } from "@/components/dawn/ds/Interactive";
+import { PlateTabs, RouteMap } from "@/components/dawn/ds/Interactive";
 import { PlateLink, PrimaryButton } from "@/components/dawn/ds/Primitives";
-import { FACT_ICON, HeroPlate, MonthStrip, NeighbourLink, PlateThumb, RouteLine } from "@/components/dawn/ds/Guide";
+import { FACT_ICON, HeroPlate, MonthStrip, NeighbourLink, PlateThumb, routeNodes } from "@/components/dawn/ds/Guide";
 import { PlateIcon } from "@/components/dawn/PlateArt";
 import { PlatesViewer } from "@/components/dawn/ds/Viewer";
 import { plateNo, sourceLabel } from "./plate";
@@ -49,7 +49,7 @@ function Details({ h }: { h: Hike }) {
           {t.intro.map((s) => <p key={s.text}>{s.text}</p>)}
           <p className={`${t14} text-[#4f5f66]`}>{h.start} to {h.end} · {h.route}</p>
         </div>,
-        <RouteLine key="route" h={h} route={routes[h.id]} />,
+        <RouteMap key="route" nodes={routeNodes(h, routes[h.id])} idPrefix={h.id} />,
         <div key="when" className="flex flex-wrap items-start gap-8">
           <div className="min-w-0 flex-1">
             <p className={`${t12} flex items-center gap-1.5 text-[#4f5f66]`}><PlateIcon name="sunrise" size={22} />Best months</p>

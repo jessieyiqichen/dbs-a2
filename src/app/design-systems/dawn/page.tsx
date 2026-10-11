@@ -6,9 +6,9 @@ import { PLATE_ICON_NAMES, PlateDefs, PlateIcon, type PlateIconName } from "@/co
 import { DayPlates, EmbossStamp, PLATE_KEYFRAMES } from "@/components/dawn/PlateUI";
 import { DAWN_FOCUS_CSS, DW, caps, display, ui } from "@/components/dawn/ds/tokens";
 import { CatalogueSearch, CountBadge, MountInput, MountSelect, PlateCheck, PlateLink, PlateRadio, PrimaryButton, RadioSwatch, SecondaryButton } from "@/components/dawn/ds/Primitives";
-import { ChipSwatch, PlateChips, PlateTabs, PlateToggle, TabSwatch } from "@/components/dawn/ds/Interactive";
+import { ChipSwatch, PlateChips, PlateTabs, PlateToggle, RouteMap, TabSwatch } from "@/components/dawn/ds/Interactive";
 import { CardSwatch, CatalogueRow, DetailPanel, UIStates } from "@/components/dawn/ds/Pieces";
-import { HeroPlate, MonthStrip, NeighbourLink, PlateThumb, RouteLine } from "@/components/dawn/ds/Guide";
+import { HeroPlate, MonthStrip, NeighbourLink, PlateThumb, StopSwatch, routeNodes } from "@/components/dawn/ds/Guide";
 import { Gallery } from "@/components/dawn/ds/Viewer";
 import { AddToListDemo, CardDemo } from "@/components/dawn/ds/Demos";
 import { t12, t12caption, t14, t17, t24, t48, t96 } from "@/components/dawn/ds/type";
@@ -303,8 +303,8 @@ function Components() {
           }
         />
       </Block>
-      <Block title="Route line" note="Along the way, drawn: start, each stop with its icon, kind and day, then the finish.">
-        <RouteLine h={milford} route={routes.milford} />
+      <Block title="Route map" note="Along the way: one line through every stop's icon; choose a stop to read about it. Arrow keys move.">
+        <RouteMap nodes={routeNodes(milford, routes.milford)} idPrefix="ds-route" />
       </Block>
       <Block title="Month strip and stamp" note="Best months carry a celadon plate. Neither is a control.">
         <div className="flex flex-wrap items-start gap-6">
@@ -343,6 +343,7 @@ const ROWS: Row[] = [
   { name: "Text input", render: (s) => (s === "pressed" || s === "selected" ? null : <div className="max-w-36"><MountInput force={s} id={`dw-in-${s}`} label="Trail" placeholder="name" /></div>) },
   { name: "Select", render: (s) => (s === "pressed" || s === "selected" ? null : <div className="max-w-36"><MountSelect force={s} id={`dw-sel-${s}`} /></div>) },
   { name: "Card", render: (s) => (s === "selected" || s === "disabled" ? null : <CardSwatch force={s} />) },
+  { name: "Route stop", render: (s) => (s === "disabled" ? null : <StopSwatch force={s} />) },
   { name: "Plate thumbnail", render: (s) => (s === "disabled" ? null : <div className="max-w-32"><PlateThumb force={s} photo={plates[0]} n={1} /></div>) },
   { name: "List row", render: (s) => (s === "disabled" ? <CatalogueRow compact id="inca-trail" force={s} note="closed Feb" /> : <CatalogueRow compact id="milford" force={s} />) },
 ];

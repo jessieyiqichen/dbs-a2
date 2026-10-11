@@ -36,14 +36,14 @@ const made: Record<string, React.ReactNode> = {
   "type-hand": (
     <div className="py-4 text-center">
       <p className="font-[family-name:var(--fn-hand)] text-8xl leading-none">Aa</p>
-      <p className="mt-2 text-xs tracking-wide text-black/50">Caveat · the hand</p>
+      <p className="mt-2 text-xs tracking-wide text-black/60">Caveat · the hand</p>
     </div>
   ),
   "type-serif": (
     <div className="py-3">
       <p className="font-[family-name:var(--fn-serif)] text-5xl leading-none">4,215 m</p>
       <p className="mt-2 font-[family-name:var(--fn-serif)] text-lg italic text-black/70">Dead Woman&apos;s Pass, Inca Trail</p>
-      <p className="mt-2 text-xs tracking-wide text-black/50">Crimson Pro · the facts</p>
+      <p className="mt-2 text-xs tracking-wide text-black/60">Crimson Pro · the facts</p>
     </div>
   ),
   "ruled-note": (
@@ -260,7 +260,7 @@ export default function FieldNotesBoard() {
         </Link>
         <header className="mt-6 flex flex-wrap items-end justify-between gap-6 border-b border-black/15 pb-6">
           <div>
-            <p className="text-sm uppercase tracking-[0.2em] text-black/50">Mood board · 1 of 3</p>
+            <p className="text-sm uppercase tracking-[0.2em] text-black/60">Mood board · 1 of 3</p>
             <h1 className="mt-1 font-[family-name:var(--fn-hand)] text-7xl leading-none">Field Notes</h1>
             <p className="mt-3 text-2xl">Handmade, Curious, Warm</p>
             <p className="mt-3 max-w-xl text-lg leading-snug text-black/75">

@@ -73,8 +73,9 @@ export default function Hub() {
       <p className="font-mono text-xs uppercase tracking-[0.14em] text-black/60">UI/UX &amp; Visual Design · Hub</p>
       <h1 className="mt-2 text-4xl font-semibold tracking-tight">Twelve Trails</h1>
       <p className="mt-3 max-w-xl text-black/70">
-        A guide to twelve famous hikes around the world. Three visual styles were explored, each with a mood board and a
-        design system; the site is built in the one that won.
+        A guide to twelve famous hikes around the world, for people who love hiking, from those just browsing to those
+        picking their next trip. Three visual styles were explored, each with a mood board and a design system; the site is
+        built in the one that won.
       </p>
 
       <div className="mt-10">

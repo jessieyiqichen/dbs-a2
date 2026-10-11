@@ -28,7 +28,7 @@ export default function TrailsIndex() {
         <figure className="m-0">
           <div className="relative h-[340px]">
             <TonedPhoto photo={OPENING} sizes="100vw" priority className="h-full w-full" />
-            <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgba(22,37,43,0)_20%,rgba(22,37,43,.55)_50%,rgba(22,37,43,.9)_100%)]" />
+            <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgba(22,37,43,0)_15%,rgba(22,37,43,.68)_45%,rgba(22,37,43,.92)_100%)]" />
             <div className="absolute inset-x-5 bottom-4 text-[#f6f9f7]">
               <p className={`${t12} text-[#e6edeb]`}>A guide to twelve famous walks</p>
               <h1 className={`${t96} mt-1`}>Twelve Trails</h1>
@@ -58,7 +58,7 @@ export default function TrailsIndex() {
       <section id="walks" aria-labelledby="walks-title" className="mt-8 scroll-mt-16 sm:mt-28">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
           <h2 id="walks-title" className={t48}>The twelve walks</h2>
-          <p className={`${t14} hidden text-[#4f5f66] sm:block`}>Choose a print to read about the walk.</p>
+          <p className={`${t14} text-[#4f5f66]`}>Choose a print to read about the walk.</p>
         </div>
         <FilterBar f={filters} setF={setFilters} shown={shown.length} total={hikes.length} />
 

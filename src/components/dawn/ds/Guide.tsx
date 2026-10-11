@@ -7,13 +7,14 @@ import type { Route, StopKind } from "@/data/stops";
 import { TonedPhoto, type TrailPhoto } from "../Toned";
 import { PlateIcon, type PlateIconName } from "../PlateArt";
 import { card, cardLive, colourUp } from "./tokens";
-import { t12, t14, t17, t24 } from "./type";
+import { MONTHS, monthRange } from "@/lib/months";
+import { t12, t14, t24 } from "./type";
 
 /** The icon that names each of a walk's three figures, wherever they appear. */
 export const FACT_ICON = { distance: "boot", days: "calendar", high: "mountain" } as const satisfies Record<string, PlateIconName>;
 
 /** Each kind of stop, its icon and the word printed above it. Towns, villages, ruins and shrines share the map. */
-const STOP: Record<StopKind, { icon: PlateIconName; label: string }> = {
+export const STOP: Record<StopKind, { icon: PlateIconName; label: string }> = {
   pass: { icon: "mountain", label: "Pass" },
   summit: { icon: "mountain", label: "Summit" },
   crater: { icon: "mountain", label: "Crater" },
@@ -33,12 +34,12 @@ const STOP: Record<StopKind, { icon: PlateIconName; label: string }> = {
   shrine: { icon: "map", label: "Shrine" },
 };
 
-type Node = { icon: PlateIconName; label: string; name: string; note?: string; end: boolean };
+export type RouteNode = { icon: PlateIconName; label: string; name: string; note?: string; end: boolean };
 
-/** Along the way, drawn as a route: the start, each stop with its icon, kind and day, then the finish, on one key line. */
-export function RouteLine({ h, route }: { h: Pick<Hike, "start" | "end" | "route">; route: Route }) {
+/** The start, each stop with its icon, kind and day, then the finish (back at the start for round trips). */
+export function routeNodes(h: Pick<Hike, "start" | "end" | "route">, route: Route): RouteNode[] {
   const back = h.route === "round trip";
-  const nodes: Node[] = [
+  return [
     { icon: "boot", label: "Start", name: h.start, end: true },
     ...route.stops.map((s) => ({
       icon: STOP[s.kind].icon,
@@ -49,38 +50,37 @@ export function RouteLine({ h, route }: { h: Pick<Hike, "start" | "end" | "route
     })),
     { icon: back ? "boot" : STOP[route.finish].icon, label: back ? "Back at the start" : "Finish", name: h.end, end: true },
   ];
-  return (
-    <ol>
-      {nodes.map((n, i) => (
-        <li key={i} className="relative flex items-start gap-4 pb-4">
-          {/* the line runs between marks only */}
-          {i < nodes.length - 1 && <span aria-hidden="true" className="absolute bottom-0 left-[17px] top-9 w-[2px] bg-[#22333a]" />}
-          <span aria-hidden="true" className={`relative z-10 grid h-9 w-9 shrink-0 place-items-center border-[1.5px] border-[#22333a] bg-[#f6f9f7] ${n.end ? "rounded-full" : "shadow-[2px_2px_0_0_#c3d6c4]"}`}>
-            <PlateIcon name={n.icon} size={28} />
-          </span>
-          <span className="min-w-0 pt-0.5">
-            <span className={`${t12} block text-[#4f5f66]`}>{n.label}</span>
-            <span className={`${t17} block`}>{n.name}</span>
-            {n.note && <span className={`${t14} block text-[#4f5f66]`}>{n.note}</span>}
-          </span>
-        </li>
-      ))}
-    </ol>
-  );
 }
 
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+/** A stop on the route map. Rest: the mount with a celadon plate off register; hover: an aqua plate in register;
+ *  pressed: sinks; selected: a celadon plate in register with a key rule beneath. Ends are round. */
+export const stopBase = "relative grid h-10 w-10 shrink-0 place-items-center border-[1.5px] border-[#22333a]";
+export const stopState: Record<ControlState, string> = {
+  rest: "bg-[#f6f9f7] shadow-[2px_2px_0_0_#c3d6c4]",
+  hover: "bg-[#c9dcdc] shadow-none",
+  focus: "bg-[#f6f9f7] shadow-[2px_2px_0_0_#c3d6c4] dw-crop is-focus",
+  pressed: "translate-y-px bg-[#8eaaa6] shadow-[inset_0_2px_4px_rgba(34,51,58,.45)]",
+  selected: "bg-[#c3d6c4] shadow-[inset_0_-3px_0_0_#22333a]",
+  disabled: "",
+};
 
-/** Twelve months as small printed squares; the best months carry a celadon plate. Not a control. */
+/** One stop in a forced state, for the state table. */
+export function StopSwatch({ force }: { force: ControlState }) {
+  return <span className={`${stopBase} ${stopState[force]}`}><PlateIcon name="mountain" size={28} /></span>;
+}
+
+/** Twelve months as small printed squares. The best months carry a celadon plate and a key rule beneath, and the
+ *  range is written out in words, so the strip never relies on colour alone. Not a control. */
 export function MonthStrip({ best }: { best: string[] }) {
+  const range = monthRange(best);
   return (
     <div>
-      <p className="sr-only">Best months: {best.join(", ")}</p>
+      <p className={`${t14} mb-2 font-semibold text-[#22333a]`}>{range}</p>
       <div className="grid max-w-md grid-cols-12 gap-1" aria-hidden="true">
         {MONTHS.map((m) => {
           const on = best.includes(m);
           return (
-            <span key={m} className={`${t12} grid h-9 place-items-center border !tracking-normal ${on ? "border-[#22333a] bg-[#c3d6c4] text-[#22333a]" : "border-[#6f8287]/40 font-normal text-[#4f5f66]"}`}>
+            <span key={m} className={`${t12} grid h-9 place-items-center border !tracking-normal ${on ? "border-[#22333a] bg-[#c3d6c4] text-[#22333a] shadow-[inset_0_-3px_0_0_#22333a]" : "border-[#6f8287]/40 font-normal text-[#4f5f66]"}`}>
               {m[0]}
             </span>
           );
