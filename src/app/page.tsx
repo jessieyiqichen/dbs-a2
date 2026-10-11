@@ -48,6 +48,22 @@ function Section({ n, title, children }: { n: number; title: string; children: R
   );
 }
 
+// What was checked on the site, and what the check turned up. Kept to what was actually tried.
+const CHECKS: [string, string][] = [
+  ["Both widths", "Every page, hub to walk pages, fits at 1440 and at 390 with no sideways scrolling."],
+  ["Keyboard", "On the site, Tab reaches every link and button in reading order, and each shows Dawn's crop marks. Arrow keys move between tabs."],
+  ["Filters", "Choosing where, how long or no permit changes the cards and the count at once; Clear all brings all twelve back."],
+  ["My list", "Adding a walk updates the count in the top bar, and it stays while moving between pages. A reload clears it: nothing is stored."],
+  ["Plates viewer", "Enter opens it on the chosen plate, arrow keys move, Esc closes it and focus returns to the print."],
+];
+
+const FIXED = [
+  "Old prints showed their printed border inside the frame, so they sat differently from the modern photos: cropped to the picture.",
+  "On a phone the walk cards were a screen tall each: they became rows, print beside caption, five walks to a screen.",
+  "Figures broke in the middle (\"4,215 / m\"): each figure now stays whole.",
+  "The mood boards ran very long on a phone: two columns, with the made pieces shown smaller rather than squeezed.",
+];
+
 const card =
   "group flex h-full flex-col overflow-hidden rounded-lg border border-black/15 bg-white transition hover:border-black/40 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground active:translate-y-px";
 
@@ -104,6 +120,39 @@ export default function Hub() {
           >
             Open Twelve Trails →
           </Link>
+        </Section>
+
+        <Section n={4} title="My pick and why">
+          <p className="text-black/80">
+            <span className="font-medium text-foreground">Dawn.</span> Two reasons:
+          </p>
+          <ol className="mt-3 list-decimal space-y-2 pl-5 text-black/80">
+            <li>
+              <span className="font-medium text-foreground">The style and the subject are the same thing.</span> These are old, famous walks, and photochrom
+              printers photographed four of them around 1900: the Milford Track, Mont Blanc, the West Highland Way and Half Dome. The site uses those
+              real prints.
+            </li>
+            <li>
+              <span className="font-medium text-foreground">The photos lead, and it reads quietly.</span> Pale colours, plenty of space and plain controls
+              let people take their time, whether they are just browsing or picking their next trip.
+            </li>
+          </ol>
+        </Section>
+
+        <Section n={5} title="Browser check">
+          <p className="text-sm text-black/60">Checked in Chrome at 1440 and 390 wide, and with the keyboard only.</p>
+          <ul className="mt-3 space-y-2 text-black/80">
+            {CHECKS.map(([what, result]) => (
+              <li key={what} className="grid gap-x-4 sm:grid-cols-[9rem_1fr]">
+                <span className="text-sm font-medium text-foreground">{what}</span>
+                <span>{result}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-5 text-sm font-medium text-foreground">Found and fixed</p>
+          <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-black/70">
+            {FIXED.map((f) => <li key={f}>{f}</li>)}
+          </ul>
         </Section>
       </div>
     </main>
