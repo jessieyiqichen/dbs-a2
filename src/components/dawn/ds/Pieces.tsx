@@ -4,7 +4,6 @@ import type { ControlState } from "@/lib/contrast";
 import { hikes, elevation, formatRange, type Hike } from "@/data/hikes";
 import { PlateIcon } from "../PlateArt";
 import { FACT_ICON } from "./Guide";
-import { PrintingLoader } from "../PlateUI";
 import Link from "next/link";
 import { TonedPhoto, type TrailPhoto } from "../Toned";
 import { PlateLink, PrimaryButton, SecondaryButton } from "./Primitives";
@@ -14,6 +13,7 @@ import { t12caption, t14, t24 } from "./type";
 const byId = (id: string) => hikes.find((h) => h.id === id) as Hike;
 const no = (h: Hike) => `No. ${String(hikes.indexOf(h) + 1).padStart(2, "0")}`;
 const PRINT = "/moodboards/dawn/clinton-river.jpg"; // a real photochrom of the Milford Track
+const DEMO_PHOTO: TrailPhoto = { file: PRINT, kind: "photochrom", alt: "Photochrom print of the Clinton River, Milford Track", place: "Clinton River", author: "Photoglob Co.", date: "c. 1890–1900", license: "No known restrictions", source: "", w: 1024, h: 756, cover: true };
 
 /** Printed caption, set the way the prints set theirs. */
 export function Caption({ h }: { h: Hike }) {
@@ -149,7 +149,10 @@ export function UIStates() {
         <SecondaryButton>Clear filters</SecondaryButton>
       </StateCard>
       <StateCard title="Loading">
-        <div className="w-48"><PrintingLoader photo="/moodboards/dawn/te-anau-south-fjord.jpg" /></div>
+        <div className="w-48">
+          <TonedPhoto photo={DEMO_PHOTO} sizes="200px" force="loading" className="aspect-[4/3] border-[3px] border-dw-ink" />
+          <p className={`${ui} mt-2 text-sm text-dw-muted`} role="status">Printing the colour, one plate at a time…</p>
+        </div>
       </StateCard>
       <StateCard title="Error">
         <span className={`${display} grid h-12 w-12 place-items-center border-[1.5px] border-dw-ink bg-dw-stone text-2xl text-dw-ink shadow-[3px_3px_0_0_var(--color-dw-ink)]`}>!</span>

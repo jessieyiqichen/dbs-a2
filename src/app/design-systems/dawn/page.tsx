@@ -14,7 +14,7 @@ import { AddToListDemo, CardDemo } from "@/components/dawn/ds/Demos";
 import { t12, t12caption, t14, t17, t24, t48, t96 } from "@/components/dawn/ds/type";
 import { routes } from "@/data/stops";
 import rawPhotos from "@/data/trailPhotos.json";
-import type { TrailPhoto } from "@/components/dawn/Toned";
+import { TonedPhoto, type TrailPhoto } from "@/components/dawn/Toned";
 
 const displayFont = Old_Standard_TT({ subsets: ["latin"], weight: ["400", "700"], style: ["normal", "italic"], variable: "--dw-display" });
 const uiFont = Libre_Franklin({ subsets: ["latin"], weight: ["400", "600"], variable: "--dw-ui" });
@@ -277,6 +277,16 @@ function Components() {
           <DayPlates day={2} of={4} />
         </Block>
       </div>
+      <Block title="Photo: loading, shown, failed" note="Every photo prints its plates while it loads, sky first; the colour fades in once it arrives; a photo that fails says so in the frame." className="lg:col-span-2">
+        <div className="grid grid-cols-3 gap-3">
+          {(["loading", "ready", "error"] as const).map((st) => (
+            <figure key={st} className="m-0">
+              <TonedPhoto photo={cover} sizes="300px" force={st === "ready" ? undefined : st} className="aspect-[4/3] border-[3px] border-dw-ink" />
+              <figcaption className={`${ui} mt-1 text-xs text-dw-muted`}>{st === "loading" ? "Loading" : st === "ready" ? "Shown" : "Failed to load"}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </Block>
       <Block title="Hero plate" note="The large print on a walk's page. It is the button to every plate.">
         <div className="relative"><HeroPlate photo={cover} count={plates.length} label={`See all ${plates.length} plates of Milford Track`} /></div>
       </Block>

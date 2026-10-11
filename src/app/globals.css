@@ -32,6 +32,12 @@
   --color-dw-stone: #a7b4b1;
 }
 
+/* Dawn's loading plates: each tint plate slides into register, sky first (Toned.tsx). */
+@keyframes dw-plate {
+  from { transform: translateX(-8%); opacity: .35; }
+  to { transform: none; opacity: 1; }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
