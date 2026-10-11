@@ -46,9 +46,9 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Shadow: no drop shadows; a soft lilac glow (`0 0 40px rgba(150,140,220,.18)`) and a hairline white border.
 - Motion: 600–700ms, ease-in-out; fades and 2px lifts, nothing snaps.
 
-### Trail Quest — Playful, Bright, Game-like (modern mobile game)
-- Palette roles: night page `#1b1d4a` with soft electric/violet glows; card surfaces `#2a2e78`; white text (15.89:1 on night, 11.93:1 on card); muted text `#b9bdf0` (8.78:1 / 6.59:1); electric `#3b5bff` for selected states and secondary buttons (white text 5.09:1); lime `#5ef08a` only for the primary action, with `#14162b` text (12.13:1); sun `#ffe14d` only for stars, XP and rewards. Never red or orange.
-- Type pair: Fredoka, bold, for names, numbers and buttons; Nunito (700–800) for everything else.
-- Corners: 16–24px, chunky; pills for tags.
-- Shadow: a hard bottom "depth" shadow with no blur (`0 6px 0` a darker shade) that collapses when pressed; soft glows only in the background.
-- Motion: snappy, 150–200ms; buttons press down 4px; rewards overshoot (`cubic-bezier(.34,1.56,.64,1)`); respect reduced motion.
+### Trail Quest — Playful, Bright, Game-like (a sunny modern mobile game)
+- Palette roles: sky page, a gradient `#4cc3ff → #9ee3ff → #e6f8ff`, with drifting clouds and green hills; white card surfaces with a 3px navy outline; navy text `#1d2b53` (13.79:1 on white, 12.63:1 on pale sky), muted `#4a5a85` (6.79:1); grass `#58d36b` only for the primary action, with navy text (7.19:1); grape `#6741d9` for selected states and secondary buttons, white text (6.3:1); sun `#ffd23f` for stars, rewards and Claim (navy text 9.55:1). Never red or orange.
+- Type pair: Fredoka, bold, outlined in navy, for titles, numbers and buttons; Nunito Black/ExtraBold for everything else.
+- Corners: 16–26px, chunky; round icon buttons; every shape has a 3px navy outline.
+- Shadow: a hard bottom depth shadow with no blur (`0 6px 0` a darker shade, then navy) that collapses when pressed; a white gloss band on buttons.
+- Motion: snappy, 150–200ms; buttons press down and squash; rewards pop with overshoot (`cubic-bezier(.34,1.56,.64,1)`); idle loops (clouds, pulse on the next level, stripes on bars) stop under reduced motion.
