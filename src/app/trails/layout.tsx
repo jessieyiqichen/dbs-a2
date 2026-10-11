@@ -17,8 +17,8 @@ export const metadata: Metadata = {
 export default function TrailsLayout({ children }: { children: React.ReactNode }) {
   return (
     <main
-      className={`${display.variable} ${ui.variable} min-h-screen overflow-x-clip font-[family-name:var(--dw-ui)] text-[#22333a] [font-variant-numeric:lining-nums]`}
-      style={{ background: "linear-gradient(180deg, #e6edeb 0%, #eaf0ee 45%, #f0f5f3 100%)" }}
+      className={`${display.variable} ${ui.variable} min-h-screen overflow-x-clip font-[family-name:var(--dw-ui)] text-dw-ink [font-variant-numeric:lining-nums]`}
+      style={{ background: "linear-gradient(180deg, var(--color-dw-page) 0%, var(--color-dw-page-mid) 45%, var(--color-dw-page-low) 100%)" }}
     >
       <PlateDefs />
       <style>{DAWN_FOCUS_CSS}</style>

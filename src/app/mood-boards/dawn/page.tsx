@@ -17,7 +17,7 @@ export const metadata: Metadata = { title: "Dawn · Mood board · Twelve Trails"
 type Credit = (typeof credits)[number];
 const print = (file: string) => credits.find((c) => c.file === file) as Credit;
 const src = (file: string) => `/moodboards/dawn/${file}`;
-const PAGE = "linear-gradient(180deg, #e6edeb 0%, #eaf0ee 45%, #f0f5f3 100%)";
+const PAGE = "linear-gradient(180deg, var(--color-dw-page) 0%, var(--color-dw-page-mid) 45%, var(--color-dw-page-low) 100%)";
 
 const PALETTE = [
   { name: "Key", hex: "#22333a", role: "Text, key lines · 12.36:1", swatch: "key", from: "Deep water, Milford Sound, darkened" },
@@ -35,11 +35,11 @@ const made: Record<string, React.ReactNode> = {
     <div className="grid grid-cols-3 gap-x-3 gap-y-4">
       {PALETTE.map((c) => (
         <div key={c.hex}>
-          <div className="relative h-16 border border-[#22333a]/30" style={{ background: c.hex }}>
-            {c.swatch && <Image src={src(`swatch-${c.swatch}.jpg`)} alt="" width={120} height={120} className="absolute -bottom-2 -right-2 h-9 w-9 border-2 border-[#f6f9f7] object-cover" />}
+          <div className="relative h-16 border border-dw-ink/30" style={{ background: c.hex }}>
+            {c.swatch && <Image src={src(`swatch-${c.swatch}.jpg`)} alt="" width={120} height={120} className="absolute -bottom-2 -right-2 h-9 w-9 border-2 border-dw-mount object-cover" />}
           </div>
-          <p className="mt-2 text-sm font-semibold">{c.name} <span className="font-normal text-[#4f5f66]">{c.hex}</span></p>
-          <p className="text-[11px] leading-snug text-[#4f5f66]">{c.from}</p>
+          <p className="mt-2 text-sm font-semibold">{c.name} <span className="font-normal text-dw-muted">{c.hex}</span></p>
+          <p className="text-[11px] leading-snug text-dw-muted">{c.from}</p>
         </div>
       ))}
     </div>
@@ -48,13 +48,13 @@ const made: Record<string, React.ReactNode> = {
     <div className="py-2">
       <p className="font-[family-name:var(--dw-display)] text-7xl leading-none">Aa</p>
       <p className="mt-3 font-[family-name:var(--dw-display)] text-3xl leading-tight">Milford Track</p>
-      <p className="font-[family-name:var(--dw-display)] text-xl italic text-[#4f5f66]">53.5 km, one way, in four days</p>
+      <p className="font-[family-name:var(--dw-display)] text-xl italic text-dw-muted">53.5 km, one way, in four days</p>
     </div>
   ),
   "type-ui": (
     <div className="py-2">
       <p className="text-2xl font-semibold">Best November to April</p>
-      <p className="mt-1 text-base text-[#4f5f66]">Huts must be booked for the Great Walks season; no camping; one direction only.</p>
+      <p className="mt-1 text-base text-dw-muted">Huts must be booked for the Great Walks season; no camping; one direction only.</p>
     </div>
   ),
   caption: (
@@ -83,7 +83,7 @@ const made: Record<string, React.ReactNode> = {
       {PLATE_ICON_NAMES.map((n) => (
         <div key={n} className="flex flex-col items-center">
           <PlateIcon name={n} size={40} />
-          <span className="mt-1 text-[10px] text-[#4f5f66]">{n}</span>
+          <span className="mt-1 text-[10px] text-dw-muted">{n}</span>
         </div>
       ))}
     </div>
@@ -95,17 +95,17 @@ const made: Record<string, React.ReactNode> = {
 /* ---------- overview ---------- */
 
 function Tag({ children }: { children: React.ReactNode }) {
-  return <span className="inline-block bg-[#22333a] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#f6f9f7]">{children}</span>;
+  return <span className="inline-block bg-dw-ink px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-dw-mount">{children}</span>;
 }
 
 function Ref({ file, note, className = "" }: { file: string; note: string; className?: string }) {
   const c = print(file);
   return (
-    <figure className={`m-0 flex flex-col bg-[#f6f9f7] p-2.5 ${className}`}>
-      <div className="relative min-h-0 flex-1 overflow-hidden border-[3px] border-[#22333a]">
+    <figure className={`m-0 flex flex-col bg-dw-mount p-2.5 ${className}`}>
+      <div className="relative min-h-0 flex-1 overflow-hidden border-[3px] border-dw-ink">
         <Image src={src(file)} alt={c.title} width={c.w} height={c.h} className="h-full w-full object-cover" sizes="(min-width: 1024px) 30vw, 100vw" />
       </div>
-      <figcaption className="mt-2 text-sm text-[#4f5f66]">{note}</figcaption>
+      <figcaption className="mt-2 text-sm text-dw-muted">{note}</figcaption>
     </figure>
   );
 }
@@ -119,27 +119,27 @@ function Overview() {
       </div>
       <Ref file="te-anau-south-fjord.jpg" note="Lake Te Anau: almost no contrast" className="h-60 lg:h-auto" />
       <Ref file="mitre-peak.jpg" note="Mitre Peak: mist kept in the valleys" className="h-60 lg:h-auto" />
-      <div className="bg-[#f6f9f7] p-5 lg:col-span-2">
+      <div className="bg-dw-mount p-5 lg:col-span-2">
         <Tag>Early decisions</Tag>
         <div className="mt-3 flex flex-wrap items-end gap-6">
           <p className="font-[family-name:var(--dw-display)] text-8xl leading-[0.8]">Aa</p>
           <div>
             <p className="font-[family-name:var(--dw-display)] text-4xl leading-none">
-              53.5 km <span className="italic text-[#4f5f66]">Milford Track</span>
+              53.5 km <span className="italic text-dw-muted">Milford Track</span>
             </p>
-            <p className="mt-2 max-w-md text-sm text-[#4f5f66]">Old Standard for names, numbers and captions; Libre Franklin for everything else. Both from the prints&apos; own years. Key ink for text, never black. Only the cool half of the prints: sky, water, ice.</p>
+            <p className="mt-2 max-w-md text-sm text-dw-muted">Old Standard for names, numbers and captions; Libre Franklin for everything else. Both from the prints&apos; own years. Key ink for text, never black. Only the cool half of the prints: sky, water, ice.</p>
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-6 gap-2 bg-[#f6f9f7] p-3 lg:col-span-2">
+      <div className="grid grid-cols-6 gap-2 bg-dw-mount p-3 lg:col-span-2">
         {PALETTE.map((c) => (
           <div key={c.hex}>
-            <div className="h-20 border border-[#22333a]/30" style={{ background: c.hex }} />
+            <div className="h-20 border border-dw-ink/30" style={{ background: c.hex }} />
             <p className="mt-1 text-xs font-semibold">{c.name}</p>
           </div>
         ))}
       </div>
-      <div className="flex flex-col justify-center gap-5 bg-[#f6f9f7] p-5">
+      <div className="flex flex-col justify-center gap-5 bg-dw-mount p-5">
         <ColourToggle initial label="Sunrise times" />
         <PlateButtons />
       </div>
@@ -187,26 +187,26 @@ const tiles: Tile[] = [
 export default function DawnBoard() {
   const madeCount = tiles.filter((t) => t.kind === "made").length;
   return (
-    <main className={`${display.variable} ${ui.variable} min-h-screen font-[family-name:var(--dw-ui)] text-[#22333a] [font-variant-numeric:lining-nums]`} style={{ background: PAGE }}>
+    <main className={`${display.variable} ${ui.variable} min-h-screen font-[family-name:var(--dw-ui)] text-dw-ink [font-variant-numeric:lining-nums]`} style={{ background: PAGE }}>
       <PlateDefs />
       <style>{PLATE_KEYFRAMES}</style>
       <div className="mx-auto max-w-6xl px-5 pb-24 pt-10">
-        <Link href="/" className="text-sm text-[#4f5f66] underline-offset-4 hover:text-[#22333a] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#22333a]">
+        <Link href="/" className="text-sm text-dw-muted underline-offset-4 hover:text-dw-ink hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dw-ink">
           ← Hub
         </Link>
         <header className="mt-8 flex flex-wrap items-end justify-between gap-6 pb-4">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#4f5f66]">Mood board · 2 of 3</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-dw-muted">Mood board · 2 of 3</p>
             <h1 className="mt-2 font-[family-name:var(--dw-display)] text-8xl leading-none">Dawn</h1>
             <p className="mt-3 font-[family-name:var(--dw-display)] text-3xl italic">Quiet, Light, Hopeful</p>
-            <p className="mt-3 max-w-xl text-base leading-relaxed text-[#4f5f66]">
+            <p className="mt-3 max-w-xl text-base leading-relaxed text-dw-muted">
               Hand-coloured travel prints from around 1900, called photochroms: pale skies, still water, colour laid on one plate at a
               time. For people who just want to see the most beautiful paths in the world, and be moved a little.
             </p>
-            <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#2c5868]">Evokes</p>
+            <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.24em] text-dw-loch">Evokes</p>
             <p className="font-[family-name:var(--dw-display)] text-3xl leading-tight">Opening a box of old travel prints and finding the walk you are about to take.</p>
           </div>
-          <p className="text-sm text-[#4f5f66]">
+          <p className="text-sm text-dw-muted">
             {tiles.length} artifacts · <span aria-hidden="true">✦</span> {madeCount} made for this board · {tiles.length - madeCount} collected
           </p>
         </header>
@@ -217,9 +217,9 @@ export default function DawnBoard() {
         <ul className="mt-6 columns-2 gap-3 sm:gap-5 lg:columns-3 xl:columns-4">
           {tiles.map((t, i) => (
             <li key={i} className="mb-3 break-inside-avoid sm:mb-5">
-              <figure className="relative m-0 border border-[#22333a]/10 bg-[#f6f9f7] p-2 sm:p-3">
+              <figure className="relative m-0 border border-dw-ink/10 bg-dw-mount p-2 sm:p-3">
                 {t.kind === "made" && (
-                  <span className="absolute right-2.5 top-1.5 text-xs text-[#2c5868]" title="Made for this board" aria-label="Made for this board">✦</span>
+                  <span className="absolute right-2.5 top-1.5 text-xs text-dw-loch" title="Made for this board" aria-label="Made for this board">✦</span>
                 )}
                 {t.kind === "photo" ? (
                   <Image
@@ -227,32 +227,32 @@ export default function DawnBoard() {
                     alt={print(t.file).title}
                     width={print(t.file).w}
                     height={print(t.file).h}
-                    className="h-auto w-full border-[3px] border-[#22333a]"
+                    className="h-auto w-full border-[3px] border-dw-ink"
                     sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, 50vw"
                   />
                 ) : (
                   // on a phone the tile is half the screen: the piece keeps its own layout and is shown smaller, like a thumbnail
                   <div className="max-sm:[zoom:.62]">{made[t.id]}</div>
                 )}
-                <figcaption className="mt-2 text-xs leading-snug text-[#4f5f66] sm:mt-2.5 sm:text-sm">{t.caption}</figcaption>
+                <figcaption className="mt-2 text-xs leading-snug text-dw-muted sm:mt-2.5 sm:text-sm">{t.caption}</figcaption>
               </figure>
             </li>
           ))}
         </ul>
 
-        <section className="mt-16 border-t border-[#22333a]/20 pt-6 text-sm text-[#4f5f66]">
-          <h2 className="font-[family-name:var(--dw-display)] text-3xl text-[#22333a]">Collected prints</h2>
+        <section className="mt-16 border-t border-dw-ink/20 pt-6 text-sm text-dw-muted">
+          <h2 className="font-[family-name:var(--dw-display)] text-3xl text-dw-ink">Collected prints</h2>
           <ul className="mt-3 grid gap-x-8 gap-y-1 sm:grid-cols-2">
             {credits.map((c) => (
               <li key={c.file}>
-                <a href={c.source} className="underline decoration-[#8eaaa6] underline-offset-2 hover:decoration-[#22333a]">{c.title}</a>, {c.author}, {c.date}
+                <a href={c.source} className="underline decoration-dw-loch-tint underline-offset-2 hover:decoration-dw-ink">{c.title}</a>, {c.author}, {c.date}
               </li>
             ))}
           </ul>
           <p className="mt-3">
             Photochrom prints from the Library of Congress Photochrom Print Collection: no known restrictions on publication. The modern photo in the
             treatment piece is by{" "}
-            <a href={modern[0].source} className="underline decoration-[#8eaaa6] underline-offset-2 hover:decoration-[#22333a]">{modern[0].author}</a> on
+            <a href={modern[0].source} className="underline decoration-dw-loch-tint underline-offset-2 hover:decoration-dw-ink">{modern[0].author}</a> on
             Unsplash (Unsplash License). Everything marked ✦ was drawn or set for this board; its colours are sampled from the prints.
           </p>
         </section>

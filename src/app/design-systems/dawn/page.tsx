@@ -30,11 +30,11 @@ const cover = plates.find((p) => p.cover) ?? plates[0];
 
 function Section({ n, title, note, children }: { n: number; title: string; note: string; children: React.ReactNode }) {
   return (
-    <section className="border-t border-[#22333a]/20 pt-8">
+    <section className="border-t border-dw-ink/20 pt-8">
       <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
         <span className="self-center"><CountBadge n={n} /></span>
         <h2 className={`${display} text-4xl leading-none`}>{title}</h2>
-        <p className={`${display} text-lg italic text-[#4f5f66]`}>{note}</p>
+        <p className={`${display} text-lg italic text-dw-muted`}>{note}</p>
       </div>
       <div className="mt-6">{children}</div>
     </section>
@@ -43,9 +43,9 @@ function Section({ n, title, note, children }: { n: number; title: string; note:
 
 function Block({ title, note, children, className = "" }: { title: string; note?: string; children: React.ReactNode; className?: string }) {
   return (
-    <div className={`bg-[#f6f9f7] p-5 ${className}`}>
-      <p className={`${caps} text-[#22333a]`}>{title}</p>
-      {note && <p className={`${display} mt-1 text-base italic text-[#4f5f66]`}>{note}</p>}
+    <div className={`bg-dw-mount p-5 ${className}`}>
+      <p className={`${caps} text-dw-ink`}>{title}</p>
+      {note && <p className={`${display} mt-1 text-base italic text-dw-muted`}>{note}</p>}
       <div className="mt-4">{children}</div>
     </div>
   );
@@ -67,26 +67,26 @@ function ColourRoles() {
   return (
     <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
       {ROLES.map((r) => (
-        <div key={r.role} className="bg-[#f6f9f7] p-3">
+        <div key={r.role} className="bg-dw-mount p-3">
           {r.role === "Tints" ? (
-            <div className="grid h-12 grid-cols-4 border border-[#22333a] sm:h-20">
+            <div className="grid h-12 grid-cols-4 border border-dw-ink sm:h-20">
               {[DW.celadon, DW.aqua, DW.loch, DW.stone].map((c) => <span key={c} style={{ background: c }} />)}
             </div>
           ) : (
-            <div className="h-12 border border-[#22333a] shadow-[3px_3px_0_0_#c9dcdc] sm:h-20" style={{ background: r.hex }} />
+            <div className="h-12 border border-dw-ink shadow-[3px_3px_0_0_var(--color-dw-aqua)] sm:h-20" style={{ background: r.hex }} />
           )}
           <p className={`${display} mt-3 text-xl leading-none`}>{r.role}</p>
-          <p className={`${ui} mt-1 text-xs text-[#4f5f66]`}>{r.role === "Tints" ? `${DW.celadon} ${DW.aqua} ${DW.loch} ${DW.stone}` : r.hex} · {r.use}</p>
+          <p className={`${ui} mt-1 text-xs text-dw-muted`}>{r.role === "Tints" ? `${DW.celadon} ${DW.aqua} ${DW.loch} ${DW.stone}` : r.hex} · {r.use}</p>
           {r.checks.map(([label, fg, bg]) => (
             <p key={label} className={`${ui} text-xs`}>
-              <span className="font-semibold">{ratio(fg, bg)}</span> <span className="text-[#4f5f66]">{label}</span>
+              <span className="font-semibold">{ratio(fg, bg)}</span> <span className="text-dw-muted">{label}</span>
             </p>
           ))}
         </div>
       ))}
-      <div className="bg-[#f6f9f7] p-3">
+      <div className="bg-dw-mount p-3">
         <p className={`${display} text-xl leading-none`}>Temperature</p>
-        <p className={`${ui} mt-2 text-sm leading-relaxed text-[#4f5f66]`}>Only the cool half of the prints: sky, water, ice. Warm earth tones belong to Field Notes, so the two never read alike.</p>
+        <p className={`${ui} mt-2 text-sm leading-relaxed text-dw-muted`}>Only the cool half of the prints: sky, water, ice. Warm earth tones belong to Field Notes, so the two never read alike.</p>
       </div>
     </div>
   );
@@ -106,14 +106,14 @@ const TYPE = [
 
 function TypeRoles() {
   return (
-    <div className="divide-y divide-[#22333a]/15 bg-[#f6f9f7] px-5">
+    <div className="divide-y divide-dw-ink/15 bg-dw-mount px-5">
       {TYPE.map((t) => (
         <div key={t.role} className="grid gap-2 py-4 sm:grid-cols-[12rem_1fr] sm:items-baseline">
           <div>
             <p className={`${display} text-xl leading-none`}>{t.role}</p>
-            <p className={`${ui} mt-1 text-xs text-[#4f5f66]`}>{t.spec}</p>
+            <p className={`${ui} mt-1 text-xs text-dw-muted`}>{t.spec}</p>
           </div>
-          <p className={`${t.cls} text-[#22333a]`}>{t.sample}</p>
+          <p className={`${t.cls} text-dw-ink`}>{t.sample}</p>
         </div>
       ))}
     </div>
@@ -123,14 +123,14 @@ function TypeRoles() {
 /* ---------- 3. spacing and shape ---------- */
 
 function SpacingShape() {
-  const note = `${ui} mt-1 text-xs text-[#4f5f66]`;
+  const note = `${ui} mt-1 text-xs text-dw-muted`;
   return (
     <div className="grid gap-4 lg:grid-cols-2">
       <Block title="Spacing" note="Seven steps, in px. Generous: the prints need air.">
         <div className="flex flex-wrap items-end gap-4">
           {[4, 8, 12, 16, 24, 32, 48].map((s) => (
             <div key={s} className="text-center">
-              <div className="border border-[#22333a] bg-[#c9dcdc]" style={{ width: s, height: s }} />
+              <div className="border border-dw-ink bg-dw-aqua" style={{ width: s, height: s }} />
               <p className={note}>{s}</p>
             </div>
           ))}
@@ -138,22 +138,22 @@ function SpacingShape() {
       </Block>
       <Block title="Corners" note="Square, like a cut print. Only radios are round.">
         <div className="flex flex-wrap items-center gap-6">
-          <div><div className="h-14 w-20 border border-[#22333a] bg-[#f6f9f7]" /><p className={note}>0 · everything</p></div>
-          <div><div className="h-5 w-5 rounded-full border-[1.5px] border-[#22333a]" /><p className={note}>round · radios</p></div>
+          <div><div className="h-14 w-20 border border-dw-ink bg-dw-mount" /><p className={note}>0 · everything</p></div>
+          <div><div className="h-5 w-5 rounded-full border-[1.5px] border-dw-ink" /><p className={note}>round · radios</p></div>
         </div>
       </Block>
       <Block title="Borders" note="Key lines, fine and even.">
         <div className="space-y-3">
-          <div className="flex items-center gap-4"><span className="block h-10 w-28 border-[3px] border-[#22333a]" /><span className={note}>3px key edge · around every print</span></div>
-          <div className="flex items-center gap-4"><span className="block h-10 w-28 border border-[#6f8287]" /><span className={note}>1px border · fields</span></div>
-          <div className="flex items-center gap-4"><span className="block h-10 w-28 border border-dashed border-[#4f5f66]" /><span className={note}>Dashed · disabled, unprinted</span></div>
+          <div className="flex items-center gap-4"><span className="block h-10 w-28 border-[3px] border-dw-ink" /><span className={note}>3px key edge · around every print</span></div>
+          <div className="flex items-center gap-4"><span className="block h-10 w-28 border border-dw-border" /><span className={note}>1px border · fields</span></div>
+          <div className="flex items-center gap-4"><span className="block h-10 w-28 border border-dashed border-dw-muted" /><span className={note}>Dashed · disabled, unprinted</span></div>
         </div>
       </Block>
       <Block title="Shadow" note="No soft shadows. Depth is a tint plate printed off register.">
         <div className="flex flex-wrap gap-8">
-          <div><div className="h-16 w-28 border border-[#22333a] bg-[#f6f9f7] shadow-[3px_3px_0_0_#8eaaa6]" /><p className={note}>Rest · plate 3px off</p></div>
-          <div><div className="h-16 w-28 border border-[#22333a] bg-[#f6f9f7]" /><p className={note}>Hover · in register</p></div>
-          <div><div className="h-16 w-28 border border-[#22333a] bg-[#c9dcdc] shadow-[inset_0_2px_4px_rgba(34,51,58,.3)]" /><p className={note}>Pressed · ink pressed in</p></div>
+          <div><div className="h-16 w-28 border border-dw-ink bg-dw-mount shadow-[3px_3px_0_0_var(--color-dw-loch-tint)]" /><p className={note}>Rest · plate 3px off</p></div>
+          <div><div className="h-16 w-28 border border-dw-ink bg-dw-mount" /><p className={note}>Hover · in register</p></div>
+          <div><div className="h-16 w-28 border border-dw-ink bg-dw-aqua shadow-[inset_0_2px_4px_rgba(34,51,58,.3)]" /><p className={note}>Pressed · ink pressed in</p></div>
         </div>
       </Block>
     </div>
@@ -187,8 +187,8 @@ function Icons() {
       {PLATE_ICON_NAMES.map((n) => (
         <li key={n} className="flex flex-col items-center text-center">
           <PlateIcon name={n} size={40} />
-          <span className={`${ui} mt-1 text-xs font-semibold text-[#22333a]`}>{n}</span>
-          <span className={`${ui} text-[11px] leading-tight text-[#4f5f66] ${ICON_USE[n] ? "" : "italic"}`}>{ICON_USE[n] ?? "not on the site yet"}</span>
+          <span className={`${ui} mt-1 text-xs font-semibold text-dw-ink`}>{n}</span>
+          <span className={`${ui} text-[11px] leading-tight text-dw-muted ${ICON_USE[n] ? "" : "italic"}`}>{ICON_USE[n] ?? "not on the site yet"}</span>
         </li>
       ))}
     </ul>
@@ -260,8 +260,8 @@ function Components() {
       <Block title="Badges">
         <div className="flex flex-wrap items-center gap-6">
           <div className="[&_svg]:h-24 [&_svg]:w-24"><EmbossStamp /></div>
-          <span className={`${caps} border border-[#22333a] bg-[#c3d6c4] px-2.5 py-1 text-[#22333a]`}>Great Walk</span>
-          <span className="flex items-center gap-2"><CountBadge n={12} /><span className={`${ui} text-sm text-[#4f5f66]`}>trails</span></span>
+          <span className={`${caps} border border-dw-ink bg-dw-celadon px-2.5 py-1 text-dw-ink`}>Great Walk</span>
+          <span className="flex items-center gap-2"><CountBadge n={12} /><span className={`${ui} text-sm text-dw-muted`}>trails</span></span>
         </div>
       </Block>
       <Block title="Card" note="A mounted print; the print and name open the walk. The list button sits outside the link.">
@@ -269,7 +269,7 @@ function Components() {
       </Block>
       <div className="space-y-4">
         <Block title="List rows" note="A page of the print catalogue. The chosen row gets a celadon plate.">
-          <div className="mb-2 flex items-center gap-2"><CountBadge n={2} /><span className={`${ui} text-sm text-[#4f5f66]`}>trails in Oceania</span></div>
+          <div className="mb-2 flex items-center gap-2"><CountBadge n={2} /><span className={`${ui} text-sm text-dw-muted`}>trails in Oceania</span></div>
           <CatalogueRow id="milford" force="selected" />
           <CatalogueRow id="tongariro" />
         </Block>
@@ -297,7 +297,7 @@ function Components() {
           start={1}
           title={
             <>
-              <p className={`${t12caption} text-[#4f5f66]`}>No. 05. New Zealand</p>
+              <p className={`${t12caption} text-dw-muted`}>No. 05. New Zealand</p>
               <p className={`${t48} mt-2`}>{milford.name}</p>
             </>
           }
@@ -350,25 +350,25 @@ const ROWS: Row[] = [
 
 function ControlStates() {
   return (
-    <div className="relative overflow-x-auto bg-[#f6f9f7] p-4">
+    <div className="relative overflow-x-auto bg-dw-mount p-4">
       <table className="w-full min-w-[960px] table-fixed border-collapse">
         <thead>
           <tr>
             <th className="w-32" />
             {CONTROL_STATES.map((s) => (
               <th key={s} scope="col" className="pb-3 pr-3 text-left align-bottom">
-                <span className={`${display} block text-xl font-normal capitalize text-[#22333a]`}>{s}</span>
-                <span className={`${ui} block text-[11px] font-normal leading-snug text-[#4f5f66]`}>{STATE_NOTES[s]}</span>
+                <span className={`${display} block text-xl font-normal capitalize text-dw-ink`}>{s}</span>
+                <span className={`${ui} block text-[11px] font-normal leading-snug text-dw-muted`}>{STATE_NOTES[s]}</span>
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
           {ROWS.map((r) => (
-            <tr key={r.name} className="border-t border-[#22333a]/15">
-              <th scope="row" className={`${ui} py-5 pr-4 text-left text-sm font-normal text-[#4f5f66]`}>{r.name}</th>
+            <tr key={r.name} className="border-t border-dw-ink/15">
+              <th scope="row" className={`${ui} py-5 pr-4 text-left text-sm font-normal text-dw-muted`}>{r.name}</th>
               {CONTROL_STATES.map((s) => (
-                <td key={s} className="py-5 pr-4 align-middle">{r.render(s) ?? <span className={`${ui} text-[#4f5f66]`} aria-label="Not used">—</span>}</td>
+                <td key={s} className="py-5 pr-4 align-middle">{r.render(s) ?? <span className={`${ui} text-dw-muted`} aria-label="Not used">—</span>}</td>
               ))}
             </tr>
           ))}
@@ -382,7 +382,7 @@ function ControlStates() {
 
 export default function DawnSystem() {
   return (
-    <main className={`${displayFont.variable} ${uiFont.variable} min-h-screen font-[family-name:var(--dw-ui)] text-[#22333a] [font-variant-numeric:lining-nums]`} style={{ background: "linear-gradient(180deg, #e6edeb 0%, #eaf0ee 45%, #f0f5f3 100%)" }}>
+    <main className={`${displayFont.variable} ${uiFont.variable} min-h-screen font-[family-name:var(--dw-ui)] text-dw-ink [font-variant-numeric:lining-nums]`} style={{ background: "linear-gradient(180deg, var(--color-dw-page) 0%, var(--color-dw-page-mid) 45%, var(--color-dw-page-low) 100%)" }}>
       <PlateDefs />
       <style>{PLATE_KEYFRAMES + DAWN_FOCUS_CSS}</style>
       <div className="mx-auto max-w-6xl space-y-14 px-5 pb-24 pt-10">
@@ -392,10 +392,10 @@ export default function DawnSystem() {
             <PlateLink href="/mood-boards/dawn/" size="note">Built from the Dawn mood board →</PlateLink>
             <PlateLink href="/trails/" size="note">The site built from it →</PlateLink>
           </div>
-          <p className={`${caps} mt-8 text-[#4f5f66]`}>Design system · 2 of 3</p>
+          <p className={`${caps} mt-8 text-dw-muted`}>Design system · 2 of 3</p>
           <h1 className={`${display} mt-2 text-8xl leading-none`}>Dawn</h1>
           <p className={`${display} mt-3 text-3xl italic`}>Quiet, Light, Hopeful</p>
-          <p className={`${ui} mt-3 max-w-2xl text-base leading-relaxed text-[#4f5f66]`}>
+          <p className={`${ui} mt-3 max-w-2xl text-base leading-relaxed text-dw-muted`}>
             Everything is made the way a photochrom was: flat colour plates laid slightly off register, a fine key line on top. Interaction
             brings the plates into register. Loch is kept for the one thing to do next.
           </p>

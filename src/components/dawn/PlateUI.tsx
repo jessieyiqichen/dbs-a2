@@ -8,12 +8,12 @@ import { TONE_FILTER, TONE_OVERLAY } from "./Toned";
 const ui = "font-[family-name:var(--dw-ui)]";
 const serif = "font-[family-name:var(--dw-display)]";
 const caps = `${ui} whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.16em]`;
-const focus = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#22333a]";
+const focus = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-dw-ink";
 const slow = "transition-[box-shadow,background-color,text-shadow,translate] duration-[600ms] ease-[cubic-bezier(.45,0,.2,1)]";
 
 /** Primary: deep loch ink with its tint plate printed a little off. Hover: the plates come into register. */
-const primary = `${caps} bg-[#2c5868] px-5 py-3 text-[#f6f9f7] shadow-[3px_3px_0_0_#8eaaa6] [text-shadow:1px_0.5px_0_rgba(195,214,196,.75)] ${slow} hover:bg-[#356677] hover:shadow-[0_0_0_0_#8eaaa6] hover:[text-shadow:0_0_0_rgba(195,214,196,0)] active:translate-y-px active:bg-[#244a58] ${focus}`;
-const secondary = `${caps} border border-[#22333a] bg-[#f6f9f7] px-5 py-3 text-[#22333a] shadow-[3px_3px_0_0_#c3d6c4] ${slow} hover:shadow-[0_0_0_0_#c3d6c4] active:translate-y-px ${focus}`;
+const primary = `${caps} bg-dw-loch px-5 py-3 text-dw-mount shadow-[3px_3px_0_0_var(--color-dw-loch-tint)] [text-shadow:1px_0.5px_0_rgba(195,214,196,.75)] ${slow} hover:bg-dw-loch-hover hover:shadow-[0_0_0_0_var(--color-dw-loch-tint)] hover:[text-shadow:0_0_0_rgba(195,214,196,0)] active:translate-y-px active:bg-dw-loch-pressed ${focus}`;
+const secondary = `${caps} border border-dw-ink bg-dw-mount px-5 py-3 text-dw-ink shadow-[3px_3px_0_0_var(--color-dw-celadon)] ${slow} hover:shadow-[0_0_0_0_var(--color-dw-celadon)] active:translate-y-px ${focus}`;
 
 export function PlateButtons({ showStates = false }: { showStates?: boolean }) {
   if (!showStates) {
@@ -26,23 +26,23 @@ export function PlateButtons({ showStates = false }: { showStates?: boolean }) {
   }
   const states = [
     { s: "Rest", c: primary },
-    { s: "Hover · in register", c: `${primary} !bg-[#356677] !shadow-none ![text-shadow:none]` },
-    { s: "Pressed", c: `${primary} !bg-[#244a58] !shadow-none translate-y-px` },
-    { s: "Focus", c: `${primary} outline outline-2 outline-offset-[3px] outline-[#22333a]` },
+    { s: "Hover · in register", c: `${primary} !bg-dw-loch-hover !shadow-none ![text-shadow:none]` },
+    { s: "Pressed", c: `${primary} !bg-dw-loch-pressed !shadow-none translate-y-px` },
+    { s: "Focus", c: `${primary} outline outline-2 outline-offset-[3px] outline-dw-ink` },
   ];
   return (
     <div className="space-y-3">
       {states.map((x) => (
         <div key={x.s} className="flex items-center gap-4">
           <span tabIndex={-1} className={`inline-block ${x.c}`}>See the walk</span>
-          <span className={`${ui} text-xs text-[#4f5f66]`}>{x.s}</span>
+          <span className={`${ui} text-xs text-dw-muted`}>{x.s}</span>
         </div>
       ))}
       <div className="flex items-center gap-4">
-        <button type="button" disabled className={`${caps} cursor-not-allowed border border-dashed border-[#4f5f66] bg-transparent px-5 py-3 text-[#4f5f66]`}>
+        <button type="button" disabled className={`${caps} cursor-not-allowed border border-dashed border-dw-muted bg-transparent px-5 py-3 text-dw-muted`}>
           Full for 2026
         </button>
-        <span className={`${ui} text-xs text-[#4f5f66]`}>Disabled · unprinted</span>
+        <span className={`${ui} text-xs text-dw-muted`}>Disabled · unprinted</span>
       </div>
     </div>
   );
@@ -61,7 +61,7 @@ export function PlateChips() {
       {chips.map((c) => (
         <span
           key={c.t}
-          className={`${ui} border px-3 py-1.5 text-sm ${c.on ? "border-[#22333a] font-semibold text-[#22333a]" : "border-[#22333a]/40 text-[#4f5f66]"}`}
+          className={`${ui} border px-3 py-1.5 text-sm ${c.on ? "border-dw-ink font-semibold text-dw-ink" : "border-dw-ink/40 text-dw-muted"}`}
           style={{ background: c.on ? c.tint : "transparent", boxShadow: c.on ? "none" : `2px 2px 0 0 ${c.tint}` }}
         >
           {c.t}
@@ -74,10 +74,10 @@ export function PlateChips() {
 /** Search the catalogue: a field with a print-mount bevel. */
 export function CatalogueSearch() {
   return (
-    <div className="border border-[#22333a]/50 bg-[#f6f9f7] p-1">
-      <div className="flex items-baseline gap-3 border border-[#22333a]/20 px-3 py-2.5">
-        <span className={`${caps} text-[#4f5f66]`}>No.</span>
-        <span className={`${serif} text-lg italic text-[#4f5f66]`}>a trail, a country, a month…</span>
+    <div className="border border-dw-ink/50 bg-dw-mount p-1">
+      <div className="flex items-baseline gap-3 border border-dw-ink/20 px-3 py-2.5">
+        <span className={`${caps} text-dw-muted`}>No.</span>
+        <span className={`${serif} text-lg italic text-dw-muted`}>a trail, a country, a month…</span>
       </div>
     </div>
   );
@@ -109,7 +109,7 @@ export function EmbossStamp({ text = "Permit needed", uid = "dw-ring", className
 /** The printed caption line, set the way the prints set theirs. */
 export function PrintCaption({ n, text }: { n: number; text: string }) {
   return (
-    <p className={`${serif} text-[13px] uppercase tracking-[0.12em] text-[#22333a]`}>
+    <p className={`${serif} text-[13px] uppercase tracking-[0.12em] text-dw-ink`}>
       No. {String(n).padStart(2, "0")}. {text}.
     </p>
   );
@@ -121,22 +121,22 @@ export function PlateCard({ id, photo, plateNote }: { id: string; photo: string;
   const h = hikes[index];
   if (!h) return null;
   return (
-    <article className="group bg-[#f6f9f7] p-3.5 shadow-[0_1px_0_rgba(34,51,58,.15)]">
-      <div className="relative aspect-[4/3] overflow-hidden border-[3px] border-[#22333a]">
+    <article className="group bg-dw-mount p-3.5 shadow-[0_1px_0_rgba(34,51,58,.15)]">
+      <div className="relative aspect-[4/3] overflow-hidden border-[3px] border-dw-ink">
         <Image src={photo} alt="" fill sizes="(min-width: 1024px) 30vw, 100vw" className="object-cover transition-[filter] duration-[1200ms] group-hover:saturate-[1.15]" />
       </div>
       <div className="mt-3">
         <PrintCaption n={index + 1} text={`${h.name}, ${h.country.join(", ")}`} />
-        <p className={`${ui} mt-0.5 text-xs text-[#4f5f66]`}>{plateNote}</p>
+        <p className={`${ui} mt-0.5 text-xs text-dw-muted`}>{plateNote}</p>
       </div>
-      <dl className={`${ui} mt-3 border-t border-[#22333a]/20 text-sm text-[#22333a]`}>
+      <dl className={`${ui} mt-3 border-t border-dw-ink/20 text-sm text-dw-ink`}>
         {[
           ["Distance", `${formatRange(h.distance_km)} km, ${h.route}`],
           ["Days", formatRange(h.days)],
           ["High point", elevation(h)],
         ].map(([k, v]) => (
-          <div key={k} className="flex items-baseline justify-between gap-3 border-b border-dotted border-[#22333a]/25 py-1.5">
-            <dt className="text-[#4f5f66]">{k}</dt>
+          <div key={k} className="flex items-baseline justify-between gap-3 border-b border-dotted border-dw-ink/25 py-1.5">
+            <dt className="text-dw-muted">{k}</dt>
             <dd className={`${serif} text-base`}>{v}</dd>
           </div>
         ))}
@@ -169,8 +169,8 @@ export function DayPlates({ day = 2, of = 4 }: { day?: number; of?: number }) {
           );
         })}
       </div>
-      <p className={`${ui} mt-3 text-sm text-[#22333a]`}>
-        <span className="font-semibold">Day {day} of {of}</span> <span className="text-[#4f5f66]">· a plate for each day walked</span>
+      <p className={`${ui} mt-3 text-sm text-dw-ink`}>
+        <span className="font-semibold">Day {day} of {of}</span> <span className="text-dw-muted">· a plate for each day walked</span>
       </p>
     </div>
   );
@@ -180,11 +180,11 @@ export function DayPlates({ day = 2, of = 4 }: { day?: number; of?: number }) {
 export function PrintingLoader({ photo }: { photo: string }) {
   return (
     <div>
-      <div className="relative aspect-[4/3] overflow-hidden border-[3px] border-[#22333a]">
+      <div className="relative aspect-[4/3] overflow-hidden border-[3px] border-dw-ink">
         <Image src={photo} alt="" fill sizes="300px" className="object-cover grayscale" />
         <Image src={photo} alt="" fill sizes="300px" className="dw-print object-cover" />
       </div>
-      <p className={`${ui} mt-2 text-sm text-[#4f5f66]`} role="status">Printing the colour, one plate at a time…</p>
+      <p className={`${ui} mt-2 text-sm text-dw-muted`} role="status">Printing the colour, one plate at a time…</p>
     </div>
   );
 }
@@ -195,14 +195,14 @@ export function PhotochromTreatment({ photo }: { photo: string }) {
     <div className="grid grid-cols-2 gap-2">
       <figure className="m-0">
         <div className="relative aspect-square overflow-hidden"><Image src={photo} alt="" fill sizes="200px" className="object-cover" /></div>
-        <figcaption className={`${ui} mt-1 text-[11px] text-[#4f5f66]`}>Unsplash, as shot</figcaption>
+        <figcaption className={`${ui} mt-1 text-[11px] text-dw-muted`}>Unsplash, as shot</figcaption>
       </figure>
       <figure className="m-0">
-        <div className="relative aspect-square overflow-hidden border-[3px] border-[#22333a]">
+        <div className="relative aspect-square overflow-hidden border-[3px] border-dw-ink">
           <Image src={photo} alt="" fill sizes="200px" className="object-cover" style={{ filter: TONE_FILTER }} />
           <div className="absolute inset-0 opacity-55 mix-blend-soft-light" style={{ background: TONE_OVERLAY }} />
         </div>
-        <figcaption className={`${ui} mt-1 text-[11px] text-[#4f5f66]`}>Toned like the prints</figcaption>
+        <figcaption className={`${ui} mt-1 text-[11px] text-dw-muted`}>Toned like the prints</figcaption>
       </figure>
     </div>
   );

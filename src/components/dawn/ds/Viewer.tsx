@@ -19,14 +19,14 @@ export function Gallery({ photos, start = 0, title }: { photos: TrailPhoto[]; st
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.6fr_1fr]">
       <figure className="m-0 min-w-0">
-        <TonedPhoto photo={p} sizes="(min-width: 1024px) 680px, 100vw" priority className="aspect-[4/3] border-[3px] border-[#22333a]" />
-        <figcaption className={`${t14} mt-2 text-[#4f5f66]`} aria-live="polite">
-          <span className="font-semibold text-[#22333a]">Plate {at + 1} of {photos.length}</span> · {creditLine(p)}
+        <TonedPhoto photo={p} sizes="(min-width: 1024px) 680px, 100vw" priority className="aspect-[4/3] border-[3px] border-dw-ink" />
+        <figcaption className={`${t14} mt-2 text-dw-muted`} aria-live="polite">
+          <span className="font-semibold text-dw-ink">Plate {at + 1} of {photos.length}</span> · {creditLine(p)}
         </figcaption>
       </figure>
       <div className="min-w-0">
         {title}
-        <p className={`${t12} mt-6 text-[#4f5f66]`}>In route order · arrow keys move</p>
+        <p className={`${t12} mt-6 text-dw-muted`}>In route order · arrow keys move</p>
         <div
           role="group"
           aria-label="Plates of this walk"
@@ -60,7 +60,7 @@ export function PlatesViewer({ photos, at, title, labelledBy, onClose }: { photo
       onClose={onClose}
       onClick={(e) => e.target === ref.current && ref.current?.close()}
       aria-labelledby={labelledBy}
-      className="m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-6xl overflow-y-auto bg-[#f6f9f7] p-0 text-[#22333a] shadow-[8px_8px_0_0_#c9dcdc] backdrop:bg-[#22333a]/60"
+      className="m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-6xl overflow-y-auto bg-dw-mount p-0 text-dw-ink shadow-[8px_8px_0_0_var(--color-dw-aqua)] backdrop:bg-dw-ink/60"
     >
       {at !== null && (
         <div key={at} className="relative p-5 pt-16 sm:p-7 sm:pt-16">

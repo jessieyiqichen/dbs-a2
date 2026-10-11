@@ -9,9 +9,9 @@ const photos = rawPhotos as Record<string, TrailPhoto[]>;
 
 export function Colophon() {
   return (
-    <footer className={`${t14} mx-auto mt-16 max-w-6xl px-5 pb-12 text-[#4f5f66] sm:mt-24 sm:pb-16`}>
-      <div className="border-t border-[#22333a] pt-6">
-        <h2 className={`${t24} text-[#22333a]`}>Before you go</h2>
+    <footer className={`${t14} mx-auto mt-16 max-w-6xl px-5 pb-12 text-dw-muted sm:mt-24 sm:pb-16`}>
+      <div className="border-t border-dw-ink pt-6">
+        <h2 className={`${t24} text-dw-ink`}>Before you go</h2>
         <p className="mt-2 max-w-prose">
           Facts were checked against official park, trail and tourism sources in {DATA_AS_OF}; where sources disagree, both numbers are shown, and each walk&apos;s page lists its
           sources and notes. Rules, closures and permits change, so check them before you travel. Your list lasts for this visit only: nothing is stored.

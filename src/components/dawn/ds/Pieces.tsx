@@ -17,7 +17,7 @@ const PRINT = "/moodboards/dawn/clinton-river.jpg"; // a real photochrom of the 
 
 /** Printed caption, set the way the prints set theirs. */
 export function Caption({ h }: { h: Hike }) {
-  return <p className={`${t12caption} text-[#22333a]`}>{no(h)}. {h.name}, {h.country.join(", ")}.</p>;
+  return <p className={`${t12caption} text-dw-ink`}>{no(h)}. {h.name}, {h.country.join(", ")}.</p>;
 }
 
 /** Card: a mounted print. The print and its caption are one link; `footer` (a small button) sits under it, outside
@@ -27,10 +27,10 @@ export function PrintCard({ id, photo, href = "#card", footer, sizes = "(min-wid
   // On a phone the print sits beside its caption, so a screen shows several walks; from 640px it stands above it.
   const inner = (
     <>
-      <TonedPhoto photo={photo} sizes={sizes} className={`row-span-3 aspect-[4/3] self-start border-2 border-[#22333a] sm:border-[3px] ${colourUp}`} />
-      <span className={`${t12caption} block text-[#4f5f66] sm:mt-4`}>{no(h)}. {h.country.join(", ")}</span>
-      <span id={`${h.id}-card`} className={`${t24} mt-1 block decoration-[#8eaaa6] decoration-2 underline-offset-4 group-hover:underline`}>{h.name}</span>
-      <span className={`${t14} mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-[#4f5f66]`}>
+      <TonedPhoto photo={photo} sizes={sizes} className={`row-span-3 aspect-[4/3] self-start border-2 border-dw-ink sm:border-[3px] ${colourUp}`} />
+      <span className={`${t12caption} block text-dw-muted sm:mt-4`}>{no(h)}. {h.country.join(", ")}</span>
+      <span id={`${h.id}-card`} className={`${t24} mt-1 block decoration-dw-loch-tint decoration-2 underline-offset-4 group-hover:underline`}>{h.name}</span>
+      <span className={`${t14} mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-dw-muted`}>
         {/* each figure with its icon, kept whole when the line wraps */}
         {([[FACT_ICON.distance, `${formatRange(h.distance_km)} km`], [FACT_ICON.days, `${formatRange(h.days)} ${h.days[1] === 1 ? "day" : "days"}`], [FACT_ICON.high, elevation(h)]] as const).map(([icon, x]) => (
           <span key={icon} className="inline-flex items-center gap-1 whitespace-nowrap"><PlateIcon name={icon} size={20} />{x}</span>
@@ -51,10 +51,10 @@ export function PrintCard({ id, photo, href = "#card", footer, sizes = "(min-wid
 export function CardSwatch({ force }: { force: ControlState }) {
   return (
     <span className={`relative flex items-center gap-2 p-1.5 ${card[force]}`}>
-      <span className="relative block h-9 w-12 shrink-0 overflow-hidden border-2 border-[#22333a]">
+      <span className="relative block h-9 w-12 shrink-0 overflow-hidden border-2 border-dw-ink">
         <Image src={PRINT} alt="" fill sizes="48px" className={`object-cover ${force === "hover" ? "saturate-[1.25]" : ""}`} />
       </span>
-      <span className={`${t14} leading-tight text-[#22333a] ${force === "selected" ? "font-semibold" : ""}`}>Milford Track</span>
+      <span className={`${t14} leading-tight text-dw-ink ${force === "selected" ? "font-semibold" : ""}`}>Milford Track</span>
     </span>
   );
 }
@@ -63,11 +63,11 @@ export function CardSwatch({ force }: { force: ControlState }) {
 
 const rowState: Record<ControlState, string> = {
   rest: "",
-  hover: "bg-[#c9dcdc]",
+  hover: "bg-dw-aqua",
   focus: focusForced,
-  pressed: "bg-[#8eaaa6]/60 shadow-[inset_0_2px_3px_rgba(34,51,58,.25)]",
-  selected: "bg-[#c3d6c4] shadow-[inset_0_-3px_0_0_#22333a]",
-  disabled: "cursor-not-allowed text-[#4f5f66]",
+  pressed: "bg-dw-loch-tint/60 shadow-[inset_0_2px_3px_rgba(34,51,58,.25)]",
+  selected: "bg-dw-celadon shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]",
+  disabled: "cursor-not-allowed text-dw-muted",
 };
 
 /** List row: a line of the print catalogue: number, name, a dotted leader, distance. `muted` greys a row that doesn't fit a choice but stays usable. */
@@ -80,12 +80,12 @@ export function CatalogueRow({ id, force, note, compact = false, href = "#rows",
       href={href}
       onClick={onClick}
       aria-disabled={disabled || undefined}
-      className={`relative flex min-w-0 items-baseline border-b border-[#22333a]/20 ${compact ? "gap-1.5 px-1.5" : "gap-3 px-3"} py-2.5 ${slow} ${rowState[state]} ${force ? "" : `hover:bg-[#c9dcdc] active:bg-[#8eaaa6]/60 active:shadow-[inset_0_2px_3px_rgba(34,51,58,.25)] ${focusRing}`}`}
+      className={`relative flex min-w-0 items-baseline border-b border-dw-ink/20 ${compact ? "gap-1.5 px-1.5" : "gap-3 px-3"} py-2.5 ${slow} ${rowState[state]} ${force ? "" : `hover:bg-dw-aqua active:bg-dw-loch-tint/60 active:shadow-[inset_0_2px_3px_rgba(34,51,58,.25)] ${focusRing}`}`}
     >
-      {!compact && <span className={`${display} w-14 shrink-0 text-sm text-[#4f5f66]`}>{no(h)}</span>}
-      <span className={`${display} ${compact ? "text-base" : "text-[17px]"} ${disabled ? "text-[#4f5f66] line-through" : muted ? "italic text-[#4f5f66]" : "text-[#22333a]"}`}>{compact ? h.name.split(" ")[0] : h.name}</span>
-      <span aria-hidden="true" className={`${compact ? "min-w-0" : "min-w-4"} flex-1 translate-y-[-3px] border-b border-dotted border-[#22333a]/40`} />
-      <span className={`${ui} whitespace-nowrap ${compact ? "text-xs" : "text-sm"} text-[#4f5f66]`}>{note ?? `${formatRange(h.distance_km)} km`}</span>
+      {!compact && <span className={`${display} w-14 shrink-0 text-sm text-dw-muted`}>{no(h)}</span>}
+      <span className={`${display} ${compact ? "text-base" : "text-[17px]"} ${disabled ? "text-dw-muted line-through" : muted ? "italic text-dw-muted" : "text-dw-ink"}`}>{compact ? h.name.split(" ")[0] : h.name}</span>
+      <span aria-hidden="true" className={`${compact ? "min-w-0" : "min-w-4"} flex-1 translate-y-[-3px] border-b border-dotted border-dw-ink/40`} />
+      <span className={`${ui} whitespace-nowrap ${compact ? "text-xs" : "text-sm"} text-dw-muted`}>{note ?? `${formatRange(h.distance_km)} km`}</span>
     </a>
   );
 }
@@ -102,24 +102,24 @@ export function DetailPanel({ id }: { id: string }) {
     ["Best months", h.best_months.join(", ")],
   ];
   return (
-    <div role="dialog" aria-modal="false" aria-labelledby="dw-detail-title" className="relative bg-[#f6f9f7] p-5 shadow-[6px_6px_0_0_#c9dcdc]">
+    <div role="dialog" aria-modal="false" aria-labelledby="dw-detail-title" className="relative bg-dw-mount p-5 shadow-[6px_6px_0_0_var(--color-dw-aqua)]">
       <span className="absolute right-4 top-4"><SecondaryButton small>Close</SecondaryButton></span>
       <Caption h={h} />
-      <h3 id="dw-detail-title" className={`${display} mt-1 text-4xl leading-tight text-[#22333a]`}>{h.name}</h3>
-      <div className="relative mt-4 aspect-[16/9] overflow-hidden border-[3px] border-[#22333a]">
+      <h3 id="dw-detail-title" className={`${display} mt-1 text-4xl leading-tight text-dw-ink`}>{h.name}</h3>
+      <div className="relative mt-4 aspect-[16/9] overflow-hidden border-[3px] border-dw-ink">
         <Image src={PRINT} alt="Photochrom print of the Clinton River, Milford Track" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
       </div>
-      <p className={`${ui} mt-1 text-xs text-[#4f5f66]`}>Clinton River, the track&apos;s first valley · Photoglob Co., c. 1890–1900</p>
-      <p className={`${ui} mt-3 text-base leading-relaxed text-[#22333a]`}>{h.why}</p>
+      <p className={`${ui} mt-1 text-xs text-dw-muted`}>Clinton River, the track&apos;s first valley · Photoglob Co., c. 1890–1900</p>
+      <p className={`${ui} mt-3 text-base leading-relaxed text-dw-ink`}>{h.why}</p>
       <dl className={`${ui} mt-3 text-sm`}>
         {facts.map(([k, v]) => (
-          <div key={k} className="grid grid-cols-[6.5rem_1fr] gap-3 border-b border-dotted border-[#22333a]/25 py-1.5">
-            <dt className="text-[#4f5f66]">{k}</dt>
-            <dd className="text-[#22333a]">{v}</dd>
+          <div key={k} className="grid grid-cols-[6.5rem_1fr] gap-3 border-b border-dotted border-dw-ink/25 py-1.5">
+            <dt className="text-dw-muted">{k}</dt>
+            <dd className="text-dw-ink">{v}</dd>
           </div>
         ))}
       </dl>
-      <p className={`${display} mt-3 text-sm italic text-[#4f5f66]`}>{h.permit_note}</p>
+      <p className={`${display} mt-3 text-sm italic text-dw-muted`}>{h.permit_note}</p>
       <div className="mt-5 flex flex-wrap items-center gap-4">
         <PrimaryButton>Add to my list</PrimaryButton>
         <PlateLink>Sources</PlateLink>
@@ -133,8 +133,8 @@ export function DetailPanel({ id }: { id: string }) {
 function StateCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <figure className="m-0 flex flex-col">
-      <div className="flex min-h-44 flex-1 flex-col items-center justify-center gap-3 max-sm:[zoom:.72] sm:min-h-64 bg-[#f6f9f7] p-5 text-center">{children}</div>
-      <figcaption className={`${caps} mt-2 text-[#4f5f66]`}>{title}</figcaption>
+      <div className="flex min-h-44 flex-1 flex-col items-center justify-center gap-3 max-sm:[zoom:.72] sm:min-h-64 bg-dw-mount p-5 text-center">{children}</div>
+      <figcaption className={`${caps} mt-2 text-dw-muted`}>{title}</figcaption>
     </figure>
   );
 }
@@ -143,26 +143,26 @@ export function UIStates() {
   return (
     <div className="grid grid-cols-2 gap-3 sm:gap-6 xl:grid-cols-4">
       <StateCard title="Empty">
-        <span className="grid h-20 w-28 place-items-center border-[1.5px] border-dashed border-[#4f5f66]"><PlateIcon name="camera" size={36} /></span>
-        <p className={`${display} text-2xl text-[#22333a]`}>No prints in this drawer</p>
-        <p className={`${ui} text-sm text-[#4f5f66]`}>No trail matches all four filters. Take one off to see more.</p>
+        <span className="grid h-20 w-28 place-items-center border-[1.5px] border-dashed border-dw-muted"><PlateIcon name="camera" size={36} /></span>
+        <p className={`${display} text-2xl text-dw-ink`}>No prints in this drawer</p>
+        <p className={`${ui} text-sm text-dw-muted`}>No trail matches all four filters. Take one off to see more.</p>
         <SecondaryButton>Clear filters</SecondaryButton>
       </StateCard>
       <StateCard title="Loading">
         <div className="w-48"><PrintingLoader photo="/moodboards/dawn/te-anau-south-fjord.jpg" /></div>
       </StateCard>
       <StateCard title="Error">
-        <span className={`${display} grid h-12 w-12 place-items-center border-[1.5px] border-[#22333a] bg-[#a7b4b1] text-2xl text-[#22333a] shadow-[3px_3px_0_0_#22333a]`}>!</span>
-        <p className={`${display} text-2xl text-[#22333a]`}>This print didn&apos;t come through</p>
-        <p className={`${ui} text-sm text-[#4f5f66]`}>The page didn&apos;t load. Check your connection and try again.</p>
+        <span className={`${display} grid h-12 w-12 place-items-center border-[1.5px] border-dw-ink bg-dw-stone text-2xl text-dw-ink shadow-[3px_3px_0_0_var(--color-dw-ink)]`}>!</span>
+        <p className={`${display} text-2xl text-dw-ink`}>This print didn&apos;t come through</p>
+        <p className={`${ui} text-sm text-dw-muted`}>The page didn&apos;t load. Check your connection and try again.</p>
         <SecondaryButton>Try again</SecondaryButton>
       </StateCard>
       <StateCard title="Success">
-        <span className="grid h-12 w-12 place-items-center border-[1.5px] border-[#22333a] bg-[#8eaaa6]">
+        <span className="grid h-12 w-12 place-items-center border-[1.5px] border-dw-ink bg-dw-loch-tint">
           <svg viewBox="0 0 16 16" className="h-6 w-6" aria-hidden="true"><path d="M2.5 8.5 L6.5 12 L13.5 3.5" fill="none" stroke={DW.text} strokeWidth="2" strokeLinecap="square" /></svg>
         </span>
-        <p className={`${display} text-2xl text-[#22333a]`}>Added to your list</p>
-        <p className={`${ui} text-sm text-[#4f5f66]`}>Milford Track is on your list.</p>
+        <p className={`${display} text-2xl text-dw-ink`}>Added to your list</p>
+        <p className={`${ui} text-sm text-dw-muted`}>Milford Track is on your list.</p>
       </StateCard>
     </div>
   );

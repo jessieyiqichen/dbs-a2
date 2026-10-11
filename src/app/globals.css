@@ -12,6 +12,26 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Dawn, the chosen style: its colour roles, the single source for every Dawn class (text-dw-ink, bg-dw-mount …).
+   `static` keeps every variable in the CSS, so arbitrary values and inline styles can use var(--color-dw-*) too.
+   src/components/dawn/ds/tokens.ts mirrors these for SVG and contrast checks; a test keeps the two equal. */
+@theme static {
+  --color-dw-page: #e6edeb;      /* background: pale sky */
+  --color-dw-page-mid: #eaf0ee;  /* the page gradient, lower down */
+  --color-dw-page-low: #f0f5f3;
+  --color-dw-mount: #f6f9f7;     /* surface: the mount a print sits on */
+  --color-dw-ink: #22333a;       /* text: key plate ink */
+  --color-dw-muted: #4f5f66;     /* captions, meta, placeholders */
+  --color-dw-border: #6f8287;    /* control borders */
+  --color-dw-loch: #2c5868;      /* accent: the one primary action */
+  --color-dw-loch-hover: #356677;
+  --color-dw-loch-pressed: #244a58;
+  --color-dw-celadon: #c3d6c4;   /* tint plates: selected */
+  --color-dw-aqua: #c9dcdc;      /* tint plates: hover */
+  --color-dw-loch-tint: #8eaaa6; /* tint plates: pressed, chips */
+  --color-dw-stone: #a7b4b1;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

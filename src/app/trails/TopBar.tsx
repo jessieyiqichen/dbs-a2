@@ -7,7 +7,7 @@ import { t14 } from "./type";
 export function TopBar() {
   const { list } = useTrails();
   return (
-    <div className="sticky top-0 z-30 border-b border-[#22333a]/15 bg-[#e6edeb]/95">
+    <div className="sticky top-0 z-30 border-b border-dw-ink/15 bg-dw-page/95">
       <div className={`${t14} mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3`}>
         <div className="flex items-baseline gap-6">
           <PlateLink href="/" size="note">← Hub</PlateLink>
@@ -15,7 +15,7 @@ export function TopBar() {
         </div>
         <p className="flex items-center gap-2" aria-live="polite">
           <CountBadge n={list.length} />
-          <span className="text-[#4f5f66]">on your list</span>
+          <span className="text-dw-muted">on your list</span>
         </p>
       </div>
     </div>

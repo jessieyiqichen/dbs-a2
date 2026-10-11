@@ -54,13 +54,13 @@ export function routeNodes(h: Pick<Hike, "start" | "end" | "route">, route: Rout
 
 /** A stop on the route map. Rest: the mount with a celadon plate off register; hover: an aqua plate in register;
  *  pressed: sinks; selected: a celadon plate in register with a key rule beneath. Ends are round. */
-export const stopBase = "relative grid h-10 w-10 shrink-0 place-items-center border-[1.5px] border-[#22333a]";
+export const stopBase = "relative grid h-10 w-10 shrink-0 place-items-center border-[1.5px] border-dw-ink";
 export const stopState: Record<ControlState, string> = {
-  rest: "bg-[#f6f9f7] shadow-[2px_2px_0_0_#c3d6c4]",
-  hover: "bg-[#c9dcdc] shadow-none",
-  focus: "bg-[#f6f9f7] shadow-[2px_2px_0_0_#c3d6c4] dw-crop is-focus",
-  pressed: "translate-y-px bg-[#8eaaa6] shadow-[inset_0_2px_4px_rgba(34,51,58,.45)]",
-  selected: "bg-[#c3d6c4] shadow-[inset_0_-3px_0_0_#22333a]",
+  rest: "bg-dw-mount shadow-[2px_2px_0_0_var(--color-dw-celadon)]",
+  hover: "bg-dw-aqua shadow-none",
+  focus: "bg-dw-mount shadow-[2px_2px_0_0_var(--color-dw-celadon)] dw-crop is-focus",
+  pressed: "translate-y-px bg-dw-loch-tint shadow-[inset_0_2px_4px_rgba(34,51,58,.45)]",
+  selected: "bg-dw-celadon shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]",
   disabled: "",
 };
 
@@ -75,12 +75,12 @@ export function MonthStrip({ best }: { best: string[] }) {
   const range = monthRange(best);
   return (
     <div>
-      <p className={`${t14} mb-2 font-semibold text-[#22333a]`}>{range}</p>
+      <p className={`${t14} mb-2 font-semibold text-dw-ink`}>{range}</p>
       <div className="grid max-w-md grid-cols-12 gap-1" aria-hidden="true">
         {MONTHS.map((m) => {
           const on = best.includes(m);
           return (
-            <span key={m} className={`${t12} grid h-9 place-items-center border !tracking-normal ${on ? "border-[#22333a] bg-[#c3d6c4] text-[#22333a] shadow-[inset_0_-3px_0_0_#22333a]" : "border-[#6f8287]/40 font-normal text-[#4f5f66]"}`}>
+            <span key={m} className={`${t12} grid h-9 place-items-center border !tracking-normal ${on ? "border-dw-ink bg-dw-celadon text-dw-ink shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]" : "border-dw-border/40 font-normal text-dw-muted"}`}>
               {m[0]}
             </span>
           );
@@ -96,8 +96,8 @@ export function PlateThumb({ photo, n, selected, force, onClick, label }: { phot
   const look = force ? card[force] : on ? card.selected : card.rest;
   const body = (
     <>
-      <TonedPhoto photo={photo} sizes="200px" className={`aspect-[4/3] border-2 border-[#22333a] ${force === "hover" ? "saturate-[1.25]" : colourUp}`} />
-      <span className={`${t14} mt-1 block truncate ${on ? "font-semibold text-[#22333a]" : "text-[#4f5f66] group-hover:text-[#22333a]"}`}>{n}. {photo.place}</span>
+      <TonedPhoto photo={photo} sizes="200px" className={`aspect-[4/3] border-2 border-dw-ink ${force === "hover" ? "saturate-[1.25]" : colourUp}`} />
+      <span className={`${t14} mt-1 block truncate ${on ? "font-semibold text-dw-ink" : "text-dw-muted group-hover:text-dw-ink"}`}>{n}. {photo.place}</span>
     </>
   );
   if (force) return <span className={`relative block p-1.5 ${look}`}>{body}</span>;
@@ -112,8 +112,8 @@ export function PlateThumb({ photo, n, selected, force, onClick, label }: { phot
 export function HeroPlate({ photo, count, onOpen, label, priority = false }: { photo: TrailPhoto; count: number; onOpen?: () => void; label: string; priority?: boolean }) {
   return (
     <button type="button" onClick={onOpen} aria-label={label} className={`group block w-full text-left sm:p-3.5 ${card.rest} ${cardLive}`}>
-      <TonedPhoto photo={photo} sizes="(min-width: 1024px) 660px, 100vw" priority={priority} className={`aspect-[3/2] sm:aspect-[4/3] sm:border-[3px] sm:border-[#22333a] ${colourUp}`} />
-      <span className={`${t12} absolute bottom-3 right-3 flex items-center gap-1.5 border sm:bottom-7 sm:right-7 border-[#22333a] bg-[#f6f9f7] px-3 py-2 transition-colors duration-[600ms] group-hover:bg-[#c3d6c4]`}><PlateIcon name="camera" size={20} />{count} plates →</span>
+      <TonedPhoto photo={photo} sizes="(min-width: 1024px) 660px, 100vw" priority={priority} className={`aspect-[3/2] sm:aspect-[4/3] sm:border-[3px] sm:border-dw-ink ${colourUp}`} />
+      <span className={`${t12} absolute bottom-3 right-3 flex items-center gap-1.5 border sm:bottom-7 sm:right-7 border-dw-ink bg-dw-mount px-3 py-2 transition-colors duration-[600ms] group-hover:bg-dw-celadon`}><PlateIcon name="camera" size={20} />{count} plates →</span>
     </button>
   );
 }
@@ -122,10 +122,10 @@ export function HeroPlate({ photo, count, onOpen, label, priority = false }: { p
 export function NeighbourLink({ href, label, name, photo }: { href: string; label: string; name: string; photo: TrailPhoto }) {
   const body = (
     <>
-      <TonedPhoto photo={photo} sizes="120px" className={`aspect-[4/3] w-full shrink-0 border-2 border-[#22333a] sm:w-28 ${colourUp}`} />
+      <TonedPhoto photo={photo} sizes="120px" className={`aspect-[4/3] w-full shrink-0 border-2 border-dw-ink sm:w-28 ${colourUp}`} />
       <span className="min-w-0">
-        <span className={`${t12} block text-[#4f5f66]`}>{label}</span>
-        <span className={`${t24} mt-1 block decoration-[#8eaaa6] decoration-2 underline-offset-4 group-hover:underline`}>{name}</span>
+        <span className={`${t12} block text-dw-muted`}>{label}</span>
+        <span className={`${t24} mt-1 block decoration-dw-loch-tint decoration-2 underline-offset-4 group-hover:underline`}>{name}</span>
       </span>
     </>
   );
