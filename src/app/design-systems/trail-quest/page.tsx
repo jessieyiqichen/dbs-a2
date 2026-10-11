@@ -8,7 +8,6 @@ import { TQ, TQ_FOCUS_CSS, display, ui } from "@/components/trail-quest/ds/token
 import { CountBubble, GameButton, GameCheck, GameInput, GameLink, GameRadio, GameSearch, GameSelect, RadioSwatch } from "@/components/trail-quest/ds/Primitives";
 import { ChipSwatch, GameChips, GameTabs, GameToggle, TabSwatch } from "@/components/trail-quest/ds/Interactive";
 import { AltitudeBar, Boots, CardSwatch, LevelCard, LevelDialog, LevelRow, TQ_KEYFRAMES, UIStates } from "@/components/trail-quest/ds/Pieces";
-import FocusTrial from "./FocusTrial";
 
 const displayFont = Fredoka({ subsets: ["latin"], weight: ["500", "600", "700"], variable: "--tq-display" });
 const uiFont = Nunito({ subsets: ["latin"], weight: ["600", "800", "900"], variable: "--tq-ui" });
@@ -216,7 +215,7 @@ function Components() {
 const STATE_NOTES: Record<ControlState, string> = {
   rest: "Standing on its ground shadow",
   hover: "Lifts higher and brightens; a shine sweeps",
-  focus: "Reached with Tab: sparkles at the corners",
+  focus: "Reached with Tab: a selection arrow bobs above",
   pressed: "Drops onto its shadow and squashes",
   selected: "Turns grape and pops up",
   disabled: "Locked: grey, with a lock",
@@ -287,7 +286,6 @@ export default function TrailQuestSystem() {
             A sunny mobile game. Every shape has a 3px navy outline and stands on a hard ground shadow; pressing drops it down. Grass is kept for the one thing to do next.
           </p>
         </header>
-        <FocusTrial />
         <Section n={1} title="Colour roles" note="Contrast is computed from the hex values.">
           <ColourRoles />
         </Section>

@@ -33,7 +33,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## State rules (all three styles)
 - The six control states are exactly the assignment's: rest, hover, focus, pressed, selected, disabled, shown "where they apply". Every interactive control in a design system gets a row in its state grid, with a dash where a state does not apply (buttons and links have no selected; text fields have no pressed or selected; links have no disabled).
 - One rule per state inside a style, applied to every control; hover, pressed and selected must never look alike, and selected carries a non-colour mark (a tick, a rule, a circle).
-- Focus is never a box drawn round the outside of a control (it reads as an extra layer). Each style marks focus in its own language, on the control itself (the toggle track, the checkbox box), never the control plus its label: Field Notes draws one ink-blue pen stroke underneath; Dawn puts printer's crop marks at the four corners. Text fields show it from a wrapper while the field has focus.
+- Focus is never a box drawn round the outside of a control (it reads as an extra layer). Each style marks focus in its own language, on the control itself (the toggle track, the checkbox box), never the control plus its label: Field Notes draws one ink-blue pen stroke underneath; Dawn puts printer's crop marks at the four corners; Trail Quest bobs a yellow selection arrow above. Text fields show it from a wrapper while the field has focus.
 - The site imports these same components, so its states match the design system by construction.
 
 ## Style specs (the five decisions; follow them exactly when building in a style)
@@ -64,5 +64,5 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Type pair: Fredoka, bold, outlined in navy, for titles, numbers and buttons; Nunito Black/ExtraBold for everything else.
 - Corners: 16–26px, chunky; round icon buttons; every shape has a 3px navy outline.
 - Shadow: a hard bottom depth shadow with no blur (`0 6px 0` a darker shade, then navy) that collapses when pressed; a white gloss band on buttons.
-- States: rest = standing on a hard ground shadow; hover = lifts 2px, brightens, a shine sweeps across; pressed = drops onto its shadow and squashes; selected = grape, popped up (chips, tabs), grass with a white tick (checkbox, toggle), a grape gem (radio); disabled = locked: grey face, grey outline, a lock icon; focus = game marks on the control (choice pending: sparkles or a bobbing arrow).
+- States: rest = standing on a hard ground shadow; hover = lifts 2px, brightens, a shine sweeps across; pressed = drops onto its shadow and squashes; selected = grape, popped up (chips, tabs), grass with a white tick (checkbox, toggle), a grape gem (radio); disabled = locked: grey face, grey outline, a lock icon; focus = a sun-yellow selection arrow bobbing above the control, like a game-menu cursor (above the label for text fields).
 - Motion: snappy, 150–200ms; buttons press down and squash; rewards pop with overshoot (`cubic-bezier(.34,1.56,.64,1)`); idle loops (clouds, pulse on the next level, stripes on bars) stop under reduced motion.

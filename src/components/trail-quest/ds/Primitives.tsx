@@ -1,7 +1,7 @@
 // Trail Quest controls without client state. One rule for every control:
 // rest = raised on a hard ground shadow; hover = lifts higher and brightens, a shine sweeps across;
 // pressed = drops onto its shadow and squashes; selected = grape, raised; disabled = locked grey;
-// focus = game sparkles at the corners (see tokens).
+// focus = a bobbing selection arrow above the control (see tokens).
 import type { ControlState } from "@/lib/contrast";
 import { Icon } from "../Icons";
 import { TQ, display, focusForced, focusRing, focusWithin, pop, snappy, ui } from "./tokens";
@@ -91,9 +91,10 @@ const fieldLook: Record<ControlState, string> = {
 
 function Field({ id, label, force, children }: { id: string; label: string; force?: ControlState; children: React.ReactNode }) {
   return (
-    <label htmlFor={id} className="block">
+    // The arrow sits above the label, not on it: the whole label is the focus target.
+    <label htmlFor={id} className={`block ${force === "focus" ? `${focusForced} relative` : force ? "relative" : focusWithin}`}>
       <span className={`${ui} mb-1 block text-sm font-black text-[#1d2b53]`}>{label}</span>
-      <span className={`block ${force === "focus" ? `${focusForced} relative` : force ? "relative" : focusWithin}`}>{children}</span>
+      <span className="relative block">{children}</span>
     </label>
   );
 }
