@@ -164,7 +164,7 @@ const tiles: Tile[] = [
   { kind: "made", id: "tabs", caption: "Tabs: a celadon plate slides under the chosen one (try it)" },
   { kind: "made", id: "type-ui", caption: "Libre Franklin: plain words for the practical parts" },
   { kind: "photo", file: "fort-william-ben-nevis.jpg", caption: "Fort William and Ben Nevis: where the West Highland Way ends" },
-  { kind: "made", id: "toggle", caption: "Toggle: off is a grey proof; on, the colour plates are laid in" },
+  { kind: "made", id: "toggle", caption: "Toggle: off, the plate sits off register; on, it locks in and the track is printed" },
   { kind: "made", id: "caption", caption: "Caption line: numbered and set in capitals, as the prints were" },
   { kind: "photo", file: "mitre-peak.jpg", caption: "Mitre Peak, Milford Sound: mist kept in the valleys" },
   { kind: "made", id: "progress", caption: "Progress: one plate per day; today is still a touch off register" },

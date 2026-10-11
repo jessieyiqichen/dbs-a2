@@ -37,20 +37,20 @@ export function TintTabs({ tabs = ["Overview", "Route", "When to go"] }: { tabs?
   );
 }
 
-/** Toggle: off, the track is a grey proof; on, the colour plates are laid in and the key disc slides across. */
+/** Toggle: square, like everything printed. Off, the knob's loch plate sits off register on a blank track;
+ *  on, the plate locks into register and the track is printed in loch. Same rule as the buttons: in register means active. */
 export function ColourToggle({ label, initial = false }: { label: string; initial?: boolean }) {
   const [on, setOn] = useState(initial);
+  const move = `left 600ms ${ease}, box-shadow 600ms ${ease}, background-color 600ms ${ease}`;
   return (
-    <button type="button" role="switch" aria-checked={on} onClick={() => setOn(!on)} className={`flex items-center gap-3 text-left ${focus}`}>
-      <span className="relative block h-7 w-14 shrink-0 overflow-hidden border border-[#22333a]">
-        <span className="absolute inset-0" style={{ background: "linear-gradient(180deg,#e1e5e4 0 45%,#b6bcbc 45% 100%)" }} />
+    <button type="button" role="switch" aria-checked={on} onClick={() => setOn(!on)} className={`group flex items-center gap-3 text-left ${focus}`}>
+      <span
+        className="relative block h-[26px] w-[50px] shrink-0 border-[1.5px] border-[#22333a]"
+        style={{ background: on ? T.loch : "#f6f9f7", transition: move }}
+      >
         <span
-          className="absolute inset-0"
-          style={{ background: `linear-gradient(180deg, ${T.aqua} 0 20%, ${T.celadon} 20% 45%, ${T.loch} 45% 100%)`, opacity: on ? 1 : 0, transition: `opacity 700ms ${ease}` }}
-        />
-        <span
-          className="absolute top-[3px] h-5 w-5 rounded-full border border-[#22333a] bg-[#f6f9f7]"
-          style={{ left: on ? "calc(100% - 23px)" : "3px", transition: `left 700ms ${ease}` }}
+          className="absolute top-[3px] h-[17px] w-[17px] border-[1.5px] border-[#22333a] bg-[#f6f9f7]"
+          style={{ left: on ? "calc(100% - 20px)" : "3px", boxShadow: on ? `0 0 0 0 ${T.loch}` : `3px 3px 0 0 ${T.loch}`, transition: move }}
         />
       </span>
       <span className={`${ui} text-[15px] ${on ? "text-[#22333a]" : "text-[#4f5f66]"}`}>{label}</span>
