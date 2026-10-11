@@ -137,7 +137,7 @@ const made: Record<string, React.ReactNode> = {
   ),
   "stamp-button": (
     <div className="py-5 text-center">
-      <span className="inline-block rotate-[-2deg] border-2 border-[#4f6a3f] bg-[#6f8a5b] px-5 py-2 font-[family-name:var(--fn-serif)] text-lg uppercase tracking-[0.18em] text-[#fbf7ec]">
+      <span className="inline-block rotate-[-2deg] border-2 border-[#3f5732] bg-[#4f6a3f] px-5 py-2 font-[family-name:var(--fn-serif)] text-lg uppercase tracking-[0.18em] text-[#fbf7ec]">
         Open the trail →
       </span>
     </div>
@@ -233,7 +233,7 @@ function Overview() {
           </svg>
           Permit needed
         </p>
-        <span className="block border-2 border-[#4f6a3f] bg-[#6f8a5b] py-2 text-center font-[family-name:var(--fn-serif)] text-lg uppercase tracking-[0.18em] text-[#fbf7ec]">
+        <span className="block border-2 border-[#3f5732] bg-[#4f6a3f] py-2 text-center font-[family-name:var(--fn-serif)] text-lg uppercase tracking-[0.18em] text-[#fbf7ec]">
           Open the trail →
         </span>
       </div>

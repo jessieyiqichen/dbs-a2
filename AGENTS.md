@@ -29,3 +29,12 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Every step is discussed and approved by the user before it is built. Small fixes to approved work are fine.
 - Log every request, push-back and decision in `log.md` (Chinese). Pages, code and this file stay in English.
 - Commits: one small step each; add files by name, never `git add -A`.
+
+## Style specs (the five decisions; follow them exactly when building in a style)
+
+### Field Notes — Handmade, Curious, Warm
+- Palette roles: paper page `#f7f1e3`, kraft cards `#e9dcc0`, graphite text `#55524b` (6.92:1 on paper, 5.74:1 on kraft), muted text `#625e56` (5.73:1 / 4.75:1), ink-blue lines and links `#2f4a6b` (8.06:1), moss only for the primary action: button fill `#4f6a3f` with paper text (5.66:1); light moss `#6f8a5b` for large areas and decoration only (3.59:1, never behind body text).
+- Type pair: Caveat for titles and labels; Crimson Pro for names, numbers and reading. Text is graphite, never black.
+- Corners: 2px, paper edges, not rounded.
+- Shadow: low and soft, like paper on a desk (`0 1px 2px rgba(0,0,0,.12), 0 8px 18px rgba(60,45,20,.10)`).
+- Motion: 300ms, ease-out, settles straight; no bounce.
