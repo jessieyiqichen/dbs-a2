@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Cormorant_Garamond, Mulish } from "next/font/google";
 import credits from "@/data/credits/dawn.json";
+import skies from "@/data/dawn-skies.json";
 import { DAWN_ICON_NAMES, DAWN_KEYFRAMES, DawnDefs, DawnIcon, StartSlider, SunArc, SunriseLoader } from "@/components/dawn/DawnArt";
 import SunToggle from "@/components/dawn/SunToggle";
 
@@ -64,13 +65,14 @@ const made: Record<string, React.ReactNode> = {
     </div>
   ),
   ridges: (
-    <svg viewBox="0 0 300 160" className="block h-auto w-full rounded-2xl" role="img" aria-label="Layered ridges fading into mist">
-      <rect width="300" height="160" fill="#eef0fa" />
-      <path d="M0 80 L40 62 L80 74 L130 50 L180 70 L230 56 L300 72 V160 H0 Z" fill="#cfc4e6" opacity=".55" />
-      <path d="M0 102 L50 84 L100 96 L150 78 L210 94 L260 82 L300 92 V160 H0 Z" fill="#a9a6d8" opacity=".6" />
-      <path d="M0 126 L60 108 L120 120 L170 104 L230 118 L300 106 V160 H0 Z" fill="#6f70a8" opacity=".7" />
-      <path d="M0 146 L70 132 L140 142 L200 130 L260 140 L300 134 V160 H0 Z" fill="#2e3150" opacity=".85" />
-    </svg>
+    <div className="grid grid-cols-5 gap-2 py-1">
+      {(Object.entries(skies) as [string, string[]][]).map(([file, stops]) => (
+        <div key={file}>
+          <div className="h-28 rounded-full" style={{ background: `linear-gradient(180deg, ${stops.join(", ")})` }} />
+          <Image src={`/moodboards/dawn/${file}.jpg`} alt="" width={photo(`${file}.jpg`).w} height={photo(`${file}.jpg`).h} className="mt-2 aspect-square w-full rounded-full object-cover" sizes="60px" />
+        </div>
+      ))}
+    </div>
   ),
   icons: (
     <div className="grid grid-cols-4 gap-x-2 gap-y-3 py-2">
@@ -151,20 +153,19 @@ const made: Record<string, React.ReactNode> = {
     </div>
   ),
   profile: (
-    <svg viewBox="0 0 300 130" className="block h-auto w-full" role="img" aria-label="Elevation profile as misty layers, with first light on the summit">
-      <defs>
-        <linearGradient id="dw-prof" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#5b4fc4" stopOpacity=".45" />
-          <stop offset="1" stopColor="#a9c3e6" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <path d="M0 110 C 40 104, 60 84, 100 78 S 150 40, 180 36 S 240 80, 300 90 V130 H0 Z" fill="#cfc4e6" opacity=".35" />
-      <path d="M0 110 C 40 106, 60 74, 100 68 S 150 24, 180 22 S 240 70, 300 82 V130 H0 Z" fill="url(#dw-prof)" />
-      <path d="M0 110 C 40 106, 60 74, 100 68 S 150 24, 180 22 S 240 70, 300 82" fill="none" stroke="#5b4fc4" strokeWidth="1.5" />
-      <circle cx="180" cy="22" r="18" fill="url(#dw-glow)" />
-      <circle cx="180" cy="22" r="4" fill="#fff1b8" stroke="#2e3150" strokeWidth="1" />
-      <text x="190" y="14" fontSize="10" fill="#5d6180" letterSpacing="1.5">MACKINNON PASS</text>
-    </svg>
+    <div className="relative py-4 pl-1">
+      <span className="absolute right-2 top-3 h-12 w-12 rounded-full bg-[radial-gradient(#fff1b8,transparent_68%)]" />
+      {[
+        ["53.5", "km, one way"],
+        ["4", "days, huts booked"],
+        ["1,140–1,154", "metres at Mackinnon Pass"],
+      ].map(([n, l], i) => (
+        <div key={l} className={i ? "mt-3 border-t border-[#cfc4e6] pt-3" : ""}>
+          <p className="font-[family-name:var(--dw-display)] text-4xl font-light leading-none">{n}</p>
+          <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-[#5d6180]">{l}</p>
+        </div>
+      ))}
+    </div>
   ),
   hours: (
     <div className="py-4">
@@ -261,7 +262,7 @@ const tiles: Tile[] = [
   { kind: "made", id: "type-name", caption: "Names and numbers, set large and thin" },
   { kind: "made", id: "chips", caption: "Filters: the chosen one catches the light" },
   { kind: "photo", file: "lone-tree-fog.jpg", caption: "Lone tree: emptiness is the layout" },
-  { kind: "made", id: "ridges", caption: "Ridges: depth from paler, not darker" },
+  { kind: "made", id: "ridges", caption: "Skies sampled from the photos, top to bottom: where the palette comes from" },
   { kind: "made", id: "type-ui", caption: "Mulish: small labels, wide tracking" },
   { kind: "photo", file: "misty-lake.jpg", caption: "Misty lake: reflections, not shadows" },
   { kind: "made", id: "glass-card", caption: "Glass card: a horizon line, light leaking in" },
@@ -272,7 +273,7 @@ const tiles: Tile[] = [
   { kind: "made", id: "icons", caption: "Dawn icons: a fine line over a soft wash, horizons that fade, one point of light" },
   { kind: "photo", file: "misty-birches.jpg", caption: "Misty birches: soft, layered light" },
   { kind: "made", id: "toggle", caption: "Toggle: tap it; the sun climbs an arc as night fades to day" },
-  { kind: "made", id: "profile", caption: "Elevation in mist, first light on the pass" },
+  { kind: "made", id: "profile", caption: "Numbers, quietly: thin, large, with air between" },
   { kind: "photo", file: "lilac-dusk.jpg", caption: "Lilac dusk: the one darker note" },
   { kind: "made", id: "hours", caption: "4:30 to 6:30: colour changes slowly" },
   { kind: "photo", file: "fog-meadow.jpg", caption: "Fog meadow: texture without contrast" },
@@ -287,7 +288,7 @@ const tiles: Tile[] = [
 export default function DawnBoard() {
   const madeCount = tiles.filter((t) => t.kind === "made").length;
   return (
-    <main className={`${display.variable} ${ui.variable} min-h-screen font-[family-name:var(--dw-ui)] text-[#2e3150]`} style={{ background: SKY }}>
+    <main className={`${display.variable} ${ui.variable} min-h-screen font-[family-name:var(--dw-ui)] text-[#2e3150] [font-variant-numeric:lining-nums]`} style={{ background: SKY }}>
       <DawnDefs />
       <style>{DAWN_KEYFRAMES}</style>
       <div className="mx-auto max-w-6xl px-5 pb-24 pt-10">

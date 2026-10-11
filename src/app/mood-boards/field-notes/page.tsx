@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Caveat, Crimson_Pro } from "next/font/google";
 import credits from "@/data/credits/field-notes.json";
+import { CircledChoice, FIELD_ICON_NAMES, FIELD_KEYFRAMES, FieldDefs, FieldIcon, NotebookTabs, PaperStack, PencilLoader, PermitStamp, RouteProgress, RulerSlider, SearchLine, WashToggle } from "@/components/field-notes/FieldArt";
 
 const hand = Caveat({ subsets: ["latin"], weight: ["400", "600"], variable: "--fn-hand" });
 const serif = Crimson_Pro({ subsets: ["latin"], weight: ["400", "600"], style: ["normal", "italic"], variable: "--fn-serif" });
@@ -43,11 +44,6 @@ const made: Record<string, React.ReactNode> = {
       ))}
     </div>
   ),
-  moss: (
-    <div className="flex h-40 items-end p-3 text-[#f7f1e3]" style={{ background: "#6f8a5b" }}>
-      <span className="font-[family-name:var(--fn-hand)] text-2xl">moss, after rain</span>
-    </div>
-  ),
   "type-hand": (
     <div className="py-4 text-center">
       <p className="font-[family-name:var(--fn-hand)] text-8xl leading-none">Aa</p>
@@ -70,53 +66,6 @@ const made: Record<string, React.ReactNode> = {
       <br />
       Huts booked, no camping.
     </div>
-  ),
-  graph: (
-    <div
-      className="h-44"
-      style={{
-        backgroundColor: "#f7f1e3",
-        backgroundImage:
-          "linear-gradient(#cfd8c4 1px, transparent 1px), linear-gradient(90deg, #cfd8c4 1px, transparent 1px), linear-gradient(#a9b89a 1px, transparent 1px), linear-gradient(90deg, #a9b89a 1px, transparent 1px)",
-        backgroundSize: "10px 10px, 10px 10px, 50px 50px, 50px 50px",
-      }}
-    />
-  ),
-  kraft: (
-    <svg viewBox="0 0 200 140" className="block h-auto w-full" role="img" aria-label="Kraft paper texture">
-      <filter id="fn-kraft">
-        <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" seed="4" />
-        <feColorMatrix values="0 0 0 0 .55  0 0 0 0 .45  0 0 0 0 .3  0 0 0 .35 0" />
-      </filter>
-      <rect width="200" height="140" fill="#e9dcc0" />
-      <rect width="200" height="140" filter="url(#fn-kraft)" />
-    </svg>
-  ),
-  "doodle-mountain": (
-    <Rough viewBox="0 0 220 140" label="Line drawing of mountains with a dashed trail">
-      <path d="M10 125 L70 45 L100 85 L140 25 L210 125 Z" />
-      <path d="M128 42 l12 -17 l12 17" />
-      <path d="M30 120 C 60 112, 70 98, 92 96 S 120 78, 138 60" strokeDasharray="5 7" stroke="#2f4a6b" />
-      <circle cx="138" cy="58" r="3.5" fill={INK} />
-    </Rough>
-  ),
-  "doodle-boot": (
-    <Rough viewBox="0 0 160 140" label="Line drawing of a hiking boot">
-      <path d="M48 18 h40 v58 c18 4 40 10 52 22 c6 6 6 14 0 18 H30 c-6 0 -8 -6 -6 -12 l8 -30 z" />
-      <path d="M24 116 h118" />
-      <path d="M52 34 h30 M52 46 h30 M52 58 h30" />
-      <path d="M30 126 l6 -10 M50 126 l6 -10 M70 126 l6 -10 M90 126 l6 -10 M110 126 l6 -10" strokeWidth={1.6} />
-    </Rough>
-  ),
-  "doodle-tent": (
-    <Rough viewBox="0 0 180 130" label="Line drawing of a tent under stars">
-      <path d="M20 110 L80 30 L150 110 Z" />
-      <path d="M80 30 L95 110 M80 30 L65 110" />
-      <path d="M10 112 h160" />
-      <path d="M140 22 l4 8 l8 1 l-6 6 l2 8 l-8 -4 l-8 4 l2 -8 l-6 -6 l8 -1 z" strokeWidth={1.6} />
-      <circle cx="30" cy="26" r="2" fill={INK} />
-      <circle cx="110" cy="14" r="2" fill={INK} />
-    </Rough>
   ),
   "profile-sketch": (
     <div>
@@ -168,16 +117,30 @@ const made: Record<string, React.ReactNode> = {
       </p>
     </div>
   ),
-  washi: (
-    <div className="relative h-32">
-      <div className="absolute left-2 top-6 h-8 w-4/5 -rotate-6 bg-[#9fb38f]/70" />
-      <div className="absolute right-2 top-14 h-8 w-3/4 rotate-3 bg-[#8fa3bd]/60" />
-      <div
-        className="absolute bottom-3 left-8 h-8 w-2/3 -rotate-1 bg-[#e3d6b4]/80"
-        style={{ backgroundImage: "repeating-linear-gradient(90deg, transparent 0 10px, rgba(85,82,75,.15) 10px 12px)" }}
-      />
+  icons: (
+    <div className="grid grid-cols-4 gap-x-2 gap-y-2 py-2">
+      {FIELD_ICON_NAMES.map((n) => (
+        <div key={n} className="flex flex-col items-center">
+          <FieldIcon name={n} size={44} />
+          <span className="font-[family-name:var(--fn-hand)] text-base leading-none text-black/60">{n}</span>
+        </div>
+      ))}
     </div>
   ),
+  tabs: <NotebookTabs />,
+  choice: <CircledChoice />,
+  ruler: <RulerSlider />,
+  toggle: (
+    <div className="space-y-2 py-3">
+      <WashToggle on label="huts only" />
+      <WashToggle on={false} label="day hikes" />
+    </div>
+  ),
+  search: <SearchLine />,
+  stamp: <PermitStamp />,
+  progress: <RouteProgress />,
+  loader: <PencilLoader />,
+  papers: <PaperStack />,
 };
 
 
@@ -251,29 +214,31 @@ const tiles: Tile[] = [
   { kind: "photo", file: "fern.jpg", caption: "Fern: the only green, kept for the one action" },
   { kind: "made", id: "type-hand", caption: "Caveat: the hand, for titles and labels" },
   { kind: "photo", file: "birch-path.jpg", caption: "Birch path: pale light and plenty of air" },
-  { kind: "made", id: "doodle-mountain", caption: "Route, sketched: lines drawn, not ruled" },
+  { kind: "made", id: "icons", caption: "Pencil icons: wobbly graphite, hatched shade, one watercolour dab" },
   { kind: "photo", file: "pressed-petals.jpg", caption: "Pressed petals: things kept between pages" },
   { kind: "made", id: "ruled-note", caption: "Ruled note: facts written down plainly" },
   { kind: "made", id: "tape-chip", caption: "Tape labels: filters as tape, not pills" },
   { kind: "photo", file: "tree-sketch.jpg", caption: "Trees in pencil: graphite for text, never black" },
   { kind: "made", id: "type-serif", caption: "Crimson Pro: a book serif for names and numbers" },
   { kind: "photo", file: "alpine-hut.jpg", caption: "Hut above the treeline: shelter and warmth" },
-  { kind: "made", id: "doodle-boot", caption: "Boot: icons drawn by hand" },
-  { kind: "made", id: "graph", caption: "Graph paper: a grid you feel, not see" },
+  { kind: "made", id: "tabs", caption: "Tabs: index tabs on the notebook\u2019s edge" },
+  { kind: "made", id: "choice", caption: "Pick one: the answer gets circled in pencil" },
   { kind: "photo", file: "compass.jpg", caption: "Brass compass: warmth in the small things" },
   { kind: "made", id: "page-card", caption: "Clipped card: a card is a page" },
   { kind: "photo", file: "flower-notebook.jpg", caption: "Drawn cover: illustration over icons" },
-  { kind: "made", id: "moss", caption: "Moss: one colour does the talking" },
+  { kind: "made", id: "ruler", caption: "Slider: a pencil ruler, a paperclip for the thumb" },
+  { kind: "made", id: "toggle", caption: "Toggle: on is a wash of moss inside the pencil line" },
   { kind: "photo", file: "mossy-birch.jpg", caption: "Light on moss: soft, low shadows" },
   { kind: "made", id: "checkbox", caption: "Drawn ticks: controls that feel handmade" },
-  { kind: "made", id: "kraft", caption: "Kraft: the surface texture" },
+  { kind: "made", id: "papers", caption: "Kraft, graph and ruled paper, stacked" },
+  { kind: "made", id: "search", caption: "Search: one ruled line and a pencil" },
   { kind: "photo", file: "sketchbook.jpg", caption: "Pen landscape: thin ink lines for borders" },
   { kind: "made", id: "stamp-button", caption: "Stamped button: the one primary action" },
-  { kind: "photo", file: "map-pencil.jpg", caption: "Map, pencil, coffee: planning at a table" },
   { kind: "made", id: "profile-sketch", caption: "Elevation by hand: charts drawn, not plotted" },
   { kind: "photo", file: "swiss-trail.jpg", caption: "Up the ridge: what the notebook is for" },
-  { kind: "made", id: "doodle-tent", caption: "Night two: small, quiet doodles" },
-  { kind: "made", id: "washi", caption: "Washi tape: how things are held down" },
+  { kind: "made", id: "stamp", caption: "Badge: a perforated stamp" },
+  { kind: "made", id: "progress", caption: "Progress: an X on the pencilled route" },
+  { kind: "made", id: "loader", caption: "Loading: a pencil sketching the mountain" },
 ];
 
 const tilts = ["-rotate-1", "rotate-1", "rotate-0", "-rotate-[0.6deg]", "rotate-[0.8deg]"];
@@ -285,12 +250,8 @@ export default function FieldNotesBoard() {
       className={`${hand.variable} ${serif.variable} min-h-screen font-[family-name:var(--fn-serif)] text-[#2b2a26]`}
       style={{ background: "#efe6d0" }}
     >
-      <svg width="0" height="0" className="absolute" aria-hidden="true">
-        <filter id="fn-rough">
-          <feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="3" />
-          <feDisplacementMap in="SourceGraphic" scale="2.6" />
-        </filter>
-      </svg>
+      <FieldDefs />
+      <style>{FIELD_KEYFRAMES}</style>
 
       <div className="mx-auto max-w-6xl px-5 pb-20 pt-10">
         <Link

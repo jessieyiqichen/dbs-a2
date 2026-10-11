@@ -38,6 +38,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Corners: 2px, paper edges, not rounded.
 - Shadow: low and soft, like paper on a desk (`0 1px 2px rgba(0,0,0,.12), 0 8px 18px rgba(60,45,20,.10)`).
 - Motion: 300ms, ease-out, settles straight; no bounce.
+- Signature: everything is something from a trail notebook. Icons: a wobbly graphite pencil line, hatching on the side away from the light, one small watercolour dab (moss or ink blue). Tabs: index tabs on the notebook's edge. Single choice: the answer circled in pencil. Slider: a pencil ruler with a paperclip thumb. Toggle: on is a moss wash inside the pencil pill. Search: one ruled line. Badge: a perforated stamp. Progress: an X on the pencilled route. Loading: a pencil sketching the mountain.
 
 ### Dawn — Quiet, Light, Hopeful
 - Palette roles: haze page, a soft sky gradient `#e9e4f5 → #dfe8f5 → #f6f3f8`; frosted white surfaces (white at 60–80%, blurred); twilight text `#2e3150` (11.42:1 on haze); muted text `#5d6180` (5.48:1); lilac hairlines `#cfc4e6` (decorative only, never text); violet `#5b4fc4` only for the primary action, with white text (6.25:1).
