@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Cormorant_Garamond, Mulish } from "next/font/google";
 import credits from "@/data/credits/dawn.json";
+import { DAWN_ICON_NAMES, DawnDefs, DawnIcon, StartSlider, SunArc, SunriseLoader, SunToggle } from "@/components/dawn/DawnArt";
 
 const display = Cormorant_Garamond({ subsets: ["latin"], weight: ["300", "400", "500"], style: ["normal", "italic"], variable: "--dw-display" });
 const ui = Mulish({ subsets: ["latin"], weight: ["300", "400", "600"], variable: "--dw-ui" });
@@ -24,14 +25,6 @@ const SKY = "linear-gradient(180deg, #e9e4f5 0%, #dfe8f5 55%, #f6f3f8 100%)";
 const glass = "rounded-[20px] border border-white/70 bg-white/60 backdrop-blur-md shadow-[0_0_40px_rgba(150,140,220,.18)]";
 
 /* ---------- pieces made for this board ---------- */
-
-function Thin({ children, viewBox, label }: { children: React.ReactNode; viewBox: string; label: string }) {
-  return (
-    <svg viewBox={viewBox} role="img" aria-label={label} className="h-auto w-full" fill="none" stroke={TWILIGHT} strokeWidth={1.25} strokeLinecap="round" strokeLinejoin="round">
-      {children}
-    </svg>
-  );
-}
 
 const made: Record<string, React.ReactNode> = {
   palette: (
@@ -69,13 +62,6 @@ const made: Record<string, React.ReactNode> = {
       <p className="text-[11px] uppercase tracking-[0.2em] text-[#5d6180]">Mulish · for everything else</p>
     </div>
   ),
-  blur: (
-    <div className="relative h-44 overflow-hidden rounded-2xl bg-[#f6f3f8]">
-      <div className="absolute -left-6 top-4 h-32 w-32 rounded-full bg-[#cfc4e6] blur-2xl" />
-      <div className="absolute right-0 top-10 h-36 w-36 rounded-full bg-[#a9c3e6] blur-2xl" />
-      <div className="absolute bottom-0 left-16 h-24 w-40 rounded-full bg-white blur-xl" />
-    </div>
-  ),
   ridges: (
     <svg viewBox="0 0 300 160" className="block h-auto w-full rounded-2xl" role="img" aria-label="Layered ridges fading into mist">
       <rect width="300" height="160" fill="#eef0fa" />
@@ -86,60 +72,97 @@ const made: Record<string, React.ReactNode> = {
     </svg>
   ),
   icons: (
-    <div className="grid grid-cols-3 gap-4 px-2 py-3">
-      <Thin viewBox="0 0 48 48" label="Sunrise icon">
-        <path d="M6 32 h36" />
-        <path d="M14 32 a10 10 0 0 1 20 0" />
-        <path d="M24 12 v5 M11 18 l3 3 M37 18 l-3 3" />
-      </Thin>
-      <Thin viewBox="0 0 48 48" label="Cloud icon">
-        <path d="M14 32 h22 a7 7 0 0 0 0 -14 a10 10 0 0 0 -19 3 a6 6 0 0 0 -3 11 z" />
-      </Thin>
-      <Thin viewBox="0 0 48 48" label="Mountain icon">
-        <path d="M4 38 L18 16 L26 28 L32 20 L44 38 Z" />
-      </Thin>
+    <div className="grid grid-cols-4 gap-x-2 gap-y-3 py-2">
+      {DAWN_ICON_NAMES.map((n) => (
+        <div key={n} className="flex flex-col items-center">
+          <DawnIcon name={n} size={40} />
+          <span className="mt-1 text-[9px] uppercase tracking-[0.14em] text-[#5d6180]">{n}</span>
+        </div>
+      ))}
     </div>
   ),
   chips: (
     <div className="flex flex-wrap gap-2 py-4">
-      <span className="rounded-full bg-[#5b4fc4] px-4 py-1.5 text-sm text-white">All</span>
-      <span className="rounded-full border border-[#cfc4e6] bg-white/70 px-4 py-1.5 text-sm">Day hikes</span>
-      <span className="rounded-full border border-[#cfc4e6] bg-white/70 px-4 py-1.5 text-sm">Multi-day</span>
-      <span className="rounded-full border border-[#cfc4e6] bg-white/70 px-4 py-1.5 text-sm">Permit</span>
+      <span className="flex items-center gap-1.5 rounded-full bg-white/80 py-1.5 pl-2 pr-4 text-sm shadow-[0_0_22px_rgba(255,241,184,.9),0_0_0_1px_#cfc4e6]">
+        <DawnIcon name="sunrise" size={22} />
+        Day hikes
+      </span>
+      <span className="rounded-full border border-[#cfc4e6] bg-white/40 px-4 py-1.5 text-sm text-[#5d6180]">Multi-day</span>
+      <span className="rounded-full border border-[#cfc4e6] bg-white/40 px-4 py-1.5 text-sm text-[#5d6180]">Permit</span>
     </div>
   ),
   buttons: (
     <div className="flex flex-wrap items-center gap-3 py-5">
-      <span className="rounded-full bg-[#5b4fc4] px-6 py-2.5 text-sm font-semibold text-white shadow-[0_0_24px_rgba(91,79,196,.35)]">See the walk</span>
-      <span className="rounded-full border border-[#cfc4e6] px-6 py-2.5 text-sm">Later</span>
+      <span
+        className="relative overflow-hidden rounded-full px-7 py-3 [background-position:0_15%] hover:[background-position:0_60%] text-sm font-semibold text-white shadow-[0_0_28px_rgba(91,79,196,.35)] transition-[box-shadow,background-position] duration-700 ease-in-out hover:shadow-[0_0_40px_rgba(255,241,184,.7)]"
+        style={{ backgroundImage: "linear-gradient(0deg, #fff1b8 0%, #cfc4e6 18%, #5b4fc4 45%, #2e3150 100%)", backgroundSize: "100% 260%" }}
+      >
+        See the walk
+      </span>
+      <span className="rounded-full border border-white/80 bg-white/50 px-6 py-3 text-sm backdrop-blur">Later</span>
+      <span className="grid h-11 w-11 place-items-center rounded-full border border-white/80 bg-white/50 backdrop-blur">
+        <DawnIcon name="map" size={24} label="Map" />
+      </span>
+    </div>
+  ),
+  tabs: (
+    <div className="flex gap-6 py-5 text-sm">
+      <span className="relative pb-2 font-semibold">
+        Overview
+        <span className="absolute inset-x-[-6px] -bottom-0.5 h-[3px] rounded-full bg-[#fff1b8] shadow-[0_0_12px_4px_rgba(255,241,184,.9)]" />
+      </span>
+      <span className="pb-2 text-[#5d6180]">Route</span>
+      <span className="pb-2 text-[#5d6180]">When to go</span>
+    </div>
+  ),
+  search: (
+    <div className="py-4">
+      <div className="flex items-center gap-2 rounded-full border border-white/80 bg-white/60 px-4 py-3 shadow-[0_0_30px_rgba(150,140,220,.18)] backdrop-blur">
+        <DawnIcon name="compass" size={22} />
+        <span className="font-[family-name:var(--dw-display)] text-lg italic text-[#5d6180]">Where will you be at sunrise?</span>
+      </div>
+    </div>
+  ),
+  slider: <StartSlider />,
+  "sun-arc": (
+    <div className="py-2">
+      <SunArc progress={0.4} caption="Day 2 of 4 · Milford Track" />
     </div>
   ),
   "glass-card": (
-    <div className="rounded-2xl p-3" style={{ background: "linear-gradient(135deg, #cfc4e6, #a9c3e6)" }}>
-      <div className={`${glass} p-4`}>
-        <p className="font-[family-name:var(--dw-display)] text-3xl font-light leading-none">Milford Track</p>
+    <div className="rounded-2xl p-3" style={{ background: "linear-gradient(160deg, #cfc4e6, #a9c3e6)" }}>
+      <div className={`${glass} relative overflow-hidden p-4 transition duration-700 hover:shadow-[0_0_50px_rgba(255,241,184,.6)]`}>
+        <span className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-[radial-gradient(#fff1b8,transparent_70%)]" />
+        <div className="flex items-start justify-between">
+          <p className="font-[family-name:var(--dw-display)] text-3xl font-light leading-none">Milford Track</p>
+          <DawnIcon name="tent" size={30} />
+        </div>
         <p className="mt-2 text-sm text-[#5d6180]">53.5 km · 4 days · November to April</p>
+        <div className="mt-3 h-px bg-gradient-to-r from-transparent via-[#5b4fc4]/50 to-transparent" />
+        <p className="mt-2 text-[11px] uppercase tracking-[0.2em] text-[#5d6180]">Huts booked · one way only</p>
       </div>
     </div>
   ),
   toggle: (
-    <div className="flex items-center gap-3 py-5">
-      <span className="relative inline-block h-7 w-12 rounded-full bg-[#5b4fc4]">
-        <span className="absolute right-1 top-1 h-5 w-5 rounded-full bg-white shadow" />
-      </span>
-      <span className="text-sm">Only walks with a permit</span>
+    <div className="space-y-3 py-4">
+      <SunToggle on label="Show sunrise times" />
+      <SunToggle on={false} label="Permit walks only" />
     </div>
   ),
   profile: (
-    <svg viewBox="0 0 300 120" className="block h-auto w-full" role="img" aria-label="Soft elevation profile filled with a gradient">
+    <svg viewBox="0 0 300 130" className="block h-auto w-full" role="img" aria-label="Elevation profile as misty layers, with first light on the summit">
       <defs>
         <linearGradient id="dw-prof" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#5b4fc4" stopOpacity=".45" />
           <stop offset="1" stopColor="#a9c3e6" stopOpacity="0" />
         </linearGradient>
       </defs>
-      <path d="M0 100 C 40 96, 60 70, 100 64 S 150 20, 180 26 S 240 70, 300 80 V120 H0 Z" fill="url(#dw-prof)" />
-      <path d="M0 100 C 40 96, 60 70, 100 64 S 150 20, 180 26 S 240 70, 300 80" fill="none" stroke="#5b4fc4" strokeWidth="1.5" />
+      <path d="M0 110 C 40 104, 60 84, 100 78 S 150 40, 180 36 S 240 80, 300 90 V130 H0 Z" fill="#cfc4e6" opacity=".35" />
+      <path d="M0 110 C 40 106, 60 74, 100 68 S 150 24, 180 22 S 240 70, 300 82 V130 H0 Z" fill="url(#dw-prof)" />
+      <path d="M0 110 C 40 106, 60 74, 100 68 S 150 24, 180 22 S 240 70, 300 82" fill="none" stroke="#5b4fc4" strokeWidth="1.5" />
+      <circle cx="180" cy="22" r="18" fill="url(#dw-glow)" />
+      <circle cx="180" cy="22" r="4" fill="#fff1b8" stroke="#2e3150" strokeWidth="1" />
+      <text x="190" y="14" fontSize="10" fill="#5d6180" letterSpacing="1.5">MACKINNON PASS</text>
     </svg>
   ),
   hours: (
@@ -159,13 +182,9 @@ const made: Record<string, React.ReactNode> = {
     </div>
   ),
   breathe: (
-    <div className="grid h-40 place-items-center">
-      <span className="h-16 w-16 rounded-full bg-[#cfc4e6] motion-safe:animate-pulse" style={{ animationDuration: "3s" }} />
-    </div>
-  ),
-  space: (
-    <div className="grid h-48 place-items-center">
-      <p className="font-[family-name:var(--dw-display)] text-4xl font-light italic">Leave early.</p>
+    <div className="py-2">
+      <SunriseLoader />
+      <p className="text-center text-[11px] uppercase tracking-[0.2em] text-[#5d6180]">Loading the walk…</p>
     </div>
   ),
 };
@@ -215,13 +234,13 @@ function Overview() {
         ))}
       </div>
       <div className={`${glass} flex flex-col justify-center gap-4 p-5`}>
-        <span className="flex items-center gap-3 text-sm">
-          <span className="relative inline-block h-7 w-12 rounded-full bg-[#5b4fc4]">
-            <span className="absolute right-1 top-1 h-5 w-5 rounded-full bg-white shadow" />
-          </span>
-          Permit only
+        <SunToggle on label="Sunrise times" />
+        <span
+          className="block rounded-full py-3 text-center text-sm font-semibold text-white shadow-[0_0_28px_rgba(91,79,196,.35)]"
+          style={{ backgroundImage: "linear-gradient(0deg, #fff1b8 0%, #cfc4e6 18%, #5b4fc4 45%, #2e3150 100%)", backgroundSize: "100% 260%", backgroundPosition: "0 15%" }}
+        >
+          See the walk
         </span>
-        <span className="block rounded-full bg-[#5b4fc4] py-2.5 text-center text-sm font-semibold text-white shadow-[0_0_24px_rgba(91,79,196,.35)]">See the walk</span>
       </div>
     </section>
   );
@@ -239,25 +258,27 @@ const tiles: Tile[] = [
   { kind: "made", id: "first-light", caption: "First light: the only gradient that matters" },
   { kind: "photo", file: "fog-island.jpg", caption: "Fog island: one subject, lots of grey" },
   { kind: "made", id: "type-name", caption: "Names and numbers, set large and thin" },
-  { kind: "made", id: "chips", caption: "Filters: soft pills, one filled" },
+  { kind: "made", id: "chips", caption: "Filters: the chosen one catches the light" },
   { kind: "photo", file: "lone-tree-fog.jpg", caption: "Lone tree: emptiness is the layout" },
   { kind: "made", id: "ridges", caption: "Ridges: depth from paler, not darker" },
   { kind: "made", id: "type-ui", caption: "Mulish: small labels, wide tracking" },
   { kind: "photo", file: "misty-lake.jpg", caption: "Misty lake: reflections, not shadows" },
-  { kind: "made", id: "glass-card", caption: "A card like frosted glass" },
-  { kind: "made", id: "blur", caption: "Blur: colour without edges" },
+  { kind: "made", id: "glass-card", caption: "Glass card: a horizon line, light leaking in" },
+  { kind: "made", id: "tabs", caption: "Tabs: the selected one is a line of first light" },
+  { kind: "made", id: "slider", caption: "Start time: night to morning, the sun as the thumb" },
   { kind: "photo", file: "cliff-in-cloud.jpg", caption: "Cliff in cloud: the foreground can wait" },
-  { kind: "made", id: "buttons", caption: "One glowing button; the rest stay quiet" },
-  { kind: "made", id: "icons", caption: "Thin icons: 1.25px lines" },
+  { kind: "made", id: "buttons", caption: "The main button rises like a sunrise on hover" },
+  { kind: "made", id: "icons", caption: "Dawn icons: thin lines, lilac fill, one point of first light" },
   { kind: "photo", file: "misty-birches.jpg", caption: "Misty birches: soft, layered light" },
-  { kind: "made", id: "toggle", caption: "Toggle: round and unhurried" },
-  { kind: "made", id: "profile", caption: "Elevation as a soft gradient" },
+  { kind: "made", id: "toggle", caption: "Toggle: the moon sets, the sun comes up" },
+  { kind: "made", id: "profile", caption: "Elevation in mist, first light on the pass" },
   { kind: "photo", file: "lilac-dusk.jpg", caption: "Lilac dusk: the one darker note" },
   { kind: "made", id: "hours", caption: "4:30 to 6:30: colour changes slowly" },
   { kind: "photo", file: "fog-meadow.jpg", caption: "Fog meadow: texture without contrast" },
-  { kind: "made", id: "breathe", caption: "Motion: a slow breath, 600ms and longer" },
+  { kind: "made", id: "breathe", caption: "Loading: the sun lifts behind the horizon" }
+  ,{ kind: "made", id: "sun-arc", caption: "Progress as the sun\u2019s arc across the day" },
   { kind: "photo", file: "cloud-sea.jpg", caption: "Cloud sea: above it all, quietly" },
-  { kind: "made", id: "space", caption: "Whitespace is the decoration" },
+  { kind: "made", id: "search", caption: "Search asks where you will be at sunrise" },
   { kind: "photo", file: "lone-boat.jpg", caption: "Lone boat: space around one thing" },
   { kind: "photo", file: "layered-ridges.jpg", caption: "Layered ridges: the palette, in a photo" },
 ];
@@ -266,6 +287,8 @@ export default function DawnBoard() {
   const madeCount = tiles.filter((t) => t.kind === "made").length;
   return (
     <main className={`${display.variable} ${ui.variable} min-h-screen font-[family-name:var(--dw-ui)] text-[#2e3150]`} style={{ background: SKY }}>
+      <DawnDefs />
+      <style>{`@keyframes dw-rise { 0%, 100% { transform: translateY(26px) } 50% { transform: translateY(0) } }`}</style>
       <div className="mx-auto max-w-6xl px-5 pb-24 pt-10">
         <Link
           href="/"
