@@ -20,7 +20,7 @@ const photos = rawPhotos as Record<string, TrailPhoto[]>;
 
 function Facts({ h }: { h: Hike }) {
   return (
-    <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-y border-[#22333a]/20 py-4">
+    <dl className="mt-5 flex flex-wrap gap-x-8 gap-y-3 border-y border-[#22333a]/20 py-3 sm:mt-8 sm:gap-x-10 sm:gap-y-4 sm:py-4">
       {[
         ["Distance", `${formatRange(h.distance_km)} km`],
         ["Days", formatRange(h.days)],
@@ -66,9 +66,10 @@ function Plates({ list, onOpen }: { list: TrailPhoto[]; onOpen: (i: number) => v
     <section aria-labelledby="plates-h">
       <h2 id="plates-h" className={t24}>The plates</h2>
       <p className={`${t14} mt-1 text-[#4f5f66]`}>{list.length} photographs, in route order.</p>
-      <ul className="mt-4 grid grid-cols-2 gap-4">
+      {/* a sliding strip on a phone; two columns from 640px */}
+      <ul className="-mx-5 mt-2 flex gap-3 overflow-x-auto px-5 py-2 [scrollbar-width:none] sm:mx-0 sm:mt-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:p-0">
         {list.map((p, i) => (
-          <li key={p.file}><PlateThumb photo={p} n={i + 1} onClick={() => onOpen(i)} label={`Open plate ${i + 1}: ${p.place}`} /></li>
+          <li key={p.file} className="w-40 shrink-0 sm:w-auto"><PlateThumb photo={p} n={i + 1} onClick={() => onOpen(i)} label={`Open plate ${i + 1}: ${p.place}`} /></li>
         ))}
       </ul>
     </section>
@@ -79,7 +80,7 @@ function MoreWalks({ id }: { id: string }) {
   const nb = neighbours(hikes, id);
   if (!nb) return null;
   return (
-    <nav aria-label="More walks" className="mt-14 sm:mt-20 grid grid-cols-1 gap-6 sm:grid-cols-2">
+    <nav aria-label="More walks" className="mt-10 grid grid-cols-2 gap-3 sm:mt-20 sm:gap-6">
       {([["← Previous walk", nb.prev], ["Next walk →", nb.next]] as const).map(([label, w]) => (
         <NeighbourLink key={label} href={`/trails/${w.id}/`} label={label} name={w.name} photo={photos[w.id][coverIndex(photos[w.id])]} />
       ))}
@@ -98,31 +99,32 @@ export default function TrailDetail({ id }: { id: string }) {
 
   return (
     <article aria-labelledby="walk-title" className="mx-auto max-w-6xl px-5">
-      <p className="mt-6 sm:mt-8"><PlateLink href="/trails/#walks" size="note">← All twelve walks</PlateLink></p>
+      <p className="mt-4 sm:mt-8"><PlateLink href="/trails/#walks" size="note">← All twelve walks</PlateLink></p>
 
-      <div className="mt-6 grid grid-cols-1 gap-10 lg:grid-cols-[1.45fr_1fr] lg:items-end">
-        <figure className="m-0 min-w-0">
+      <div className="mt-4 grid grid-cols-1 gap-5 sm:mt-6 sm:gap-10 lg:grid-cols-[1.45fr_1fr] lg:items-end">
+        <figure className="m-0 -mx-5 min-w-0 sm:mx-0">
           <HeroPlate photo={own[ci]} count={own.length} onOpen={() => setViewAt(ci)} label={`See all ${own.length} plates of ${h.name}`} priority />
-          <figcaption className={`${t14} mt-3 text-[#4f5f66]`}>{creditLine(own[ci])}</figcaption>
+          <figcaption className={`${t14} mt-2 px-5 text-[#4f5f66] sm:mt-3 sm:px-0`}>{creditLine(own[ci])}</figcaption>
         </figure>
 
         <div className="min-w-0 lg:pb-8">
           <p className={`${t12caption} text-[#4f5f66]`}>{plateNo(n)}. {h.country.join(", ")}</p>
           <h1 id="walk-title" className={`${t48} mt-2`}>{h.name}</h1>
-          <p className={`${t17} mt-4 text-[#4f5f66]`}>{h.why}</p>
+          <p className={`${t17} mt-3 text-[#4f5f66] sm:mt-4`}>{h.why}</p>
           <Facts h={h} />
-          <div className="mt-8">
+          {/* full width on a phone, where the thumb reaches for it */}
+          <div className="mt-5 [&>button]:w-full [&>button]:justify-center sm:mt-8 sm:[&>button]:w-auto">
             <PrimaryButton selected={inList} onClick={() => toggleList(h.id)}>{inList ? "On your list" : "Add to my list"}</PrimaryButton>
           </div>
         </div>
       </div>
 
-      <div className="mt-14 grid grid-cols-1 gap-14 sm:mt-24 lg:grid-cols-[1.45fr_1fr]">
+      <div className="mt-10 grid grid-cols-1 gap-10 sm:mt-24 sm:gap-14 lg:grid-cols-[1.45fr_1fr]">
         <div className="min-w-0"><Details h={h} /></div>
         <Plates list={own} onOpen={setViewAt} />
       </div>
 
-      <section aria-labelledby="sources-h" className={`${t14} mt-14 sm:mt-20 border-t border-[#22333a]/20 pt-6 text-[#4f5f66]`}>
+      <section aria-labelledby="sources-h" className={`${t14} mt-10 sm:mt-20 border-t border-[#22333a]/20 pt-6 text-[#4f5f66]`}>
         <h2 id="sources-h" className={`${t12} text-[#22333a]`}>Sources</h2>
         <ul className="mt-3 grid gap-x-8 gap-y-2 sm:grid-cols-2">
           {[...new Set([...h.sources, ...introSources(h.id)])].map((s) => (

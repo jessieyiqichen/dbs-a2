@@ -76,9 +76,9 @@ export function SecondaryButton({ force, selected, small, children = "Later", ..
 /** Link sizes, from the six: reading text, notes, and walk names. */
 export type LinkSize = "reading" | "note" | "name";
 const linkFace: Record<LinkSize, string> = {
-  reading: `${ui} text-[17px] leading-[27px] font-semibold`,
+  reading: `${ui} text-[16px] leading-[25px] font-semibold sm:text-[17px] sm:leading-[27px]`,
   note: `${ui} text-[14px] leading-[21px] font-semibold`,
-  name: `${display} text-[24px] leading-[1.2]`,
+  name: `${display} text-[20px] leading-[1.25] sm:text-[24px] sm:leading-[1.2]`,
 };
 const linkState: Record<ControlState, string> = {
   rest: "decoration-[#8eaaa6] underline-offset-[6px]",

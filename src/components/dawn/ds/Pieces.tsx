@@ -37,11 +37,11 @@ export function PrintCard({ id, photo, href = "#card", footer, sizes = "(min-wid
       </span>
     </>
   );
-  const cls = `group relative grid grid-cols-[7.5rem_1fr] content-start gap-x-3 sm:block ${focusRing}`;
+  const cls = `group relative grid grid-cols-[6rem_1fr] content-start gap-x-3 sm:block ${focusRing}`;
   return (
-    <article aria-labelledby={`${h.id}-card`} className={`flex w-full flex-col p-3 sm:p-3.5 ${card.rest} ${cardLiveHas}`}>
+    <article aria-labelledby={`${h.id}-card`} className={`flex w-full flex-col p-2.5 sm:p-3.5 ${card.rest} ${cardLiveHas}`}>
       {href.startsWith("/") ? <Link href={href} className={cls}>{inner}</Link> : <a href={href} className={cls}>{inner}</a>}
-      {footer && <div className="mt-auto pl-[8.25rem] pt-3 sm:pl-0 sm:pt-4">{footer}</div>}
+      {footer && <div className="mt-auto pl-[6.75rem] pt-2 sm:pl-0 sm:pt-4">{footer}</div>}
     </article>
   );
 }

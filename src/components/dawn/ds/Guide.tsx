@@ -77,12 +77,12 @@ export function PlateThumb({ photo, n, selected, force, onClick, label }: { phot
   );
 }
 
-/** The large print at the top of a walk's page: itself the button to every plate, tagged "N plates →". */
+/** The large print at the top of a walk's page: itself the button to every plate, tagged "N plates →". On a phone it runs edge to edge, no mount. */
 export function HeroPlate({ photo, count, onOpen, label, priority = false }: { photo: TrailPhoto; count: number; onOpen?: () => void; label: string; priority?: boolean }) {
   return (
-    <button type="button" onClick={onOpen} aria-label={label} className={`group block w-full p-3.5 text-left ${card.rest} ${cardLive}`}>
-      <TonedPhoto photo={photo} sizes="(min-width: 1024px) 660px, 100vw" priority={priority} className={`aspect-[4/3] border-[3px] border-[#22333a] ${colourUp}`} />
-      <span className={`${t12} absolute bottom-7 right-7 border border-[#22333a] bg-[#f6f9f7] px-3 py-2 transition-colors duration-[600ms] group-hover:bg-[#c3d6c4]`}>{count} plates →</span>
+    <button type="button" onClick={onOpen} aria-label={label} className={`group block w-full text-left sm:p-3.5 ${card.rest} ${cardLive}`}>
+      <TonedPhoto photo={photo} sizes="(min-width: 1024px) 660px, 100vw" priority={priority} className={`aspect-[3/2] sm:aspect-[4/3] sm:border-[3px] sm:border-[#22333a] ${colourUp}`} />
+      <span className={`${t12} absolute bottom-3 right-3 border sm:bottom-7 sm:right-7 border-[#22333a] bg-[#f6f9f7] px-3 py-2 transition-colors duration-[600ms] group-hover:bg-[#c3d6c4]`}>{count} plates →</span>
     </button>
   );
 }
@@ -91,13 +91,13 @@ export function HeroPlate({ photo, count, onOpen, label, priority = false }: { p
 export function NeighbourLink({ href, label, name, photo }: { href: string; label: string; name: string; photo: TrailPhoto }) {
   const body = (
     <>
-      <TonedPhoto photo={photo} sizes="120px" className={`aspect-[4/3] w-28 shrink-0 border-2 border-[#22333a] ${colourUp}`} />
+      <TonedPhoto photo={photo} sizes="120px" className={`aspect-[4/3] w-full shrink-0 border-2 border-[#22333a] sm:w-28 ${colourUp}`} />
       <span className="min-w-0">
         <span className={`${t12} block text-[#4f5f66]`}>{label}</span>
         <span className={`${t24} mt-1 block decoration-[#8eaaa6] decoration-2 underline-offset-4 group-hover:underline`}>{name}</span>
       </span>
     </>
   );
-  const cls = `group flex items-center gap-4 p-3 ${card.rest} ${cardLive}`;
+  const cls = `group flex flex-col items-start gap-2 p-2 sm:flex-row sm:items-center sm:gap-4 sm:p-3 ${card.rest} ${cardLive}`;
   return href.startsWith("/") ? <Link href={href} className={cls}>{body}</Link> : <a href={href} className={cls}>{body}</a>;
 }

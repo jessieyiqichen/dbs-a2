@@ -9,7 +9,7 @@ const photos = rawPhotos as Record<string, TrailPhoto[]>;
 
 export function Colophon() {
   return (
-    <footer className={`${t14} mx-auto mt-24 max-w-6xl px-5 pb-16 text-[#4f5f66]`}>
+    <footer className={`${t14} mx-auto mt-16 max-w-6xl px-5 pb-12 text-[#4f5f66] sm:mt-24 sm:pb-16`}>
       <div className="border-t border-[#22333a] pt-6">
         <h2 className={`${t24} text-[#22333a]`}>Before you go</h2>
         <p className="mt-2 max-w-prose">
