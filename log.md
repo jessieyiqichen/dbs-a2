@@ -11,3 +11,5 @@
 - 我觉得 Mist / Summit / Trailhead '74 要换。Claude 给了八个情绪（分两组），我选了 Field Notes、Postcard、Dawn、Trail Quest；Claude 建议去掉和 Field Notes 太像的 Postcard，我同意。三种风格定为 Field Notes（手工、好奇、温暖）、Dawn（安静、轻盈、有希望）、Trail Quest（好玩、鲜艳、游戏感）。
 - 我问 mood 和第一周的 style 有什么区别。Claude 解释：第一周每版是完整网页，变布局、结构、交互；这周内容和结构不变，只变视觉层；情绪板是找感觉的素材板，设计系统把感觉落成规则。
 - Field Notes 情绪板第一版素材用的是 Wikimedia Commons 的照片和标本扫描，我说"太难看了"——照片本身不够美。改用 Unsplash（免费授权，排除 Unsplash+ 付费图），挑了 12 张暖调自然光的照片，避开大块红橙色；另做 16 件素材（色板、Caveat 手写字和 Crimson Pro 衬线字样张、横线纸、方格纸、牛皮纸纹理、线描山/靴子/帐篷、海拔速写、胶带标签、印章按钮、夹子卡片、手画勾选框、和纸胶带）。底部列出每张照片的摄影师和链接。
+- 我发了第二周课件（Downloads/…Week 2 - Slides）。Claude 读了：第 74 页是情绪板的标准样子（三个形容词做名字、每张参考图标注"它贡献了什么"、Early decisions 字体搭配、带名字的色板、一个组件小样、一句 Evokes）；第 76 页是从情绪板到设计系统的五个决定（Palette roles、Type pair、Corners、Shadow、Motion，各一句话，并写进 agent 的上下文）；第 73 页是课上的六种示例风格（Swiss、Neo-Brutalist、Glass、Editorial、Playful、Default）；第 88 页 hub 还要放"我的选择和理由、浏览器检查"。
+- Field Notes 情绪板按第 74 页改：名字下写 Handmade, Curious, Warm；加 Evokes（在山间小屋里翻一本写满笔记的本子）；顶部加概览板（References 三张图带标注、Early decisions、五色色板、勾选框加主按钮小样）；28 件素材的说明全部改成"它贡献了什么"；主按钮改成苔藓绿（强调色只给主要操作）。

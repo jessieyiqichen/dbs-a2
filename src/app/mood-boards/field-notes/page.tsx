@@ -137,7 +137,7 @@ const made: Record<string, React.ReactNode> = {
   ),
   "stamp-button": (
     <div className="py-5 text-center">
-      <span className="inline-block rotate-[-2deg] border-2 border-[#2f4a6b] px-5 py-2 font-[family-name:var(--fn-serif)] text-lg uppercase tracking-[0.18em] text-[#2f4a6b]">
+      <span className="inline-block rotate-[-2deg] border-2 border-[#4f6a3f] bg-[#6f8a5b] px-5 py-2 font-[family-name:var(--fn-serif)] text-lg uppercase tracking-[0.18em] text-[#fbf7ec]">
         Open the trail →
       </span>
     </div>
@@ -180,39 +180,100 @@ const made: Record<string, React.ReactNode> = {
   ),
 };
 
+
+/* ---------- overview: references, early decisions, palette, one component ---------- */
+
+function Tag({ children }: { children: React.ReactNode }) {
+  return <span className="inline-block bg-[#2f4a6b] px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#fbf7ec]">{children}</span>;
+}
+
+function Ref({ file, note, className = "" }: { file: string; note: string; className?: string }) {
+  const c = photo(file);
+  return (
+    <figure className={`relative overflow-hidden ${className}`}>
+      <Image src={`/moodboards/field-notes/${file}`} alt={note} width={c.w} height={c.h} className="h-full w-full object-cover" sizes="(min-width: 1024px) 30vw, 100vw" />
+      <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/55 to-transparent px-3 pb-2 pt-8 font-[family-name:var(--fn-hand)] text-xl text-[#fbf7ec]">{note}</figcaption>
+    </figure>
+  );
+}
+
+function Overview() {
+  return (
+    <section aria-label="Overview" className="mt-8 grid gap-3 bg-[#e6dbc2] p-3 lg:grid-cols-[1.1fr_1fr_1fr] lg:grid-rows-[220px_auto_auto]">
+      <div className="relative lg:row-span-2">
+        <span className="absolute left-3 top-3 z-10"><Tag>References</Tag></span>
+        <Ref file="notebook-map.jpg" note="Field notebook: kraft for every card" className="h-72 lg:h-full" />
+      </div>
+      <Ref file="fern.jpg" note="Fern: one green, for the one action" className="h-56 lg:h-auto" />
+      <Ref file="tree-sketch.jpg" note="Pencil: lines drawn, not ruled" className="h-56 lg:h-auto" />
+      <div className="bg-[#fbf7ec] p-5 lg:col-span-2">
+        <Tag>Early decisions</Tag>
+        <div className="mt-3 flex flex-wrap items-end gap-6">
+          <p className="font-[family-name:var(--fn-hand)] text-8xl leading-[0.8]">Aa</p>
+          <div>
+            <p className="font-[family-name:var(--fn-serif)] text-4xl leading-none">
+              4,215 m <span className="italic text-black/60">Dead Woman&apos;s Pass</span>
+            </p>
+            <p className="mt-2 max-w-md text-base text-black/70">Caveat for titles and labels, Crimson Pro for names, numbers and reading. Graphite text, never black.</p>
+          </div>
+        </div>
+      </div>
+      <div className="grid grid-cols-5 gap-2 lg:col-span-2">
+        {PALETTE.map((c) => (
+          <div key={c.hex} className="flex h-28 items-end border border-black/10 p-2" style={{ background: c.hex, color: ["#55524b", "#6f8a5b", "#2f4a6b"].includes(c.hex) ? "#fbf7ec" : INK }}>
+            <span className="font-[family-name:var(--fn-hand)] text-xl leading-none">{c.name}</span>
+          </div>
+        ))}
+      </div>
+      <div className="flex flex-col justify-center gap-4 bg-[#fbf7ec] p-5">
+        <p className="flex items-center gap-3 font-[family-name:var(--fn-hand)] text-2xl">
+          <svg viewBox="0 0 28 28" className="h-7 w-7" fill="none" stroke={INK} strokeWidth={2.2} strokeLinecap="round" aria-hidden="true">
+            <path d="M4 5 L24 4 L23 24 L5 23 Z" />
+            <path d="M8 14 l5 6 l11 -16" stroke="#6f8a5b" strokeWidth={3} />
+          </svg>
+          Permit needed
+        </p>
+        <span className="block border-2 border-[#4f6a3f] bg-[#6f8a5b] py-2 text-center font-[family-name:var(--fn-serif)] text-lg uppercase tracking-[0.18em] text-[#fbf7ec]">
+          Open the trail →
+        </span>
+      </div>
+    </section>
+  );
+}
+
 /* ---------- the board, in reading order ---------- */
 
 type Tile = { kind: "photo"; file: string; caption: string } | { kind: "made"; id: keyof typeof made; caption: string };
 
 const tiles: Tile[] = [
-  { kind: "photo", file: "notebook-map.jpg", caption: "A notebook that lives on the map" },
-  { kind: "made", id: "palette", caption: "Paper, pencil, moss and ink" },
-  { kind: "photo", file: "fern.jpg", caption: "Fern, close" },
-  { kind: "made", id: "type-hand", caption: "A hand for notes and labels" },
-  { kind: "photo", file: "birch-path.jpg", caption: "A path through birch" },
-  { kind: "made", id: "doodle-mountain", caption: "Route, sketched" },
-  { kind: "photo", file: "pressed-petals.jpg", caption: "Pressed petals, kraft pages" },
-  { kind: "made", id: "ruled-note", caption: "Facts, written down" },
-  { kind: "made", id: "tape-chip", caption: "Labels as tape, not as pills" },
-  { kind: "photo", file: "tree-sketch.jpg", caption: "Trees in pencil" },
-  { kind: "made", id: "type-serif", caption: "A book serif for the numbers" },
-  { kind: "photo", file: "alpine-hut.jpg", caption: "A hut above the treeline" },
-  { kind: "made", id: "doodle-boot", caption: "Boot" },
-  { kind: "made", id: "graph", caption: "Graph paper" },
-  { kind: "photo", file: "compass.jpg", caption: "Brass and glass" },
-  { kind: "made", id: "page-card", caption: "A card is a page, clipped in" },
-  { kind: "photo", file: "flower-notebook.jpg", caption: "Flowers, drawn on the cover" },
-  { kind: "made", id: "moss", caption: "One colour does the talking" },
-  { kind: "photo", file: "mossy-birch.jpg", caption: "Light on moss" },
-  { kind: "made", id: "checkbox", caption: "Ticks drawn, not clicked" },
-  { kind: "made", id: "kraft", caption: "Kraft" },
-  { kind: "photo", file: "sketchbook.jpg", caption: "Landscape, in pen" },
-  { kind: "made", id: "stamp-button", caption: "The one button: stamped" },
-  { kind: "photo", file: "map-pencil.jpg", caption: "Pencil, map, coffee" },
-  { kind: "made", id: "profile-sketch", caption: "Elevation, by hand" },
-  { kind: "photo", file: "swiss-trail.jpg", caption: "Up the ridge" },
-  { kind: "made", id: "doodle-tent", caption: "Night two" },
-  { kind: "made", id: "washi", caption: "Washi tape, holding things down" },
+  { kind: "photo", file: "notebook-map.jpg", caption: "Field notebook on a map: kraft for every card" },
+  { kind: "made", id: "palette", caption: "Kraft, paper, graphite, moss, ink: one accent" },
+  { kind: "photo", file: "fern.jpg", caption: "Fern: the only green, kept for the one action" },
+  { kind: "made", id: "type-hand", caption: "Caveat: the hand, for titles and labels" },
+  { kind: "photo", file: "birch-path.jpg", caption: "Birch path: pale light and plenty of air" },
+  { kind: "made", id: "doodle-mountain", caption: "Route, sketched: lines drawn, not ruled" },
+  { kind: "photo", file: "pressed-petals.jpg", caption: "Pressed petals: things kept between pages" },
+  { kind: "made", id: "ruled-note", caption: "Ruled note: facts written down plainly" },
+  { kind: "made", id: "tape-chip", caption: "Tape labels: filters as tape, not pills" },
+  { kind: "photo", file: "tree-sketch.jpg", caption: "Trees in pencil: graphite for text, never black" },
+  { kind: "made", id: "type-serif", caption: "Crimson Pro: a book serif for names and numbers" },
+  { kind: "photo", file: "alpine-hut.jpg", caption: "Hut above the treeline: shelter and warmth" },
+  { kind: "made", id: "doodle-boot", caption: "Boot: icons drawn by hand" },
+  { kind: "made", id: "graph", caption: "Graph paper: a grid you feel, not see" },
+  { kind: "photo", file: "compass.jpg", caption: "Brass compass: warmth in the small things" },
+  { kind: "made", id: "page-card", caption: "Clipped card: a card is a page" },
+  { kind: "photo", file: "flower-notebook.jpg", caption: "Drawn cover: illustration over icons" },
+  { kind: "made", id: "moss", caption: "Moss: one colour does the talking" },
+  { kind: "photo", file: "mossy-birch.jpg", caption: "Light on moss: soft, low shadows" },
+  { kind: "made", id: "checkbox", caption: "Drawn ticks: controls that feel handmade" },
+  { kind: "made", id: "kraft", caption: "Kraft: the surface texture" },
+  { kind: "photo", file: "sketchbook.jpg", caption: "Pen landscape: thin ink lines for borders" },
+  { kind: "made", id: "stamp-button", caption: "Stamped button: the one primary action" },
+  { kind: "photo", file: "map-pencil.jpg", caption: "Map, pencil, coffee: planning at a table" },
+  { kind: "made", id: "profile-sketch", caption: "Elevation by hand: charts drawn, not plotted" },
+  { kind: "photo", file: "swiss-trail.jpg", caption: "Up the ridge: what the notebook is for" },
+  { kind: "made", id: "doodle-tent", caption: "Night two: small, quiet doodles" },
+  { kind: "made", id: "washi", caption: "Washi tape: how things are held down" },
 ];
 
 const tilts = ["-rotate-1", "rotate-1", "rotate-0", "-rotate-[0.6deg]", "rotate-[0.8deg]"];
@@ -242,11 +303,13 @@ export default function FieldNotesBoard() {
           <div>
             <p className="text-sm uppercase tracking-[0.2em] text-black/50">Mood board · 1 of 3</p>
             <h1 className="mt-1 font-[family-name:var(--fn-hand)] text-7xl leading-none">Field Notes</h1>
-            <p className="mt-3 text-xl italic">Handmade · Curious · Warm</p>
+            <p className="mt-3 text-2xl">Handmade, Curious, Warm</p>
             <p className="mt-3 max-w-xl text-lg leading-snug text-black/75">
               A notebook kept on the trail: pencil, pressed leaves, tape, and a route sketched by hand. For people who want to get to
               know each walk slowly.
             </p>
+            <p className="mt-4 text-sm uppercase tracking-[0.2em] text-[#2f4a6b]">Evokes</p>
+            <p className="font-[family-name:var(--fn-hand)] text-3xl leading-tight">Turning the pages of a well-used notebook in a mountain hut.</p>
           </div>
           <p className="text-sm text-black/60">
             {tiles.length} artifacts · <span aria-hidden="true">✦</span> {madeCount} made for this board · {tiles.length - madeCount}{" "}
@@ -254,7 +317,10 @@ export default function FieldNotesBoard() {
           </p>
         </header>
 
-        <ul className="mt-10 columns-1 gap-6 sm:columns-2 lg:columns-3 xl:columns-4">
+        <Overview />
+
+        <h2 className="mt-14 font-[family-name:var(--fn-hand)] text-4xl">All {tiles.length} artifacts</h2>
+        <ul className="mt-6 columns-1 gap-6 sm:columns-2 lg:columns-3 xl:columns-4">
           {tiles.map((t, i) => (
             <li key={i} className="mb-6 break-inside-avoid">
               <figure
