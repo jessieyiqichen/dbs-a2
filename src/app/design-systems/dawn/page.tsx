@@ -12,7 +12,7 @@ import { HeroPlate, MonthStrip, NeighbourLink, PlateThumb, RouteLine } from "@/c
 import { Gallery } from "@/components/dawn/ds/Viewer";
 import { AddToListDemo, CardDemo } from "@/components/dawn/ds/Demos";
 import { t12, t12caption, t14, t17, t24, t48, t96 } from "@/components/dawn/ds/type";
-import { intros } from "@/data/intros";
+import { routes } from "@/data/stops";
 import rawPhotos from "@/data/trailPhotos.json";
 import type { TrailPhoto } from "@/components/dawn/Toned";
 
@@ -162,17 +162,23 @@ function SpacingShape() {
 
 /* ---------- 4. components ---------- */
 
-// Where the site puts each icon; the rest are kept for the guide as it grows.
+// Where the site puts each icon. Cloud waits for a stop that is truly cloud forest by name.
 const ICON_USE: Partial<Record<PlateIconName, string>> = {
   boot: "Distance · route start",
   calendar: "Days",
-  mountain: "High point",
-  compass: "Filter: where",
+  mountain: "High point · passes, summits",
+  compass: "Filter: where · junctions",
   clock: "Filter: how long",
   permit: "Filter: no permit",
-  camera: "Plates · empty state",
+  camera: "Plates · viewpoints",
   sunrise: "Best months",
-  hut: "Route finish",
+  hut: "Huts, refuges, guesthouses",
+  lake: "Lakes, glaciers",
+  waterfall: "Waterfalls",
+  bridge: "Bridges",
+  tent: "Camps",
+  pine: "Forests",
+  map: "Towns, villages, sites",
 };
 
 function Icons() {
@@ -297,8 +303,8 @@ function Components() {
           }
         />
       </Block>
-      <Block title="Route line" note="Along the way, drawn: start, three stops, finish.">
-        <RouteLine h={milford} stops={intros.milford.along_the_way} />
+      <Block title="Route line" note="Along the way, drawn: start, each stop with its icon, kind and day, then the finish.">
+        <RouteLine h={milford} route={routes.milford} />
       </Block>
       <Block title="Month strip and stamp" note="Best months carry a celadon plate. Neither is a control.">
         <div className="flex flex-wrap items-start gap-6">

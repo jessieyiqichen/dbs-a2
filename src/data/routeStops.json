@@ -1,0 +1,857 @@
+{
+ "inca-trail": {
+  "finish": "ruin",
+  "stops": [
+   {
+    "name": "Patallaqta (Llactapata)",
+    "kind": "ruin",
+    "note": "Inca site about 1.5 km from the Classic trail's start",
+    "day": null,
+    "label": "Inca site",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Patallaqta",
+     "https://en.wikipedia.org/wiki/Inca_Trail_to_Machu_Picchu"
+    ]
+   },
+   {
+    "name": "Wayllabamba (Wayllapampa)",
+    "kind": "village",
+    "note": "Village of about 400 people at 3,000 m",
+    "day": null,
+    "sources": [
+     "https://en.wikipedia.org/wiki/Inca_Trail_to_Machu_Picchu"
+    ]
+   },
+   {
+    "name": "Dead Woman's Pass (Warmiwañusqa)",
+    "kind": "pass",
+    "note": "Highest point of the Classic trail, 4,215 m",
+    "day": null,
+    "sources": [
+     "https://en.wikipedia.org/wiki/Inca_Trail_to_Machu_Picchu"
+    ]
+   },
+   {
+    "name": "Runkuraqay",
+    "kind": "ruin",
+    "note": "Inca tambo (way station) at 3,750 m, near Runkuraqay pass",
+    "day": null,
+    "label": "Inca site",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Inca_Trail_to_Machu_Picchu",
+     "https://en.wikipedia.org/wiki/Runkurakay"
+    ]
+   },
+   {
+    "name": "Sayaqmarka (Sayacmarca)",
+    "kind": "ruin",
+    "note": "Inca ruin whose name means 'steep-place town'",
+    "day": null,
+    "label": "Inca site",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Inca_Trail_to_Machu_Picchu",
+     "https://en.wikipedia.org/wiki/Sayaqmarka"
+    ]
+   },
+   {
+    "name": "Phuyupatamarka",
+    "kind": "ruin",
+    "note": "'Cloud-level town': ruins with five fountains, about 3,600 m",
+    "day": null,
+    "label": "Inca site",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Phuyupatamarka",
+     "https://en.wikipedia.org/wiki/Inca_Trail_to_Machu_Picchu"
+    ]
+   },
+   {
+    "name": "Wiñay Wayna",
+    "kind": "ruin",
+    "note": "'Forever young': Inca ruin and last campsite, 2,650 m",
+    "day": null,
+    "label": "Inca site",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Wiñay_Wayna",
+     "https://en.wikipedia.org/wiki/Inca_Trail_to_Machu_Picchu"
+    ]
+   }
+  ]
+ },
+ "tmb": {
+  "finish": "town",
+  "stops": [
+   {
+    "name": "Refuge de la Croix du Bonhomme",
+    "kind": "hut",
+    "note": "Refuge at 2,443 m just north-east of the col",
+    "day": null,
+    "label": "Refuge",
+    "sources": [
+     "https://fr.wikipedia.org/wiki/Col_de_la_Croix_du_Bonhomme",
+     "https://en.wikipedia.org/wiki/Tour_du_Mont_Blanc"
+    ]
+   },
+   {
+    "name": "Col de la Seigne",
+    "kind": "pass",
+    "note": "France–Italy border crossing, 2,516 m; famous Mont Blanc view",
+    "day": null,
+    "sources": [
+     "https://www.autourdumontblanc.com/en/routes/all-routes/tour-du-mont-blanc",
+     "https://filestore.cicerone.co.uk/assets/0779_tour-of-mont-blanc-sample.pdf"
+    ]
+   },
+   {
+    "name": "Courmayeur",
+    "kind": "town",
+    "note": "Italian town at 1,224 m, end of the Elisabetta stage",
+    "day": null,
+    "sources": [
+     "https://www.autourdumontblanc.com/en/routes/all-routes/tour-du-mont-blanc",
+     "https://en.wikipedia.org/wiki/Tour_du_Mont_Blanc"
+    ]
+   },
+   {
+    "name": "Rifugio Bonatti (Rifugio Walter Bonatti)",
+    "kind": "hut",
+    "note": "Refuge at 2,025 m above Val Ferret",
+    "day": null,
+    "label": "Refuge",
+    "sources": [
+     "https://it.wikipedia.org/wiki/Rifugio_Walter_Bonatti",
+     "https://www.autourdumontblanc.com/en/routes/all-routes/tour-du-mont-blanc"
+    ]
+   },
+   {
+    "name": "Grand Col Ferret",
+    "kind": "pass",
+    "note": "Italy–Switzerland border pass, 2,537 m",
+    "day": null,
+    "sources": [
+     "https://en.wikipedia.org/wiki/Col_Ferret",
+     "https://www.autourdumontblanc.com/en/routes/all-routes/tour-du-mont-blanc"
+    ]
+   },
+   {
+    "name": "Champex-Lac (Lac de Champex)",
+    "kind": "lake",
+    "note": "Swiss lakeside village at 1,466 m, overnight stop",
+    "day": null,
+    "sources": [
+     "https://www.autourdumontblanc.com/en/routes/all-routes/tour-du-mont-blanc",
+     "https://en.wikipedia.org/wiki/Lac_de_Champex"
+    ]
+   },
+   {
+    "name": "Col de Balme",
+    "kind": "pass",
+    "note": "Switzerland–France border pass, 2,195 m",
+    "day": null,
+    "sources": [
+     "https://en.wikipedia.org/wiki/Col_de_Balme",
+     "https://www.autourdumontblanc.com/en/routes/all-routes/tour-du-mont-blanc"
+    ]
+   }
+  ]
+ },
+ "w-trek": {
+  "finish": "hut",
+  "stops": [
+   {
+    "name": "Base of the Towers lookout (Mirador Base Las Torres)",
+    "kind": "viewpoint",
+    "note": "Three granite towers above a glacial lake, via Valle Ascencio",
+    "day": 2,
+    "sources": [
+     "https://chile.travel/itinerarios/circuito-w-de-torres-del-paine-la-guia-definitiva/",
+     "https://parquetorresdelpaine.cl/wp-content/uploads/2025/10/Version-en-ingles-Boletin-informativo-pntp-1.pdf"
+    ]
+   },
+   {
+    "name": "Lake Nordenskjöld (Lago Nordenskjöld)",
+    "kind": "lake",
+    "note": "Trail skirts the lake with views of the Cuernos",
+    "day": 3,
+    "sources": [
+     "https://chile.travel/itinerarios/circuito-w-de-torres-del-paine-la-guia-definitiva/",
+     "https://en.wikipedia.org/wiki/Nordenskjöld_Lake"
+    ]
+   },
+   {
+    "name": "Refugio Los Cuernos",
+    "kind": "hut",
+    "note": "Day 3 overnight refuge (or nearby Francés sector)",
+    "day": 3,
+    "label": "Refugio",
+    "sources": [
+     "https://chile.travel/itinerarios/circuito-w-de-torres-del-paine-la-guia-definitiva/",
+     "https://parquetorresdelpaine.cl/wp-content/uploads/2025/10/Version-en-ingles-Boletin-informativo-pntp-1.pdf"
+    ]
+   },
+   {
+    "name": "Italiano (Campamento Italiano)",
+    "kind": "junction",
+    "note": "Leave packs here to climb Valle del Francés",
+    "day": 4,
+    "sources": [
+     "https://chile.travel/itinerarios/circuito-w-de-torres-del-paine-la-guia-definitiva/",
+     "https://parquetorresdelpaine.cl/wp-content/uploads/2025/10/Version-en-ingles-Boletin-informativo-pntp-1.pdf"
+    ]
+   },
+   {
+    "name": "British lookout, French Valley (Mirador Británico, Valle del Francés)",
+    "kind": "viewpoint",
+    "note": "Head of the French Valley, beyond Mirador Francés",
+    "day": 4,
+    "sources": [
+     "https://chile.travel/itinerarios/circuito-w-de-torres-del-paine-la-guia-definitiva/",
+     "https://parquetorresdelpaine.cl/wp-content/uploads/2025/10/Version-en-ingles-Boletin-informativo-pntp-1.pdf"
+    ]
+   },
+   {
+    "name": "Grey Glacier (Glaciar Grey)",
+    "kind": "glacier",
+    "note": "Out-and-back from Paine Grande to icefall viewpoints, about 8 hours",
+    "day": 5,
+    "sources": [
+     "https://chile.travel/itinerarios/circuito-w-de-torres-del-paine-la-guia-definitiva/",
+     "https://en.wikipedia.org/wiki/Grey_Glacier"
+    ]
+   }
+  ]
+ },
+ "ebc": {
+  "finish": "town",
+  "stops": [
+   {
+    "name": "Phakding",
+    "kind": "village",
+    "note": "Main first stopping point for trekkers, 2,610 m",
+    "day": null,
+    "sources": [
+     "https://en.wikipedia.org/wiki/Phakding"
+    ]
+   },
+   {
+    "name": "Namche Bazaar",
+    "kind": "town",
+    "note": "Sherpa capital, 3,440 m; rest day to acclimatise",
+    "day": null,
+    "sources": [
+     "https://en.wikipedia.org/wiki/Everest_base_camps"
+    ]
+   },
+   {
+    "name": "Tengboche Monastery",
+    "kind": "shrine",
+    "note": "Largest gompa in the Khumbu, 3,867 m, on the traditional trail",
+    "day": null,
+    "label": "Monastery",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Tengboche_Monastery",
+     "https://en.wikipedia.org/wiki/Everest_base_camps"
+    ]
+   },
+   {
+    "name": "Dingboche",
+    "kind": "village",
+    "note": "Second rest day to acclimatise, 4,260 m",
+    "day": null,
+    "sources": [
+     "https://en.wikipedia.org/wiki/Everest_base_camps",
+     "https://en.wikipedia.org/wiki/Dingboche"
+    ]
+   },
+   {
+    "name": "Gorak Shep (Gorakshep)",
+    "kind": "village",
+    "note": "Last village with accommodation, 5,164 m; original base camp",
+    "day": null,
+    "sources": [
+     "https://en.wikipedia.org/wiki/Gorakshep",
+     "https://en.wikipedia.org/wiki/Everest_base_camps"
+    ]
+   },
+   {
+    "name": "Everest Base Camp (South Base Camp)",
+    "kind": "campsite",
+    "note": "Turning point: climbers' base camp, 5,364 m",
+    "day": null,
+    "turn": true,
+    "sources": [
+     "https://en.wikipedia.org/wiki/Everest_base_camps"
+    ]
+   }
+  ]
+ },
+ "milford": {
+  "finish": "lake",
+  "stops": [
+   {
+    "name": "Clinton Hut",
+    "kind": "hut",
+    "note": "First DOC hut, 5 km through beech forest from Glade Wharf",
+    "day": 1,
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/tracks/milford-track/",
+     "https://en.wikipedia.org/wiki/Milford_Track"
+    ]
+   },
+   {
+    "name": "Hirere Falls",
+    "kind": "waterfall",
+    "note": "Highlight of the climb up the Clinton Valley",
+    "day": 2,
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/tracks/milford-track/"
+    ]
+   },
+   {
+    "name": "Mintaro Hut",
+    "kind": "hut",
+    "note": "By Lake Mintaro, at the base of Omanui/McKinnon Pass",
+    "day": 2,
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/tracks/milford-track/",
+     "https://en.wikipedia.org/wiki/Milford_Track"
+    ]
+   },
+   {
+    "name": "Omanui/McKinnon Pass",
+    "kind": "pass",
+    "note": "Highest point of the track, 1154 m, with McKinnon memorial",
+    "day": 3,
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/tracks/milford-track/",
+     "https://en.wikipedia.org/wiki/Milford_Track"
+    ]
+   },
+   {
+    "name": "Sutherland Falls",
+    "kind": "waterfall",
+    "note": "Side trip, 1.5 hr return; falls drop 580 m from Lake Quill",
+    "day": 3,
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/tracks/milford-track/",
+     "https://en.wikipedia.org/wiki/Milford_Track"
+    ]
+   },
+   {
+    "name": "Dumpling Hut",
+    "kind": "hut",
+    "note": "Third and last DOC hut, after Quintin Shelter",
+    "day": 3,
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/tracks/milford-track/",
+     "https://en.wikipedia.org/wiki/Milford_Track"
+    ]
+   },
+   {
+    "name": "Mackay Falls",
+    "kind": "waterfall",
+    "note": "Beside Bell Rock on the Arthur River, past the Boatshed",
+    "day": 4,
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/tracks/milford-track/",
+     "https://en.wikipedia.org/wiki/Milford_Track"
+    ]
+   }
+  ]
+ },
+ "tongariro": {
+  "finish": "town",
+  "stops": [
+   {
+    "name": "Mangatepōpō Hut",
+    "kind": "hut",
+    "note": "DOC hut a short way up the valley from the road end",
+    "day": null,
+    "sources": [
+     "https://en.wikipedia.org/wiki/Tongariro_Alpine_Crossing",
+     "https://www.herengaanuku.govt.nz/track/tongariro-alpine-crossing/pdfPreview"
+    ]
+   },
+   {
+    "name": "Soda Springs turn-off",
+    "kind": "junction",
+    "note": "End of the 5.4 km valley section shared with Soda Springs Walk",
+    "day": null,
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/things-to-do/tracks/tongariro-alpine-crossing/description",
+     "https://en.wikipedia.org/wiki/Tongariro_Alpine_Crossing"
+    ]
+   },
+   {
+    "name": "South Crater",
+    "kind": "crater",
+    "note": "Short plateau after a ~350 m staircase climb",
+    "day": null,
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/things-to-do/tracks/tongariro-alpine-crossing/description",
+     "https://en.wikipedia.org/wiki/Tongariro_Alpine_Crossing"
+    ]
+   },
+   {
+    "name": "Red Crater",
+    "kind": "crater",
+    "note": "Highest point of the Crossing, 1886 m; loose, steep slopes",
+    "day": null,
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/things-to-do/tracks/tongariro-alpine-crossing/description",
+     "https://en.wikipedia.org/wiki/Tongariro_Alpine_Crossing"
+    ]
+   },
+   {
+    "name": "Emerald Lakes (Ngā Rotopounamu)",
+    "kind": "lake",
+    "note": "Reached by a steep descent on volcanic scree",
+    "day": null,
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/things-to-do/tracks/tongariro-alpine-crossing/description",
+     "https://en.wikipedia.org/wiki/Tongariro_Alpine_Crossing"
+    ]
+   },
+   {
+    "name": "Central Crater",
+    "kind": "crater",
+    "note": "Described as 'Mars-like'; between Emerald Lakes and Blue Lake",
+    "day": null,
+    "sources": [
+     "https://www.herengaanuku.govt.nz/track/tongariro-alpine-crossing/pdfPreview"
+    ]
+   },
+   {
+    "name": "Blue Lake (Te Wai Whakaata o Te Rangihīroa)",
+    "kind": "lake",
+    "note": "Name means 'Rangihīroa's mirror'; track passes the lake",
+    "day": null,
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/things-to-do/tracks/tongariro-alpine-crossing/description",
+     "https://www.herengaanuku.govt.nz/track/tongariro-alpine-crossing/pdfPreview"
+    ]
+   }
+  ]
+ },
+ "kumano": {
+  "finish": "shrine",
+  "stops": [
+   {
+    "name": "Takahara Kumano-jinja Shrine",
+    "kind": "shrine",
+    "note": "Considered the oldest surviving shrine on the Kumano Kodo",
+    "day": 1,
+    "sources": [
+     "https://visitwakayama.jp/en/itineraries/detail_147.html"
+    ]
+   },
+   {
+    "name": "Takahara",
+    "kind": "village",
+    "note": "'Village of Mist', panorama of the Hatenashi mountain range",
+    "day": 1,
+    "sources": [
+     "https://visitwakayama.jp/en/itineraries/detail_147.html",
+     "https://www.tb-kumano.jp/en/kumano-kodo/nakahechi/"
+    ]
+   },
+   {
+    "name": "Chikatsuyu",
+    "kind": "village",
+    "note": "Former post town; overnight stop with minshuku and guesthouses",
+    "day": 1,
+    "sources": [
+     "https://visitwakayama.jp/en/itineraries/detail_147.html",
+     "https://www.tb-kumano.jp/en/kumano-kodo/nakahechi/"
+    ]
+   },
+   {
+    "name": "Tsugizakura-oji",
+    "kind": "shrine",
+    "note": "Oji shrine keeping the solemn atmosphere of the ancient route",
+    "day": 2,
+    "sources": [
+     "https://visitwakayama.jp/en/itineraries/detail_148.html",
+     "https://www.tb-kumano.jp/en/kumano-kodo/nakahechi/"
+    ]
+   },
+   {
+    "name": "Mitsukoshi Pass",
+    "kind": "pass",
+    "note": "Covered rest area and restrooms; usual lunch stop",
+    "day": 2,
+    "sources": [
+     "https://visitwakayama.jp/en/itineraries/detail_148.html"
+    ]
+   },
+   {
+    "name": "Hosshinmon-oji",
+    "kind": "shrine",
+    "note": "One of the five most important oji shrines",
+    "day": 2,
+    "sources": [
+     "https://visitwakayama.jp/en/itineraries/detail_148.html",
+     "https://www.tb-kumano.jp/en/kumano-kodo/nakahechi/"
+    ]
+   },
+   {
+    "name": "Fushiogami-oji",
+    "kind": "shrine",
+    "note": "Name means 'to kneel down and worship'",
+    "day": 2,
+    "sources": [
+     "https://visitwakayama.jp/en/itineraries/detail_148.html"
+    ]
+   }
+  ]
+ },
+ "laugavegur": {
+  "finish": "hut",
+  "stops": [
+   {
+    "name": "Hrafntinnusker (Höskuldsskáli hut)",
+    "kind": "hut",
+    "note": "52-bed hut past obsidian fields and steaming vents; often foggy",
+    "day": 1,
+    "sources": [
+     "https://www.fi.is/en/hiking-trails/trails/view/laugavegur",
+     "https://www.fi.is/en/moya/adverts/425"
+    ]
+   },
+   {
+    "name": "Jökultungur",
+    "kind": "viewpoint",
+    "note": "Clear-day view of Mýrdals-, Eyjafjalla- and Tindfjallajökull",
+    "day": 2,
+    "sources": [
+     "https://www.fi.is/en/hiking-trails/trails/view/laugavegur",
+     "https://www.fi.is/en/moya/adverts/425"
+    ]
+   },
+   {
+    "name": "Álftavatn",
+    "kind": "lake",
+    "note": "Two lakeside huts (72 beds) and campsite",
+    "day": 2,
+    "sources": [
+     "https://www.fi.is/en/hiking-trails/trails/view/laugavegur",
+     "https://www.fi.is/en/moya/adverts/425"
+    ]
+   },
+   {
+    "name": "Hvanngil hut",
+    "kind": "hut",
+    "note": "60-bed hut, alternative overnight to Álftavatn",
+    "day": 3,
+    "sources": [
+     "https://www.fi.is/en/hiking-trails/trails/view/laugavegur",
+     "https://www.fi.is/en/moya/adverts/425"
+    ]
+   },
+   {
+    "name": "Botnar huts (Emstrur)",
+    "kind": "hut",
+    "note": "Three huts, 60 beds; side trip to 200 m-deep Markarfljótsgljúfur",
+    "day": 3,
+    "sources": [
+     "https://www.fi.is/en/hiking-trails/trails/view/laugavegur",
+     "https://www.fi.is/en/moya/adverts/425"
+    ]
+   },
+   {
+    "name": "Fremri-Emstruá footbridge",
+    "kind": "bridge",
+    "note": "Footbridge over the river in a narrow canyon",
+    "day": 4,
+    "sources": [
+     "https://www.fi.is/en/hiking-trails/trails/view/laugavegur",
+     "https://www.fi.is/en/moya/adverts/425"
+    ]
+   },
+   {
+    "name": "Hamraskógar",
+    "kind": "forest",
+    "note": "Dense birch woodland before Þórsmörk",
+    "day": 4,
+    "sources": [
+     "https://www.fi.is/en/hiking-trails/trails/view/laugavegur",
+     "https://www.fi.is/en/moya/adverts/425"
+    ]
+   }
+  ]
+ },
+ "whw": {
+  "finish": "town",
+  "stops": [
+   {
+    "name": "Conic Hill",
+    "kind": "summit",
+    "note": "Only significant ascent of the section; views over Loch Lomond islands",
+    "day": 2,
+    "sources": [
+     "https://www.westhighlandway.org/the-route/drymen-to-rowardennan/",
+     "https://en.wikipedia.org/wiki/West_Highland_Way"
+    ]
+   },
+   {
+    "name": "Inversnaid waterfall",
+    "kind": "waterfall",
+    "note": "Spectacular waterfall on Loch Lomond, crossed by a footbridge",
+    "day": 3,
+    "sources": [
+     "https://www.westhighlandway.org/the-route/rowardennan-to-inverarnan/"
+    ]
+   },
+   {
+    "name": "St Fillan's Priory",
+    "kind": "ruin",
+    "note": "Priory ruins and graveyard at Kirkton Farm",
+    "day": 4,
+    "sources": [
+     "https://www.westhighlandway.org/the-route/inverarnan-to-tyndrum/"
+    ]
+   },
+   {
+    "name": "Tyndrum",
+    "kind": "village",
+    "note": "Last chance to stock up before Kinlochleven",
+    "day": 4,
+    "sources": [
+     "https://www.westhighlandway.org/the-route/tyndrum-to-inveroran/",
+     "https://en.wikipedia.org/wiki/West_Highland_Way"
+    ]
+   },
+   {
+    "name": "Bridge of Orchy",
+    "kind": "village",
+    "note": "The Way joins the Old Military Road here",
+    "day": 5,
+    "sources": [
+     "https://www.westhighlandway.org/the-route/tyndrum-to-inveroran/",
+     "https://en.wikipedia.org/wiki/West_Highland_Way"
+    ]
+   },
+   {
+    "name": "Devil's Staircase",
+    "kind": "pass",
+    "note": "Highest point of the Way, 550 m, marked by a cairn",
+    "day": 6,
+    "sources": [
+     "https://www.westhighlandway.org/the-route/kingshouse-to-kinlochleven/",
+     "https://en.wikipedia.org/wiki/West_Highland_Way"
+    ]
+   },
+   {
+    "name": "Kinlochleven",
+    "kind": "village",
+    "note": "Village below the Staircase, home of the Ice Factor climbing centre",
+    "day": 6,
+    "sources": [
+     "https://www.westhighlandway.org/the-route/kingshouse-to-kinlochleven/"
+    ]
+   }
+  ]
+ },
+ "camino": {
+  "finish": "town",
+  "stops": [
+   {
+    "name": "Roncesvalles (Orreaga)",
+    "kind": "village",
+    "note": "First stop in Navarre, just over the Pyrenees",
+    "day": null,
+    "sources": [
+     "https://www.spain.info/en/camino-santiago/french-way-camino-santiago/"
+    ]
+   },
+   {
+    "name": "Alto del Perdón",
+    "kind": "pass",
+    "note": "Camino crosses the sierra at 770 m; pilgrim monument (1996)",
+    "day": null,
+    "sources": [
+     "https://es.wikipedia.org/wiki/Alto_del_Perdón"
+    ]
+   },
+   {
+    "name": "Puente la Reina (Romanesque bridge)",
+    "kind": "bridge",
+    "note": "11th-century six-arched bridge over the Arga, built for pilgrims",
+    "day": null,
+    "sources": [
+     "https://en.wikipedia.org/wiki/Puente_la_Reina",
+     "https://www.spain.info/en/camino-santiago/french-way-camino-santiago/"
+    ]
+   },
+   {
+    "name": "Burgos",
+    "kind": "town",
+    "note": "City whose cathedral is a UNESCO World Heritage Site",
+    "day": null,
+    "sources": [
+     "https://www.spain.info/en/camino-santiago/french-way-camino-santiago/"
+    ]
+   },
+   {
+    "name": "León",
+    "kind": "town",
+    "note": "Major city stop, worth a day to explore",
+    "day": null,
+    "sources": [
+     "https://www.spain.info/en/camino-santiago/french-way-camino-santiago/"
+    ]
+   },
+   {
+    "name": "Cruz de Ferro (Iron Cross)",
+    "kind": "shrine",
+    "note": "Iron cross at the highest point of the Way",
+    "day": null,
+    "label": "Iron cross",
+    "sources": [
+     "https://www.spain.info/en/camino-santiago/french-way-camino-santiago/"
+    ]
+   },
+   {
+    "name": "O Cebreiro",
+    "kind": "village",
+    "note": "Village at 1,300 m where the Galician stage begins",
+    "day": null,
+    "sources": [
+     "https://www.caminodesantiago.gal/en/make-plans/the-ways/french-way/stage-o-cebreiro-tricastela",
+     "https://www.spain.info/en/camino-santiago/french-way-camino-santiago/"
+    ]
+   }
+  ]
+ },
+ "tiger-leaping": {
+  "finish": "hut",
+  "stops": [
+   {
+    "name": "Naxi Family Guesthouse",
+    "kind": "hut",
+    "note": "About 2 hours' walk from Qiaotou, before the 28 Bends",
+    "day": null,
+    "label": "Guesthouse",
+    "sources": [
+     "https://www.chinahighlights.com/travelguide/china-hiking/tiger-leaping-gorge.htm",
+     "https://www.novo-monde.com/en/tiger-leaping-gorge/"
+    ]
+   },
+   {
+    "name": "Top of the 28 Bends",
+    "kind": "viewpoint",
+    "note": "Highest point of the trek, 2,650 m, Jade Dragon Snow Mountain views",
+    "day": null,
+    "sources": [
+     "https://www.novo-monde.com/en/tiger-leaping-gorge/",
+     "https://www.gokunming.com/en/blog/item/2941/getting-away-tiger-leaping-gorge"
+    ]
+   },
+   {
+    "name": "Tea Horse Guesthouse",
+    "kind": "hut",
+    "note": "Lunch or overnight stop just after the 28 Bends",
+    "day": null,
+    "label": "Guesthouse",
+    "sources": [
+     "https://www.chinahighlights.com/travelguide/china-hiking/tiger-leaping-gorge.htm",
+     "https://www.novo-monde.com/en/tiger-leaping-gorge/"
+    ]
+   },
+   {
+    "name": "Halfway Guesthouse",
+    "kind": "hut",
+    "note": "Terrace views over Jade Dragon Snow Mountain and the Jinsha River",
+    "day": null,
+    "label": "Guesthouse",
+    "sources": [
+     "https://www.chinahighlights.com/travelguide/china-hiking/tiger-leaping-gorge.htm",
+     "https://www.novo-monde.com/en/tiger-leaping-gorge/"
+    ]
+   },
+   {
+    "name": "Waterfalls between Halfway and Tina's",
+    "kind": "waterfall",
+    "note": "Trail descends past waterfalls and canyons to Tina's",
+    "day": null,
+    "sources": [
+     "https://www.chinahighlights.com/travelguide/china-hiking/tiger-leaping-gorge.htm",
+     "https://www.novo-monde.com/en/tiger-leaping-gorge/"
+    ]
+   }
+  ]
+ },
+ "half-dome": {
+  "finish": "town",
+  "stops": [
+   {
+    "name": "Vernal Fall Footbridge",
+    "kind": "bridge",
+    "note": "0.8 mi from Happy Isles, 400 ft gain; water and toilets",
+    "day": null,
+    "sources": [
+     "https://www.nps.gov/yose/planyourvisit/vernalnevadatrail.htm",
+     "https://www.nps.gov/yose/planyourvisit/halfdome.htm"
+    ]
+   },
+   {
+    "name": "Vernal Fall (top, via Mist Trail)",
+    "kind": "waterfall",
+    "note": "Top reached via the Mist Trail, 1,000 ft gain",
+    "day": null,
+    "sources": [
+     "https://www.nps.gov/yose/planyourvisit/vernalnevadatrail.htm"
+    ]
+   },
+   {
+    "name": "Nevada Fall (top, via Mist Trail)",
+    "kind": "waterfall",
+    "note": "2,000 ft gain from Happy Isles via the Mist Trail",
+    "day": null,
+    "sources": [
+     "https://www.nps.gov/yose/planyourvisit/vernalnevadatrail.htm",
+     "https://home.nps.gov/yose/planyourvisit/yosemite-valley-trails.htm"
+    ]
+   },
+   {
+    "name": "Little Yosemite Valley",
+    "kind": "campsite",
+    "note": "Backpackers' campground; ranger station staffed in summer",
+    "day": null,
+    "sources": [
+     "https://home.nps.gov/yose/planyourvisit/yosemite-valley-trails.htm",
+     "https://www.nps.gov/yose/planyourvisit/halfdome.htm"
+    ]
+   },
+   {
+    "name": "Sub Dome (subdome)",
+    "kind": "summit",
+    "note": "Steep stairs and slabs; rangers check permits at its base",
+    "day": null,
+    "label": "Dome",
+    "sources": [
+     "https://www.nps.gov/yose/planyourvisit/hdpermits.htm",
+     "https://home.nps.gov/yose/planyourvisit/yosemite-valley-trails.htm"
+    ]
+   },
+   {
+    "name": "Half Dome Cables",
+    "kind": "cables",
+    "note": "Two steel cables cover the last 400 feet to the summit",
+    "day": null,
+    "sources": [
+     "https://www.nps.gov/yose/planyourvisit/halfdome.htm"
+    ]
+   },
+   {
+    "name": "Half Dome summit",
+    "kind": "summit",
+    "note": "8,800 ft, nearly 5,000 ft above Yosemite Valley",
+    "day": null,
+    "turn": true,
+    "sources": [
+     "https://www.nps.gov/yose/planyourvisit/halfdome.htm"
+    ]
+   }
+  ]
+ }
+}

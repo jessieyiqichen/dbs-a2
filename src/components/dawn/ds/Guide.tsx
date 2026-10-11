@@ -3,39 +3,65 @@
 import Link from "next/link";
 import type { ControlState } from "@/lib/contrast";
 import type { Hike } from "@/data/hikes";
-import type { Sourced } from "@/data/intros";
+import type { Route, StopKind } from "@/data/stops";
 import { TonedPhoto, type TrailPhoto } from "../Toned";
 import { PlateIcon, type PlateIconName } from "../PlateArt";
 import { card, cardLive, colourUp } from "./tokens";
-import { t12, t12caption, t14, t17, t24 } from "./type";
+import { t12, t14, t17, t24 } from "./type";
 
 /** The icon that names each of a walk's three figures, wherever they appear. */
 export const FACT_ICON = { distance: "boot", days: "calendar", high: "mountain" } as const satisfies Record<string, PlateIconName>;
 
-/** Along the way, drawn as a route rather than written as a list: start, three stops, finish, on one key line. */
-export function RouteLine({ h, stops }: { h: Pick<Hike, "start" | "end">; stops: Pick<Sourced, "text">[] }) {
-  // the ends carry an icon (a boot to set out, a hut to arrive), the stops their number
-  const nodes: { mark: string; icon?: PlateIconName; label: string; end: boolean }[] = [
-    { mark: "", icon: "boot", label: h.start, end: true },
-    ...stops.map((s, i) => ({ mark: String(i + 1), label: s.text, end: false })),
-    { mark: "", icon: "hut", label: h.end, end: true },
+/** Each kind of stop, its icon and the word printed above it. Towns, villages, ruins and shrines share the map. */
+const STOP: Record<StopKind, { icon: PlateIconName; label: string }> = {
+  pass: { icon: "mountain", label: "Pass" },
+  summit: { icon: "mountain", label: "Summit" },
+  crater: { icon: "mountain", label: "Crater" },
+  cables: { icon: "mountain", label: "Cables" },
+  lake: { icon: "lake", label: "Lake" },
+  glacier: { icon: "lake", label: "Glacier" },
+  waterfall: { icon: "waterfall", label: "Waterfall" },
+  bridge: { icon: "bridge", label: "Bridge" },
+  hut: { icon: "hut", label: "Hut" },
+  campsite: { icon: "tent", label: "Camp" },
+  village: { icon: "map", label: "Village" },
+  town: { icon: "map", label: "Town" },
+  forest: { icon: "pine", label: "Forest" },
+  viewpoint: { icon: "camera", label: "Viewpoint" },
+  junction: { icon: "compass", label: "Junction" },
+  ruin: { icon: "map", label: "Ruin" },
+  shrine: { icon: "map", label: "Shrine" },
+};
+
+type Node = { icon: PlateIconName; label: string; name: string; note?: string; end: boolean };
+
+/** Along the way, drawn as a route: the start, each stop with its icon, kind and day, then the finish, on one key line. */
+export function RouteLine({ h, route }: { h: Pick<Hike, "start" | "end" | "route">; route: Route }) {
+  const back = h.route === "round trip";
+  const nodes: Node[] = [
+    { icon: "boot", label: "Start", name: h.start, end: true },
+    ...route.stops.map((s) => ({
+      icon: STOP[s.kind].icon,
+      label: [s.label ?? STOP[s.kind].label, s.day ? `Day ${s.day}` : "", s.turn ? "Turn back here" : ""].filter(Boolean).join(" · "),
+      name: s.name,
+      note: s.note,
+      end: false,
+    })),
+    { icon: back ? "boot" : STOP[route.finish].icon, label: back ? "Back at the start" : "Finish", name: h.end, end: true },
   ];
   return (
     <ol>
       {nodes.map((n, i) => (
-        <li key={i} className="relative flex items-start gap-4 py-2">
-          {/* the line runs between marks only: up from every mark but the first, down from every mark but the last */}
-          {i > 0 && <span aria-hidden="true" className="absolute left-[13px] top-0 h-[22px] w-[2px] bg-[#22333a]" />}
-          {i < nodes.length - 1 && <span aria-hidden="true" className="absolute bottom-0 left-[13px] top-[22px] w-[2px] bg-[#22333a]" />}
-          <span
-            aria-hidden="true"
-            className={`${t12caption} relative z-10 grid h-7 w-7 shrink-0 place-items-center border-[1.5px] border-[#22333a] ${n.end ? "rounded-full bg-[#f6f9f7]" : "bg-[#c3d6c4] shadow-[2px_2px_0_0_#8eaaa6]"}`}
-          >
-            {n.icon ? <PlateIcon name={n.icon} size={22} /> : n.mark}
+        <li key={i} className="relative flex items-start gap-4 pb-4">
+          {/* the line runs between marks only */}
+          {i < nodes.length - 1 && <span aria-hidden="true" className="absolute bottom-0 left-[17px] top-9 w-[2px] bg-[#22333a]" />}
+          <span aria-hidden="true" className={`relative z-10 grid h-9 w-9 shrink-0 place-items-center border-[1.5px] border-[#22333a] bg-[#f6f9f7] ${n.end ? "rounded-full" : "shadow-[2px_2px_0_0_#c3d6c4]"}`}>
+            <PlateIcon name={n.icon} size={28} />
           </span>
           <span className="min-w-0 pt-0.5">
-            {n.end && <span className={`${t12} block text-[#4f5f66]`}>{i === 0 ? "Start" : "Finish"}</span>}
-            <span className={`${t17} block`}>{n.label}</span>
+            <span className={`${t12} block text-[#4f5f66]`}>{n.label}</span>
+            <span className={`${t17} block`}>{n.name}</span>
+            {n.note && <span className={`${t14} block text-[#4f5f66]`}>{n.note}</span>}
           </span>
         </li>
       ))}

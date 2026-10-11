@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { elevation, formatRange, hikes, type Hike } from "@/data/hikes";
 import { intros, introSources } from "@/data/intros";
+import { routes, stopSources } from "@/data/stops";
 import rawPhotos from "@/data/trailPhotos.json";
 import { creditLine, type TrailPhoto } from "@/components/dawn/Toned";
 import { EmbossStamp } from "@/components/dawn/PlateUI";
@@ -48,7 +49,7 @@ function Details({ h }: { h: Hike }) {
           {t.intro.map((s) => <p key={s.text}>{s.text}</p>)}
           <p className={`${t14} text-[#4f5f66]`}>{h.start} to {h.end} · {h.route}</p>
         </div>,
-        <RouteLine key="route" h={h} stops={t.along_the_way} />,
+        <RouteLine key="route" h={h} route={routes[h.id]} />,
         <div key="when" className="flex flex-wrap items-start gap-8">
           <div className="min-w-0 flex-1">
             <p className={`${t12} flex items-center gap-1.5 text-[#4f5f66]`}><PlateIcon name="sunrise" size={22} />Best months</p>
@@ -128,7 +129,7 @@ export default function TrailDetail({ id }: { id: string }) {
       <section aria-labelledby="sources-h" className={`${t14} mt-10 sm:mt-20 border-t border-[#22333a]/20 pt-6 text-[#4f5f66]`}>
         <h2 id="sources-h" className={`${t12} text-[#22333a]`}>Sources</h2>
         <ul className="mt-3 grid gap-x-8 gap-y-2 sm:grid-cols-2">
-          {[...new Set([...h.sources, ...introSources(h.id)])].map((s) => (
+          {[...new Set([...h.sources, ...introSources(h.id), ...stopSources(h.id)])].map((s) => (
             <li key={s}><PlateLink href={s} size="note" external>{sourceLabel(s)}</PlateLink></li>
           ))}
         </ul>
