@@ -22,6 +22,24 @@ export const caps = `${ui} whitespace-nowrap text-xs font-semibold uppercase tra
 export const focusRing = "dw-crop focus-visible:outline-none";
 export const focusForced = "dw-crop is-focus";
 export const slow = "transition duration-[600ms] ease-[cubic-bezier(.45,0,.2,1)]";
+/** Cards and plates (anything that is a print you can choose): rest lies flat on the page; hover lifts an aqua plate
+ *  off register and brings the colour up; pressed sinks, ink pressed in; selected lays a celadon plate under, in
+ *  register, with a key rule beneath. The same words as every other Dawn control. */
+export const card = {
+  rest: "bg-[#f6f9f7] shadow-[0_1px_0_rgba(34,51,58,.15)]",
+  hover: "bg-[#f6f9f7] shadow-[4px_4px_0_0_#c9dcdc]",
+  focus: "bg-[#f6f9f7] shadow-[0_1px_0_rgba(34,51,58,.15)] dw-crop is-focus",
+  pressed: "bg-[#f6f9f7] translate-y-px shadow-[inset_0_2px_4px_rgba(34,51,58,.2)]",
+  selected: "bg-[#c3d6c4] shadow-[inset_0_-3px_0_0_#22333a]",
+  disabled: "",
+} as const;
+/** Live card states on the element itself. */
+export const cardLive = `relative ${slow} hover:shadow-[4px_4px_0_0_#c9dcdc] active:translate-y-px active:shadow-[inset_0_2px_4px_rgba(34,51,58,.2)] dw-crop focus-visible:outline-none`;
+/** Live card states on a mount whose link sits inside it. */
+export const cardLiveHas = `${slow} has-[a:hover]:shadow-[4px_4px_0_0_#c9dcdc] has-[a:active]:translate-y-px has-[a:active]:shadow-[inset_0_2px_4px_rgba(34,51,58,.2)]`;
+/** The print inside a card brings its colour up when the card is hovered. */
+export const colourUp = `${slow} group-hover:saturate-[1.25]`;
+
 /** Fields can't draw marks on themselves: their wrapper shows the crop marks while the field inside has focus. */
 export const focusWithin = "dw-crop dw-within relative";
 

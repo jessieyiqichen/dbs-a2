@@ -1,6 +1,7 @@
 "use client";
 // One line of printed chips above the cards: where, how long, and no permit. The cards below change at once.
-import { DW, focusRing } from "@/components/dawn/ds/tokens";
+import { DW } from "@/components/dawn/ds/tokens";
+import { SecondaryButton } from "@/components/dawn/ds/Primitives";
 import { PlateChip, PlateToggle } from "@/components/dawn/ds/Interactive";
 import { LENGTHS, NO_FILTERS, REGIONS, isFiltered, toggle, type Filters } from "./filters";
 import { t12, t14 } from "./type";
@@ -22,10 +23,10 @@ export function FilterBar({ f, setF, shown, total }: { f: Filters; setF: (f: Fil
         </div>
         <PlateToggle label="No permit needed" checked={f.noPermit} onChange={(noPermit) => setF({ ...f, noPermit })} />
       </div>
-      <p className={`${t14} mt-3 flex items-baseline gap-4 text-[#4f5f66]`} aria-live="polite">
+      <p className={`${t14} mt-3 flex min-h-9 items-center gap-4 text-[#4f5f66]`} aria-live="polite">
         <span><span className="font-semibold text-[#22333a]">{shown}</span> of {total} walks</span>
         {isFiltered(f) && (
-          <button type="button" onClick={() => setF(NO_FILTERS)} className={`relative underline decoration-[#8eaaa6] decoration-2 underline-offset-4 hover:text-[#22333a] hover:decoration-[#22333a] ${focusRing}`}>Clear all</button>
+          <SecondaryButton small onClick={() => setF(NO_FILTERS)}>Clear all</SecondaryButton>
         )}
       </p>
     </div>

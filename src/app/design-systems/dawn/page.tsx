@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Libre_Franklin, Old_Standard_TT } from "next/font/google";
 import { CONTROL_STATES, ratio, type ControlState } from "@/lib/contrast";
 import { hikes } from "@/data/hikes";
@@ -8,7 +7,14 @@ import { DayPlates, EmbossStamp, PLATE_KEYFRAMES } from "@/components/dawn/Plate
 import { DAWN_FOCUS_CSS, DW, caps, display, ui } from "@/components/dawn/ds/tokens";
 import { CatalogueSearch, CountBadge, MountInput, MountSelect, PlateCheck, PlateLink, PlateRadio, PrimaryButton, RadioSwatch, SecondaryButton } from "@/components/dawn/ds/Primitives";
 import { ChipSwatch, PlateChips, PlateTabs, PlateToggle, TabSwatch } from "@/components/dawn/ds/Interactive";
-import { CardSwatch, CatalogueRow, DetailPanel, PrintCard, UIStates } from "@/components/dawn/ds/Pieces";
+import { CardSwatch, CatalogueRow, DetailPanel, UIStates } from "@/components/dawn/ds/Pieces";
+import { HeroPlate, MonthStrip, NeighbourLink, PlateThumb, RouteLine } from "@/components/dawn/ds/Guide";
+import { Gallery } from "@/components/dawn/ds/Viewer";
+import { AddToListDemo, CardDemo } from "@/components/dawn/ds/Demos";
+import { t12, t12caption, t14, t17, t24, t48, t96 } from "@/components/dawn/ds/type";
+import { intros } from "@/data/intros";
+import rawPhotos from "@/data/trailPhotos.json";
+import type { TrailPhoto } from "@/components/dawn/Toned";
 
 const displayFont = Old_Standard_TT({ subsets: ["latin"], weight: ["400", "700"], style: ["normal", "italic"], variable: "--dw-display" });
 const uiFont = Libre_Franklin({ subsets: ["latin"], weight: ["400", "600"], variable: "--dw-ui" });
@@ -16,6 +22,9 @@ const uiFont = Libre_Franklin({ subsets: ["latin"], weight: ["400", "600"], vari
 export const metadata: Metadata = { title: "Dawn · Design system · Twelve Trails" };
 
 const milford = hikes.find((h) => h.id === "milford")!;
+const photos = rawPhotos as Record<string, TrailPhoto[]>;
+const plates = photos.milford;
+const cover = plates.find((p) => p.cover) ?? plates[0];
 
 /* ---------- scaffolding ---------- */
 
@@ -86,11 +95,13 @@ function ColourRoles() {
 /* ---------- 2. type roles ---------- */
 
 const TYPE = [
-  { role: "Display", spec: "Old Standard 400 · 64 / 64", cls: `${display} text-[64px] leading-[1]`, sample: "Twelve Trails" },
-  { role: "Heading", spec: "Old Standard 400 · 36 / 40", cls: `${display} text-[36px] leading-[1.1]`, sample: milford.name },
-  { role: "Caption", spec: "Old Standard 400 · 13 / 18, capitals, +0.12em", cls: `${display} text-[13px] uppercase leading-[18px] tracking-[0.12em]`, sample: "No. 05. Milford Track, New Zealand." },
-  { role: "Body", spec: "Libre Franklin 400 · 17 / 27", cls: `${ui} max-w-xl text-[17px] leading-[27px]`, sample: milford.why },
-  { role: "Label", spec: "Libre Franklin 600 · 12 / 16, capitals, +0.16em", cls: `${ui} text-[12px] font-semibold uppercase leading-[16px] tracking-[0.16em]`, sample: "Best Nov – Apr" },
+  { role: "Title · 96", spec: "Old Standard 400 · 96 / 91 (112 on wide screens, 48 on phones) · once per page", cls: t96, sample: "Twelve Trails" },
+  { role: "Section · 48", spec: "Old Standard 400 · 48 / 50 · section titles, a walk's name on its page", cls: t48, sample: milford.name },
+  { role: "Name · 24", spec: "Old Standard 400 · 24 / 29 · walk names on cards, numbers, lead lines", cls: t24, sample: "53.5 km · 4 days" },
+  { role: "Reading · 17", spec: "Libre Franklin 400 · 17 / 27 · everything read as text", cls: `${t17} max-w-xl`, sample: milford.why },
+  { role: "Note · 14", spec: "Libre Franklin 400 · 14 / 21 · captions, credits, chips, tabs", cls: t14, sample: "Clinton River · photochrom, Photoglob Co., c. 1890–1900" },
+  { role: "Label · 12", spec: "Libre Franklin 600 · 12 / 16, capitals, +0.16em · labels and buttons", cls: t12, sample: "Best months" },
+  { role: "Caption · 12", spec: "Old Standard 400 · 12 / 16, capitals, +0.14em · the printed caption", cls: t12caption, sample: "No. 05. New Zealand" },
 ];
 
 function TypeRoles() {
@@ -154,11 +165,19 @@ function SpacingShape() {
 function Components() {
   return (
     <div className="grid gap-4 lg:grid-cols-2">
-      <Block title="Buttons and link" note="Loch is kept for the one primary action on a screen.">
-        <div className="flex flex-wrap items-center gap-5">
-          <PrimaryButton />
-          <SecondaryButton />
-          <PlateLink />
+      <Block title="Buttons and links" note="Loch is kept for the one primary action on a screen. Chosen, a button gives the loch up.">
+        <div className="space-y-5">
+          <div className="flex flex-wrap items-center gap-5">
+            <AddToListDemo />
+            <SecondaryButton>Later</SecondaryButton>
+            <SecondaryButton small>Clear all</SecondaryButton>
+            <SecondaryButton small selected>On my list</SecondaryButton>
+          </div>
+          <div className="flex flex-wrap items-baseline gap-6">
+            <PlateLink>Read the route</PlateLink>
+            <PlateLink size="note">wikipedia · Milford Track</PlateLink>
+            <PlateLink size="name">Twelve Trails</PlateLink>
+          </div>
         </div>
       </Block>
       <Block title="Text input, select, search">
@@ -209,8 +228,8 @@ function Components() {
           <span className="flex items-center gap-2"><CountBadge n={12} /><span className={`${ui} text-sm text-[#4f5f66]`}>trails</span></span>
         </div>
       </Block>
-      <Block title="Card" note="A mounted print. Hover brings the colour up.">
-        <PrintCard id="milford" photo="/moodboards/dawn/clinton-river.jpg" plateNote="Clinton River, the track's first valley · Photoglob Co., c. 1890–1900" />
+      <Block title="Card" note="A mounted print; the print and name open the walk. The list button sits outside the link.">
+        <div className="max-w-sm"><CardDemo id="milford" photo={cover} /></div>
       </Block>
       <div className="space-y-4">
         <Block title="List rows" note="A page of the print catalogue. The chosen row gets a celadon plate.">
@@ -222,6 +241,41 @@ function Components() {
           <DayPlates day={2} of={4} />
         </Block>
       </div>
+      <Block title="Hero plate" note="The large print on a walk's page. It is the button to every plate.">
+        <div className="relative"><HeroPlate photo={cover} count={plates.length} label={`See all ${plates.length} plates of Milford Track`} /></div>
+      </Block>
+      <div className="space-y-4">
+        <Block title="Plate thumbnails" note="Small prints that open the viewer. The plate on view is selected.">
+          <div className="grid grid-cols-2 gap-3">
+            <PlateThumb photo={plates[0]} n={1} label={`Plate 1: ${plates[0].place}`} />
+            <PlateThumb photo={plates[1]} n={2} selected label={`Plate 2: ${plates[1].place}`} />
+          </div>
+        </Block>
+        <Block title="Next-walk link" note="The walks either side, at the foot of a walk's page.">
+          <NeighbourLink href="#next" label="Next walk →" name="Tongariro Alpine Crossing" photo={photos.tongariro[0]} />
+        </Block>
+      </div>
+      <Block title="Plates viewer" note="Every photograph of a walk, in route order. Opens as a dialog: Esc or Close shuts it, arrow keys move." className="lg:col-span-2">
+        <Gallery
+          photos={plates}
+          start={1}
+          title={
+            <>
+              <p className={`${t12caption} text-[#4f5f66]`}>No. 05. New Zealand</p>
+              <p className={`${t48} mt-2`}>{milford.name}</p>
+            </>
+          }
+        />
+      </Block>
+      <Block title="Route line" note="Along the way, drawn: start, three stops, finish.">
+        <RouteLine h={milford} stops={intros.milford.along_the_way} />
+      </Block>
+      <Block title="Month strip and stamp" note="Best months carry a celadon plate. Neither is a control.">
+        <div className="flex flex-wrap items-start gap-6">
+          <div className="min-w-0 flex-1"><MonthStrip best={milford.best_months} /></div>
+          <div className="[&_svg]:h-24 [&_svg]:w-24"><EmbossStamp text="Permit needed" uid="ds-stamp" /></div>
+        </div>
+      </Block>
       <Block title="Detail panel" note="Opens over the list when a card or row is chosen." className="lg:col-span-2">
         <div className="max-w-xl"><DetailPanel id="milford" /></div>
       </Block>
@@ -242,8 +296,8 @@ const STATE_NOTES: Record<ControlState, string> = {
 
 type Row = { name: string; render: (s: ControlState) => React.ReactNode | null };
 const ROWS: Row[] = [
-  { name: "Primary button", render: (s) => (s === "selected" ? null : <PrimaryButton force={s}>See</PrimaryButton>) },
-  { name: "Secondary button", render: (s) => (s === "selected" ? null : <SecondaryButton force={s}>Later</SecondaryButton>) },
+  { name: "Primary button", render: (s) => <PrimaryButton force={s}>{s === "selected" ? "On list" : "Add"}</PrimaryButton> },
+  { name: "Secondary button", render: (s) => <SecondaryButton force={s} small>{s === "selected" ? "On list" : "My list"}</SecondaryButton> },
   { name: "Link", render: (s) => (s === "selected" || s === "disabled" ? null : <PlateLink force={s}>Sources</PlateLink>) },
   { name: "Filter chip", render: (s) => <ChipSwatch force={s} /> },
   { name: "Tab", render: (s) => <TabSwatch force={s} /> },
@@ -253,6 +307,7 @@ const ROWS: Row[] = [
   { name: "Text input", render: (s) => (s === "pressed" || s === "selected" ? null : <div className="max-w-36"><MountInput force={s} id={`dw-in-${s}`} label="Trail" placeholder="name" /></div>) },
   { name: "Select", render: (s) => (s === "pressed" || s === "selected" ? null : <div className="max-w-36"><MountSelect force={s} id={`dw-sel-${s}`} /></div>) },
   { name: "Card", render: (s) => (s === "selected" || s === "disabled" ? null : <CardSwatch force={s} />) },
+  { name: "Plate thumbnail", render: (s) => (s === "disabled" ? null : <div className="max-w-32"><PlateThumb force={s} photo={plates[0]} n={1} /></div>) },
   { name: "List row", render: (s) => (s === "disabled" ? <CatalogueRow compact id="inca-trail" force={s} note="closed Feb" /> : <CatalogueRow compact id="milford" force={s} />) },
 ];
 
@@ -296,8 +351,9 @@ export default function DawnSystem() {
       <div className="mx-auto max-w-6xl space-y-14 px-5 pb-24 pt-10">
         <header>
           <div className={`${ui} flex flex-wrap gap-x-6 text-sm`}>
-            <Link href="/" className="text-[#4f5f66] underline-offset-4 hover:text-[#22333a] hover:underline">← Hub</Link>
-            <Link href="/mood-boards/dawn/" className="font-semibold text-[#22333a] underline decoration-[#8eaaa6] decoration-2 underline-offset-4 hover:decoration-[#22333a]">Built from the Dawn mood board →</Link>
+            <PlateLink href="/" size="note">← Hub</PlateLink>
+            <PlateLink href="/mood-boards/dawn/" size="note">Built from the Dawn mood board →</PlateLink>
+            <PlateLink href="/trails/" size="note">The site built from it →</PlateLink>
           </div>
           <p className={`${caps} mt-8 text-[#4f5f66]`}>Design system · 2 of 3</p>
           <h1 className={`${display} mt-2 text-8xl leading-none`}>Dawn</h1>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { ControlState } from "@/lib/contrast";
 import { DW, focusForced, focusRing, slow, ui } from "./tokens";
+import { Tick } from "./Primitives";
 
 /* ---------- tabs ---------- */
 
@@ -63,14 +64,6 @@ export function PlateTabs({ tabs, panels, idPrefix = "dw", panelClassName }: { t
 }
 
 /* ---------- chips ---------- */
-
-function Tick() {
-  return (
-    <svg viewBox="0 0 16 16" className="-ml-0.5 mr-1.5 inline-block h-3 w-3 align-[-1px]" aria-hidden="true">
-      <path d="M2.5 8.5 L6.5 12 L13.5 3.5" fill="none" stroke="#22333a" strokeWidth="2.2" strokeLinecap="square" />
-    </svg>
-  );
-}
 
 const chipState: Record<ControlState, string> = {
   rest: "border-[#22333a]/50 bg-transparent text-[#22333a] shadow-[2px_2px_0_0_var(--tint)]",
@@ -139,7 +132,7 @@ export function PlateToggle({ label, initial = false, force, checked, onChange }
       />
     </span>
   );
-  const text = <span className={`${ui} whitespace-nowrap text-base ${disabled ? "text-[#4f5f66] line-through" : on ? "text-[#22333a]" : "text-[#4f5f66]"}`}>{label}</span>;
+  const text = <span className={`${ui} whitespace-nowrap text-[14px] ${disabled ? "text-[#4f5f66] line-through" : on ? "text-[#22333a]" : "text-[#4f5f66]"}`}>{label}</span>;
   if (force) return <span className="flex items-center gap-3">{track}{text}</span>;
   return (
     <button type="button" role="switch" aria-checked={on} onClick={() => (onChange ? onChange(!on) : setLive(!live))} className="group flex items-center gap-3 text-left outline-none">

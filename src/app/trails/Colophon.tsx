@@ -2,6 +2,7 @@
 import { DATA_AS_OF, hikes } from "@/data/hikes";
 import rawPhotos from "@/data/trailPhotos.json";
 import type { TrailPhoto } from "@/components/dawn/Toned";
+import { PlateLink, plateLinkClass } from "@/components/dawn/ds/Primitives";
 import { t14, t24 } from "./type";
 
 const photos = rawPhotos as Record<string, TrailPhoto[]>;
@@ -19,11 +20,11 @@ export function Colophon() {
           Photochrom prints: Library of Congress, Photochrom Print Collection (no known restrictions). Other photographs: Unsplash (Unsplash License), toned to sit with the prints.
         </p>
         <details className="mt-3">
-          <summary className="cursor-pointer text-[#22333a] underline decoration-[#8eaaa6] underline-offset-4">Every photograph and its credit</summary>
-          <ul className="mt-2 grid gap-x-8 gap-y-1 sm:grid-cols-2">
+          <summary className={`w-fit cursor-pointer ${plateLinkClass("note")}`}>Every photograph and its credit</summary>
+          <ul className="mt-3 grid gap-x-8 gap-y-2 sm:grid-cols-2">
             {hikes.flatMap((h) => photos[h.id].map((p) => (
               <li key={p.file}>
-                {h.name}: <a href={p.source} target="_blank" rel="noreferrer" className="underline decoration-[#8eaaa6] underline-offset-2 hover:decoration-[#22333a]">{p.place}</a>, {p.kind === "photochrom" ? `${p.author}, ${p.date}` : `${p.author} / Unsplash`}
+                {h.name}: <PlateLink href={p.source} size="note" external>{p.place}</PlateLink>, {p.kind === "photochrom" ? `${p.author}, ${p.date}` : `${p.author} / Unsplash`}
               </li>
             )))}
           </ul>

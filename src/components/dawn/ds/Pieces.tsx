@@ -4,8 +4,11 @@ import type { ControlState } from "@/lib/contrast";
 import { hikes, elevation, formatRange, type Hike } from "@/data/hikes";
 import { PlateIcon } from "../PlateArt";
 import { PrintingLoader } from "../PlateUI";
+import Link from "next/link";
+import { TonedPhoto, type TrailPhoto } from "../Toned";
 import { PlateLink, PrimaryButton, SecondaryButton } from "./Primitives";
-import { DW, caps, display, focusForced, focusRing, slow, ui } from "./tokens";
+import { DW, caps, card, cardLiveHas, colourUp, display, focusForced, focusRing, slow, ui } from "./tokens";
+import { t12caption, t14, t24 } from "./type";
 
 const byId = (id: string) => hikes.find((h) => h.id === id) as Hike;
 const no = (h: Hike) => `No. ${String(hikes.indexOf(h) + 1).padStart(2, "0")}`;
@@ -13,49 +16,38 @@ const PRINT = "/moodboards/dawn/clinton-river.jpg"; // a real photochrom of the 
 
 /** Printed caption, set the way the prints set theirs. */
 export function Caption({ h }: { h: Hike }) {
-  return <p className={`${display} text-[13px] uppercase tracking-[0.12em] text-[#22333a]`}>{no(h)}. {h.name}, {h.country.join(", ")}.</p>;
+  return <p className={`${t12caption} text-[#22333a]`}>{no(h)}. {h.name}, {h.country.join(", ")}.</p>;
 }
 
-/** Card: a mounted print. Hover brings the colour up; press sinks the mount. */
-export function PrintCard({ id, photo, plateNote }: { id: string; photo: string; plateNote: string }) {
+/** Card: a mounted print. The print and its caption are one link; `footer` (a small button) sits under it, outside
+ *  the link. Hover lifts an aqua plate and brings the colour up; press sinks the mount. */
+export function PrintCard({ id, photo, href = "#card", footer, sizes = "(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" }: { id: string; photo: TrailPhoto; href?: string; footer?: React.ReactNode; sizes?: string }) {
   const h = byId(id);
+  const inner = (
+    <>
+      <TonedPhoto photo={photo} sizes={sizes} className={`aspect-[4/3] border-[3px] border-[#22333a] ${colourUp}`} />
+      <span className={`${t12caption} mt-4 block text-[#4f5f66]`}>{no(h)}. {h.country.join(", ")}</span>
+      <span id={`${h.id}-card`} className={`${t24} mt-1 block decoration-[#8eaaa6] decoration-2 underline-offset-4 group-hover:underline`}>{h.name}</span>
+      <span className={`${t14} mt-2 block text-[#4f5f66]`}>{formatRange(h.distance_km)} km · {formatRange(h.days)} {h.days[1] === 1 ? "day" : "days"} · {elevation(h)}</span>
+    </>
+  );
+  const cls = `group relative block ${focusRing}`;
   return (
-    <a href="#card" className={`group relative block bg-[#f6f9f7] p-3.5 shadow-[0_1px_0_rgba(34,51,58,.15)] ${slow} hover:shadow-[4px_4px_0_0_#c9dcdc] active:translate-y-px active:shadow-[inset_0_2px_4px_rgba(34,51,58,.2)] ${focusRing}`}>
-      <span className="relative block aspect-[4/3] overflow-hidden border-[3px] border-[#22333a]">
-        <Image src={photo} alt={`Photochrom print: ${h.name}`} fill sizes="(min-width: 1024px) 40vw, 100vw" className={`object-cover ${slow} group-hover:saturate-[1.2]`} />
-      </span>
-      <span className="mt-3 block"><Caption h={h} /></span>
-      <span className={`${ui} block text-xs text-[#4f5f66]`}>{plateNote}</span>
-      <span className={`${ui} mt-3 block border-t border-[#22333a]/20 text-sm text-[#22333a]`}>
-        {[
-          ["Distance", `${formatRange(h.distance_km)} km, ${h.route}`],
-          ["Days", formatRange(h.days)],
-          ["High point", elevation(h)],
-        ].map(([k, v]) => (
-          <span key={k} className="flex items-baseline justify-between gap-3 border-b border-dotted border-[#22333a]/25 py-1.5">
-            <span className="text-[#4f5f66]">{k}</span>
-            <span className={`${display} text-base`}>{v}</span>
-          </span>
-        ))}
-      </span>
-    </a>
+    <article aria-labelledby={`${h.id}-card`} className={`flex w-full flex-col p-3.5 ${card.rest} ${cardLiveHas}`}>
+      {href.startsWith("/") ? <Link href={href} className={cls}>{inner}</Link> : <a href={href} className={cls}>{inner}</a>}
+      {footer && <div className="mt-auto pt-4">{footer}</div>}
+    </article>
   );
 }
 
-/** A small card in a forced state, for the grid. */
+/** A small card in a forced state, for the grid. Selected is what a chosen plate in the viewer looks like. */
 export function CardSwatch({ force }: { force: ControlState }) {
-  const look: Partial<Record<ControlState, string>> = {
-    rest: "shadow-[0_1px_0_rgba(34,51,58,.15)]",
-    hover: "shadow-[4px_4px_0_0_#c9dcdc]",
-    focus: `shadow-[0_1px_0_rgba(34,51,58,.15)] ${focusForced}`,
-    pressed: "translate-y-px shadow-[inset_0_2px_4px_rgba(34,51,58,.2)]",
-  };
   return (
-    <span className={`relative flex items-center gap-2 bg-[#f6f9f7] p-1.5 ${look[force]}`}>
+    <span className={`relative flex items-center gap-2 p-1.5 ${card[force]}`}>
       <span className="relative block h-9 w-12 shrink-0 overflow-hidden border-2 border-[#22333a]">
-        <Image src={PRINT} alt="" fill sizes="48px" className={`object-cover ${force === "hover" ? "saturate-[1.2]" : ""}`} />
+        <Image src={PRINT} alt="" fill sizes="48px" className={`object-cover ${force === "hover" ? "saturate-[1.25]" : ""}`} />
       </span>
-      <span className={`${display} text-sm leading-tight text-[#22333a]`}>Milford Track</span>
+      <span className={`${t14} leading-tight text-[#22333a] ${force === "selected" ? "font-semibold" : ""}`}>Milford Track</span>
     </span>
   );
 }
@@ -67,7 +59,7 @@ const rowState: Record<ControlState, string> = {
   hover: "bg-[#c9dcdc]",
   focus: focusForced,
   pressed: "bg-[#8eaaa6]/60 shadow-[inset_0_2px_3px_rgba(34,51,58,.25)]",
-  selected: "bg-[#c3d6c4] shadow-[inset_3px_0_0_0_#22333a]",
+  selected: "bg-[#c3d6c4] shadow-[inset_0_-3px_0_0_#22333a]",
   disabled: "cursor-not-allowed text-[#4f5f66]",
 };
 
@@ -104,9 +96,7 @@ export function DetailPanel({ id }: { id: string }) {
   ];
   return (
     <div role="dialog" aria-modal="false" aria-labelledby="dw-detail-title" className="relative bg-[#f6f9f7] p-5 shadow-[6px_6px_0_0_#c9dcdc]">
-      <button type="button" className={`${caps} absolute right-4 top-4 border-b border-[#22333a]/40 pb-0.5 text-[#22333a] hover:border-[#22333a] active:translate-y-px ${focusRing}`}>
-        Close
-      </button>
+      <span className="absolute right-4 top-4"><SecondaryButton small>Close</SecondaryButton></span>
       <Caption h={h} />
       <h3 id="dw-detail-title" className={`${display} mt-1 text-4xl leading-tight text-[#22333a]`}>{h.name}</h3>
       <div className="relative mt-4 aspect-[16/9] overflow-hidden border-[3px] border-[#22333a]">

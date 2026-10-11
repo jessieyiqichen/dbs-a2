@@ -1,6 +1,7 @@
 // Dawn controls without client state. Rule for every control:
 // rest = tint plate a little off register; hover = plates in register, colour lifts; pressed = sinks, a shade darker, ink pressed in;
 // focus = solid key-ink ring; selected = a tint plate laid under, in register; disabled = unprinted (dashed key line, no plates).
+import Link from "next/link";
 import type { ControlState } from "@/lib/contrast";
 import { DW, caps, display, focusForced, focusRing, focusWithin, slow, ui } from "./tokens";
 
@@ -8,59 +9,98 @@ type Forceable = { force?: ControlState; children?: React.ReactNode };
 
 /* ---------- buttons ---------- */
 
-const primaryBase = `${caps} relative inline-flex items-center px-5 py-3 ${slow}`;
+/** The printed tick: shown on anything selected (buttons, chips). */
+export function Tick() {
+  return (
+    <svg viewBox="0 0 16 16" className="-ml-0.5 mr-1.5 inline-block h-3 w-3 shrink-0 align-[-1px]" aria-hidden="true">
+      <path d="M2.5 8.5 L6.5 12 L13.5 3.5" fill="none" stroke="#22333a" strokeWidth="2.2" strokeLinecap="square" />
+    </svg>
+  );
+}
+
+/** Selected, for every button: a celadon plate laid under in register, a key rule beneath, and a tick. */
+const selectedLook = "border-[#22333a] bg-[#c3d6c4] text-[#22333a] shadow-[inset_0_-3px_0_0_#22333a]";
+const selectedLive = `active:translate-x-px active:translate-y-px active:bg-[#8eaaa6] active:shadow-[inset_0_2px_4px_rgba(34,51,58,.45)] ${focusRing}`;
+
+/** `selected` makes a button a toggle (aria-pressed); `small` is for buttons that sit inside cards and panels. */
+type ButtonProps = Forceable & { selected?: boolean; small?: boolean } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className">;
+const pad = (small?: boolean) => (small ? "px-3 py-2" : "px-5 py-3");
+
+const primaryBase = `${caps} relative inline-flex items-center border border-transparent ${slow}`;
 const primaryState: Record<ControlState, string> = {
   rest: "bg-[#2c5868] text-[#f6f9f7] shadow-[3px_3px_0_0_#8eaaa6]",
   hover: "bg-[#356677] text-[#f6f9f7] shadow-[0_0_0_0_#8eaaa6]",
   focus: `bg-[#2c5868] text-[#f6f9f7] shadow-[3px_3px_0_0_#8eaaa6] ${focusForced}`,
   pressed: "translate-x-px translate-y-px bg-[#244a58] text-[#f6f9f7] shadow-[inset_0_2px_4px_rgba(0,0,0,.4)]",
-  selected: "",
-  disabled: "cursor-not-allowed border border-dashed border-[#4f5f66] bg-transparent text-[#4f5f66] shadow-none",
+  selected: selectedLook,
+  disabled: "cursor-not-allowed !border-dashed !border-[#4f5f66] bg-transparent text-[#4f5f66] shadow-none",
 };
 const primaryLive = `hover:bg-[#356677] hover:shadow-[0_0_0_0_#8eaaa6] active:translate-x-px active:translate-y-px active:bg-[#244a58] active:shadow-[inset_0_2px_4px_rgba(0,0,0,.4)] ${focusRing}`;
 
-/** Primary: loch ink with its tint plate printed a little off. Hover brings it into register; press sinks it. */
-type ButtonProps = Forceable & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className">;
-
-export function PrimaryButton({ force, children = "See the walk", ...rest }: ButtonProps) {
-  if (force) return <span className={`${primaryBase} ${primaryState[force]}`}>{children}</span>;
-  return <button type="button" {...rest} className={`${primaryBase} ${primaryState.rest} ${primaryLive}`}>{children}</button>;
-}
-
-const secondaryBase = `${caps} relative inline-flex items-center border px-5 py-3 ${slow}`;
-const secondaryState: Record<ControlState, string> = {
-  rest: "border-[#22333a] bg-[#f6f9f7] text-[#22333a] shadow-[3px_3px_0_0_#c3d6c4]",
-  hover: "border-[#22333a] bg-[#c3d6c4] text-[#22333a] shadow-[0_0_0_0_#c3d6c4]",
-  focus: `border-[#22333a] bg-[#f6f9f7] text-[#22333a] shadow-[3px_3px_0_0_#c3d6c4] ${focusForced}`,
-  pressed: "translate-x-px translate-y-px border-[#22333a] bg-[#8eaaa6] text-[#22333a] shadow-[inset_0_2px_4px_rgba(34,51,58,.45)]",
-  selected: "",
-  disabled: "cursor-not-allowed border-dashed border-[#4f5f66] bg-transparent text-[#4f5f66] shadow-none",
-};
-
-/** Secondary: key-ink outline on the mount, a celadon plate off register. */
-export function SecondaryButton({ force, children = "Later", ...rest }: ButtonProps) {
-  if (force) return <span className={`${secondaryBase} ${secondaryState[force]}`}>{children}</span>;
+/** Primary: loch ink with its tint plate printed a little off. Hover brings it into register; press sinks it.
+ *  As a toggle, once chosen it gives up the loch: the thing is done, so the accent is free for the next action. */
+export function PrimaryButton({ force, selected, small, children = "See the walk", ...rest }: ButtonProps) {
+  if (force) return <span className={`${primaryBase} ${pad(small)} ${primaryState[force]}`}>{force === "selected" && <Tick />}{children}</span>;
   return (
-    <button type="button" {...rest} className={`${secondaryBase} ${secondaryState.rest} hover:bg-[#c3d6c4] hover:shadow-[0_0_0_0_#c3d6c4] active:translate-x-px active:translate-y-px active:bg-[#8eaaa6] active:shadow-[inset_0_2px_4px_rgba(34,51,58,.45)] ${focusRing}`}>
+    <button type="button" aria-pressed={selected} {...rest} className={`${primaryBase} ${pad(small)} ${selected ? `${primaryState.selected} ${selectedLive}` : `${primaryState.rest} ${primaryLive}`}`}>
+      {selected && <Tick />}
       {children}
     </button>
   );
 }
 
-/** Link: key ink with a loch underline printed slightly low; hover pulls it into register under the word. */
-export function PlateLink({ force, children = "Read the route" }: Forceable) {
-  const state: Partial<Record<ControlState, string>> = {
-    rest: "decoration-[#8eaaa6] underline-offset-[6px]",
-    hover: "decoration-[#22333a] underline-offset-[3px]",
-    focus: `decoration-[#8eaaa6] underline-offset-[6px] ${focusForced}`,
-    pressed: "bg-[#c9dcdc] decoration-[#22333a] underline-offset-[3px]",
-  };
-  const live = `hover:decoration-[#22333a] hover:underline-offset-[3px] active:bg-[#c9dcdc] ${focusRing}`;
+const secondaryBase = `${caps} relative inline-flex items-center border ${slow}`;
+const secondaryState: Record<ControlState, string> = {
+  rest: "border-[#22333a] bg-[#f6f9f7] text-[#22333a] shadow-[3px_3px_0_0_#c3d6c4]",
+  hover: "border-[#22333a] bg-[#c3d6c4] text-[#22333a] shadow-[0_0_0_0_#c3d6c4]",
+  focus: `border-[#22333a] bg-[#f6f9f7] text-[#22333a] shadow-[3px_3px_0_0_#c3d6c4] ${focusForced}`,
+  pressed: "translate-x-px translate-y-px border-[#22333a] bg-[#8eaaa6] text-[#22333a] shadow-[inset_0_2px_4px_rgba(34,51,58,.45)]",
+  selected: selectedLook,
+  disabled: "cursor-not-allowed border-dashed border-[#4f5f66] bg-transparent text-[#4f5f66] shadow-none",
+};
+const secondaryLive = `hover:bg-[#c3d6c4] hover:shadow-[0_0_0_0_#c3d6c4] active:translate-x-px active:translate-y-px active:bg-[#8eaaa6] active:shadow-[inset_0_2px_4px_rgba(34,51,58,.45)] ${focusRing}`;
+
+/** Secondary: key-ink outline on the mount, a celadon plate off register. */
+export function SecondaryButton({ force, selected, small, children = "Later", ...rest }: ButtonProps) {
+  if (force) return <span className={`${secondaryBase} ${pad(small)} ${secondaryState[force]}`}>{force === "selected" && <Tick />}{children}</span>;
   return (
-    <a href="#links" className={`${ui} relative px-0.5 text-base font-semibold text-[#22333a] underline decoration-2 ${slow} ${state[force ?? "rest"]} ${force ? "" : live}`}>
+    <button type="button" aria-pressed={selected} {...rest} className={`${secondaryBase} ${pad(small)} ${selected ? `${secondaryState.selected} ${selectedLive}` : `${secondaryState.rest} ${secondaryLive}`}`}>
+      {selected && <Tick />}
       {children}
-    </a>
+    </button>
   );
+}
+
+/* ---------- link ---------- */
+
+/** Link sizes, from the six: reading text, notes, and walk names. */
+export type LinkSize = "reading" | "note" | "name";
+const linkFace: Record<LinkSize, string> = {
+  reading: `${ui} text-[17px] leading-[27px] font-semibold`,
+  note: `${ui} text-[14px] leading-[21px] font-semibold`,
+  name: `${display} text-[24px] leading-[1.2]`,
+};
+const linkState: Record<ControlState, string> = {
+  rest: "decoration-[#8eaaa6] underline-offset-[6px]",
+  hover: "decoration-[#22333a] underline-offset-[3px]",
+  focus: `decoration-[#8eaaa6] underline-offset-[6px] ${focusForced}`,
+  pressed: "bg-[#c9dcdc] decoration-[#22333a] underline-offset-[3px]",
+  selected: "",
+  disabled: "",
+};
+const linkLive = `hover:decoration-[#22333a] hover:underline-offset-[3px] active:bg-[#c9dcdc] ${focusRing}`;
+
+/** The link look, for things that act as links but aren't anchors (a <summary>). */
+export function plateLinkClass(size: LinkSize = "reading", force?: ControlState): string {
+  return `${linkFace[size]} relative px-0.5 text-[#22333a] underline decoration-2 ${slow} ${linkState[force ?? "rest"]} ${force ? "" : linkLive}`;
+}
+
+/** Link: key ink with a loch underline printed slightly low; hover pulls it into register under the word.
+ *  Paths starting with "/" move within the site; `external` opens another site in a new tab. */
+export function PlateLink({ force, children = "Read the route", href = "#links", size = "reading", external = false }: Forceable & { href?: string; size?: LinkSize; external?: boolean }) {
+  const cls = plateLinkClass(size, force);
+  if (href.startsWith("/") && !force) return <Link href={href} className={cls}>{children}</Link>;
+  return <a href={href} className={cls} {...(external ? { target: "_blank", rel: "noreferrer" } : {})}>{children}</a>;
 }
 
 /* ---------- fields ---------- */
@@ -147,7 +187,7 @@ export function PlateCheck({ force, label = "Huts on the way", defaultChecked = 
   );
 }
 
-/** Radio: a key-line ring; chosen, a loch dot sits in register at its centre. */
+/** Radio: a key-line ring; chosen, a key-ink dot sits in register at its centre (loch is kept for the primary action). */
 export function PlateRadio({ name, options, defaultValue }: { name: string; options: string[]; defaultValue: string }) {
   return (
     <fieldset className="flex flex-wrap gap-x-6 gap-y-3">
@@ -156,7 +196,7 @@ export function PlateRadio({ name, options, defaultValue }: { name: string; opti
         <label key={o} className="group relative flex cursor-pointer items-center gap-2.5">
           <input type="radio" name={name} value={o} defaultChecked={o === defaultValue} className="peer sr-only" />
           <span className={`relative grid h-5 w-5 place-items-center rounded-full border-[1.5px] border-[#22333a] bg-[#f6f9f7] ${slow} group-hover:bg-[#c9dcdc] peer-active:translate-y-px peer-active:bg-[#a7b4b1] peer-checked:[&_.dot]:scale-100 dw-crop`}>
-            <span className={`dot h-2.5 w-2.5 scale-0 rounded-full bg-[#2c5868] ${slow}`} />
+            <span className={`dot h-2.5 w-2.5 scale-0 rounded-full bg-[#22333a] ${slow}`} />
           </span>
           <span className={`${ui} text-base text-[#22333a]`}>{o}</span>
         </label>
@@ -175,7 +215,7 @@ export function RadioSwatch({ force, label = "A few days" }: { force: ControlSta
   return (
     <span className="flex items-center gap-2.5">
       <span className={`relative grid h-5 w-5 place-items-center rounded-full border-[1.5px] border-[#22333a] bg-[#f6f9f7] ${ring}`}>
-        {force === "selected" && <span className="h-2.5 w-2.5 rounded-full bg-[#2c5868]" />}
+        {force === "selected" && <span className="h-2.5 w-2.5 rounded-full bg-[#22333a]" />}
       </span>
       <span className={`${ui} whitespace-nowrap text-base ${force === "disabled" ? "text-[#4f5f66] line-through" : "text-[#22333a]"}`}>{label}</span>
     </span>

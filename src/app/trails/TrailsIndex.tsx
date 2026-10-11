@@ -4,12 +4,11 @@ import { useMemo } from "react";
 import { hikes } from "@/data/hikes";
 import rawPhotos from "@/data/trailPhotos.json";
 import { TonedPhoto, creditLine, type TrailPhoto } from "@/components/dawn/Toned";
-import { SecondaryButton } from "@/components/dawn/ds/Primitives";
+import { PlateLink, SecondaryButton } from "@/components/dawn/ds/Primitives";
+import { PrintCard } from "@/components/dawn/ds/Pieces";
 import { PlateIcon } from "@/components/dawn/PlateArt";
-import { focusRing } from "@/components/dawn/ds/tokens";
 import { NO_FILTERS, applyFilters } from "./filters";
 import { FilterBar } from "./FilterBar";
-import { TrailCard } from "./TrailCard";
 import { useTrails } from "./state";
 import { t12, t14, t24, t48, t96 } from "./type";
 
@@ -29,10 +28,10 @@ export default function TrailsIndex() {
           <p className={`${t12} text-[#4f5f66]`}>A guide to twelve famous walks</p>
           <h1 className={`${t96} mt-4`}>Twelve Trails</h1>
           <p className={`${t24} mt-6 max-w-md italic text-[#4f5f66]`}>From a day on a volcano to a month across Spain: twelve walks, set out like a box of old travel prints.</p>
-          <a href="#walks" className={`${t12} relative mt-8 inline-block underline decoration-[#8eaaa6] decoration-2 underline-offset-[6px] hover:decoration-[#22333a] hover:underline-offset-[3px] ${focusRing}`}>See the twelve walks ↓</a>
+          <p className="mt-8"><PlateLink href="#walks" size="note">See the twelve walks ↓</PlateLink></p>
         </div>
         <figure className="m-0">
-          <div className="bg-[#f6f9f7] p-3.5 shadow-[6px_6px_0_0_#c9dcdc]">
+          <div className="bg-[#f6f9f7] p-3.5 shadow-[0_1px_0_rgba(34,51,58,.15)]">
             <TonedPhoto photo={OPENING} sizes="(min-width: 1024px) 600px, 100vw" priority className="aspect-[4/3] border-[3px] border-[#22333a]" />
           </div>
           <figcaption className={`${t14} mt-3 text-[#4f5f66]`}>{creditLine(OPENING)}</figcaption>
@@ -57,7 +56,16 @@ export default function TrailsIndex() {
           <ul className="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {shown.map((h) => (
               <li key={h.id} className="flex">
-                <TrailCard h={h} n={hikes.indexOf(h) + 1} cover={coverOf(h.id)} inList={list.includes(h.id)} onToggleList={() => toggleList(h.id)} />
+                <PrintCard
+                  id={h.id}
+                  photo={coverOf(h.id)}
+                  href={`/trails/${h.id}/`}
+                  footer={
+                    <SecondaryButton small selected={list.includes(h.id)} onClick={() => toggleList(h.id)} aria-label={`${h.name}: on my list`}>
+                      {list.includes(h.id) ? "On my list" : "+ My list"}
+                    </SecondaryButton>
+                  }
+                />
               </li>
             ))}
           </ul>
