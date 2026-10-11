@@ -135,7 +135,8 @@ export function WashSwitch({ label, initial = false, disabled = false, force }: 
   const cx = on ? 46 : 18;
   const knob = force === "pressed" ? "scale(1.15, .85)" : "scale(1)";
   const svg = (
-    <svg viewBox="0 0 64 34" className="h-9 w-[68px] shrink-0 overflow-visible" aria-hidden="true">
+    <span className={`shrink-0 rounded-full ${force === "focus" ? focusForced : force ? "" : "group-focus-visible:outline-2 group-focus-visible:outline-dashed group-focus-visible:outline-offset-4 group-focus-visible:outline-[#2f4a6b]"}`}>
+    <svg viewBox="0 0 64 34" className="block h-9 w-[68px] overflow-visible" aria-hidden="true">
       <path d="M9 15 C 10 7, 30 7.5, 46 7 C 60 7.5, 60 26, 46 27 C 30 28, 13 28.5, 9.5 22 Z" fill={FN.wash} filter="url(#fn-wash)" style={{ opacity: on ? 0.55 : force === "pressed" ? 0.2 : 0, transition: "opacity 300ms ease-out" }} />
       <g style={{ transform: `translateX(${cx - 18}px)`, transition: "transform 300ms ease-out" }}>
         <g style={{ transform: knob, transformOrigin: "18px 17px", transformBox: "view-box", transition: "transform 150ms ease-out" }} className={force ? "" : "group-active:[transform:scale(1.15,.85)]"}>
@@ -155,13 +156,14 @@ export function WashSwitch({ label, initial = false, disabled = false, force }: 
         className={force ? "" : "transition-[stroke-width] duration-300 group-hover:[stroke-width:2.2]"}
       />
     </svg>
+    </span>
   );
   const text = <span className={`${hand} whitespace-nowrap text-2xl ${off ? "text-[#625e56] line-through decoration-1" : on ? "text-[#3d3a34]" : "text-[#625e56]"}`}>{label}</span>;
   if (force) {
-    return <span className={`flex items-center gap-3 ${force === "focus" ? focusForced : ""}`}>{svg}{text}</span>;
+    return <span className="flex items-center gap-3">{svg}{text}</span>;
   }
   return (
-    <button type="button" role="switch" aria-checked={on} disabled={off} onClick={() => setLive(!live)} className={`group flex items-center gap-3 text-left disabled:cursor-not-allowed ${focusRing}`}>
+    <button type="button" role="switch" aria-checked={on} disabled={off} onClick={() => setLive(!live)} className="group flex items-center gap-3 text-left outline-none disabled:cursor-not-allowed">
       {svg}
       {text}
     </button>

@@ -32,7 +32,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## State rules (all three styles)
 - The six control states are exactly the assignment's: rest, hover, focus, pressed, selected, disabled, shown "where they apply". Every interactive control in a design system gets a row in its state grid, with a dash where a state does not apply (buttons and links have no selected; text fields have no pressed or selected; links have no disabled).
-- One rule per state inside a style, applied to every control; hover and pressed must never look alike.
+- One rule per state inside a style, applied to every control; hover, pressed and selected must never look alike, and selected carries a non-colour mark (a tick, a rule, a circle).
+- The focus ring goes around the control itself (the toggle track, the checkbox box), never around the control plus its label.
 - The site imports these same components, so its states match the design system by construction.
 
 ## Style specs (the five decisions; follow them exactly when building in a style)
@@ -54,6 +55,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Type pair: Old Standard TT for names, numbers and printed captions (caps, tracked); Libre Franklin for everything else. Both are revivals of type from the prints' own years. Text is key ink, never black.
 - Corners: square; a print has a 3px key-ink edge and sits on a cream mount.
 - Shadow: none; depth is a tint plate printed 2–3px off register.
+- States: rest = tint plate 2–3px off register; hover = the plate moves in under the control (its colour fills it); pressed = sinks 1px, a deeper tint, an inner shadow; focus = a solid 2px key-ink ring, offset 3px; selected = a solid tint plate plus a key mark (tick or rule); disabled = unprinted: dashed key line, muted text, struck through.
 - Motion: 600ms, `cubic-bezier(.45,0,.2,1)`; plates slide into register, colour fades in; nothing bounces or glows.
 - Signature: everything is made the way a photochrom was: flat colour plates slightly off register with a litho grain, a fine key line on top. Interaction brings plates into register. Primary button: loch with its tint plate off; hover puts it in register. Tabs: a celadon plate slides under the chosen one. Toggle: square track and knob; off, the knob's loch-tint plate sits off register on a blank track; on, it locks into register and the track is printed in loch tint. Filters: printed labels; chosen ones drop into register. Route card: a mounted print with a numbered caption ("No. 05. MILFORD TRACK, NEW ZEALAND.") and catalogue rows of facts. Progress: one plate per day. Loading: the print comes up plate by plate, sky first. Badge: an embossed stamp. Search: "No." and a field with a mount bevel. Modern photos get the photochrom treatment (greyscale, then the print's tints in colour blend) so they sit with the old prints.
 
