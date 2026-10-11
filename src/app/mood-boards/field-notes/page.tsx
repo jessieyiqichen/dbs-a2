@@ -279,11 +279,11 @@ export default function FieldNotesBoard() {
         <Overview />
 
         <h2 className="mt-14 font-[family-name:var(--fn-hand)] text-4xl">All {tiles.length} artifacts</h2>
-        <ul className="mt-6 columns-1 gap-6 sm:columns-2 lg:columns-3 xl:columns-4">
+        <ul className="mt-6 columns-2 gap-3 sm:gap-6 lg:columns-3 xl:columns-4">
           {tiles.map((t, i) => (
-            <li key={i} className="mb-6 break-inside-avoid">
+            <li key={i} className="mb-3 break-inside-avoid sm:mb-6">
               <figure
-                className={`relative bg-[#fbf7ec] p-3 shadow-[0_1px_2px_rgba(0,0,0,.12),0_8px_18px_rgba(60,45,20,.10)] transition duration-300 hover:-translate-y-1 hover:rotate-0 hover:shadow-[0_2px_4px_rgba(0,0,0,.14),0_16px_28px_rgba(60,45,20,.16)] ${tilts[i % tilts.length]}`}
+                className={`relative bg-[#fbf7ec] p-2 sm:p-3 shadow-[0_1px_2px_rgba(0,0,0,.12),0_8px_18px_rgba(60,45,20,.10)] transition duration-300 hover:-translate-y-1 hover:rotate-0 hover:shadow-[0_2px_4px_rgba(0,0,0,.14),0_16px_28px_rgba(60,45,20,.16)] ${tilts[i % tilts.length]}`}
               >
                 {t.kind === "made" && (
                   <span className="absolute right-2 top-1 text-sm text-[#2f4a6b]" title="Made for this board" aria-label="Made for this board">
@@ -297,12 +297,13 @@ export default function FieldNotesBoard() {
                     width={photo(t.file).w}
                     height={photo(t.file).h}
                     className="h-auto w-full"
-                    sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, 50vw"
                   />
                 ) : (
-                  made[t.id]
+                  // on a phone the tile is half the screen: the piece keeps its own layout and is shown smaller, like a thumbnail
+                  <div className="max-sm:[zoom:.62]">{made[t.id]}</div>
                 )}
-                <figcaption className="mt-2 font-[family-name:var(--fn-hand)] text-lg leading-tight text-black/70">{t.caption}</figcaption>
+                <figcaption className="mt-2 font-[family-name:var(--fn-hand)] text-base leading-tight text-black/70 sm:text-lg">{t.caption}</figcaption>
               </figure>
             </li>
           ))}

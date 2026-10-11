@@ -152,7 +152,7 @@ export function DetailPanel({ id }: { id: string }) {
 function StateCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <figure className="m-0 flex flex-col">
-      <div className="relative flex min-h-64 flex-1 flex-col items-center justify-center gap-3 bg-[#fbf7ec] p-5 text-center" style={{ backgroundImage: "repeating-linear-gradient(#fbf7ec 0 27px, #dfe5ec 27px 28px)" }}>
+      <div className="relative flex min-h-44 flex-1 flex-col items-center justify-center gap-3 max-sm:[zoom:.72] sm:min-h-64 bg-[#fbf7ec] p-5 text-center" style={{ backgroundImage: "repeating-linear-gradient(#fbf7ec 0 27px, #dfe5ec 27px 28px)" }}>
         {children}
       </div>
       <figcaption className={`${hand} mt-2 text-xl text-[#625e56]`}>{title}</figcaption>
@@ -173,7 +173,7 @@ function CircledMark({ children }: { children: React.ReactNode }) {
 
 export function UIStates() {
   return (
-    <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 sm:gap-6 xl:grid-cols-4">
       <StateCard title="Empty">
         <FieldIcon name="map" size={44} />
         <p className={`${hand} text-3xl text-[#3d3a34]`}>Nothing on this page yet</p>

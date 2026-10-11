@@ -57,10 +57,10 @@ const ROLES = [
 
 function ColourRoles() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
       {ROLES.map((r) => (
         <div key={r.role} className="rounded-[22px] border-[3px] border-[#1d2b53] bg-white p-3 shadow-[0_5px_0_#1d2b53]">
-          <div className="h-16 rounded-2xl border-[3px] border-[#1d2b53]" style={{ background: r.role === "Background" ? `linear-gradient(${TQ.sky}, ${TQ.skyMid}, ${TQ.skyLow})` : r.hex }} />
+          <div className="h-12 rounded-2xl border-[3px] border-[#1d2b53] sm:h-16" style={{ background: r.role === "Background" ? `linear-gradient(${TQ.sky}, ${TQ.skyMid}, ${TQ.skyLow})` : r.hex }} />
           <p className={`${display} mt-2 text-lg text-[#1d2b53]`}>{r.role}</p>
           <p className={`${ui} text-xs font-bold text-[#4a5a85]`}>{r.hex} · {r.use}</p>
           {r.checks.map(([label, fg, bg]) => (

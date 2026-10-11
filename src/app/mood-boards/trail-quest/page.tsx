@@ -270,7 +270,7 @@ const made: Record<string, React.ReactNode> = {
   locked: (
     <div className="relative overflow-hidden rounded-2xl border-[3px] border-[#1d2b53] bg-[#d5dbe8] p-4 pb-5">
       <p className="font-[family-name:var(--tq-display)] text-2xl font-bold text-[#4a5a85]">Half Dome</p>
-      <p className="text-sm font-extrabold text-[#4a5a85]">Cables up late May to mid-October</p>
+      <p className="pr-12 text-sm font-extrabold text-[#4a5a85]">Cables up late May to mid-October</p>
       <span className="absolute -right-2 top-2 rotate-12">
         <Icon name="lock" size={60} />
       </span>
@@ -513,10 +513,10 @@ export default function TrailQuestBoard() {
         </section>
 
         <h2 className={`${outlined} mt-16 text-5xl`}>All {tiles.length} artifacts</h2>
-        <ul className="mt-8 columns-1 gap-6 sm:columns-2 lg:columns-3 xl:columns-4">
+        <ul className="mt-8 columns-2 gap-3 sm:gap-6 lg:columns-3 xl:columns-4">
           {tiles.filter((t) => t.kind !== "map").map((t, i) => (
-            <li key={i} className="mb-6 break-inside-avoid">
-              <figure className={`relative p-3 transition-transform duration-200 [transition-timing-function:cubic-bezier(.34,1.56,.64,1)] hover:-translate-y-1.5 hover:-rotate-1 ${tile}`}>
+            <li key={i} className="mb-3 break-inside-avoid sm:mb-6">
+              <figure className={`relative p-2 sm:p-3 transition-transform duration-200 [transition-timing-function:cubic-bezier(.34,1.56,.64,1)] hover:-translate-y-1.5 hover:-rotate-1 ${tile}`}>
                 {t.kind !== "photo" && (
                   <span className="absolute -right-2 -top-3 z-10 grid h-7 w-7 place-items-center rounded-full border-2 border-[#1d2b53] bg-[#ffd23f] text-xs" title="Made for this board" aria-label="Made for this board">
                     ✦
@@ -529,12 +529,13 @@ export default function TrailQuestBoard() {
                     width={photo(t.file).w}
                     height={photo(t.file).h}
                     className="h-auto w-full rounded-2xl border-2 border-[#1d2b53]"
-                    sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, 50vw"
                   />
                 ) : t.kind === "made" ? (
-                  made[t.id]
+                  // on a phone the tile is half the screen: the piece keeps its own layout and is shown smaller, like a thumbnail
+                  <div className="max-sm:[zoom:.62]">{made[t.id]}</div>
                 ) : null}
-                <figcaption className="mt-2 text-sm font-extrabold leading-snug text-[#4a5a85]">{t.caption}</figcaption>
+                <figcaption className="mt-2 text-xs font-extrabold leading-snug text-[#4a5a85] sm:text-sm">{t.caption}</figcaption>
               </figure>
             </li>
           ))}

@@ -11,15 +11,19 @@ const LENGTH_TINT = { day: DW.aqua, days: DW.celadon, weeks: DW.stone } as const
 
 export function FilterBar({ f, setF, shown, total }: { f: Filters; setF: (f: Filters) => void; shown: number; total: number }) {
   return (
-    <div className="mt-8 border-y border-[#22333a]/20 py-4">
-      <div className="flex flex-wrap items-center gap-x-10 gap-y-4">
-        <div role="group" aria-label="Where" className="flex flex-wrap items-center gap-2">
-          <span className={`${t12} mr-1 text-[#4f5f66]`} aria-hidden="true">Where</span>
-          {REGIONS.map((r) => <PlateChip key={r} label={r} tint={REGION_TINT[r]} on={f.regions.includes(r)} onToggle={() => setF({ ...f, regions: toggle(f.regions, r) })} />)}
+    <div className="mt-6 border-y border-[#22333a]/20 py-4 sm:mt-8">
+      <div className="flex flex-wrap items-start gap-x-10 gap-y-4 sm:items-center">
+        <div role="group" aria-label="Where" className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <span className={`${t12} text-[#4f5f66] sm:mr-1`} aria-hidden="true">Where</span>
+          <div className="flex flex-wrap gap-2">
+            {REGIONS.map((r) => <PlateChip key={r} label={r} tint={REGION_TINT[r]} on={f.regions.includes(r)} onToggle={() => setF({ ...f, regions: toggle(f.regions, r) })} />)}
+          </div>
         </div>
-        <div role="group" aria-label="How long" className="flex flex-wrap items-center gap-2">
-          <span className={`${t12} mr-1 text-[#4f5f66]`} aria-hidden="true">How long</span>
-          {LENGTHS.map((l) => <PlateChip key={l.key} label={l.label} tint={LENGTH_TINT[l.key]} on={f.lengths.includes(l.key)} onToggle={() => setF({ ...f, lengths: toggle(f.lengths, l.key) })} />)}
+        <div role="group" aria-label="How long" className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <span className={`${t12} text-[#4f5f66] sm:mr-1`} aria-hidden="true">How long</span>
+          <div className="flex flex-wrap gap-2">
+            {LENGTHS.map((l) => <PlateChip key={l.key} label={l.label} tint={LENGTH_TINT[l.key]} on={f.lengths.includes(l.key)} onToggle={() => setF({ ...f, lengths: toggle(f.lengths, l.key) })} />)}
+          </div>
         </div>
         <PlateToggle label="No permit needed" checked={f.noPermit} onChange={(noPermit) => setF({ ...f, noPermit })} />
       </div>

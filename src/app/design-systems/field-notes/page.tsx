@@ -57,10 +57,10 @@ const ROLES = [
 
 function ColourRoles() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
       {ROLES.map((r) => (
         <div key={r.role} className="bg-[#fbf7ec] p-3">
-          <div className="relative h-20" style={{ background: r.hex }}>
+          <div className="relative h-12 sm:h-20" style={{ background: r.hex }}>
             <PencilFrame className="text-[#7d776b]" />
           </div>
           <p className={`${hand} mt-2 text-2xl font-semibold leading-none`}>{r.role}</p>

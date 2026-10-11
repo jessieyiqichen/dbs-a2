@@ -77,4 +77,5 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Photos: src/data/trailPhotos.json, 3–4 per trail in route order, one marked cover; modern photos get treatment A (Toned.tsx). Never use a photo whose recorded location is off the route.
 - Heights use elevation(h): when no source publishes one (Kumano), the site says "not published".
 - Filtering logic lives in src/app/trails/filters.ts, previous/next and cover choice in walks.ts; both are tested (npm test).
-- Desktop first; phone layout to be adapted after desktop is approved.
+- Phone (390): shrink blocks rather than only stacking them. Index cards turn into rows (print beside caption, five walks a screen); filter labels sit above their chips; figures never break inside a number. Mood boards go two columns, made pieces scaled down whole (zoom) so their own layout never squeezes; design systems put colour and UI-state cards two to a row. Only /trails must be responsive by the brief; the rest must simply not break.
+- Photochrom scans on the site are cropped to the picture (scripts/crop_prints.py: the printed mount, rounded corners and caption number removed) so every photo meets its key line the same way; the mood board keeps the full scans.

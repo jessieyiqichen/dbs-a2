@@ -23,11 +23,11 @@ export default function TrailsIndex() {
 
   return (
     <div className="mx-auto max-w-6xl px-5">
-      <header className="mt-14 grid grid-cols-1 items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
+      <header className="mt-8 grid grid-cols-1 items-center gap-8 sm:mt-14 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
         <div>
           <p className={`${t12} text-[#4f5f66]`}>A guide to twelve famous walks</p>
           <h1 className={`${t96} mt-4`}>Twelve Trails</h1>
-          <p className={`${t24} mt-6 max-w-md italic text-[#4f5f66]`}>From a day on a volcano to a month across Spain: twelve walks, set out like a box of old travel prints.</p>
+          <p className={`${t24} mt-4 max-w-md italic text-[#4f5f66] sm:mt-6`}>From a day on a volcano to a month across Spain: twelve walks, set out like a box of old travel prints.</p>
           <p className="mt-8"><PlateLink href="#walks" size="note">See the twelve walks ↓</PlateLink></p>
         </div>
         <figure className="m-0">
@@ -38,7 +38,7 @@ export default function TrailsIndex() {
         </figure>
       </header>
 
-      <section id="walks" aria-labelledby="walks-title" className="mt-28 scroll-mt-16">
+      <section id="walks" aria-labelledby="walks-title" className="mt-16 scroll-mt-16 sm:mt-28">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
           <h2 id="walks-title" className={t48}>The twelve walks</h2>
           <p className={`${t14} text-[#4f5f66]`}>Choose a print to read about the walk.</p>
@@ -53,7 +53,7 @@ export default function TrailsIndex() {
             <SecondaryButton onClick={() => setFilters(NO_FILTERS)}>Clear filters</SecondaryButton>
           </div>
         ) : (
-          <ul className="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:mt-10 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-3">
             {shown.map((h) => (
               <li key={h.id} className="flex">
                 <PrintCard

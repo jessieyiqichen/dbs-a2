@@ -389,7 +389,7 @@
  ],
  "milford": [
   {
-   "file": "/moodboards/dawn/lake-te-anau.jpg",
+   "file": "/trails/pc-lake-te-anau.jpg",
    "kind": "photochrom",
    "alt": "Lake Te Anau, where the track begins, in a photochrom print",
    "place": "Lake Te Anau",
@@ -397,12 +397,12 @@
    "date": "c. 1890–1900",
    "license": "No known restrictions (Library of Congress)",
    "source": "https://www.loc.gov/item/2017658077/",
-   "w": 1024,
-   "h": 754,
+   "w": 962,
+   "h": 660,
    "cover": false
   },
   {
-   "file": "/moodboards/dawn/clinton-river.jpg",
+   "file": "/trails/pc-clinton-river.jpg",
    "kind": "photochrom",
    "alt": "The Clinton River, the track's first valley, in a photochrom print",
    "place": "Clinton River",
@@ -410,12 +410,12 @@
    "date": "c. 1890–1900",
    "license": "No known restrictions (Library of Congress)",
    "source": "https://www.loc.gov/item/2017658066/",
-   "w": 1024,
-   "h": 756,
+   "w": 971,
+   "h": 666,
    "cover": true
   },
   {
-   "file": "/moodboards/dawn/mitre-peak.jpg",
+   "file": "/trails/pc-mitre-peak.jpg",
    "kind": "photochrom",
    "alt": "Mitre Peak in Milford Sound, at the end of the track, in a photochrom print",
    "place": "Mitre Peak, Milford Sound",
@@ -423,8 +423,8 @@
    "date": "c. 1890–1900",
    "license": "No known restrictions (Library of Congress)",
    "source": "https://www.loc.gov/item/2017658061/",
-   "w": 1024,
-   "h": 752,
+   "w": 969,
+   "h": 663,
    "cover": false
   }
  ],
@@ -454,7 +454,7 @@
    "cover": false
   },
   {
-   "file": "/moodboards/dawn/chamonix-floria.jpg",
+   "file": "/trails/pc-chamonix-floria.jpg",
    "kind": "photochrom",
    "alt": "The Chamonix valley from the Aiguille du Floria, in a photochrom print",
    "place": "The Chamonix valley",
@@ -462,12 +462,12 @@
    "date": "c. 1890–1900",
    "license": "No known restrictions (Library of Congress)",
    "source": "https://www.loc.gov/item/2001697618/",
-   "w": 1024,
-   "h": 758,
+   "w": 923,
+   "h": 616,
    "cover": false
   },
   {
-   "file": "/moodboards/dawn/mont-blanc-flegere.jpg",
+   "file": "/trails/pc-mont-blanc-flegere.jpg",
    "kind": "photochrom",
    "alt": "The Mont Blanc range from La Flégère, in a photochrom print",
    "place": "La Flégère",
@@ -475,8 +475,8 @@
    "date": "c. 1890–1900",
    "license": "No known restrictions (Library of Congress)",
    "source": "https://www.loc.gov/item/2001697619/",
-   "w": 1024,
-   "h": 735,
+   "w": 933,
+   "h": 582,
    "cover": true
   }
  ],
@@ -494,7 +494,7 @@
    "cover": false
   },
   {
-   "file": "/moodboards/dawn/loch-lomond-tarbet.jpg",
+   "file": "/trails/pc-loch-lomond-tarbet.jpg",
    "kind": "photochrom",
    "alt": "Loch Lomond from Tarbet, in a photochrom print",
    "place": "Loch Lomond",
@@ -502,8 +502,8 @@
    "date": "c. 1890–1900",
    "license": "No known restrictions (Library of Congress)",
    "source": "https://www.loc.gov/item/2002695019/",
-   "w": 1024,
-   "h": 765,
+   "w": 959,
+   "h": 669,
    "cover": true
   },
   {
@@ -519,7 +519,7 @@
    "cover": false
   },
   {
-   "file": "/moodboards/dawn/fort-william-ben-nevis.jpg",
+   "file": "/trails/pc-fort-william-ben-nevis.jpg",
    "kind": "photochrom",
    "alt": "Fort William and Ben Nevis, where the way ends, in a photochrom print",
    "place": "Fort William and Ben Nevis",
@@ -527,8 +527,8 @@
    "date": "c. 1890–1900",
    "license": "No known restrictions (Library of Congress)",
    "source": "https://www.loc.gov/item/2001705996/",
-   "w": 1024,
-   "h": 764,
+   "w": 960,
+   "h": 680,
    "cover": false
   }
  ],
@@ -570,7 +570,7 @@
    "cover": false
   },
   {
-   "file": "/moodboards/dawn/south-dome.jpg",
+   "file": "/trails/pc-south-dome.jpg",
    "kind": "photochrom",
    "alt": "Half Dome, then called South Dome, in a photochrom print",
    "place": "South Dome",
@@ -578,8 +578,8 @@
    "date": "1898",
    "license": "No known restrictions (Library of Congress)",
    "source": "https://www.loc.gov/item/2008678186/",
-   "w": 778,
-   "h": 1024,
+   "w": 715,
+   "h": 913,
    "cover": true
   }
  ]

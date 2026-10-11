@@ -79,7 +79,7 @@ function MoreWalks({ id }: { id: string }) {
   const nb = neighbours(hikes, id);
   if (!nb) return null;
   return (
-    <nav aria-label="More walks" className="mt-20 grid grid-cols-1 gap-6 sm:grid-cols-2">
+    <nav aria-label="More walks" className="mt-14 sm:mt-20 grid grid-cols-1 gap-6 sm:grid-cols-2">
       {([["← Previous walk", nb.prev], ["Next walk →", nb.next]] as const).map(([label, w]) => (
         <NeighbourLink key={label} href={`/trails/${w.id}/`} label={label} name={w.name} photo={photos[w.id][coverIndex(photos[w.id])]} />
       ))}
@@ -98,7 +98,7 @@ export default function TrailDetail({ id }: { id: string }) {
 
   return (
     <article aria-labelledby="walk-title" className="mx-auto max-w-6xl px-5">
-      <p className="mt-8"><PlateLink href="/trails/#walks" size="note">← All twelve walks</PlateLink></p>
+      <p className="mt-6 sm:mt-8"><PlateLink href="/trails/#walks" size="note">← All twelve walks</PlateLink></p>
 
       <div className="mt-6 grid grid-cols-1 gap-10 lg:grid-cols-[1.45fr_1fr] lg:items-end">
         <figure className="m-0 min-w-0">
@@ -117,12 +117,12 @@ export default function TrailDetail({ id }: { id: string }) {
         </div>
       </div>
 
-      <div className="mt-24 grid grid-cols-1 gap-14 lg:grid-cols-[1.45fr_1fr]">
+      <div className="mt-14 grid grid-cols-1 gap-14 sm:mt-24 lg:grid-cols-[1.45fr_1fr]">
         <div className="min-w-0"><Details h={h} /></div>
         <Plates list={own} onOpen={setViewAt} />
       </div>
 
-      <section aria-labelledby="sources-h" className={`${t14} mt-20 border-t border-[#22333a]/20 pt-6 text-[#4f5f66]`}>
+      <section aria-labelledby="sources-h" className={`${t14} mt-14 sm:mt-20 border-t border-[#22333a]/20 pt-6 text-[#4f5f66]`}>
         <h2 id="sources-h" className={`${t12} text-[#22333a]`}>Sources</h2>
         <ul className="mt-3 grid gap-x-8 gap-y-2 sm:grid-cols-2">
           {[...new Set([...h.sources, ...introSources(h.id)])].map((s) => (

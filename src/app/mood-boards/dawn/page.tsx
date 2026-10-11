@@ -214,10 +214,10 @@ export default function DawnBoard() {
         <Overview />
 
         <h2 className="mt-16 font-[family-name:var(--dw-display)] text-5xl">All {tiles.length} artifacts</h2>
-        <ul className="mt-6 columns-1 gap-5 sm:columns-2 lg:columns-3 xl:columns-4">
+        <ul className="mt-6 columns-2 gap-3 sm:gap-5 lg:columns-3 xl:columns-4">
           {tiles.map((t, i) => (
-            <li key={i} className="mb-5 break-inside-avoid">
-              <figure className="relative m-0 border border-[#22333a]/10 bg-[#f6f9f7] p-3">
+            <li key={i} className="mb-3 break-inside-avoid sm:mb-5">
+              <figure className="relative m-0 border border-[#22333a]/10 bg-[#f6f9f7] p-2 sm:p-3">
                 {t.kind === "made" && (
                   <span className="absolute right-2.5 top-1.5 text-xs text-[#2c5868]" title="Made for this board" aria-label="Made for this board">✦</span>
                 )}
@@ -228,12 +228,13 @@ export default function DawnBoard() {
                     width={print(t.file).w}
                     height={print(t.file).h}
                     className="h-auto w-full border-[3px] border-[#22333a]"
-                    sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, 50vw"
                   />
                 ) : (
-                  made[t.id]
+                  // on a phone the tile is half the screen: the piece keeps its own layout and is shown smaller, like a thumbnail
+                  <div className="max-sm:[zoom:.62]">{made[t.id]}</div>
                 )}
-                <figcaption className="mt-2.5 text-sm leading-snug text-[#4f5f66]">{t.caption}</figcaption>
+                <figcaption className="mt-2 text-xs leading-snug text-[#4f5f66] sm:mt-2.5 sm:text-sm">{t.caption}</figcaption>
               </figure>
             </li>
           ))}

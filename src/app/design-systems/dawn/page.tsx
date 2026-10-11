@@ -65,15 +65,15 @@ const ROLES = [
 
 function ColourRoles() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
       {ROLES.map((r) => (
         <div key={r.role} className="bg-[#f6f9f7] p-3">
           {r.role === "Tints" ? (
-            <div className="grid h-20 grid-cols-4 border border-[#22333a]">
+            <div className="grid h-12 grid-cols-4 border border-[#22333a] sm:h-20">
               {[DW.celadon, DW.aqua, DW.loch, DW.stone].map((c) => <span key={c} style={{ background: c }} />)}
             </div>
           ) : (
-            <div className="h-20 border border-[#22333a] shadow-[3px_3px_0_0_#c9dcdc]" style={{ background: r.hex }} />
+            <div className="h-12 border border-[#22333a] shadow-[3px_3px_0_0_#c9dcdc] sm:h-20" style={{ background: r.hex }} />
           )}
           <p className={`${display} mt-3 text-xl leading-none`}>{r.role}</p>
           <p className={`${ui} mt-1 text-xs text-[#4f5f66]`}>{r.role === "Tints" ? `${DW.celadon} ${DW.aqua} ${DW.loch} ${DW.stone}` : r.hex} · {r.use}</p>

@@ -177,7 +177,7 @@ export function AltitudeBar({ id = "inca-trail", at = 0.75 }: { id?: string; at?
 function StateCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <figure className="m-0 flex flex-col">
-      <div className="flex min-h-64 flex-1 flex-col items-center justify-center gap-3 rounded-[22px] border-[3px] border-[#1d2b53] bg-white p-5 text-center shadow-[0_6px_0_#1d2b53]">{children}</div>
+      <div className="flex min-h-44 flex-1 flex-col items-center justify-center gap-3 max-sm:[zoom:.72] sm:min-h-64 rounded-[22px] border-[3px] border-[#1d2b53] bg-white p-5 text-center shadow-[0_6px_0_#1d2b53]">{children}</div>
       <figcaption className={`${ui} mt-3 text-sm font-black uppercase tracking-widest text-[#1d2b53]`}>{title}</figcaption>
     </figure>
   );
@@ -185,7 +185,7 @@ function StateCard({ title, children }: { title: string; children: React.ReactNo
 
 export function UIStates() {
   return (
-    <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 sm:gap-6 xl:grid-cols-4">
       <StateCard title="Empty">
         <Icon name="chest" size={56} />
         <p className={`${display} text-2xl text-[#1d2b53]`}>No levels here yet</p>

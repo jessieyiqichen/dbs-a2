@@ -21,21 +21,27 @@ export function Caption({ h }: { h: Hike }) {
 
 /** Card: a mounted print. The print and its caption are one link; `footer` (a small button) sits under it, outside
  *  the link. Hover lifts an aqua plate and brings the colour up; press sinks the mount. */
-export function PrintCard({ id, photo, href = "#card", footer, sizes = "(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" }: { id: string; photo: TrailPhoto; href?: string; footer?: React.ReactNode; sizes?: string }) {
+export function PrintCard({ id, photo, href = "#card", footer, sizes = "(min-width: 1024px) 360px, (min-width: 640px) 50vw, 120px" }: { id: string; photo: TrailPhoto; href?: string; footer?: React.ReactNode; sizes?: string }) {
   const h = byId(id);
+  // On a phone the print sits beside its caption, so a screen shows several walks; from 640px it stands above it.
   const inner = (
     <>
-      <TonedPhoto photo={photo} sizes={sizes} className={`aspect-[4/3] border-[3px] border-[#22333a] ${colourUp}`} />
-      <span className={`${t12caption} mt-4 block text-[#4f5f66]`}>{no(h)}. {h.country.join(", ")}</span>
+      <TonedPhoto photo={photo} sizes={sizes} className={`row-span-3 aspect-[4/3] self-start border-2 border-[#22333a] sm:border-[3px] ${colourUp}`} />
+      <span className={`${t12caption} block text-[#4f5f66] sm:mt-4`}>{no(h)}. {h.country.join(", ")}</span>
       <span id={`${h.id}-card`} className={`${t24} mt-1 block decoration-[#8eaaa6] decoration-2 underline-offset-4 group-hover:underline`}>{h.name}</span>
-      <span className={`${t14} mt-2 block text-[#4f5f66]`}>{formatRange(h.distance_km)} km · {formatRange(h.days)} {h.days[1] === 1 ? "day" : "days"} · {elevation(h)}</span>
+      <span className={`${t14} mt-2 block text-[#4f5f66]`}>
+        {/* each figure stays whole when the line wraps */}
+        {[`${formatRange(h.distance_km)} km`, `${formatRange(h.days)} ${h.days[1] === 1 ? "day" : "days"}`, elevation(h)].map((x, i) => (
+          <span key={x}>{i > 0 && " · "}<span className="whitespace-nowrap">{x}</span></span>
+        ))}
+      </span>
     </>
   );
-  const cls = `group relative block ${focusRing}`;
+  const cls = `group relative grid grid-cols-[7.5rem_1fr] content-start gap-x-3 sm:block ${focusRing}`;
   return (
-    <article aria-labelledby={`${h.id}-card`} className={`flex w-full flex-col p-3.5 ${card.rest} ${cardLiveHas}`}>
+    <article aria-labelledby={`${h.id}-card`} className={`flex w-full flex-col p-3 sm:p-3.5 ${card.rest} ${cardLiveHas}`}>
       {href.startsWith("/") ? <Link href={href} className={cls}>{inner}</Link> : <a href={href} className={cls}>{inner}</a>}
-      {footer && <div className="mt-auto pt-4">{footer}</div>}
+      {footer && <div className="mt-auto pl-[8.25rem] pt-3 sm:pl-0 sm:pt-4">{footer}</div>}
     </article>
   );
 }
@@ -126,7 +132,7 @@ export function DetailPanel({ id }: { id: string }) {
 function StateCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <figure className="m-0 flex flex-col">
-      <div className="flex min-h-64 flex-1 flex-col items-center justify-center gap-3 bg-[#f6f9f7] p-5 text-center">{children}</div>
+      <div className="flex min-h-44 flex-1 flex-col items-center justify-center gap-3 max-sm:[zoom:.72] sm:min-h-64 bg-[#f6f9f7] p-5 text-center">{children}</div>
       <figcaption className={`${caps} mt-2 text-[#4f5f66]`}>{title}</figcaption>
     </figure>
   );
@@ -134,7 +140,7 @@ function StateCard({ title, children }: { title: string; children: React.ReactNo
 
 export function UIStates() {
   return (
-    <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 sm:gap-6 xl:grid-cols-4">
       <StateCard title="Empty">
         <span className="grid h-20 w-28 place-items-center border-[1.5px] border-dashed border-[#4f5f66]"><PlateIcon name="camera" size={36} /></span>
         <p className={`${display} text-2xl text-[#22333a]`}>No prints in this drawer</p>
