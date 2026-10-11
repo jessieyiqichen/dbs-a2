@@ -28,9 +28,10 @@ export const focusWithin = "dw-crop dw-within relative";
 const mark = "linear-gradient(#22333a,#22333a)";
 /** Crop-mark focus, shared by every Dawn control. Render once per page. */
 export const DAWN_FOCUS_CSS = `
-.dw-crop::after{content:"";position:absolute;inset:-7px;pointer-events:none;opacity:0;transition:opacity 300ms cubic-bezier(.45,0,.2,1);
+.dw-crop::after{content:"";position:absolute;inset:-7px;pointer-events:none;display:none;
 background:${mark} top left/10px 2px,${mark} top left/2px 10px,${mark} top right/10px 2px,${mark} top right/2px 10px,
 ${mark} bottom left/10px 2px,${mark} bottom left/2px 10px,${mark} bottom right/10px 2px,${mark} bottom right/2px 10px;background-repeat:no-repeat}
-.dw-crop:focus-visible::after,.dw-crop.is-focus::after,:focus-visible>.dw-crop::after,.peer:focus-visible~.dw-crop::after,.dw-within:focus-within::after{opacity:1}
-@media (prefers-reduced-motion: reduce){.dw-crop::after{transition:none}}
+.dw-crop:focus-visible::after,.dw-crop.is-focus::after,:focus-visible>.dw-crop::after,.peer:focus-visible~.dw-crop::after,.dw-within:focus-within::after{display:block;animation:dw-crop-in 300ms cubic-bezier(.45,0,.2,1)}
+@keyframes dw-crop-in{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion: reduce){.dw-crop::after{animation:none!important}}
 `;

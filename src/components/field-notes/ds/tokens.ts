@@ -32,12 +32,13 @@ const stroke = encodeURIComponent(
 );
 /** Scribble focus, shared by every Field Notes control. Render once per page. */
 export const FIELD_FOCUS_CSS = `
-.fn-scrib::after{content:"";position:absolute;left:-4px;right:-4px;bottom:-13px;height:10px;pointer-events:none;opacity:0;
-background:url("data:image/svg+xml,${stroke}") center/100% 100% no-repeat;transition:opacity 300ms ease-out}
-.fn-scrib:focus-visible::after,.fn-scrib.is-focus::after,:focus-visible>.fn-scrib::after,.peer:focus-visible~.fn-scrib::after,.fn-within:focus-within::after{opacity:1}
+.fn-scrib::after{content:"";position:absolute;left:-4px;right:-4px;bottom:-13px;height:10px;pointer-events:none;display:none;
+background:url("data:image/svg+xml,${stroke}") center/100% 100% no-repeat}
+.fn-scrib:focus-visible::after,.fn-scrib.is-focus::after,:focus-visible>.fn-scrib::after,.peer:focus-visible~.fn-scrib::after,.fn-within:focus-within::after{display:block;animation:fn-scrib-in 300ms ease-out}
+@keyframes fn-scrib-in{from{opacity:0}to{opacity:1}}
 .fn-line::after{bottom:-4px}
 .fn-inside::after{left:10px;right:10px;bottom:2px;height:8px}
 .fn-line:focus-visible,.fn-line.is-focus{border-bottom-color:transparent!important;text-decoration-color:transparent!important}
 .fn-line.is-focus :is(input,select),.fn-within:focus-within :is(input,select){border-bottom-color:transparent!important}
-@media (prefers-reduced-motion: reduce){.fn-scrib::after{transition:none}}
+@media (prefers-reduced-motion: reduce){.fn-scrib::after{animation:none!important}}
 `;

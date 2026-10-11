@@ -64,4 +64,5 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Type pair: Fredoka, bold, outlined in navy, for titles, numbers and buttons; Nunito Black/ExtraBold for everything else.
 - Corners: 16–26px, chunky; round icon buttons; every shape has a 3px navy outline.
 - Shadow: a hard bottom depth shadow with no blur (`0 6px 0` a darker shade, then navy) that collapses when pressed; a white gloss band on buttons.
+- States: rest = standing on a hard ground shadow; hover = lifts 2px, brightens, a shine sweeps across; pressed = drops onto its shadow and squashes; selected = grape, popped up (chips, tabs), grass with a white tick (checkbox, toggle), a grape gem (radio); disabled = locked: grey face, grey outline, a lock icon; focus = game marks on the control (choice pending: sparkles or a bobbing arrow).
 - Motion: snappy, 150–200ms; buttons press down and squash; rewards pop with overshoot (`cubic-bezier(.34,1.56,.64,1)`); idle loops (clouds, pulse on the next level, stripes on bars) stop under reduced motion.
