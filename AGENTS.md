@@ -33,11 +33,12 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## Style specs (the five decisions; follow them exactly when building in a style)
 
 ### Field Notes — Handmade, Curious, Warm
-- Palette roles: paper page `#f7f1e3`, kraft cards `#e9dcc0`, graphite text `#55524b` (6.92:1 on paper, 5.74:1 on kraft), muted text `#625e56` (5.73:1 / 4.75:1), ink-blue lines and links `#2f4a6b` (8.06:1), moss only for the primary action: button fill `#4f6a3f` with paper text (5.66:1); light moss `#6f8a5b` for large areas and decoration only (3.59:1, never behind body text).
+- Palette roles: background paper `#f7f1e3`; surface `#fbf7ec` (cards, panels); kraft `#e9dcc0` (unselected tabs, hover washes); text dark graphite `#3d3a34` (10.06:1 on paper, never black); muted `#625e56` (5.73:1); border pencil `#7d776b` (3.95:1, for controls); accent moss `#4f6a3f` only for the primary action, paper text (5.38:1), hover `#3f5732`, pressed `#36492b`; ink blue `#2f4a6b` for links, focus and margin notes (8.06:1); light moss `#6f8a5b` for watercolour only, never behind text. No red or orange: errors use ink blue and a circled "!", never colour alone.
 - Type pair: Caveat for titles and labels; Crimson Pro for names, numbers and reading. Text is graphite, never black.
 - Corners: 2px, paper edges, not rounded.
 - Shadow: low and soft, like paper on a desk (`0 1px 2px rgba(0,0,0,.12), 0 8px 18px rgba(60,45,20,.10)`).
 - Motion: 300ms, ease-out, settles straight; no bounce.
+- Focus: a dashed ink-blue ring offset 4px, like a pencil loop in the margin. Disabled: dashed pencil line, muted text, struck through where it is a word.
 - Signature: everything is something from a trail notebook. Icons: a wobbly graphite pencil line, hatching on the side away from the light, one small watercolour dab (moss or ink blue). Tabs: index tabs on the notebook's edge. Single choice: the answer circled in pencil. Slider: a pencil ruler with a paperclip thumb. Toggle: on is a moss wash bleeding into a pencilled pill. Search: one ruled line. Badge: a perforated stamp. Progress: the walked part of the route traced over in pencil with a moss wash, a hut doodle at each night, a curved arrow for "you are here", the done day ticked and today circled. Loading: a mountain sketched in loose strokes, then hatching, then the sun. Palette: a paint chart (watercolour in pencilled boxes). Tape labels: torn ends. No perfect shapes: lines overshoot where they meet, curves wobble, marks are ticks, loops and arrows, never a geometric X, a ruled box or a smooth bell curve.
 
 ### Dawn — Quiet, Light, Hopeful (Photochrom: hand-coloured travel prints, c. 1890–1900)
