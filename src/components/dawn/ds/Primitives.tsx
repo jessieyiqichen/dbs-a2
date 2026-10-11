@@ -186,7 +186,7 @@ export function RadioSwatch({ force, label = "A few days" }: { force: ControlSta
 
 /** Count badge: a number set in a small key-line box, like a plate number. */
 export function CountBadge({ n }: { n: number }) {
-  return <span className={`${display} inline-grid h-8 min-w-8 place-items-center border border-[#22333a] bg-[#f6f9f7] px-1.5 text-lg leading-none text-[#22333a] shadow-[2px_2px_0_0_#c9dcdc]`}>{n}</span>;
+  return <span className={`${display} inline-grid h-8 min-w-8 place-items-center border border-[#22333a] bg-[#f6f9f7] px-1.5 text-[17px] leading-none text-[#22333a] shadow-[2px_2px_0_0_#c9dcdc]`}>{n}</span>;
 }
 
 /** Search: "No." then the field, as in a print catalogue. */

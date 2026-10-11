@@ -6,7 +6,8 @@ import { DATA_AS_OF, hikes } from "@/data/hikes";
 import rawPhotos from "@/data/trailPhotos.json";
 import { TonedPhoto, creditLine, type TrailPhoto } from "@/components/dawn/Toned";
 import { CountBadge } from "@/components/dawn/ds/Primitives";
-import { caps, display, focusRing, ui } from "@/components/dawn/ds/tokens";
+import { focusRing } from "@/components/dawn/ds/tokens";
+import { t12, t14, t24, t96 } from "./type";
 import { NO_FILTERS, applyFilters, toggle, type Filters } from "./filters";
 import { Contents } from "./Contents";
 import { Chapter } from "./Chapter";
@@ -25,7 +26,7 @@ export default function TrailsApp() {
 
   return (
     <div className="mx-auto max-w-6xl px-5 pb-20 pt-8">
-      <div className={`${ui} flex items-center justify-between gap-4 text-sm`}>
+      <div className={`${t14} flex items-center justify-between gap-4`}>
         <Link href="/" className="text-[#4f5f66] underline-offset-4 hover:text-[#22333a] hover:underline">← Hub</Link>
         <p className="flex items-center gap-2" aria-live="polite">
           <CountBadge n={list.length} />
@@ -35,18 +36,18 @@ export default function TrailsApp() {
 
       <header className="mt-10 grid grid-cols-1 items-end gap-10 lg:grid-cols-[1fr_1.15fr]">
         <div>
-          <p className={`${caps} text-[#4f5f66]`}>A guide to twelve famous walks</p>
-          <h1 className={`${display} mt-3 text-7xl leading-[0.95] sm:text-8xl`}>Twelve Trails</h1>
-          <p className={`${display} mt-6 max-w-md text-2xl italic leading-snug text-[#4f5f66]`}>
+          <p className={`${t12} text-[#4f5f66]`}>A guide to twelve famous walks</p>
+          <h1 className={`${t96} mt-3`}>Twelve Trails</h1>
+          <p className={`${t24} mt-6 max-w-md italic text-[#4f5f66]`}>
             From a day on a volcano to a month across Spain: twelve walks, set out like a box of old travel prints.
           </p>
-          <a href="#contents" className={`${ui} relative mt-8 inline-block border-b-2 border-[#22333a] pb-1 text-sm font-semibold uppercase tracking-[0.16em] hover:border-[#2c5868] hover:text-[#2c5868] ${focusRing}`}>
+          <a href="#contents" className={`${t12} relative mt-8 inline-block border-b-2 border-[#22333a] pb-1 hover:border-[#2c5868] hover:text-[#2c5868] active:translate-y-px ${focusRing}`}>
             Open the contents ↓
           </a>
         </div>
         <figure className="m-0 bg-[#f6f9f7] p-3.5">
           <TonedPhoto photo={OPENING} sizes="(min-width: 1024px) 640px, 100vw" priority className="aspect-[4/3] border-[3px] border-[#22333a]" />
-          <figcaption className={`${ui} mt-2 text-xs text-[#4f5f66]`}>{creditLine(OPENING)}</figcaption>
+          <figcaption className={`${t14} mt-2 text-[#4f5f66]`}>{creditLine(OPENING)}</figcaption>
         </figure>
       </header>
 
@@ -78,10 +79,10 @@ export default function TrailsApp() {
         onClose={() => setOpenId(null)}
       />
 
-      <footer className={`${ui} border-t border-[#22333a] pt-6 text-sm text-[#4f5f66]`}>
-        <h2 className={`${display} text-2xl text-[#22333a]`}>Before you go</h2>
+      <footer className={`${t14} border-t border-[#22333a] pt-6 text-[#4f5f66]`}>
+        <h2 className={`${t24} text-[#22333a]`}>Before you go</h2>
         <p className="mt-2 max-w-prose">
-          Facts were checked against official park, trail and tourism sources in {DATA_AS_OF}; where sources disagree, both numbers are shown, and each chapter lists its
+          Facts were checked against official park, trail and tourism sources in {DATA_AS_OF}; where sources disagree, both numbers are shown, and each walk&apos;s plates panel lists its
           sources and notes. Rules, closures and permits change, so check them before you travel. Your list lasts for this visit only: nothing is stored.
         </p>
         <p className="mt-2 max-w-prose">

@@ -4,8 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import type { Hike } from "@/data/hikes";
 import { TonedPhoto, creditLine, type TrailPhoto } from "@/components/dawn/Toned";
 import { PrimaryButton } from "@/components/dawn/ds/Primitives";
-import { caps, display, focusRing, slow, ui } from "@/components/dawn/ds/tokens";
-import { plateNo } from "./plate";
+import { focusRing, slow } from "@/components/dawn/ds/tokens";
+import { plateNo, sourceLabel } from "./plate";
+import { introSources } from "@/data/intros";
+import { t12, t12caption, t14, t48 } from "./type";
 
 function Gallery({ photos, title }: { photos: TrailPhoto[]; title: React.ReactNode }) {
   const [at, setAt] = useState(() => Math.max(0, photos.findIndex((p) => p.cover)));
@@ -20,13 +22,13 @@ function Gallery({ photos, title }: { photos: TrailPhoto[]; title: React.ReactNo
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.6fr_1fr]">
       <figure className="m-0 min-w-0">
         <TonedPhoto photo={p} sizes="(min-width: 1024px) 680px, 100vw" priority className="aspect-[4/3] border-[3px] border-[#22333a]" />
-        <figcaption className={`${ui} mt-2 text-sm text-[#4f5f66]`} aria-live="polite">
+        <figcaption className={`${t14} mt-2 text-[#4f5f66]`} aria-live="polite">
           <span className="font-semibold text-[#22333a]">Plate {at + 1} of {photos.length}</span> · {creditLine(p)}
         </figcaption>
       </figure>
       <div className="min-w-0">
         {title}
-        <p className={`${caps} mt-6 text-[11px] text-[#4f5f66]`}>In route order · arrow keys move</p>
+        <p className={`${t12} mt-6 text-[#4f5f66]`}>In route order · arrow keys move</p>
         <div role="group" aria-label="Plates of this walk" className="mt-2 grid grid-cols-2 gap-3" onKeyDown={(e) => (e.key === "ArrowRight" || e.key === "ArrowDown" ? (e.preventDefault(), go(at + 1)) : e.key === "ArrowLeft" || e.key === "ArrowUp" ? (e.preventDefault(), go(at - 1)) : undefined)}>
           {photos.map((ph, i) => (
             <button
@@ -41,7 +43,7 @@ function Gallery({ photos, title }: { photos: TrailPhoto[]; title: React.ReactNo
               <span className={`block border-2 ${i === at ? "border-[#22333a] shadow-[3px_3px_0_0_#c3d6c4]" : "border-[#6f8287]/40 opacity-75 hover:opacity-100 hover:shadow-[3px_3px_0_0_#c9dcdc]"} ${slow}`}>
                 <TonedPhoto photo={ph} sizes="160px" className="aspect-[4/3]" />
               </span>
-              <span className={`${ui} mt-1 block truncate text-xs ${i === at ? "font-semibold text-[#22333a]" : "text-[#4f5f66]"}`}>{i + 1}. {ph.place}</span>
+              <span className={`${t14} mt-1 block truncate ${i === at ? "font-semibold text-[#22333a]" : "text-[#4f5f66]"}`}>{i + 1}. {ph.place}</span>
             </button>
           ))}
         </div>
@@ -68,17 +70,26 @@ export function TrailDialog({ h, n, photos, inList, onToggleList, onClose }: { h
     >
       {h && (
         <div key={h.id} className="relative p-5 pt-14 sm:p-7 sm:pt-14">
-          <button type="button" onClick={() => ref.current?.close()} className={`${caps} absolute right-5 top-4 z-10 border border-[#22333a] bg-[#f6f9f7] px-3 py-1.5 text-[#22333a] hover:bg-[#c3d6c4] active:translate-y-px ${focusRing}`}>
+          <button type="button" onClick={() => ref.current?.close()} className={`${t12} absolute right-5 top-4 z-10 border border-[#22333a] bg-[#f6f9f7] px-3 py-1.5 text-[#22333a] hover:bg-[#c3d6c4] active:translate-y-px ${focusRing}`}>
             Close
           </button>
           <Gallery
             photos={photos}
             title={
               <>
-                <p className={`${display} text-[13px] uppercase tracking-[0.12em] text-[#4f5f66]`}>{plateNo(n)}. {h.country.join(", ")}</p>
-                <h2 id="plates-title" className={`${display} mt-1 text-4xl leading-tight`}>{h.name}</h2>
+                <p className={`${t12caption} text-[#4f5f66]`}>{plateNo(n)}. {h.country.join(", ")}</p>
+                <h2 id="plates-title" className={`${t48} mt-2`}>{h.name}</h2>
                 <div className="mt-5 flex flex-wrap items-center gap-4">
                   <PrimaryButton aria-pressed={inList} onClick={onToggleList}>{inList ? "On your list ✓" : "Add to my list"}</PrimaryButton>
+                </div>
+                <div className={`${t14} mt-6 text-[#4f5f66]`}>
+                  <p className={`${t12} text-[#22333a]`}>Sources</p>
+                  <ul className="mt-1 space-y-0.5">
+                    {[...new Set([...h.sources, ...introSources(h.id)])].map((s) => (
+                      <li key={s}><a href={s} target="_blank" rel="noreferrer" className={`relative underline decoration-[#8eaaa6] underline-offset-2 hover:text-[#22333a] hover:decoration-[#22333a] ${focusRing}`}>{sourceLabel(s)}</a></li>
+                    ))}
+                  </ul>
+                  {h.flags.length > 0 && <p className="mt-2">Notes on the data: {h.flags.join("; ")}.</p>}
                 </div>
               </>
             }

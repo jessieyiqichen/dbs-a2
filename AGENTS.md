@@ -74,4 +74,6 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Photos: src/data/trailPhotos.json, 3–4 per trail in route order, one marked cover. Photochrom prints shown as they are; modern Unsplash photos get treatment A (src/components/dawn/Toned.tsx). Never use a photo whose recorded location is off the route.
 - Heights use elevation(h): when no source publishes one (Kumano), the site says "not published" instead of guessing.
 - Filtering logic lives in src/app/trails/filters.ts and is tested (npm test).
+- Type: exactly six sizes, defined in src/app/trails/type.ts (96 title, 48 chapter/section, 24 names and numbers, 17 reading, 14 notes and credits, 12 small-capital labels and buttons). Never add a size inline.
+- Chapters hold only: plate (the photo is itself the button to all plates, with an "N plates →" tag), caption line, name, 2–3 intro sentences, three stops (one celadon number style), distance / days / high point, best months, one permit line, Add to my list + See all plates. Sources (labelled site · page) and data notes are in the plates panel.
 - Desktop first; phone layout to be adapted after desktop is approved.

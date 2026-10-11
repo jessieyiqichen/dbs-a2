@@ -1,5 +1,5 @@
 // Twelve months as small printed squares; the best months carry a celadon plate.
-import { ui } from "@/components/dawn/ds/tokens";
+import { t12 } from "./type";
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -11,7 +11,7 @@ export function MonthStrip({ best }: { best: string[] }) {
         {MONTHS.map((m) => {
           const on = best.includes(m);
           return (
-            <span key={m} className={`${ui} grid h-9 place-items-center border text-[11px] font-semibold ${on ? "border-[#22333a] bg-[#c3d6c4] text-[#22333a]" : "border-[#6f8287]/40 text-[#4f5f66]"}`}>
+            <span key={m} className={`${t12} grid h-9 place-items-center border !tracking-normal ${on ? "border-[#22333a] bg-[#c3d6c4] text-[#22333a]" : "border-[#6f8287]/40 font-normal text-[#4f5f66]"}`}>
               {m[0]}
             </span>
           );
