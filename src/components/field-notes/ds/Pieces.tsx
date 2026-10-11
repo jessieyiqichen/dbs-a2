@@ -59,7 +59,7 @@ const rowState: Record<ControlState, string> = {
   rest: "",
   hover: "bg-[#6f8a5b]/15",
   focus: focusForced,
-  pressed: "bg-[#6f8a5b]/25",
+  pressed: "bg-[#6f8a5b]/35 shadow-[inset_0_2px_3px_rgba(60,45,20,.25)]",
   selected: "border-l-2 border-l-[#2f4a6b] bg-[#2f4a6b]/[0.05]",
   disabled: "cursor-not-allowed text-[#625e56]",
 };
@@ -73,7 +73,7 @@ export function TrailRow({ id, force, note, compact = false }: { id: string; for
     <a
       href="#rows"
       aria-disabled={disabled || undefined}
-      className={`grid items-center border-b ${compact ? "grid-cols-[1rem_1fr_auto] gap-2 px-1" : "grid-cols-[1.5rem_1fr_auto] gap-3"} border-[#c9d3df] ${compact ? "" : "px-2"} py-2.5 transition-colors duration-300 ${rowState[state]} ${force ? "" : `hover:bg-[#6f8a5b]/15 active:bg-[#6f8a5b]/25 ${focusRing}`}`}
+      className={`grid items-center border-b ${compact ? "grid-cols-[1rem_1fr_auto] gap-2 px-1" : "grid-cols-[1.5rem_1fr_auto] gap-3"} border-[#c9d3df] ${compact ? "" : "px-2"} py-2.5 transition-colors duration-300 ${rowState[state]} ${force ? "" : `hover:bg-[#6f8a5b]/15 active:bg-[#6f8a5b]/35 active:shadow-[inset_0_2px_3px_rgba(60,45,20,.25)] ${focusRing}`}`}
     >
       <span aria-hidden="true">
         {state === "selected" && (

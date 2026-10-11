@@ -227,6 +227,15 @@ const ROWS: Row[] = [
   { name: "List row", render: (s) => s === "disabled" ? <TrailRow compact id="inca-trail" force={s} note="closed Feb" /> : <TrailRow compact id="milford" force={s} /> },
 ];
 
+const STATE_NOTES: Record<ControlState, string> = {
+  rest: "Nothing is happening to it",
+  hover: "The mouse is over it: the paper lifts",
+  focus: "Reached with the Tab key: an ink loop",
+  pressed: "While being clicked: pressed into the page",
+  selected: "Chosen, and stays chosen",
+  disabled: "Can't be used right now: dashed, muted",
+};
+
 function ControlStates() {
   return (
     <div className="relative overflow-x-auto bg-[#fbf7ec] p-4">
@@ -235,7 +244,10 @@ function ControlStates() {
           <tr>
             <th className="w-32" />
             {CONTROL_STATES.map((s) => (
-              <th key={s} scope="col" className={`${hand} pb-3 text-left text-2xl font-semibold capitalize text-[#3d3a34]`}>{s}</th>
+              <th key={s} scope="col" className="pb-3 pr-3 text-left align-bottom">
+                <span className={`${hand} block text-2xl font-semibold capitalize text-[#3d3a34]`}>{s}</span>
+                <span className={`${serif} block text-xs font-normal italic leading-snug text-[#625e56]`}>{STATE_NOTES[s]}</span>
+              </th>
             ))}
           </tr>
         </thead>

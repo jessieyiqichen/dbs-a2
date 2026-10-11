@@ -11,7 +11,7 @@ const tabState: Record<ControlState, string> = {
   rest: "translate-y-1 border-[#7d776b]/60 bg-[#e9dcc0] text-[#625e56]",
   hover: "translate-y-0.5 border-[#7d776b] bg-[#efe4cb] text-[#3d3a34]",
   focus: `translate-y-1 border-[#7d776b]/60 bg-[#e9dcc0] text-[#625e56] ${focusForced}`,
-  pressed: "translate-y-1.5 border-[#7d776b] bg-[#e3d4b4] text-[#3d3a34]",
+  pressed: "translate-y-1.5 border-[#7d776b] bg-[#dccaa3] text-[#3d3a34] shadow-[inset_0_2px_3px_rgba(60,45,20,.3)]",
   selected: "z-10 translate-y-0 border-[#7d776b] bg-[#fbf7ec] text-[#3d3a34]",
   disabled: "translate-y-1 cursor-not-allowed border-dashed border-[#7d776b]/60 bg-transparent text-[#625e56] line-through decoration-1",
 };
@@ -48,7 +48,7 @@ export function IndexTabs({ tabs, panels }: { tabs: string[]; panels: React.Reac
                 document.getElementById(`fn-tab-${next}`)?.focus();
               }
             }}
-            className={`${tabBase} ${at === i ? tabState.selected : `${tabState.rest} hover:translate-y-0.5 hover:bg-[#efe4cb] hover:text-[#3d3a34] active:translate-y-1.5`} ${focusRing}`}
+            className={`${tabBase} ${at === i ? tabState.selected : `${tabState.rest} hover:translate-y-0.5 hover:bg-[#efe4cb] hover:text-[#3d3a34] active:translate-y-1.5 active:bg-[#dccaa3]`} ${focusRing}`}
           >
             {t}
           </button>
@@ -73,9 +73,9 @@ const torn = "polygon(4px 0, calc(100% - 3px) 0, 100% 18%, calc(100% - 4px) 36%,
 const chipBase = `inline-block px-4 py-1 ${hand} text-xl transition duration-300 ease-out`;
 const chipState: Record<ControlState, string> = {
   rest: "bg-[#e9dcc0]/60 text-[#625e56]",
-  hover: "bg-[#e9dcc0] text-[#3d3a34]",
+  hover: "-translate-y-0.5 bg-[#e9dcc0] text-[#3d3a34]",
   focus: "bg-[#e9dcc0]/60 text-[#625e56]",
-  pressed: "translate-y-px bg-[#dccaa3] text-[#3d3a34]",
+  pressed: "translate-y-0.5 bg-[#d4bf93] text-[#3d3a34]",
   selected: "-rotate-2 bg-[#cfdcc4] text-[#3d3a34]",
   disabled: "cursor-not-allowed bg-transparent text-[#625e56] line-through decoration-1",
 };
@@ -90,7 +90,7 @@ function Tape({ state, children }: { state: ControlState; children: React.ReactN
 
 export function ChipSwatch({ force, label = "huts" }: { force: ControlState; label?: string }) {
   const wrap = force === "focus" ? focusForced : "";
-  const edge = force === "disabled" ? "outline-1 outline-dashed outline-[#7d776b]" : "drop-shadow-[0_1px_1px_rgba(60,45,20,.25)]";
+  const edge = force === "disabled" ? "outline-1 outline-dashed outline-[#7d776b]" : force === "pressed" ? "" : force === "hover" ? "drop-shadow-[0_4px_4px_rgba(60,45,20,.3)]" : "drop-shadow-[0_1px_1px_rgba(60,45,20,.25)]";
   return (
     <span className={`inline-block ${wrap} ${edge}`}>
       <Tape state={force}>{label}</Tape>
@@ -112,9 +112,9 @@ export function TapeChips({ options, initial }: { options: string[]; initial: st
             type="button"
             aria-pressed={sel}
             onClick={() => flip(o)}
-            className={`group drop-shadow-[0_1px_1px_rgba(60,45,20,.25)] active:translate-y-px ${focusRing}`}
+            className={`group drop-shadow-[0_1px_1px_rgba(60,45,20,.25)] transition hover:-translate-y-0.5 hover:drop-shadow-[0_4px_4px_rgba(60,45,20,.3)] active:translate-y-0.5 active:drop-shadow-none ${focusRing}`}
           >
-            <span className={`${chipBase} ${sel ? chipState.selected : `${chipState.rest} group-hover:bg-[#e9dcc0] group-hover:text-[#3d3a34]`}`} style={{ clipPath: torn, backgroundImage: "repeating-linear-gradient(90deg, rgba(255,255,255,.18) 0 2px, transparent 2px 7px)" }}>
+            <span className={`${chipBase} ${sel ? chipState.selected : `${chipState.rest} group-hover:bg-[#e9dcc0] group-hover:text-[#3d3a34] group-active:bg-[#d4bf93]`}`} style={{ clipPath: torn, backgroundImage: "repeating-linear-gradient(90deg, rgba(255,255,255,.18) 0 2px, transparent 2px 7px)" }}>
               {o}
             </span>
           </button>

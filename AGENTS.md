@@ -38,6 +38,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Corners: 2px, paper edges, not rounded.
 - Shadow: low and soft, like paper on a desk (`0 1px 2px rgba(0,0,0,.12), 0 8px 18px rgba(60,45,20,.10)`).
 - Motion: 300ms, ease-out, settles straight; no bounce.
+- Hover vs pressed: hover lifts the paper (rises 2px, shadow underneath); pressed pushes it into the page (sinks 2px, no drop shadow, an inner shadow, one shade darker). Never let the two look alike.
 - Focus: a dashed ink-blue ring offset 4px, like a pencil loop in the margin. Disabled: dashed pencil line, muted text, struck through where it is a word.
 - Signature: everything is something from a trail notebook. Icons: a wobbly graphite pencil line, hatching on the side away from the light, one small watercolour dab (moss or ink blue). Tabs: index tabs on the notebook's edge. Single choice: the answer circled in pencil. Slider: a pencil ruler with a paperclip thumb. Toggle: on is a moss wash bleeding into a pencilled pill. Search: one ruled line. Badge: a perforated stamp. Progress: the walked part of the route traced over in pencil with a moss wash, a hut doodle at each night, a curved arrow for "you are here", the done day ticked and today circled. Loading: a mountain sketched in loose strokes, then hatching, then the sun. Palette: a paint chart (watercolour in pencilled boxes). Tape labels: torn ends. No perfect shapes: lines overshoot where they meet, curves wobble, marks are ticks, loops and arrows, never a geometric X, a ruled box or a smooth bell curve.
 

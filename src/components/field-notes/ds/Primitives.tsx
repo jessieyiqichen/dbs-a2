@@ -20,13 +20,13 @@ export function PencilFrame({ dashed = false, className = "text-[#7d776b]" }: { 
 const primaryBase = `${serif} relative inline-flex items-center gap-2 border-2 px-5 py-2.5 text-[15px] font-semibold uppercase tracking-[0.16em] transition duration-300 ease-out`;
 const primaryState: Record<ControlState, string> = {
   rest: "border-[#3f5732] bg-[#4f6a3f] text-[#f7f1e3] shadow-[0_2px_0_#3f5732]",
-  hover: "-translate-y-px border-[#3f5732] bg-[#3f5732] text-[#f7f1e3] shadow-[0_3px_0_#2e4025]",
+  hover: "-translate-y-0.5 border-[#3f5732] bg-[#3f5732] text-[#f7f1e3] shadow-[0_4px_0_#2e4025,0_8px_14px_rgba(60,45,20,.25)]",
   focus: `border-[#3f5732] bg-[#4f6a3f] text-[#f7f1e3] shadow-[0_2px_0_#3f5732] ${focusForced}`,
-  pressed: "translate-y-px border-[#36492b] bg-[#36492b] text-[#f7f1e3] shadow-none",
+  pressed: "translate-y-0.5 border-[#2e4025] bg-[#36492b] text-[#f7f1e3]/90 shadow-[inset_0_3px_5px_rgba(0,0,0,.45)]",
   selected: "",
   disabled: "cursor-not-allowed border-dashed border-[#7d776b] bg-transparent text-[#625e56] shadow-none",
 };
-const primaryLive = `hover:-translate-y-px hover:bg-[#3f5732] hover:shadow-[0_3px_0_#2e4025] active:translate-y-px active:bg-[#36492b] active:shadow-none ${focusRing}`;
+const primaryLive = `hover:-translate-y-0.5 hover:bg-[#3f5732] hover:shadow-[0_4px_0_#2e4025,0_8px_14px_rgba(60,45,20,.25)] active:translate-y-0.5 active:border-[#2e4025] active:bg-[#36492b] active:shadow-[inset_0_3px_5px_rgba(0,0,0,.45)] ${focusRing}`;
 
 /** Primary: a moss stamp. Hover lifts it off the page; press stamps it down. */
 export function PrimaryButton({ force, children = "Open the trail" }: Forceable) {
@@ -37,9 +37,9 @@ export function PrimaryButton({ force, children = "Open the trail" }: Forceable)
 const secondaryBase = `${hand} relative inline-flex items-center px-5 py-1.5 text-2xl leading-tight transition duration-300 ease-out`;
 const secondaryState: Record<ControlState, string> = {
   rest: "text-[#3d3a34]",
-  hover: "bg-[#e9dcc0]/70 text-[#3d3a34]",
+  hover: "-translate-y-0.5 bg-[#e9dcc0]/70 text-[#3d3a34] shadow-[0_6px_12px_rgba(60,45,20,.18)]",
   focus: `text-[#3d3a34] ${focusForced}`,
-  pressed: "translate-y-px bg-[#e9dcc0] text-[#3d3a34]",
+  pressed: "translate-y-0.5 bg-[#dccaa3] text-[#3d3a34] shadow-[inset_0_2px_4px_rgba(60,45,20,.35)]",
   selected: "",
   disabled: "cursor-not-allowed text-[#625e56]",
 };
@@ -49,23 +49,27 @@ export function SecondaryButton({ force, children = "Save for later" }: Forceabl
   const frame = <PencilFrame dashed={force === "disabled"} className={force === "hover" || force === "pressed" ? "text-[#3d3a34]" : "text-[#7d776b] group-hover:text-[#3d3a34]"} />;
   if (force) return <span className={`${secondaryBase} ${secondaryState[force]}`}>{frame}{children}</span>;
   return (
-    <button type="button" className={`group ${secondaryBase} ${secondaryState.rest} hover:bg-[#e9dcc0]/70 active:translate-y-px active:bg-[#e9dcc0] ${focusRing}`}>
+    <button type="button" className={`group ${secondaryBase} ${secondaryState.rest} hover:-translate-y-0.5 hover:bg-[#e9dcc0]/70 hover:shadow-[0_6px_12px_rgba(60,45,20,.18)] active:translate-y-0.5 active:bg-[#dccaa3] active:shadow-[inset_0_2px_4px_rgba(60,45,20,.35)] ${focusRing}`}>
       {frame}
       {children}
     </button>
   );
 }
 
-/** Link: ink blue with a pencil underline that darkens; the arrow steps forward. */
+/** Link: hover darkens the pencil underline and steps the arrow forward; pressed presses the ink in (darker, with a wash behind). */
 export function NoteLink({ force, children = "Read the route notes" }: Forceable) {
-  const on = force === "hover" || force === "pressed";
+  const state: Partial<Record<ControlState, string>> = {
+    rest: "text-[#2f4a6b] decoration-[#2f4a6b]/40",
+    hover: "text-[#2f4a6b] decoration-[#2f4a6b] decoration-2",
+    focus: `text-[#2f4a6b] decoration-[#2f4a6b]/40 ${focusForced}`,
+    pressed: "bg-[#2f4a6b]/15 text-[#1f3550] decoration-[#1f3550] decoration-2",
+  };
+  const live = `hover:decoration-[#2f4a6b] hover:decoration-2 active:bg-[#2f4a6b]/15 active:text-[#1f3550] ${focusRing}`;
+  const arrow = force === "hover" ? "translate-x-1" : force === "pressed" ? "translate-x-0.5" : "group-hover:translate-x-1";
   return (
-    <a
-      href="#links"
-      className={`group ${serif} inline-flex items-baseline gap-1 text-lg text-[#2f4a6b] underline decoration-1 underline-offset-4 transition-colors duration-300 ${on ? "decoration-[#2f4a6b] decoration-2" : "decoration-[#2f4a6b]/40 hover:decoration-[#2f4a6b] hover:decoration-2"} ${force === "focus" ? focusForced : focusRing}`}
-    >
+    <a href="#links" className={`group ${serif} inline-flex items-baseline gap-1 px-0.5 text-lg underline decoration-1 underline-offset-4 transition duration-300 ${state[force ?? "rest"]} ${force ? "" : live}`}>
       {children}
-      <span aria-hidden="true" className={`transition-transform duration-300 ${on ? "translate-x-1" : "group-hover:translate-x-1"}`}>→</span>
+      <span aria-hidden="true" className={`transition-transform duration-300 ${arrow}`}>→</span>
     </a>
   );
 }
@@ -134,7 +138,7 @@ export function TickBox({ force, label = "Permit needed", defaultChecked = false
     <label className={`group relative flex items-center gap-3 ${disabled ? "cursor-not-allowed" : "cursor-pointer"}`}>
       <input type="checkbox" className="peer sr-only" defaultChecked={checked} disabled={disabled} />
       <span
-        className={`relative h-7 w-7 shrink-0 transition duration-300 peer-checked:[&_.tick]:opacity-100 ${force === "hover" ? "bg-[#e9dcc0]/70" : "group-hover:bg-[#e9dcc0]/70"} ${force === "pressed" ? "scale-90" : "peer-active:scale-90"} ${force === "focus" ? focusForced : "peer-focus-visible:outline-2 peer-focus-visible:outline-dashed peer-focus-visible:outline-offset-4 peer-focus-visible:outline-[#2f4a6b]"}`}
+        className={`relative h-7 w-7 shrink-0 transition duration-300 peer-checked:[&_.tick]:opacity-100 ${force === "hover" ? "bg-[#e9dcc0]/70" : force === "pressed" ? "" : "group-hover:bg-[#e9dcc0]/70"} ${force === "pressed" ? "scale-[.82] bg-[#dccaa3] shadow-[inset_0_2px_3px_rgba(60,45,20,.35)]" : "peer-active:scale-[.82] peer-active:bg-[#dccaa3]"} ${force === "focus" ? focusForced : "peer-focus-visible:outline-2 peer-focus-visible:outline-dashed peer-focus-visible:outline-offset-4 peer-focus-visible:outline-[#2f4a6b]"}`}
       >
         <PencilFrame dashed={disabled} className={force === "hover" ? "text-[#3d3a34]" : "text-[#7d776b] group-hover:text-[#3d3a34]"} />
         <svg viewBox="0 0 28 28" className={`tick absolute -right-1 -top-2 h-8 w-8 transition-opacity duration-300 ${checked ? "opacity-100" : "opacity-0"}`} aria-hidden="true">
