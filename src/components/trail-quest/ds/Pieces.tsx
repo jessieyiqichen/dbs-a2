@@ -1,6 +1,6 @@
 // Trail Quest: the level card, level rows, dialog, progress and UI states, filled with real trail data.
 import type { ControlState } from "@/lib/contrast";
-import { hikes, formatRange, type Hike } from "@/data/hikes";
+import { hikes, elevation, formatRange, type Hike } from "@/data/hikes";
 import { Icon } from "../Icons";
 import { GameButton, GameLink } from "./Primitives";
 import { display, focusForced, focusRing, snappy, ui } from "./tokens";
@@ -55,7 +55,7 @@ export function LevelCard({ id }: { id: string }) {
           {[
             ["KM", formatRange(h.distance_km), "#4cc3ff"],
             ["DAYS", formatRange(h.days), "#58d36b"],
-            ["TOP", `${formatRange(h.max_elev_m)} m`, "#ffd23f"],
+            ["TOP", elevation(h), "#ffd23f"],
           ].map(([k, v, c]) => (
             <span key={k} className="block rounded-xl border-[3px] border-[#1d2b53] p-1.5 text-center text-[#1d2b53] shadow-[0_3px_0_#1d2b53]" style={{ background: c }}>
               <span className={`${ui} block text-[10px] font-black tracking-widest`}>{k}</span>
@@ -129,7 +129,7 @@ export function LevelDialog({ id }: { id: string }) {
         {[
           ["KM", formatRange(h.distance_km), "#4cc3ff"],
           ["DAYS", formatRange(h.days), "#58d36b"],
-          ["TOP", `${formatRange(h.max_elev_m)} m`, "#ffd23f"],
+          ["TOP", elevation(h), "#ffd23f"],
         ].map(([k, v, c]) => (
           <div key={k} className="rounded-2xl border-[3px] border-[#1d2b53] p-2 text-center text-[#1d2b53] shadow-[0_4px_0_#1d2b53]" style={{ background: c }}>
             <p className={`${ui} text-[10px] font-black tracking-widest`}>{k}</p>
@@ -166,7 +166,7 @@ export function AltitudeBar({ id = "inca-trail", at = 0.75 }: { id?: string; at?
       </div>
       <p className={`${ui} mt-2 flex justify-between text-xs font-black text-[#1d2b53]`}>
         <span>{h.name.split(" to ")[0]} · altitude</span>
-        <span className="text-[#6741d9]">{formatRange(h.max_elev_m)} m top</span>
+        <span className="text-[#6741d9]">{elevation(h)} top</span>
       </p>
     </div>
   );

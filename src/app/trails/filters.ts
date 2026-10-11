@@ -51,7 +51,7 @@ const order: Record<Sort, (a: Hike, b: Hike) => number> = {
   catalogue: () => 0,
   shortest: (a, b) => a.distance_km[0] - b.distance_km[0],
   longest: (a, b) => b.distance_km[1] - a.distance_km[1],
-  highest: (a, b) => b.max_elev_m[1] - a.max_elev_m[1],
+  highest: (a, b) => (b.max_elev_m?.[1] ?? -1) - (a.max_elev_m?.[1] ?? -1),
 };
 
 /** Within a group (regions, lengths) any chip matches; across groups all must. */

@@ -1,6 +1,6 @@
 // Field Notes: the card, list rows, detail panel and UI states, filled with real trail data.
 import type { ControlState } from "@/lib/contrast";
-import { hikes, formatRange, type Hike } from "@/data/hikes";
+import { hikes, elevation, formatRange, type Hike } from "@/data/hikes";
 import { FieldIcon, PermitStamp } from "../FieldArt";
 import { PencilLoader } from "../FieldSketches";
 import { PrimaryButton, SecondaryButton, NoteLink, PencilFrame } from "./Primitives";
@@ -116,7 +116,7 @@ export function DetailPanel({ id }: { id: string }) {
   const facts: [string, string][] = [
     ["Distance", `${formatRange(h.distance_km)} km, ${h.route}`],
     ["Days", formatRange(h.days)],
-    ["High point", `${h.high_point}, ${formatRange(h.max_elev_m)} m`],
+    ["High point", h.max_elev_m ? `${h.high_point}, ${elevation(h)}` : h.high_point],
     ["Best months", h.best_months.join(", ")],
   ];
   return (

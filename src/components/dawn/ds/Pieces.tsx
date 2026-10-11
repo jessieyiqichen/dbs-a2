@@ -1,7 +1,7 @@
 // Dawn: the card, catalogue rows, detail panel and UI states, filled with real trail data.
 import Image from "next/image";
 import type { ControlState } from "@/lib/contrast";
-import { hikes, formatRange, type Hike } from "@/data/hikes";
+import { hikes, elevation, formatRange, type Hike } from "@/data/hikes";
 import { PlateIcon } from "../PlateArt";
 import { PrintingLoader } from "../PlateUI";
 import { PlateLink, PrimaryButton, SecondaryButton } from "./Primitives";
@@ -30,7 +30,7 @@ export function PrintCard({ id, photo, plateNote }: { id: string; photo: string;
         {[
           ["Distance", `${formatRange(h.distance_km)} km, ${h.route}`],
           ["Days", formatRange(h.days)],
-          ["High point", `${formatRange(h.max_elev_m)} m`],
+          ["High point", elevation(h)],
         ].map(([k, v]) => (
           <span key={k} className="flex items-baseline justify-between gap-3 border-b border-dotted border-[#22333a]/25 py-1.5">
             <span className="text-[#4f5f66]">{k}</span>
@@ -98,7 +98,7 @@ export function DetailPanel({ id }: { id: string }) {
   const facts: [string, string][] = [
     ["Route", `${h.start} to ${h.end}`],
     ["Distance", `${formatRange(h.distance_km)} km, ${h.route}`],
-    ["High point", `${h.high_point}, ${formatRange(h.max_elev_m)} m`],
+    ["High point", h.max_elev_m ? `${h.high_point}, ${elevation(h)}` : h.high_point],
     ["Best months", h.best_months.join(", ")],
   ];
   return (

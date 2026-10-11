@@ -1,7 +1,7 @@
 // Dawn components, made the way a photochrom was: colour plates slightly off register, a key line on top.
 // Interaction brings the plates into register. Nothing glows, nothing is glass.
 import Image from "next/image";
-import { hikes, formatRange } from "@/data/hikes";
+import { hikes, elevation, formatRange } from "@/data/hikes";
 import { KEY, LOCH, MOUNT, T } from "./PlateArt";
 import { TONE_FILTER, TONE_OVERLAY } from "./Toned";
 
@@ -133,7 +133,7 @@ export function PlateCard({ id, photo, plateNote }: { id: string; photo: string;
         {[
           ["Distance", `${formatRange(h.distance_km)} km, ${h.route}`],
           ["Days", formatRange(h.days)],
-          ["High point", `${formatRange(h.max_elev_m)} m`],
+          ["High point", elevation(h)],
         ].map(([k, v]) => (
           <div key={k} className="flex items-baseline justify-between gap-3 border-b border-dotted border-[#22333a]/25 py-1.5">
             <dt className="text-[#4f5f66]">{k}</dt>

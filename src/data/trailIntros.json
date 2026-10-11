@@ -1,0 +1,541 @@
+{
+ "inca-trail": {
+  "intro": [
+   {
+    "text": "The Inca Trail is a hiking route in Peru that ends at Machu Picchu; the Classic route starts at Km 82, Piscacucho, beside the Urubamba River.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Inca_Trail_to_Machu_Picchu",
+     "https://andina.pe/ingles/noticia-peru-inca-road-network-to-machu-picchu-reopens-welcomes-visitors-from-seven-countries-1065030.aspx"
+    ]
+   },
+   {
+    "text": "Along the way it crosses cloud forest and alpine tundra, passes Inca ruins and tunnels, and climbs above 4,200 metres.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Inca_Trail_to_Machu_Picchu"
+    ]
+   },
+   {
+    "text": "The trail is part of the Qhapaq Ñan, the Inca road system listed by UNESCO in 2014. Daily numbers are capped, and every trekker must walk with a guide.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Inca_Trail_to_Machu_Picchu"
+    ]
+   }
+  ],
+  "along_the_way": [
+   {
+    "text": "Patallaqta ruins, where the Km 82 and Km 88 starts meet",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Inca_Trail_to_Machu_Picchu"
+    ]
+   },
+   {
+    "text": "Warmiwañusqa (Dead Woman's Pass), the high point at 4,215 m",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Inca_Trail_to_Machu_Picchu"
+    ]
+   },
+   {
+    "text": "Wiñay Wayna ruins and terraces, about 3 km before the Sun Gate",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Inca_Trail_to_Machu_Picchu"
+    ]
+   }
+  ]
+ },
+ "tmb": {
+  "intro": [
+   {
+    "text": "The Tour du Mont Blanc is a long-distance hiking loop around the Mont Blanc massif, normally walked anticlockwise from Les Houches through France, Italy and Switzerland.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Tour_du_Mont_Blanc"
+    ]
+   },
+   {
+    "text": "It crosses seven valleys, among them the Chamonix valley, the Vallée des Glaciers, Italy's Val Veny and Val Ferret, and the Swiss Val Ferret.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Tour_du_Mont_Blanc"
+    ]
+   },
+   {
+    "text": "In 1767 the Genevan scientist Horace-Bénédict de Saussure completed his first tour of Mont Blanc, a journey that helped reveal the topography of the Savoy Alps.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Horace_B%C3%A9n%C3%A9dict_de_Saussure"
+    ]
+   }
+  ],
+  "along_the_way": [
+   {
+    "text": "Col de la Seigne, the pass on the France–Italy border",
+    "sources": [
+     "https://montourdumontblanc.com/en/actualites/the-passes-of-the-tour-the-iconic-crossings"
+    ]
+   },
+   {
+    "text": "Courmayeur, the Italian town below Mont Blanc",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Tour_du_Mont_Blanc",
+     "https://www.autourdumontblanc.com/en/"
+    ]
+   },
+   {
+    "text": "Grand Col Ferret (2,537 m) on the Italy–Switzerland border",
+    "sources": [
+     "https://montourdumontblanc.com/en/actualites/the-passes-of-the-tour-the-iconic-crossings",
+     "https://en.wikipedia.org/wiki/Col_Ferret"
+    ]
+   }
+  ]
+ },
+ "w-trek": {
+  "intro": [
+   {
+    "text": "The W Trek traces a W-shaped route of about 70 km through Torres del Paine National Park in Chilean Patagonia.",
+    "sources": [
+     "https://chile.travel/itinerarios/circuito-w-de-torres-del-paine-la-guia-definitiva/",
+     "https://chile.travel/atractivos/circuito-w/"
+    ]
+   },
+   {
+    "text": "It passes lenga forests, rivers and glaciers, skirts Lake Nordenskjöld beneath the Cuernos del Paine, and offers views of Grey Glacier.",
+    "sources": [
+     "https://chile.travel/atractivos/circuito-w/"
+    ]
+   },
+   {
+    "text": "The park was established in 1959 and named a UNESCO Biosphere Reserve in 1978; 'Paine' means 'blue' in the Tehuelche (Aonikenk) language.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Torres_del_Paine_National_Park"
+    ]
+   }
+  ],
+  "along_the_way": [
+   {
+    "text": "Ascencio Valley climb to Mirador Base Las Torres",
+    "sources": [
+     "https://chile.travel/itinerarios/circuito-w-de-torres-del-paine-la-guia-definitiva/",
+     "https://en.wikipedia.org/wiki/Torres_del_Paine_National_Park"
+    ]
+   },
+   {
+    "text": "Lake Nordenskjöld shore beneath the Cuernos del Paine",
+    "sources": [
+     "https://chile.travel/itinerarios/circuito-w-de-torres-del-paine-la-guia-definitiva/",
+     "https://chile.travel/atractivos/circuito-w/"
+    ]
+   },
+   {
+    "text": "French Valley (Valle del Francés) up to Mirador Británico",
+    "sources": [
+     "https://chile.travel/itinerarios/circuito-w-de-torres-del-paine-la-guia-definitiva/"
+    ]
+   }
+  ]
+ },
+ "ebc": {
+  "intro": [
+   {
+    "text": "The trek starts and ends at Lukla and takes about two weeks, following the Dudh Koshi valley, lined with tea houses, towards Mount Everest.",
+    "sources": [
+     "https://ntb.gov.np/everest-base-camp"
+    ]
+   },
+   {
+    "text": "Past Monjo, walkers enter Sagarmatha National Park, which includes Everest and in 1979 became Nepal's first national park inscribed as a natural World Heritage Site.",
+    "sources": [
+     "https://ntb.gov.np/everest-base-camp",
+     "https://en.wikipedia.org/wiki/Sagarmatha_National_Park"
+    ]
+   },
+   {
+    "text": "Beyond Lobuche, on the lateral moraine of the Khumbu Glacier, Gorak Shep is the last settlement before the Kala Patthar viewpoint and base camp.",
+    "sources": [
+     "https://ntb.gov.np/everest-base-camp",
+     "https://en.wikipedia.org/wiki/Everest_base_camps"
+    ]
+   }
+  ],
+  "along_the_way": [
+   {
+    "text": "Namche Bazaar, the 'Sherpa capital', at 3,440 m",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Everest_base_camps",
+     "https://en.wikipedia.org/wiki/Namche_Bazaar"
+    ]
+   },
+   {
+    "text": "Tengboche Monastery, built in 1916, at 3,867 m",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Tengboche_Monastery",
+     "https://ntb.gov.np/everest-base-camp"
+    ]
+   },
+   {
+    "text": "Gorak Shep, the last settlement, below Kala Patthar",
+    "sources": [
+     "https://ntb.gov.np/everest-base-camp",
+     "https://en.wikipedia.org/wiki/Everest_base_camps"
+    ]
+   }
+  ]
+ },
+ "milford": {
+  "intro": [
+   {
+    "text": "The Milford Track runs 53.5 km through Fiordland National Park, from Glade Wharf at the head of Lake Te Anau to Sandfly Point on Milford Sound.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Milford_Track",
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/tracks/milford-track/"
+    ]
+   },
+   {
+    "text": "Walkers follow the Clinton and Arthur valleys over four days, in one direction only, staying at Clinton, Mintaro and Dumpling huts.",
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/tracks/milford-track/",
+     "https://en.wikipedia.org/wiki/Milford_Track"
+    ]
+   },
+   {
+    "text": "In 1888 Quintin McKinnon found the pass now named after him, and he became the first guide to take walkers from Lake Te Anau to Milford Sound.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Milford_Track"
+    ]
+   }
+  ],
+  "along_the_way": [
+   {
+    "text": "Hirere Falls, with first views of Omanui/McKinnon Pass",
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/tracks/milford-track/"
+    ]
+   },
+   {
+    "text": "Quintin McKinnon memorial on Omanui/McKinnon Pass",
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/tracks/milford-track/"
+    ]
+   },
+   {
+    "text": "Mackay Falls and Bell Rock, on the final day",
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/tracks/milford-track/",
+     "https://en.wikipedia.org/wiki/Milford_Track"
+    ]
+   }
+  ]
+ },
+ "tongariro": {
+  "intro": [
+   {
+    "text": "The crossing begins at 1,120 m on a boardwalk in the Mangatepōpō Valley and ends at Ketetahi Road, 760 m, after a long zig-zag descent of the northern slopes.",
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/things-to-do/tracks/tongariro-alpine-crossing/",
+     "https://en.wikipedia.org/wiki/Tongariro_Alpine_Crossing"
+    ]
+   },
+   {
+    "text": "Until 2007 it was called the Tongariro Crossing; 'Alpine' was added to emphasise the extreme weather on the exposed terrain.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Tongariro_Alpine_Crossing"
+    ]
+   },
+   {
+    "text": "The mountains are sacred to Ngāti Hikairo ki Tongariro of Ngāti Tūwharetoa, and in 1993 Tongariro became the first property inscribed under World Heritage cultural landscape criteria.",
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/things-to-do/tracks/tongariro-alpine-crossing/"
+    ]
+   }
+  ],
+  "along_the_way": [
+   {
+    "text": "South Crater, reached by a staircase climb of about 350 m",
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/things-to-do/tracks/tongariro-alpine-crossing/"
+    ]
+   },
+   {
+    "text": "Red Crater, the crossing's highest point at 1,886 m",
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/things-to-do/tracks/tongariro-alpine-crossing/",
+     "https://en.wikipedia.org/wiki/Tongariro_Alpine_Crossing"
+    ]
+   },
+   {
+    "text": "The Emerald Lakes, then the edge of Blue Lake",
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/things-to-do/tracks/tongariro-alpine-crossing/",
+     "https://en.wikipedia.org/wiki/Tongariro_Alpine_Crossing"
+    ]
+   }
+  ]
+ },
+ "kumano": {
+  "intro": [
+   {
+    "text": "The Nakahechi is the main route linking the three Grand Shrines of Kumano; this walk covers it from Takijiri-oji, beside the Tonda River, to Kumano Hongu Taisha.",
+    "sources": [
+     "https://www.tb-kumano.jp/en/kumano-kodo/nakahechi/",
+     "https://www.tb-kumano.jp/en/kumano-kodo/nakahechi/takijiri-oji-to-chikatsuyu-oji/"
+    ]
+   },
+   {
+    "text": "Most walkers split the roughly 37 km of mountain trail into two days, stopping in the village of Chikatsuyu about halfway.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Kumano_Kod%C5%8D"
+    ]
+   },
+   {
+    "text": "People from peasants to emperors walked to Kumano, and retired emperors made repeated pilgrimages there in the 11th and 12th centuries.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Kumano_Kod%C5%8D"
+    ]
+   }
+  ],
+  "along_the_way": [
+   {
+    "text": "Takahara, a mountain village with paved lanes",
+    "sources": [
+     "https://www.tb-kumano.jp/en/kumano-kodo/nakahechi/takijiri-oji-to-chikatsuyu-oji/",
+     "https://en.wikipedia.org/wiki/Kumano_Kod%C5%8D"
+    ]
+   },
+   {
+    "text": "Chikatsuyu village, the usual overnight stop about halfway",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Kumano_Kod%C5%8D",
+     "https://www.tb-kumano.jp/en/kumano-kodo/difficulty-rating/"
+    ]
+   },
+   {
+    "text": "Hosshinmon-oji shrine, about 7 km before Hongu Taisha",
+    "sources": [
+     "https://www.tb-kumano.jp/en/kumano-kodo/difficulty-rating/",
+     "https://www.tb-kumano.jp/en/kumano-kodo/nakahechi/tsugizakura-oji-to-kumano-hongu-taisha/"
+    ]
+   }
+  ]
+ },
+ "laugavegur": {
+  "intro": [
+   {
+    "text": "The Laugavegur is a hiking trail in southern Iceland, usually walked north to south over four days from Landmannalaugar to the glacial valley of Þórsmörk.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Laugavegur",
+     "https://www.fi.is/en/hiking-trails/trails/view/laugavegur"
+    ]
+   },
+   {
+    "text": "It is known for its varied landscapes: colourful mountains, black lava, bubbling hot springs, lakes, canyons and a black sandy desert.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Laugavegur"
+    ]
+   },
+   {
+    "text": "The trail was established in 1978 and is maintained by Ferðafélag Íslands, which runs the mountain huts at each stage.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Laugavegur",
+     "https://www.fi.is/en/hiking-trails/trails/view/laugavegur"
+    ]
+   }
+  ],
+  "along_the_way": [
+   {
+    "text": "Obsidian fields and steaming vents on the way to Hrafntinnusker",
+    "sources": [
+     "https://www.fi.is/en/hiking-trails/trails/view/laugavegur"
+    ]
+   },
+   {
+    "text": "Álftavatn lake and its mountain huts",
+    "sources": [
+     "https://www.fi.is/en/hiking-trails/trails/view/laugavegur",
+     "https://en.wikipedia.org/wiki/Laugavegur"
+    ]
+   },
+   {
+    "text": "A 200-metre-deep canyon near the Emstrur huts",
+    "sources": [
+     "https://www.fi.is/en/hiking-trails/trails/view/laugavegur"
+    ]
+   }
+  ]
+ },
+ "whw": {
+  "intro": [
+   {
+    "text": "The West Highland Way runs 154 km (96 miles) from Milngavie, north of Glasgow, to Fort William, and is usually walked south to north from the Lowlands into the Highlands.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/West_Highland_Way",
+     "https://www.westhighlandway.org/",
+     "https://www.scotlandsgreattrails.com/trail/west-highland-way/"
+    ]
+   },
+   {
+    "text": "It follows the shore of Loch Lomond, crosses the open wilderness of Rannoch Moor and passes Glen Coe before reaching Fort William at the foot of Ben Nevis.",
+    "sources": [
+     "https://www.scotlandsgreattrails.com/trail/west-highland-way/"
+    ]
+   },
+   {
+    "text": "Lord Mansfield opened the route on 6 October 1980. It is now one of Scotland's Great Trails, and that programme's website calls it the country's most popular long-distance route.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/West_Highland_Way",
+     "https://www.scotlandsgreattrails.com/trail/west-highland-way/"
+    ]
+   }
+  ],
+  "along_the_way": [
+   {
+    "text": "Conic Hill (361 m), on the Highland Boundary Fault",
+    "sources": [
+     "https://en.wikipedia.org/wiki/West_Highland_Way",
+     "https://www.scotlandsgreattrails.com/trail/west-highland-way/"
+    ]
+   },
+   {
+    "text": "The vast wilderness of Rannoch Moor",
+    "sources": [
+     "https://www.scotlandsgreattrails.com/trail/west-highland-way/",
+     "https://www.westhighlandway.org/"
+    ]
+   },
+   {
+    "text": "The Devil's Staircase, with views over Glen Coe",
+    "sources": [
+     "https://www.scotlandsgreattrails.com/trail/west-highland-way/",
+     "https://en.wikipedia.org/wiki/West_Highland_Way"
+    ]
+   }
+  ]
+ },
+ "camino": {
+  "intro": [
+   {
+    "text": "The Camino Francés, or French Way, runs from Saint-Jean-Pied-de-Port on the French side of the Pyrenees to Santiago de Compostela in Galicia.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/French_Way"
+    ]
+   },
+   {
+    "text": "On its way west it crosses Navarre, La Rioja, Castile and León and Galicia, passing through cities such as Pamplona, Burgos and León.",
+    "sources": [
+     "https://www.spain.info/en/camino-santiago/french-way-camino-santiago/",
+     "https://en.wikipedia.org/wiki/French_Way"
+    ]
+   },
+   {
+    "text": "The route was described in 1135 in the Codex Calixtinus, a medieval pilgrims' guide attributed to the French cleric Aymeric Picaud.",
+    "sources": [
+     "https://www.caminodesantiago.gal/en/make-plans/the-ways/french-way"
+    ]
+   }
+  ],
+  "along_the_way": [
+   {
+    "text": "Orreaga-Roncesvalles in Navarre, just over the Pyrenees",
+    "sources": [
+     "https://www.spain.info/en/camino-santiago/french-way-camino-santiago/",
+     "https://en.wikipedia.org/wiki/French_Way"
+    ]
+   },
+   {
+    "text": "Cruz de Ferro, halfway between Astorga and Ponferrada",
+    "sources": [
+     "https://www.spain.info/en/camino-santiago/french-way-camino-santiago/"
+    ]
+   },
+   {
+    "text": "O Cebreiro, where the Way enters Galicia",
+    "sources": [
+     "https://www.caminodesantiago.gal/en/make-plans/the-ways/french-way"
+    ]
+   }
+  ]
+ },
+ "tiger-leaping": {
+  "intro": [
+   {
+    "text": "The gorge lies on the Jinsha River, a primary tributary of the upper Yangtze, about 60 km north of Lijiang in Yunnan.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Tiger_Leaping_Gorge"
+    ]
+   },
+   {
+    "text": "The high trail climbs from Qiaotou up the 28 Bends switchbacks to Halfway Guesthouse, then descends to Tina's on the road.",
+    "sources": [
+     "https://visityunnanchina.com/node/198"
+    ]
+   },
+   {
+    "text": "Legend says the gorge is named after a hunted tiger that escaped by leaping across the river at its narrowest point.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Tiger_Leaping_Gorge"
+    ]
+   }
+  ],
+  "along_the_way": [
+   {
+    "text": "Naxi Family Guesthouse, a usual lunch stop on day one",
+    "sources": [
+     "https://visityunnanchina.com/node/198"
+    ]
+   },
+   {
+    "text": "The 28 Bends, a steep run of switchbacks",
+    "sources": [
+     "https://visityunnanchina.com/node/198"
+    ]
+   },
+   {
+    "text": "Halfway Guesthouse, overlooking Jade Dragon (Yulong) Snow Mountain",
+    "sources": [
+     "https://visityunnanchina.com/node/198"
+    ]
+   }
+  ]
+ },
+ "half-dome": {
+  "intro": [
+   {
+    "text": "The Half Dome day hike starts at Happy Isles and climbs past Vernal and Nevada falls into Little Yosemite Valley before turning toward the dome.",
+    "sources": [
+     "https://www.nps.gov/yose/planyourvisit/halfdome.htm",
+     "https://en.wikipedia.org/wiki/Half_Dome"
+    ]
+   },
+   {
+    "text": "The round trip is 14 to 16 miles with about 4,800 feet of climbing, and most hikers take 10 to 12 hours.",
+    "sources": [
+     "https://www.nps.gov/yose/planyourvisit/halfdome.htm"
+    ]
+   },
+   {
+    "text": "An 1865 report called the summit 'perfectly inaccessible'; George Anderson reached it in October 1875, and cables were first built near his route in 1919.",
+    "sources": [
+     "https://www.nps.gov/yose/planyourvisit/halfdome.htm",
+     "https://en.wikipedia.org/wiki/Half_Dome"
+    ]
+   }
+  ],
+  "along_the_way": [
+   {
+    "text": "Vernal Fall, passed early in the climb from Happy Isles",
+    "sources": [
+     "https://www.nps.gov/yose/planyourvisit/halfdome.htm"
+    ]
+   },
+   {
+    "text": "Nevada Fall, before the trail enters Little Yosemite Valley",
+    "sources": [
+     "https://www.nps.gov/yose/planyourvisit/halfdome.htm",
+     "https://en.wikipedia.org/wiki/Half_Dome"
+    ]
+   },
+   {
+    "text": "The sub-dome, beyond which only permit holders may go",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Half_Dome"
+    ]
+   }
+  ]
+ }
+}
