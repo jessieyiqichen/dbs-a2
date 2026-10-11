@@ -1,9 +1,9 @@
 // The site's six type sizes, and nothing else. Hierarchy comes from these steps, not from new sizes.
-//   96  the title              48  chapter and section titles     24  walk names, numbers, lead lines
+//   96  the title (112 wide)   48  chapter and section titles     24  walk names, numbers, lead lines
 //   17  reading text           14  notes, captions, credits       12  small capital labels and buttons
 import { display, ui } from "@/components/dawn/ds/tokens";
 
-export const t96 = `${display} text-[48px] leading-[1] sm:text-[96px] sm:leading-[0.95]`;
+export const t96 = `${display} text-[48px] leading-[1] sm:text-[96px] sm:leading-[0.95] lg:text-[112px] lg:leading-[0.92]`;
 export const t48 = `${display} text-[48px] leading-[1.05]`;
 export const t24 = `${display} text-[24px] leading-[1.2]`;
 export const t17 = `${ui} text-[17px] leading-[27px]`;

@@ -1,16 +1,15 @@
 "use client";
-// The plates viewer: every photograph of one walk, large, in route order. Opened from a chapter; Esc closes it.
+// The plates viewer: every photograph of one walk, large, in route order. Opened from a walk's page, on the
+// plate that was chosen; arrow keys move between plates; Esc, Close or a click outside closes it.
 import { useEffect, useRef, useState } from "react";
 import type { Hike } from "@/data/hikes";
 import { TonedPhoto, creditLine, type TrailPhoto } from "@/components/dawn/Toned";
-import { PrimaryButton } from "@/components/dawn/ds/Primitives";
 import { focusRing, slow } from "@/components/dawn/ds/tokens";
-import { plateNo, sourceLabel } from "./plate";
-import { introSources } from "@/data/intros";
+import { plateNo } from "./plate";
 import { t12, t12caption, t14, t48 } from "./type";
 
-function Gallery({ photos, title }: { photos: TrailPhoto[]; title: React.ReactNode }) {
-  const [at, setAt] = useState(() => Math.max(0, photos.findIndex((p) => p.cover)));
+function Gallery({ photos, start, title }: { photos: TrailPhoto[]; start: number; title: React.ReactNode }) {
+  const [at, setAt] = useState(start);
   const thumbs = useRef<(HTMLButtonElement | null)[]>([]);
   const go = (i: number) => {
     const next = (i + photos.length) % photos.length;
@@ -52,14 +51,15 @@ function Gallery({ photos, title }: { photos: TrailPhoto[]; title: React.ReactNo
   );
 }
 
-export function TrailDialog({ h, n, photos, inList, onToggleList, onClose }: { h: Hike | null; n: number; photos: TrailPhoto[]; inList: boolean; onToggleList: () => void; onClose: () => void }) {
+/** `at` is the plate to open on; null keeps the viewer shut. */
+export function TrailDialog({ h, n, photos, at, onClose }: { h: Hike; n: number; photos: TrailPhoto[]; at: number | null; onClose: () => void }) {
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     const d = ref.current;
     if (!d) return;
-    if (h && !d.open) d.showModal();
-    if (!h && d.open) d.close();
-  }, [h]);
+    if (at !== null && !d.open) d.showModal();
+    if (at === null && d.open) d.close();
+  }, [at]);
   return (
     <dialog
       ref={ref}
@@ -68,29 +68,18 @@ export function TrailDialog({ h, n, photos, inList, onToggleList, onClose }: { h
       aria-labelledby="plates-title"
       className="m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-6xl overflow-y-auto bg-[#f6f9f7] p-0 text-[#22333a] shadow-[8px_8px_0_0_#c9dcdc] backdrop:bg-[#22333a]/60"
     >
-      {h && (
-        <div key={h.id} className="relative p-5 pt-14 sm:p-7 sm:pt-14">
+      {at !== null && (
+        <div key={at} className="relative p-5 pt-14 sm:p-7 sm:pt-14">
           <button type="button" onClick={() => ref.current?.close()} className={`${t12} absolute right-5 top-4 z-10 border border-[#22333a] bg-[#f6f9f7] px-3 py-1.5 text-[#22333a] hover:bg-[#c3d6c4] active:translate-y-px ${focusRing}`}>
             Close
           </button>
           <Gallery
             photos={photos}
+            start={at}
             title={
               <>
                 <p className={`${t12caption} text-[#4f5f66]`}>{plateNo(n)}. {h.country.join(", ")}</p>
                 <h2 id="plates-title" className={`${t48} mt-2`}>{h.name}</h2>
-                <div className="mt-5 flex flex-wrap items-center gap-4">
-                  <PrimaryButton aria-pressed={inList} onClick={onToggleList}>{inList ? "On your list ✓" : "Add to my list"}</PrimaryButton>
-                </div>
-                <div className={`${t14} mt-6 text-[#4f5f66]`}>
-                  <p className={`${t12} text-[#22333a]`}>Sources</p>
-                  <ul className="mt-1 space-y-0.5">
-                    {[...new Set([...h.sources, ...introSources(h.id)])].map((s) => (
-                      <li key={s}><a href={s} target="_blank" rel="noreferrer" className={`relative underline decoration-[#8eaaa6] underline-offset-2 hover:text-[#22333a] hover:decoration-[#22333a] ${focusRing}`}>{sourceLabel(s)}</a></li>
-                    ))}
-                  </ul>
-                  {h.flags.length > 0 && <p className="mt-2">Notes on the data: {h.flags.join("; ")}.</p>}
-                </div>
               </>
             }
           />
