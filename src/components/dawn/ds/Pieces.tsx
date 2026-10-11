@@ -80,11 +80,11 @@ export function CatalogueRow({ id, force, note, compact = false }: { id: string;
     <a
       href="#rows"
       aria-disabled={disabled || undefined}
-      className={`relative flex items-baseline gap-3 border-b border-[#22333a]/20 ${compact ? "px-1.5" : "px-3"} py-2.5 ${slow} ${rowState[state]} ${force ? "" : `hover:bg-[#c9dcdc] active:bg-[#8eaaa6]/60 active:shadow-[inset_0_2px_3px_rgba(34,51,58,.25)] ${focusRing}`}`}
+      className={`relative flex min-w-0 items-baseline border-b border-[#22333a]/20 ${compact ? "gap-1.5 px-1.5" : "gap-3 px-3"} py-2.5 ${slow} ${rowState[state]} ${force ? "" : `hover:bg-[#c9dcdc] active:bg-[#8eaaa6]/60 active:shadow-[inset_0_2px_3px_rgba(34,51,58,.25)] ${focusRing}`}`}
     >
       {!compact && <span className={`${display} w-14 shrink-0 text-sm text-[#4f5f66]`}>{no(h)}</span>}
       <span className={`${display} ${compact ? "text-base" : "text-lg"} ${disabled ? "text-[#4f5f66] line-through" : "text-[#22333a]"}`}>{compact ? h.name.split(" ")[0] : h.name}</span>
-      <span aria-hidden="true" className="min-w-4 flex-1 translate-y-[-3px] border-b border-dotted border-[#22333a]/40" />
+      <span aria-hidden="true" className={`${compact ? "min-w-0" : "min-w-4"} flex-1 translate-y-[-3px] border-b border-dotted border-[#22333a]/40`} />
       <span className={`${ui} whitespace-nowrap ${compact ? "text-xs" : "text-sm"} text-[#4f5f66]`}>{note ?? `${formatRange(h.distance_km)} km`}</span>
     </a>
   );
