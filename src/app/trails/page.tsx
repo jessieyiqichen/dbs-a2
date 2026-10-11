@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function TrailsPage() {
   return (
     <main
-      className={`${display.variable} ${ui.variable} min-h-screen font-[family-name:var(--dw-ui)] text-[#22333a] [font-variant-numeric:lining-nums]`}
+      className={`${display.variable} ${ui.variable} min-h-screen overflow-x-clip font-[family-name:var(--dw-ui)] text-[#22333a] [font-variant-numeric:lining-nums]`}
       style={{ background: "linear-gradient(180deg, #e6edeb 0%, #eaf0ee 45%, #f0f5f3 100%)" }}
     >
       <PlateDefs />

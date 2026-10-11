@@ -40,32 +40,34 @@ export default function TrailsApp() {
       </div>
     </div>
     <div className="mx-auto max-w-6xl px-5 pb-20 pt-4">
-      <header className="mt-10 grid grid-cols-1 items-end gap-10 lg:grid-cols-[1fr_1.15fr]">
-        <div>
-          <p className={`${t12} text-[#4f5f66]`}>A guide to twelve famous walks</p>
-          <h1 className={`${t96} mt-3`}>Twelve Trails</h1>
-          <p className={`${t24} mt-6 max-w-md italic text-[#4f5f66]`}>
-            From a day on a volcano to a month across Spain: twelve walks, set out like a box of old travel prints.
-          </p>
-          <div className="mt-8">
-            <SecondaryButton aria-haspopup="dialog" onClick={() => setContentsOpen(true)}>Open the contents</SecondaryButton>
+      <header className="mt-10">
+        <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-[1.3fr_1fr]">
+          <div>
+            <p className={`${t12} text-[#4f5f66]`}>A guide to twelve famous walks</p>
+            <h1 className={`${t96} mt-3`}>Twelve Trails</h1>
+          </div>
+          <div>
+            <p className={`${t24} italic text-[#4f5f66]`}>From a day on a volcano to a month across Spain: twelve walks, set out like a box of old travel prints.</p>
+            <div className="mt-6">
+              <SecondaryButton aria-haspopup="dialog" onClick={() => setContentsOpen(true)}>Open the contents</SecondaryButton>
+            </div>
           </div>
         </div>
-        <figure className="m-0 bg-[#f6f9f7] p-3.5">
-          <TonedPhoto photo={OPENING} sizes="(min-width: 1024px) 640px, 100vw" priority className="aspect-[4/3] border-[3px] border-[#22333a]" />
-          <figcaption className={`${t14} mt-2 text-[#4f5f66]`}>{creditLine(OPENING)}</figcaption>
+        {/* The opening plate runs the full width of the window and stands taller than any chapter's plate. */}
+        <figure className="relative left-1/2 m-0 mt-12 w-screen -translate-x-1/2">
+          <TonedPhoto photo={OPENING} sizes="100vw" priority className="h-[min(78vh,760px)] min-h-[420px] w-full border-y-[3px] border-[#22333a]" />
+          <figcaption className={`${t14} mx-auto mt-2 max-w-6xl px-5 text-[#4f5f66]`}>{creditLine(OPENING)}</figcaption>
         </figure>
       </header>
 
 
-      <div className="mt-20">
+      <div className="mt-8">
         {hikes.map((h, i) => (
           <Chapter
             key={h.id}
             h={h}
             n={i + 1}
             photos={photos[h.id]}
-            flip={i % 2 === 1}
             inList={list.includes(h.id)}
             onToggleList={() => flip(h.id)}
             onOpenPlates={() => setOpenId(h.id)}
@@ -84,7 +86,7 @@ export default function TrailsApp() {
         onClose={() => setOpenId(null)}
       />
 
-      <footer className={`${t14} border-t border-[#22333a] pt-6 text-[#4f5f66]`}>
+      <footer className={`${t14} mt-24 border-t border-[#22333a] pt-6 text-[#4f5f66]`}>
         <h2 className={`${t24} text-[#22333a]`}>Before you go</h2>
         <p className="mt-2 max-w-prose">
           Facts were checked against official park, trail and tourism sources in {DATA_AS_OF}; where sources disagree, both numbers are shown, and each walk&apos;s plates panel lists its
