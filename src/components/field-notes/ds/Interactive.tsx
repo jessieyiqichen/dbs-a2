@@ -126,38 +126,44 @@ export function TapeChips({ options, initial }: { options: string[]; initial: st
 
 /* ---------- toggle ---------- */
 
-/** Toggle: a pencilled pill; on, moss watercolour bleeds into it and the knob moves across. */
-export function WashSwitch({ label, initial = false, disabled = false }: { label: string; initial?: boolean; disabled?: boolean }) {
-  const [on, setOn] = useState(initial);
+/** Toggle: a pencilled pill; on, moss watercolour bleeds into it and the knob moves across.
+ *  `force` draws one state for the grid: hover darkens the pencil, pressed squashes the knob, selected is on. */
+export function WashSwitch({ label, initial = false, disabled = false, force }: { label: string; initial?: boolean; disabled?: boolean; force?: ControlState }) {
+  const [live, setLive] = useState(initial);
+  const on = force ? force === "selected" : live;
+  const off = force === "disabled" || disabled;
   const cx = on ? 46 : 18;
-  return (
-    <button
-      type="button"
-      role="switch"
-      aria-checked={on}
-      disabled={disabled}
-      onClick={() => setOn(!on)}
-      className={`group flex items-center gap-3 text-left disabled:cursor-not-allowed ${focusRing}`}
-    >
-      <svg viewBox="0 0 64 34" className="h-9 w-[68px] shrink-0" aria-hidden="true">
-        <path d="M9 15 C 10 7, 30 7.5, 46 7 C 60 7.5, 60 26, 46 27 C 30 28, 13 28.5, 9.5 22 Z" fill={FN.wash} filter="url(#fn-wash)" style={{ opacity: on ? 0.55 : 0, transition: "opacity 300ms ease-out" }} />
-        <g style={{ transform: `translateX(${cx - 18}px)`, transition: "transform 300ms ease-out" }}>
+  const knob = force === "pressed" ? "scale(1.15, .85)" : "scale(1)";
+  const svg = (
+    <svg viewBox="0 0 64 34" className="h-9 w-[68px] shrink-0 overflow-visible" aria-hidden="true">
+      <path d="M9 15 C 10 7, 30 7.5, 46 7 C 60 7.5, 60 26, 46 27 C 30 28, 13 28.5, 9.5 22 Z" fill={FN.wash} filter="url(#fn-wash)" style={{ opacity: on ? 0.55 : force === "pressed" ? 0.2 : 0, transition: "opacity 300ms ease-out" }} />
+      <g style={{ transform: `translateX(${cx - 18}px)`, transition: "transform 300ms ease-out" }}>
+        <g style={{ transform: knob, transformOrigin: "18px 17px", transformBox: "view-box", transition: "transform 150ms ease-out" }} className={force ? "" : "group-active:[transform:scale(1.15,.85)]"}>
           <circle cx="18" cy="17" r="8" fill="#fbf7ec" />
           <circle cx="19.5" cy="18.5" r="7" fill="url(#fn-hatch)" opacity=".55" />
           <path d="M12 10.5 C 18 7, 27 10, 27 17 C 27 24, 20 27, 14 25.5 C 8 23.5, 7 14, 14 10 C 16 9, 19 9, 20 9.5" fill="none" stroke="#55524b" strokeWidth="1.5" strokeLinecap="round" filter="url(#fn-pencil)" />
         </g>
-        <path
-          d="M17 5 C 30 3.5, 44 4, 50 5 C 61 6.5, 62 27, 48 29.5 C 36 31, 24 30.5, 15 29 C 2 27, 3 7, 18 5.2 C 23 4.6, 27 4.4, 31 4.6"
-          fill="none"
-          stroke="#55524b"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeDasharray={disabled ? "4 4" : undefined}
-          filter="url(#fn-pencil)"
-          className="transition-[stroke-width] duration-300 group-hover:[stroke-width:2.2]"
-        />
-      </svg>
-      <span className={`${hand} text-2xl ${disabled ? "text-[#625e56] line-through decoration-1" : on ? "text-[#3d3a34]" : "text-[#625e56]"}`}>{label}</span>
+      </g>
+      <path
+        d="M17 5 C 30 3.5, 44 4, 50 5 C 61 6.5, 62 27, 48 29.5 C 36 31, 24 30.5, 15 29 C 2 27, 3 7, 18 5.2 C 23 4.6, 27 4.4, 31 4.6"
+        fill="none"
+        stroke={force === "hover" ? "#3d3a34" : "#55524b"}
+        strokeWidth={force === "hover" ? 2.2 : 1.5}
+        strokeLinecap="round"
+        strokeDasharray={off ? "4 4" : undefined}
+        filter="url(#fn-pencil)"
+        className={force ? "" : "transition-[stroke-width] duration-300 group-hover:[stroke-width:2.2]"}
+      />
+    </svg>
+  );
+  const text = <span className={`${hand} whitespace-nowrap text-2xl ${off ? "text-[#625e56] line-through decoration-1" : on ? "text-[#3d3a34]" : "text-[#625e56]"}`}>{label}</span>;
+  if (force) {
+    return <span className={`flex items-center gap-3 ${force === "focus" ? focusForced : ""}`}>{svg}{text}</span>;
+  }
+  return (
+    <button type="button" role="switch" aria-checked={on} disabled={off} onClick={() => setLive(!live)} className={`group flex items-center gap-3 text-left disabled:cursor-not-allowed ${focusRing}`}>
+      {svg}
+      {text}
     </button>
   );
 }

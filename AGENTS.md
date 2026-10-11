@@ -30,6 +30,11 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Log every request, push-back and decision in `log.md` (Chinese). Pages, code and this file stay in English.
 - Commits: one small step each; add files by name, never `git add -A`.
 
+## State rules (all three styles)
+- The six control states are exactly the assignment's: rest, hover, focus, pressed, selected, disabled, shown "where they apply". Every interactive control in a design system gets a row in its state grid, with a dash where a state does not apply (buttons and links have no selected; text fields have no pressed or selected; links have no disabled).
+- One rule per state inside a style, applied to every control; hover and pressed must never look alike.
+- The site imports these same components, so its states match the design system by construction.
+
 ## Style specs (the five decisions; follow them exactly when building in a style)
 
 ### Field Notes — Handmade, Curious, Warm
@@ -39,7 +44,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Shadow: low and soft, like paper on a desk (`0 1px 2px rgba(0,0,0,.12), 0 8px 18px rgba(60,45,20,.10)`).
 - Motion: 300ms, ease-out, settles straight; no bounce.
 - Hover vs pressed: hover lifts the paper (rises 2px, shadow underneath); pressed pushes it into the page (sinks 2px, no drop shadow, an inner shadow, one shade darker). Never let the two look alike.
-- Focus: a dashed ink-blue ring offset 4px, like a pencil loop in the margin. Disabled: dashed pencil line, muted text, struck through where it is a word.
+- Focus: a dashed ink-blue ring offset 4px on every control, text fields included (their ruled line also turns ink blue). Disabled: dashed pencil line, muted text, struck through where it is a word.
 - Signature: everything is something from a trail notebook. Icons: a wobbly graphite pencil line, hatching on the side away from the light, one small watercolour dab (moss or ink blue). Tabs: index tabs on the notebook's edge. Single choice: the answer circled in pencil. Slider: a pencil ruler with a paperclip thumb. Toggle: on is a moss wash bleeding into a pencilled pill. Search: one ruled line. Badge: a perforated stamp. Progress: the walked part of the route traced over in pencil with a moss wash, a hut doodle at each night, a curved arrow for "you are here", the done day ticked and today circled. Loading: a mountain sketched in loose strokes, then hatching, then the sun. Palette: a paint chart (watercolour in pencilled boxes). Tape labels: torn ends. No perfect shapes: lines overshoot where they meet, curves wobble, marks are ticks, loops and arrows, never a geometric X, a ruled box or a smooth bell curve.
 
 ### Dawn — Quiet, Light, Hopeful (Photochrom: hand-coloured travel prints, c. 1890–1900)

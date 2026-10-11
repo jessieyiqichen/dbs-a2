@@ -29,7 +29,7 @@ export function TrailCard({ id, force }: { id: string; force?: ControlState }) {
   return (
     <a
       href="#card"
-      className={`group relative block bg-[#fbf7ec] p-5 shadow-[0_1px_2px_rgba(0,0,0,.12),0_8px_18px_rgba(60,45,20,.10)] transition duration-300 ease-out ${lifted ? "-translate-y-1 -rotate-[0.6deg] shadow-[0_2px_4px_rgba(0,0,0,.12),0_14px_26px_rgba(60,45,20,.16)]" : "hover:-translate-y-1 hover:-rotate-[0.6deg] hover:shadow-[0_2px_4px_rgba(0,0,0,.12),0_14px_26px_rgba(60,45,20,.16)]"} ${force === "focus" ? focusForced : focusRing}`}
+      className={`group relative block bg-[#fbf7ec] p-5 shadow-[0_1px_2px_rgba(0,0,0,.12),0_8px_18px_rgba(60,45,20,.10)] transition duration-300 ease-out active:translate-y-0.5 active:rotate-0 active:bg-[#f3ead6] active:shadow-[inset_0_2px_4px_rgba(60,45,20,.2)] ${lifted ? "-translate-y-1 -rotate-[0.6deg] shadow-[0_2px_4px_rgba(0,0,0,.12),0_14px_26px_rgba(60,45,20,.16)]" : "hover:-translate-y-1 hover:-rotate-[0.6deg] hover:shadow-[0_2px_4px_rgba(0,0,0,.12),0_14px_26px_rgba(60,45,20,.16)]"} ${force === "focus" ? focusForced : focusRing}`}
     >
       <svg viewBox="0 0 30 60" className="absolute -top-4 right-6 h-12 w-6" fill="none" stroke="#8a8780" strokeWidth={2.5} aria-hidden="true">
         <path d="M8 40 V10 a7 7 0 0 1 14 0 V48 a10 10 0 0 1 -20 0 V16" />
@@ -50,6 +50,23 @@ export function TrailCard({ id, force }: { id: string; force?: ControlState }) {
         <span className={`${serif} text-[#2f4a6b] underline decoration-[#2f4a6b]/40 underline-offset-4 group-hover:decoration-[#2f4a6b]`}>Read the notes →</span>
       </div>
     </a>
+  );
+}
+
+/** A small card in a forced state, for the state grid: picked up on hover, pressed flat on press. */
+export function CardSwatch({ force, id = "milford" }: { force: ControlState; id?: string }) {
+  const h = byId(id);
+  const look: Partial<Record<ControlState, string>> = {
+    rest: "shadow-[0_1px_2px_rgba(0,0,0,.12),0_8px_18px_rgba(60,45,20,.10)]",
+    hover: "-translate-y-1 -rotate-[0.6deg] shadow-[0_2px_4px_rgba(0,0,0,.12),0_14px_26px_rgba(60,45,20,.16)]",
+    focus: `shadow-[0_1px_2px_rgba(0,0,0,.12),0_8px_18px_rgba(60,45,20,.10)] ${focusForced}`,
+    pressed: "translate-y-0.5 bg-[#f3ead6] shadow-[inset_0_2px_4px_rgba(60,45,20,.2)]",
+  };
+  return (
+    <span className={`block bg-[#fbf7ec] px-3 py-2 ${look[force]}`}>
+      <span className={`${serif} block text-base font-semibold leading-tight text-[#3d3a34]`}>{h.name}</span>
+      <span className={`${hand} block text-lg text-[#625e56]`}>{formatRange(h.distance_km)} km</span>
+    </span>
   );
 }
 

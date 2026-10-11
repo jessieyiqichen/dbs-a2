@@ -6,9 +6,9 @@ import { hikes } from "@/data/hikes";
 import { FieldDefs, FieldIcon } from "@/components/field-notes/FieldArt";
 import { FIELD_KEYFRAMES, RouteProgress } from "@/components/field-notes/FieldSketches";
 import { FN, hand, serif } from "@/components/field-notes/ds/tokens";
-import { CircleRadio, CountBadge, NoteLink, PencilFrame, PrimaryButton, RuledInput, RuledSelect, SearchField, SecondaryButton, TickBox } from "@/components/field-notes/ds/Primitives";
+import { CircleRadio, CountBadge, NoteLink, PencilFrame, PrimaryButton, RadioSwatch, RuledInput, RuledSelect, SearchField, SecondaryButton, TickBox } from "@/components/field-notes/ds/Primitives";
 import { ChipSwatch, IndexTabs, TabSwatch, TapeChips, WashSwitch } from "@/components/field-notes/ds/Interactive";
-import { DetailPanel, DifficultyTape, PermitStamp, TrailCard, TrailRow, UIStates } from "@/components/field-notes/ds/Pieces";
+import { CardSwatch, DetailPanel, DifficultyTape, PermitStamp, TrailCard, TrailRow, UIStates } from "@/components/field-notes/ds/Pieces";
 
 const handFont = Caveat({ subsets: ["latin"], weight: ["400", "600"], variable: "--fn-hand" });
 const serifFont = Crimson_Pro({ subsets: ["latin"], weight: ["400", "600"], style: ["normal", "italic"], variable: "--fn-serif" });
@@ -223,14 +223,18 @@ const ROWS: Row[] = [
   { name: "Filter chip", render: (s) => <ChipSwatch force={s} /> },
   { name: "Tab", render: (s) => <TabSwatch force={s} /> },
   { name: "Checkbox", render: (s) => <TickBox force={s} label="huts" /> },
+  { name: "Radio", render: (s) => <RadioSwatch force={s} label="4 days" /> },
+  { name: "Toggle", render: (s) => <WashSwitch force={s} label="on" /> },
   { name: "Text input", render: (s) => (s === "pressed" || s === "selected" ? null : <div className="w-full max-w-36"><RuledInput force={s} id={`fn-in-${s}`} label="Trail" placeholder="name" /></div>) },
+  { name: "Select", render: (s) => (s === "pressed" || s === "selected" ? null : <div className="w-full max-w-36"><RuledSelect force={s} id={`fn-sel-${s}`} /></div>) },
+  { name: "Card", render: (s) => (s === "selected" || s === "disabled" ? null : <CardSwatch force={s} />) },
   { name: "List row", render: (s) => s === "disabled" ? <TrailRow compact id="inca-trail" force={s} note="closed Feb" /> : <TrailRow compact id="milford" force={s} /> },
 ];
 
 const STATE_NOTES: Record<ControlState, string> = {
   rest: "Nothing is happening to it",
   hover: "The mouse is over it: the paper lifts",
-  focus: "Reached with the Tab key: an ink loop",
+  focus: "Reached with the Tab key: a dashed ink ring, on every control",
   pressed: "While being clicked: pressed into the page",
   selected: "Chosen, and stays chosen",
   disabled: "Can't be used right now: dashed, muted",

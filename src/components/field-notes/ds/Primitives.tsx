@@ -79,12 +79,12 @@ export function NoteLink({ force, children = "Read the route notes" }: Forceable
 const lineState: Record<ControlState, string> = {
   rest: "border-[#7d776b]",
   hover: "border-[#3d3a34]",
-  focus: "border-[#2f4a6b] bg-[#2f4a6b]/10",
+  focus: `border-[#2f4a6b] bg-[#2f4a6b]/10 ${focusForced}`,
   pressed: "border-[#2f4a6b]",
   selected: "border-[#2f4a6b]",
   disabled: "cursor-not-allowed border-dashed border-[#7d776b] text-[#625e56]",
 };
-const fieldBase = `${serif} w-full border-0 border-b-2 bg-transparent px-1 pb-1 pt-1 text-lg text-[#3d3a34] outline-none transition-colors duration-300 placeholder:font-[family-name:var(--fn-hand)] placeholder:text-xl placeholder:text-[#625e56]`;
+const fieldBase = `${serif} w-full border-0 border-b-2 bg-transparent px-1 pb-1 pt-1 text-lg text-[#3d3a34] transition-colors duration-300 placeholder:font-[family-name:var(--fn-hand)] placeholder:text-xl placeholder:text-[#625e56]`;
 
 /** Text input: one ruled line. Focus turns the line ink blue and leaves a faint wash. */
 export function RuledInput({ force, label = "Trail name", placeholder = "where to next?", id }: { force?: ControlState; label?: string; placeholder?: string; id: string }) {
@@ -97,7 +97,7 @@ export function RuledInput({ force, label = "Trail name", placeholder = "where t
         type="text"
         placeholder={placeholder}
         disabled={force === "disabled"}
-        className={`${fieldBase} ${lineState[state]} ${force ? "" : "hover:border-[#3d3a34] focus:border-[#2f4a6b] focus:bg-[#2f4a6b]/10"}`}
+        className={`${fieldBase} ${lineState[state]} ${force ? "" : "hover:border-[#3d3a34] focus:border-[#2f4a6b] focus:bg-[#2f4a6b]/10 ${focusRing}"}`}
       />
     </label>
   );
@@ -114,7 +114,7 @@ export function RuledSelect({ force, id }: { force?: ControlState; id: string })
           id={id}
           disabled={force === "disabled"}
           defaultValue="Jul"
-          className={`${fieldBase} appearance-none pr-8 ${lineState[state]} ${force ? "" : "hover:border-[#3d3a34] focus:border-[#2f4a6b] focus:bg-[#2f4a6b]/10"}`}
+          className={`${fieldBase} appearance-none pr-8 ${lineState[state]} ${force ? "" : "hover:border-[#3d3a34] focus:border-[#2f4a6b] focus:bg-[#2f4a6b]/10 ${focusRing}"}`}
         >
           {["Jun", "Jul", "Aug", "Sep"].map((m) => (
             <option key={m}>{m}</option>
@@ -177,6 +177,23 @@ export function CircleRadio({ name, options, defaultValue, force }: { name: stri
   );
 }
 
+const LOOP = "M8 26 C 6 10, 40 4, 70 6 C 100 8, 116 18, 112 30 C 108 44, 60 48, 30 44 C 10 41, 4 32, 14 20";
+
+/** One radio option in a forced state, for the state grid. */
+export function RadioSwatch({ force, label = "A few days" }: { force: ControlState; label?: string }) {
+  const loop = force === "selected" ? { o: 1, dash: undefined, w: 2.2 } : force === "hover" ? { o: 0.4, dash: "4 4", w: 1.6 } : force === "pressed" ? { o: 1, dash: "4 4", w: 1.6 } : null;
+  return (
+    <span className={`relative inline-flex px-2 py-1 ${force === "focus" ? focusForced : ""} ${force === "pressed" ? "translate-y-px" : ""}`}>
+      {loop && (
+        <svg viewBox="0 0 120 50" preserveAspectRatio="none" className="pointer-events-none absolute -inset-x-2 -inset-y-1 h-[calc(100%+8px)] w-[calc(100%+16px)]" style={{ opacity: loop.o }} aria-hidden="true">
+          <path d={LOOP} fill={force === "pressed" ? "rgba(47,74,107,.14)" : "none"} stroke={FN.ink} strokeWidth={loop.w} strokeDasharray={loop.dash} strokeLinecap="round" filter={loop.dash ? undefined : "url(#fn-rough)"} vectorEffect="non-scaling-stroke" />
+        </svg>
+      )}
+      <span className={`${hand} relative whitespace-nowrap text-2xl ${force === "disabled" ? "text-[#625e56] line-through decoration-1" : force === "rest" || force === "focus" ? "text-[#625e56]" : "text-[#3d3a34]"}`}>{label}</span>
+    </span>
+  );
+}
+
 /* ---------- small pieces ---------- */
 
 /** Count badge: a number circled in ink, as you would tally in a notebook. */
@@ -197,7 +214,7 @@ export function SearchField({ id }: { id: string }) {
     <label htmlFor={id} className="flex items-end gap-2">
       <FieldIcon name="magnifier" size={30} />
       <span className="sr-only">Search trails</span>
-      <input id={id} type="search" placeholder="search a trail or a country" className={`${fieldBase} ${lineState.rest} hover:border-[#3d3a34] focus:border-[#2f4a6b] focus:bg-[#2f4a6b]/10`} />
+      <input id={id} type="search" placeholder="search a trail or a country" className={`${fieldBase} ${lineState.rest} hover:border-[#3d3a34] focus:border-[#2f4a6b] focus:bg-[#2f4a6b]/10 ${focusRing}`} />
     </label>
   );
 }
