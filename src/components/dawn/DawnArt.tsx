@@ -1,45 +1,67 @@
 // Dawn: icons and controls drawn around one idea, the moment the light comes back.
-// Icon rules: 1.5px twilight line, round caps, a lilac-to-sky fill, and one point of first light.
+// Icon rules: a fine, slightly faded line over a soft watercolour wash that sits a little off the line,
+// horizons that fade out at both ends, and one point of first light.
 
 const T = "#2e3150";
 const LIGHT = "#fff1b8"; // the first light: pale gold, decoration only
 
-/** Shared gradients and glow; render once per page. */
+/** Shared gradients, glow and blur; render once per page. */
 export function DawnDefs() {
   return (
     <svg width="0" height="0" className="absolute" aria-hidden="true">
       <defs>
         <linearGradient id="dw-fill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#cfc4e6" />
-          <stop offset="1" stopColor="#a9c3e6" />
+          <stop offset="0" stopColor="#d7cdf0" />
+          <stop offset="1" stopColor="#b3cdee" />
         </linearGradient>
-        <linearGradient id="dw-night-day" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="#2e3150" />
-          <stop offset=".45" stopColor="#5b4fc4" />
-          <stop offset=".75" stopColor="#cfc4e6" />
-          <stop offset="1" stopColor="#eef0fa" />
+        <linearGradient id="dw-fade" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor={T} stopOpacity="0" />
+          <stop offset=".25" stopColor={T} stopOpacity=".7" />
+          <stop offset=".75" stopColor={T} stopOpacity=".7" />
+          <stop offset="1" stopColor={T} stopOpacity="0" />
         </linearGradient>
         <radialGradient id="dw-glow">
           <stop offset="0" stopColor={LIGHT} stopOpacity="1" />
-          <stop offset=".45" stopColor={LIGHT} stopOpacity=".55" />
+          <stop offset=".4" stopColor={LIGHT} stopOpacity=".6" />
           <stop offset="1" stopColor={LIGHT} stopOpacity="0" />
         </radialGradient>
+        <linearGradient id="dw-warm" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0" stopColor={LIGHT} stopOpacity=".9" />
+          <stop offset=".5" stopColor="#f3d9ef" stopOpacity=".5" />
+          <stop offset="1" stopColor="#cfc4e6" stopOpacity="0" />
+        </linearGradient>
+        <filter id="dw-wash" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="1.1" />
+        </filter>
+        <filter id="dw-haze" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2.4" />
+        </filter>
       </defs>
     </svg>
   );
 }
 
-function Light({ x, y, r = 2.2 }: { x: number; y: number; r?: number }) {
+/** The watercolour wash: blurred, a touch offset from the line. */
+function Wash({ d }: { d: string }) {
+  return <path d={d} fill="url(#dw-fill)" filter="url(#dw-wash)" transform="translate(1.3 1.6)" opacity=".95" />;
+}
+/** The fine line, never full black. */
+function Line({ d, w = 1.25, o = 0.85 }: { d: string; w?: number; o?: number }) {
+  return <path d={d} fill="none" stroke={T} strokeWidth={w} strokeOpacity={o} strokeLinecap="round" strokeLinejoin="round" />;
+}
+/** A horizon that fades out at both ends. */
+function Horizon({ y, x1 = 4, x2 = 44 }: { y: number; x1?: number; x2?: number }) {
+  const m = (x1 + x2) / 2;
+  return <path d={`M${x1} ${y} C ${m - 8} ${y - 1.2}, ${m + 8} ${y + 1.2}, ${x2} ${y}`} fill="none" stroke="url(#dw-fade)" strokeWidth="1.2" strokeLinecap="round" />;
+}
+function Light({ x, y, r = 2 }: { x: number; y: number; r?: number }) {
   return (
     <g>
-      <circle cx={x} cy={y} r={r * 3.2} fill="url(#dw-glow)" />
-      <circle cx={x} cy={y} r={r} fill={LIGHT} stroke={T} strokeWidth="1" />
+      <circle cx={x} cy={y} r={r * 4} fill="url(#dw-glow)" />
+      <circle cx={x} cy={y} r={r} fill={LIGHT} />
     </g>
   );
 }
-
-const line = { fill: "none", stroke: T, strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
-const fill = { fill: "url(#dw-fill)", stroke: T, strokeWidth: 1.5, strokeLinejoin: "round" as const };
 
 export type DawnIconName =
   | "sunrise"
@@ -62,122 +84,140 @@ export type DawnIconName =
 const art: Record<DawnIconName, React.ReactNode> = {
   sunrise: (
     <>
-      <path d="M14 32 a10 10 0 0 1 20 0 Z" {...fill} />
-      <path d="M6 32 h36 M12 38 h24" {...line} />
-      <path d="M24 12 v5 M12 17 l3 3 M36 17 l-3 3" {...line} />
-      <Light x={24} y={27} />
+      <circle cx="24" cy="30" r="13" fill="url(#dw-glow)" />
+      <Wash d="M14 31 C 14 24, 19 20, 24 20 C 29 20, 34 24, 34 31 Z" />
+      <Line d="M14 31 C 14 24, 19 20, 24 20 C 29 20, 34 24, 34 31" />
+      <Horizon y={31} />
+      <Horizon y={37} x1={12} x2={36} />
+      <Line d="M24 11 v3.5 M13.5 15.5 l2.2 2.2 M34.5 15.5 l-2.2 2.2" o={0.55} />
+      <Light x={24} y={26} />
     </>
   ),
   moonset: (
     <>
-      <path d="M28 10 a12 12 0 1 0 8 20 a9 9 0 1 1 -8 -20 z" {...fill} />
-      <path d="M6 36 h36" {...line} />
-      <Light x={38} y={12} r={1.8} />
+      <Wash d="M27 9 C 18 10, 13 18, 15 26 C 17 33, 25 36, 32 32 C 25 31, 21 25, 22 19 C 23 14, 25 11, 27 9 Z" />
+      <Line d="M27 9 C 18 10, 13 18, 15 26 C 17 33, 25 36, 32 32 C 25 31, 21 25, 22 19 C 23 14, 25 11, 27 9 Z" />
+      <Horizon y={38} />
+      <Light x={37} y={13} r={1.6} />
     </>
   ),
   ridges: (
     <>
-      <path d="M4 34 L16 18 L24 28 L32 16 L44 34 Z" {...fill} />
-      <path d="M8 40 h32 M14 44 h20" {...line} opacity=".55" />
-      <Light x={32} y={10} />
+      <Wash d="M4 33 C 9 30, 12 22, 16 19 C 19 21, 21 26, 24 27 C 27 23, 29 17, 32 16 C 36 19, 40 28, 44 33 Z" />
+      <Line d="M4 33 C 9 30, 12 22, 16 19 C 19 21, 21 26, 24 27 C 27 23, 29 17, 32 16 C 36 19, 40 28, 44 33" />
+      <Horizon y={38} />
+      <Horizon y={43} x1={12} x2={36} />
+      <Light x={32} y={9} />
     </>
   ),
   tent: (
     <>
-      <path d="M6 38 L24 10 L42 38 Z" {...fill} />
-      <path d="M24 10 L30 38 H18 Z" fill={LIGHT} stroke={T} strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M2 38 h44" {...line} />
-      <circle cx="24" cy="32" r="7" fill="url(#dw-glow)" />
+      <circle cx="24" cy="32" r="10" fill="url(#dw-glow)" />
+      <Wash d="M7 37 C 12 30, 18 18, 24 10 C 30 18, 36 30, 41 37 Z" />
+      <Line d="M7 37 C 12 30, 18 18, 24 10 C 30 18, 36 30, 41 37" />
+      <path d="M24 13 C 25 22, 27 30, 29 37 H19 C 21 30, 23 22, 24 13 Z" fill={LIGHT} opacity=".9" />
+      <Horizon y={38} />
     </>
   ),
   lantern: (
     <>
-      <path d="M18 12 h12 M24 6 v6" {...line} />
-      <rect x="16" y="12" width="16" height="24" rx="6" {...fill} />
-      <path d="M16 36 h16 M20 40 h8" {...line} />
-      <Light x={24} y={24} r={3} />
+      <Line d="M19 12 C 21 11, 27 11, 29 12 M24 6 v5" o={0.6} />
+      <circle cx="24" cy="24" r="12" fill="url(#dw-glow)" />
+      <Wash d="M17 15 C 17 13, 31 13, 31 15 C 33 21, 33 29, 31 34 C 29 36, 19 36, 17 34 C 15 29, 15 21, 17 15 Z" />
+      <Line d="M17 15 C 17 13, 31 13, 31 15 C 33 21, 33 29, 31 34 C 29 36, 19 36, 17 34 C 15 29, 15 21, 17 15 Z" />
+      <Line d="M20 39 C 22 40, 26 40, 28 39" o={0.55} />
+      <Light x={24} y={25} r={2.6} />
     </>
   ),
   "morning-star": (
     <>
-      <path d="M24 6 C 25 18, 30 23, 42 24 C 30 25, 25 30, 24 42 C 23 30, 18 25, 6 24 C 18 23, 23 18, 24 6 Z" {...fill} />
-      <Light x={24} y={24} r={2.6} />
+      <circle cx="24" cy="24" r="14" fill="url(#dw-glow)" />
+      <Wash d="M24 7 C 25 18, 29 22, 41 24 C 29 26, 25 30, 24 41 C 23 30, 19 26, 7 24 C 19 22, 23 18, 24 7 Z" />
+      <Line d="M24 7 C 25 18, 29 22, 41 24 C 29 26, 25 30, 24 41 C 23 30, 19 26, 7 24 C 19 22, 23 18, 24 7 Z" o={0.7} />
+      <Light x={24} y={24} r={2.2} />
     </>
   ),
   dew: (
     <>
-      <path d="M24 6 C 18 16, 12 22, 12 30 a12 12 0 0 0 24 0 c0 -8 -6 -14 -12 -24 z" {...fill} />
-      <path d="M8 44 C 16 40, 32 40, 40 44" {...line} />
-      <Light x={19} y={28} r={2} />
+      <Wash d="M24 7 C 20 15, 13 21, 13 29 C 13 36, 18 40, 24 40 C 30 40, 35 36, 35 29 C 35 21, 28 15, 24 7 Z" />
+      <Line d="M24 7 C 20 15, 13 21, 13 29 C 13 36, 18 40, 24 40 C 30 40, 35 36, 35 29 C 35 21, 28 15, 24 7 Z" />
+      <Horizon y={44} x1={8} x2={40} />
+      <Light x={19} y={27} r={1.8} />
     </>
   ),
   bird: (
     <>
-      <path d="M6 22 C 12 16, 18 18, 24 24 C 30 18, 36 16, 42 22" {...line} />
-      <path d="M14 32 C 17 29, 20 30, 22 33 C 24 30, 27 29, 30 32" {...line} opacity=".6" />
-      <path d="M4 40 h40" {...line} opacity=".4" />
-      <Light x={38} y={10} r={1.8} />
+      <Line d="M7 22 C 12 17, 18 18, 24 24 C 30 18, 36 17, 41 22" w={1.4} />
+      <Line d="M15 31 C 17.5 28.5, 20 29, 22 31.5 C 24 29, 26.5 28.5, 29 31" o={0.5} />
+      <Horizon y={39} />
+      <Light x={37} y={10} r={1.6} />
     </>
   ),
   compass: (
     <>
-      <circle cx="24" cy="24" r="17" {...fill} />
-      <path d="M24 12 L28 24 L24 36 L20 24 Z" fill="#fff" stroke={T} strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M24 12 L28 24 H20 Z" fill={T} />
-      <Light x={24} y={12} r={1.8} />
+      <Wash d="M24 7 C 33 7, 41 15, 41 24 C 41 33, 33 41, 24 41 C 15 41, 7 33, 7 24 C 7 15, 15 7, 24 7 Z" />
+      <Line d="M24 7 C 33 7, 41 15, 41 24 C 41 33, 33 41, 24 41 C 15 41, 7 33, 7 24 C 7 15, 15 7, 24 7 Z" />
+      <path d="M24 13 C 25.5 18, 27 21, 27.5 24 C 27 27, 25.5 30, 24 35 C 22.5 30, 21 27, 20.5 24 C 21 21, 22.5 18, 24 13 Z" fill="#fff" stroke={T} strokeOpacity=".8" strokeWidth="1.1" />
+      <path d="M24 13 C 25.5 18, 27 21, 27.5 24 H20.5 C 21 21, 22.5 18, 24 13 Z" fill={T} opacity=".75" />
+      <Light x={24} y={11} r={1.6} />
     </>
   ),
   boot: (
     <>
-      <path d="M14 8 h12 v16 c7 1 13 4 14 10 v4 H10 v-6 l4 -6 z" {...fill} />
-      <path d="M10 38 h30 M17 14 h7 M17 19 h7" {...line} />
-      <Light x={36} y={10} r={1.8} />
+      <Wash d="M15 8 C 19 7, 24 7, 27 8 C 27 14, 27 19, 28 23 C 35 25, 40 29, 40 34 C 40 36, 39 37, 37 37 H11 C 10 33, 11 29, 14 26 C 15 20, 15 14, 15 8 Z" />
+      <Line d="M15 8 C 19 7, 24 7, 27 8 C 27 14, 27 19, 28 23 C 35 25, 40 29, 40 34 C 40 36, 39 37, 37 37 H11 C 10 33, 11 29, 14 26 C 15 20, 15 14, 15 8 Z" />
+      <Line d="M18 14 h6 M18 18.5 h6" o={0.55} />
+      <Horizon y={41} />
+      <Light x={36} y={11} r={1.6} />
     </>
   ),
   path: (
     <>
-      <path d="M4 18 h40" {...line} opacity=".55" />
-      <path d="M20 44 C 22 36, 30 32, 26 26 C 24 22, 22 20, 24 18" fill="none" stroke={T} strokeWidth="7" strokeLinecap="round" />
-      <path d="M20 44 C 22 36, 30 32, 26 26 C 24 22, 22 20, 24 18" fill="none" stroke="#cfc4e6" strokeWidth="4" strokeLinecap="round" />
-      <Light x={24} y={14} r={2.6} />
+      <Horizon y={17} />
+      <path d="M19 44 C 21 37, 29 33, 26 27 C 24 23, 22 20, 24 17" fill="none" stroke="url(#dw-fill)" strokeWidth="7" strokeLinecap="round" filter="url(#dw-wash)" />
+      <Line d="M19 44 C 21 37, 29 33, 26 27 C 24 23, 22 20, 24 17" w={1.1} o={0.6} />
+      <Light x={24} y={13} r={2.4} />
     </>
   ),
   clock: (
     <>
-      <circle cx="24" cy="25" r="17" {...fill} />
-      <path d="M24 25 V13 M24 25 l-9 6" {...line} strokeWidth={2} />
-      <Light x={24} y={42} r={1.8} />
+      <Wash d="M24 8 C 33 8, 40 15, 40 24 C 40 33, 33 40, 24 40 C 15 40, 8 33, 8 24 C 8 15, 15 8, 24 8 Z" />
+      <Line d="M24 8 C 33 8, 40 15, 40 24 C 40 33, 33 40, 24 40 C 15 40, 8 33, 8 24 C 8 15, 15 8, 24 8 Z" />
+      <Line d="M24 24 C 24 20, 24 17, 24 14 M24 24 C 21 26, 18 28, 16 29" w={1.6} />
+      <Light x={24} y={44} r={1.4} />
     </>
   ),
   cloud: (
     <>
-      <path d="M12 34 h24 a7 7 0 0 0 1 -14 a10 10 0 0 0 -19 -2 a7 7 0 0 0 -6 16 z" {...fill} />
-      <path d="M8 40 h32" {...line} opacity=".5" />
-      <Light x={34} y={14} r={2} />
+      <Wash d="M12 33 C 7 33, 6 26, 11 24 C 11 18, 18 15, 22 19 C 25 13, 35 14, 35 22 C 41 22, 42 33, 36 33 Z" />
+      <Line d="M12 33 C 7 33, 6 26, 11 24 C 11 18, 18 15, 22 19 C 25 13, 35 14, 35 22 C 41 22, 42 33, 36 33 Z" />
+      <Horizon y={39} x1={8} x2={40} />
+      <Light x={34} y={12} r={1.8} />
     </>
   ),
   calendar: (
     <>
-      <rect x="8" y="10" width="32" height="30" rx="6" {...fill} />
-      <path d="M8 18 h32 M16 6 v8 M32 6 v8" {...line} />
-      <path d="M16 32 a8 8 0 0 1 16 0" {...line} />
-      <Light x={24} y={30} r={1.8} />
+      <Wash d="M13 10 C 20 9, 28 9, 35 10 C 38 10, 40 12, 40 15 C 41 22, 41 30, 40 36 C 40 38, 38 40, 35 40 C 28 41, 20 41, 13 40 C 10 40, 8 38, 8 36 C 7 30, 7 22, 8 15 C 8 12, 10 10, 13 10 Z" />
+      <Line d="M13 10 C 20 9, 28 9, 35 10 C 38 10, 40 12, 40 15 C 41 22, 41 30, 40 36 C 40 38, 38 40, 35 40 C 28 41, 20 41, 13 40 C 10 40, 8 38, 8 36 C 7 30, 7 22, 8 15 C 8 12, 10 10, 13 10 Z" />
+      <Line d="M9 18 C 18 17.5, 30 17.5, 39 18 M16 6 v7 M32 6 v7" o={0.6} />
+      <Line d="M16 33 C 16 28, 20 25, 24 25 C 28 25, 32 28, 32 33" o={0.7} />
+      <Light x={24} y={30} r={1.6} />
     </>
   ),
   map: (
     <>
-      <path d="M6 12 L17 8 L31 12 L42 8 V36 L31 40 L17 36 L6 40 Z" {...fill} />
-      <path d="M17 8 V36 M31 12 V40" {...line} opacity=".6" />
-      <path d="M11 30 C 16 24, 22 28, 26 22 S 34 16, 37 14" fill="none" stroke={T} strokeWidth="1.5" strokeDasharray="2 3" strokeLinecap="round" />
-      <Light x={37} y={14} r={2} />
+      <Wash d="M6 12 C 10 10, 14 9, 17 8 C 22 10, 26 11, 31 12 C 35 10, 39 9, 42 8 C 42 18, 42 28, 42 36 C 38 38, 35 39, 31 40 C 26 38, 22 37, 17 36 C 13 38, 9 39, 6 40 C 6 30, 6 20, 6 12 Z" />
+      <Line d="M6 12 C 10 10, 14 9, 17 8 C 22 10, 26 11, 31 12 C 35 10, 39 9, 42 8 C 42 18, 42 28, 42 36 C 38 38, 35 39, 31 40 C 26 38, 22 37, 17 36 C 13 38, 9 39, 6 40 C 6 30, 6 20, 6 12 Z" />
+      <path d="M11 31 C 16 25, 22 29, 26 23 S 34 16, 37 14" fill="none" stroke={T} strokeOpacity=".6" strokeWidth="1.1" strokeDasharray="1.5 3" strokeLinecap="round" />
+      <Light x={37} y={14} r={1.8} />
     </>
   ),
   permit: (
     <>
-      <path d="M6 14 h36 v7 a3 3 0 0 0 0 6 v7 H6 v-7 a3 3 0 0 0 0 -6 z" {...fill} />
-      <path d="M30 15 v18" {...line} strokeDasharray="2 3" />
-      <path d="M12 24 h12 M12 29 h8" {...line} />
-      <Light x={36} y={24} r={2} />
+      <Wash d="M7 15 C 18 14, 30 14, 41 15 C 41 18, 41 20, 41 21 C 38 22, 38 26, 41 27 C 41 29, 41 31, 41 33 C 30 34, 18 34, 7 33 C 7 31, 7 29, 7 27 C 10 26, 10 22, 7 21 C 7 19, 7 17, 7 15 Z" />
+      <Line d="M7 15 C 18 14, 30 14, 41 15 C 41 18, 41 20, 41 21 C 38 22, 38 26, 41 27 C 41 29, 41 31, 41 33 C 30 34, 18 34, 7 33 C 7 31, 7 29, 7 27 C 10 26, 10 22, 7 21 C 7 19, 7 17, 7 15 Z" />
+      <Line d="M13 22 C 17 21.6, 21 21.6, 25 22 M13 27 C 15.5 26.7, 18 26.7, 20 27" o={0.55} />
+      <Light x={33} y={24} r={1.8} />
     </>
   ),
 };
@@ -194,33 +234,9 @@ export function DawnIcon({ name, size = 32, label }: { name: DawnIconName; size?
 
 /* ---------- controls with a dawn in them ---------- */
 
-/** On: the sun is up and the track is day. Off: the moon is low and the track is night. */
-export function SunToggle({ on, label }: { on: boolean; label: string }) {
-  return (
-    <span className="flex items-center gap-3">
-      <span
-        className="relative inline-block h-9 w-[68px] overflow-hidden rounded-full border border-white/70 shadow-[inset_0_1px_3px_rgba(46,49,80,.25)]"
-        style={{ background: on ? "linear-gradient(180deg,#a9c3e6,#eef0fa)" : "linear-gradient(180deg,#2e3150,#5b4fc4)" }}
-      >
-        <span className="absolute inset-x-0 bottom-0 h-2.5 bg-white/40" />
-        <span
-          className={`absolute top-1.5 grid h-6 w-6 place-items-center rounded-full ${on ? "right-1.5 bg-[#fff1b8] shadow-[0_0_14px_6px_rgba(255,241,184,.85)]" : "left-1.5 bg-[#e8e6f5] shadow-[0_0_8px_2px_rgba(207,196,230,.6)]"}`}
-        >
-          {!on && <span className="absolute -right-0.5 -top-0.5 h-4 w-4 rounded-full bg-[#2e3150]" />}
-        </span>
-        {!on && (
-          <>
-            <span className="absolute right-4 top-2 h-0.5 w-0.5 rounded-full bg-white" />
-            <span className="absolute right-7 top-5 h-0.5 w-0.5 rounded-full bg-white" />
-          </>
-        )}
-      </span>
-      <span className="text-sm">{label}</span>
-    </span>
-  );
-}
+const EASE = "cubic-bezier(.45,0,.2,1)";
 
-/** Start-time slider: the track runs from night to morning; the thumb is the sun. */
+/** Start-time slider: the track runs from night to morning; the thumb is the sun, breathing slowly. */
 export function StartSlider({ at = 0.62 }: { at?: number }) {
   return (
     <div className="py-3">
@@ -229,49 +245,76 @@ export function StartSlider({ at = 0.62 }: { at?: number }) {
         <span>Start at 5:50</span>
         <span>7:00</span>
       </div>
-      <div className="relative mt-3 h-3 rounded-full" style={{ background: "linear-gradient(90deg,#2e3150,#5b4fc4 45%,#cfc4e6 75%,#eef0fa)" }}>
-        <span className="absolute top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white bg-[#fff1b8] shadow-[0_0_18px_8px_rgba(255,241,184,.8)]" style={{ left: `${at * 100}%` }} />
+      <div className="relative mt-4 h-2 rounded-full" style={{ background: "linear-gradient(90deg,#2e3150,#5b4fc4 40%,#cfc4e6 72%,#f6eef4 90%,#fff8e0)" }}>
+        <span
+          className="absolute top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full motion-safe:animate-[dw-pulse_6s_ease-in-out_infinite]"
+          style={{ left: `${at * 100}%`, background: "radial-gradient(circle, rgba(255,241,184,.95), rgba(255,241,184,.35) 40%, transparent 70%)" }}
+        />
+        <span className="absolute top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#fff1b8]" style={{ left: `${at * 100}%` }} />
       </div>
     </div>
   );
 }
 
-/** Progress as the sun's arc: how far along the walk you are. */
+/** Progress as the sun's arc: the sun breathes where you are; the walked part of the sky is warmer. */
 export function SunArc({ progress = 0.4, caption }: { progress?: number; caption: string }) {
   const a = Math.PI * (1 - progress);
   const x = 100 + 80 * Math.cos(a);
   const y = 96 - 80 * Math.sin(a);
   return (
-    <svg viewBox="0 0 200 120" className="block h-auto w-full" role="img" aria-label={caption}>
-      <path d="M20 96 A80 80 0 0 1 180 96" fill="none" stroke="#cfc4e6" strokeWidth="2" strokeDasharray="3 5" />
-      <path d={`M20 96 A80 80 0 0 1 ${x.toFixed(1)} ${y.toFixed(1)}`} fill="none" stroke="#5b4fc4" strokeWidth="2.5" strokeLinecap="round" />
-      <path d="M6 96 h188" stroke={T} strokeWidth="1.5" />
-      <circle cx={x} cy={y} r="22" fill="url(#dw-glow)" />
-      <circle cx={x} cy={y} r="7" fill="#fff1b8" stroke={T} strokeWidth="1.2" />
-      <text x="100" y="114" textAnchor="middle" fontSize="10" letterSpacing="2" fill="#5d6180">
+    <svg viewBox="0 0 200 122" className="block h-auto w-full" role="img" aria-label={caption}>
+      <defs>
+        <linearGradient id="dw-arc" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#5b4fc4" stopOpacity=".2" />
+          <stop offset="1" stopColor="#5b4fc4" stopOpacity=".9" />
+        </linearGradient>
+      </defs>
+      <path d="M20 96 A80 80 0 0 1 180 96" fill="none" stroke="#cfc4e6" strokeWidth="1.2" strokeDasharray="1 5" strokeLinecap="round" />
+      <path d={`M20 96 A80 80 0 0 1 ${x.toFixed(1)} ${y.toFixed(1)}`} fill="none" stroke="url(#dw-arc)" strokeWidth="2" strokeLinecap="round" />
+      <path d="M2 96 C 60 94.5, 140 97.5, 198 96" fill="none" stroke="url(#dw-fade)" strokeWidth="1.3" />
+      <g style={{ transformBox: "fill-box", transformOrigin: "center", animation: `dw-pulse 6s ${EASE} infinite` }} className="dw-anim">
+        <circle cx={x} cy={y} r="26" fill="url(#dw-glow)" />
+      </g>
+      <circle cx={x} cy={y} r="5.5" fill="#fff1b8" />
+      <text x="100" y="116" textAnchor="middle" fontSize="9.5" letterSpacing="2" fill="#5d6180">
         {caption.toUpperCase()}
       </text>
     </svg>
   );
 }
 
-/** Loading: the sun lifts behind the horizon and settles again. */
+/** Loading: the sky warms, mist drifts, and the sun comes up out of a blur, then sinks back. */
 export function SunriseLoader() {
   return (
-    <svg viewBox="0 0 160 90" className="block h-auto w-full" role="img" aria-label="Loading: a sun rising slowly behind the horizon">
+    <svg viewBox="0 0 200 110" className="dw-anim block h-auto w-full overflow-hidden rounded-2xl" role="img" aria-label="Loading: the sky warms and a sun rises slowly behind the horizon">
       <defs>
-        <clipPath id="dw-horizon">
-          <rect width="160" height="62" />
+        <clipPath id="dw-above">
+          <rect width="200" height="74" />
         </clipPath>
       </defs>
-      <g clipPath="url(#dw-horizon)">
-        <g className="motion-safe:animate-[dw-rise_3.2s_ease-in-out_infinite]">
-          <circle cx="80" cy="64" r="30" fill="url(#dw-glow)" />
-          <circle cx="80" cy="64" r="11" fill="#fff1b8" stroke={T} strokeWidth="1.2" />
+      <rect width="200" height="110" fill="#e4dff3" />
+      <rect width="200" height="110" fill="url(#dw-warm)" style={{ animation: `dw-warmup 7s ${EASE} infinite alternate` }} />
+      <g clipPath="url(#dw-above)">
+        <g style={{ animation: `dw-rise 7s ${EASE} infinite alternate` }}>
+          <circle cx="100" cy="74" r="42" fill="url(#dw-glow)" />
+          <circle cx="100" cy="74" r="12" fill="#fff1b8" style={{ animation: `dw-focus 7s ${EASE} infinite alternate` }} />
         </g>
       </g>
-      <path d="M10 62 h140" stroke={T} strokeWidth="1.5" />
-      <path d="M30 72 h100 M50 80 h60" stroke={T} strokeWidth="1.2" opacity=".35" />
+      <path d="M-10 74 C 60 72, 140 76, 210 74" fill="none" stroke="url(#dw-fade)" strokeWidth="1.3" />
+      <g opacity=".7" filter="url(#dw-haze)">
+        <path d="M-20 80 C 30 76, 90 84, 220 79" stroke="#fff" strokeWidth="6" fill="none" style={{ animation: `dw-mist 9s ${EASE} infinite alternate` }} />
+        <path d="M-20 92 C 50 88, 120 96, 220 90" stroke="#fff" strokeWidth="5" fill="none" style={{ animation: `dw-mist 11s ${EASE} infinite alternate-reverse` }} />
+      </g>
     </svg>
   );
 }
+
+/** Keyframes for the board; every loop is slow and stops under reduced motion. */
+export const DAWN_KEYFRAMES = `
+@keyframes dw-rise { from { transform: translateY(34px) } to { transform: translateY(4px) } }
+@keyframes dw-focus { from { filter: blur(2.5px); opacity: .6 } to { filter: blur(0); opacity: 1 } }
+@keyframes dw-warmup { from { opacity: .15 } to { opacity: 1 } }
+@keyframes dw-mist { from { transform: translateX(-10px) } to { transform: translateX(12px) } }
+@keyframes dw-pulse { 0%, 100% { scale: .85; opacity: .75 } 50% { scale: 1.12; opacity: 1 } }
+@media (prefers-reduced-motion: reduce) { .dw-anim, .dw-anim * { animation: none !important } }
+`;

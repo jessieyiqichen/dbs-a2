@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Cormorant_Garamond, Mulish } from "next/font/google";
 import credits from "@/data/credits/dawn.json";
-import { DAWN_ICON_NAMES, DawnDefs, DawnIcon, StartSlider, SunArc, SunriseLoader, SunToggle } from "@/components/dawn/DawnArt";
+import { DAWN_ICON_NAMES, DAWN_KEYFRAMES, DawnDefs, DawnIcon, StartSlider, SunArc, SunriseLoader } from "@/components/dawn/DawnArt";
+import SunToggle from "@/components/dawn/SunToggle";
 
 const display = Cormorant_Garamond({ subsets: ["latin"], weight: ["300", "400", "500"], style: ["normal", "italic"], variable: "--dw-display" });
 const ui = Mulish({ subsets: ["latin"], weight: ["300", "400", "600"], variable: "--dw-ui" });
@@ -94,7 +95,7 @@ const made: Record<string, React.ReactNode> = {
   buttons: (
     <div className="flex flex-wrap items-center gap-3 py-5">
       <span
-        className="relative overflow-hidden rounded-full px-7 py-3 [background-position:0_15%] hover:[background-position:0_60%] text-sm font-semibold text-white shadow-[0_0_28px_rgba(91,79,196,.35)] transition-[box-shadow,background-position] duration-700 ease-in-out hover:shadow-[0_0_40px_rgba(255,241,184,.7)]"
+        className="relative overflow-hidden rounded-full px-7 py-3 [background-position:0_15%] hover:[background-position:0_60%] text-sm font-semibold text-white shadow-[0_0_28px_rgba(91,79,196,.35)] transition-[box-shadow,background-position] duration-[1200ms] [transition-timing-function:cubic-bezier(.45,0,.2,1)] hover:shadow-[0_0_40px_rgba(255,241,184,.7)]"
         style={{ backgroundImage: "linear-gradient(0deg, #fff1b8 0%, #cfc4e6 18%, #5b4fc4 45%, #2e3150 100%)", backgroundSize: "100% 260%" }}
       >
         See the walk
@@ -109,7 +110,7 @@ const made: Record<string, React.ReactNode> = {
     <div className="flex gap-6 py-5 text-sm">
       <span className="relative pb-2 font-semibold">
         Overview
-        <span className="absolute inset-x-[-6px] -bottom-0.5 h-[3px] rounded-full bg-[#fff1b8] shadow-[0_0_12px_4px_rgba(255,241,184,.9)]" />
+        <span className="absolute inset-x-[-6px] -bottom-0.5 h-[3px] rounded-full bg-[#fff1b8] shadow-[0_0_12px_4px_rgba(255,241,184,.9)] motion-safe:animate-[dw-pulse_6s_ease-in-out_infinite]" />
       </span>
       <span className="pb-2 text-[#5d6180]">Route</span>
       <span className="pb-2 text-[#5d6180]">When to go</span>
@@ -145,8 +146,8 @@ const made: Record<string, React.ReactNode> = {
   ),
   toggle: (
     <div className="space-y-3 py-4">
-      <SunToggle on label="Show sunrise times" />
-      <SunToggle on={false} label="Permit walks only" />
+      <SunToggle initial label="Show sunrise times" />
+      <SunToggle label="Permit walks only (tap me)" />
     </div>
   ),
   profile: (
@@ -234,7 +235,7 @@ function Overview() {
         ))}
       </div>
       <div className={`${glass} flex flex-col justify-center gap-4 p-5`}>
-        <SunToggle on label="Sunrise times" />
+        <SunToggle initial label="Sunrise times" />
         <span
           className="block rounded-full py-3 text-center text-sm font-semibold text-white shadow-[0_0_28px_rgba(91,79,196,.35)]"
           style={{ backgroundImage: "linear-gradient(0deg, #fff1b8 0%, #cfc4e6 18%, #5b4fc4 45%, #2e3150 100%)", backgroundSize: "100% 260%", backgroundPosition: "0 15%" }}
@@ -268,14 +269,14 @@ const tiles: Tile[] = [
   { kind: "made", id: "slider", caption: "Start time: night to morning, the sun as the thumb" },
   { kind: "photo", file: "cliff-in-cloud.jpg", caption: "Cliff in cloud: the foreground can wait" },
   { kind: "made", id: "buttons", caption: "The main button rises like a sunrise on hover" },
-  { kind: "made", id: "icons", caption: "Dawn icons: thin lines, lilac fill, one point of first light" },
+  { kind: "made", id: "icons", caption: "Dawn icons: a fine line over a soft wash, horizons that fade, one point of light" },
   { kind: "photo", file: "misty-birches.jpg", caption: "Misty birches: soft, layered light" },
-  { kind: "made", id: "toggle", caption: "Toggle: the moon sets, the sun comes up" },
+  { kind: "made", id: "toggle", caption: "Toggle: tap it; the sun climbs an arc as night fades to day" },
   { kind: "made", id: "profile", caption: "Elevation in mist, first light on the pass" },
   { kind: "photo", file: "lilac-dusk.jpg", caption: "Lilac dusk: the one darker note" },
   { kind: "made", id: "hours", caption: "4:30 to 6:30: colour changes slowly" },
   { kind: "photo", file: "fog-meadow.jpg", caption: "Fog meadow: texture without contrast" },
-  { kind: "made", id: "breathe", caption: "Loading: the sun lifts behind the horizon" }
+  { kind: "made", id: "breathe", caption: "Loading: the sky warms, mist drifts, the sun comes out of a blur" }
   ,{ kind: "made", id: "sun-arc", caption: "Progress as the sun\u2019s arc across the day" },
   { kind: "photo", file: "cloud-sea.jpg", caption: "Cloud sea: above it all, quietly" },
   { kind: "made", id: "search", caption: "Search asks where you will be at sunrise" },
@@ -288,7 +289,7 @@ export default function DawnBoard() {
   return (
     <main className={`${display.variable} ${ui.variable} min-h-screen font-[family-name:var(--dw-ui)] text-[#2e3150]`} style={{ background: SKY }}>
       <DawnDefs />
-      <style>{`@keyframes dw-rise { 0%, 100% { transform: translateY(26px) } 50% { transform: translateY(0) } }`}</style>
+      <style>{DAWN_KEYFRAMES}</style>
       <div className="mx-auto max-w-6xl px-5 pb-24 pt-10">
         <Link
           href="/"
