@@ -38,3 +38,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Corners: 2px, paper edges, not rounded.
 - Shadow: low and soft, like paper on a desk (`0 1px 2px rgba(0,0,0,.12), 0 8px 18px rgba(60,45,20,.10)`).
 - Motion: 300ms, ease-out, settles straight; no bounce.
+
+### Dawn — Quiet, Light, Hopeful
+- Palette roles: haze page, a soft sky gradient `#e9e4f5 → #dfe8f5 → #f6f3f8`; frosted white surfaces (white at 60–80%, blurred); twilight text `#2e3150` (11.42:1 on haze); muted text `#5d6180` (5.48:1); lilac hairlines `#cfc4e6` (decorative only, never text); violet `#5b4fc4` only for the primary action, with white text (6.25:1).
+- Type pair: Cormorant Garamond, light, for names and numbers; Mulish for everything else. Text is twilight, never black.
+- Corners: 20px for cards; pills for buttons and chips.
+- Shadow: no drop shadows; a soft lilac glow (`0 0 40px rgba(150,140,220,.18)`) and a hairline white border.
+- Motion: 600–700ms, ease-in-out; fades and 2px lifts, nothing snaps.
