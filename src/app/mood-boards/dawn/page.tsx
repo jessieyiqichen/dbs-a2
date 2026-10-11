@@ -177,7 +177,7 @@ const tiles: Tile[] = [
   { kind: "made", id: "stamp", caption: "Badge: an embossed stamp, pressed into the mount" },
   { kind: "made", id: "button-states", caption: "Button states: rest, in register, pressed, focus, unprinted" },
   { kind: "photo", file: "lake-te-anau.jpg", caption: "Lake Te Anau: celadon water, one small boat" },
-  { kind: "made", id: "treatment", caption: "A modern photo joins the set: colour lifted out, the print's tints laid back in" },
+  { kind: "made", id: "treatment", caption: "A modern photo joins the set: toned like the prints, half the colour out, warm cream highlights" },
   { kind: "photo", file: "chamonix-floria.jpg", caption: "The Chamonix valley, where the Tour du Mont Blanc begins" },
   { kind: "photo", file: "cleddau-valley.jpg", caption: "Cleddau Valley, Milford Sound: one figure for scale" },
   { kind: "photo", file: "milford-windbound.jpg", caption: "Milford Sound from Windbound Point: depth from paler, not darker" },

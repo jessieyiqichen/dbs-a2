@@ -91,27 +91,30 @@ export function ChipSwatch({ force, label = "Lakes", tint = DW.loch }: { force: 
   );
 }
 
+/** One filter chip, controlled by its parent. */
+export function PlateChip({ label, tint, on, onToggle }: { label: string; tint: string; on: boolean; onToggle: () => void }) {
+  return (
+    <button
+      type="button"
+      aria-pressed={on}
+      onClick={onToggle}
+      className={`${chipBase} ${on ? chipState.selected : `${chipState.rest} hover:border-[#22333a] hover:shadow-[0_0_0_0_var(--tint)] hover:[background:color-mix(in_srgb,var(--tint)_45%,transparent)]`} active:translate-x-px active:translate-y-px active:shadow-[inset_0_2px_4px_rgba(34,51,58,.45)] active:[background:var(--tint)] ${focusRing}`}
+      style={{ "--tint": tint } as React.CSSProperties}
+    >
+      {on && <Tick />}
+      {label}
+    </button>
+  );
+}
+
 /** Filter chips: printed labels, each with its own tint plate. Chosen ones are printed solid, in register. */
 export function PlateChips({ options }: { options: { label: string; tint: string; on?: boolean }[] }) {
   const [on, setOn] = useState(options.filter((o) => o.on).map((o) => o.label));
   return (
     <div role="group" aria-label="Filter trails" className="flex flex-wrap gap-2.5">
-      {options.map((o) => {
-        const sel = on.includes(o.label);
-        return (
-          <button
-            key={o.label}
-            type="button"
-            aria-pressed={sel}
-            onClick={() => setOn((cur) => (sel ? cur.filter((x) => x !== o.label) : [...cur, o.label]))}
-            className={`${chipBase} ${sel ? chipState.selected : `${chipState.rest} hover:border-[#22333a] hover:shadow-[0_0_0_0_var(--tint)] hover:[background:color-mix(in_srgb,var(--tint)_45%,transparent)]`} active:translate-x-px active:translate-y-px active:shadow-[inset_0_2px_4px_rgba(34,51,58,.45)] active:[background:var(--tint)] ${focusRing}`}
-            style={{ "--tint": o.tint } as React.CSSProperties}
-          >
-            {sel && <Tick />}
-            {o.label}
-          </button>
-        );
-      })}
+      {options.map((o) => (
+        <PlateChip key={o.label} label={o.label} tint={o.tint} on={on.includes(o.label)} onToggle={() => setOn((cur) => (cur.includes(o.label) ? cur.filter((x) => x !== o.label) : [...cur, o.label]))} />
+      ))}
     </div>
   );
 }
@@ -119,9 +122,9 @@ export function PlateChips({ options }: { options: { label: string; tint: string
 /* ---------- toggle ---------- */
 
 /** Toggle: square track and knob. Off, the knob's loch plate sits off register; on, it locks in and the track is printed. */
-export function PlateToggle({ label, initial = false, force }: { label: string; initial?: boolean; force?: ControlState }) {
+export function PlateToggle({ label, initial = false, force, checked, onChange }: { label: string; initial?: boolean; force?: ControlState; checked?: boolean; onChange?: (on: boolean) => void }) {
   const [live, setLive] = useState(initial);
-  const on = force ? force === "selected" : live;
+  const on = force ? force === "selected" : (checked ?? live);
   const disabled = force === "disabled";
   const move = "left 600ms cubic-bezier(.45,0,.2,1), box-shadow 600ms cubic-bezier(.45,0,.2,1), background-color 600ms cubic-bezier(.45,0,.2,1)";
   const knobShadow = on || force === "hover" ? `0 0 0 0 ${DW.loch}` : force === "pressed" ? `inset 0 1px 2px rgba(34,51,58,.4)` : `3px 3px 0 0 ${DW.loch}`;
@@ -139,7 +142,7 @@ export function PlateToggle({ label, initial = false, force }: { label: string; 
   const text = <span className={`${ui} whitespace-nowrap text-base ${disabled ? "text-[#4f5f66] line-through" : on ? "text-[#22333a]" : "text-[#4f5f66]"}`}>{label}</span>;
   if (force) return <span className="flex items-center gap-3">{track}{text}</span>;
   return (
-    <button type="button" role="switch" aria-checked={on} onClick={() => setLive(!live)} className="group flex items-center gap-3 text-left outline-none">
+    <button type="button" role="switch" aria-checked={on} onClick={() => (onChange ? onChange(!on) : setLive(!live))} className="group flex items-center gap-3 text-left outline-none">
       {track}
       {text}
     </button>

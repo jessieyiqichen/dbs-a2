@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { hikes, formatRange } from "@/data/hikes";
 import { KEY, LOCH, MOUNT, T } from "./PlateArt";
+import { TONE_FILTER, TONE_OVERLAY } from "./Toned";
 
 const ui = "font-[family-name:var(--dw-ui)]";
 const serif = "font-[family-name:var(--dw-display)]";
@@ -188,7 +189,7 @@ export function PrintingLoader({ photo }: { photo: string }) {
   );
 }
 
-/** How a modern photo joins the set: lift the colour out, lay the print's tints back in. */
+/** How a modern photo joins the set: treatment A, the photochrom look (half the colour out, warm cream highlights, soft contrast). */
 export function PhotochromTreatment({ photo }: { photo: string }) {
   return (
     <div className="grid grid-cols-2 gap-2">
@@ -198,10 +199,10 @@ export function PhotochromTreatment({ photo }: { photo: string }) {
       </figure>
       <figure className="m-0">
         <div className="relative aspect-square overflow-hidden border-[3px] border-[#22333a]">
-          <Image src={photo} alt="" fill sizes="200px" className="object-cover [filter:grayscale(1)_contrast(1.05)_brightness(1.08)]" />
-          <div className="absolute inset-0 mix-blend-color" style={{ background: `linear-gradient(180deg, ${T.aqua} 0%, ${T.celadon} 35%, ${T.loch} 70%, #4c6a6a 100%)` }} />
+          <Image src={photo} alt="" fill sizes="200px" className="object-cover" style={{ filter: TONE_FILTER }} />
+          <div className="absolute inset-0 opacity-55 mix-blend-soft-light" style={{ background: TONE_OVERLAY }} />
         </div>
-        <figcaption className={`${ui} mt-1 text-[11px] text-[#4f5f66]`}>With the print&apos;s tints</figcaption>
+        <figcaption className={`${ui} mt-1 text-[11px] text-[#4f5f66]`}>Toned like the prints</figcaption>
       </figure>
     </div>
   );

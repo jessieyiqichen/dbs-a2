@@ -66,3 +66,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Shadow: a hard bottom depth shadow with no blur (`0 6px 0` a darker shade, then navy) that collapses when pressed; a white gloss band on buttons.
 - States: rest = standing on a hard ground shadow; hover = lifts 2px, brightens, a shine sweeps across; pressed = drops onto its shadow and squashes; selected = grape, popped up (chips, tabs), grass with a white tick (checkbox, toggle), a grape gem (radio); disabled = locked: grey face, grey outline, a lock icon; focus = a sun-yellow selection arrow bobbing above the control, like a game-menu cursor (above the label for text fields).
 - Motion: snappy, 150–200ms; buttons press down and squash; rewards pop with overshoot (`cubic-bezier(.34,1.56,.64,1)`); idle loops (clouds, pulse on the next level, stripes on bars) stop under reduced motion.
+
+## The site (/trails), in Dawn
+- One page: masthead, find-a-trail panel (search, region and length chips, no-permit toggle, order select, live count, clear all), a grid of twelve print cards, a modal detail panel, footer with data date and every photo credit.
+- Interactions (all faked in the browser, nothing stored): filter and search; sort; detail panel (native dialog, Esc closes, focus returns to the card) with a gallery of plates (thumbnails or arrow keys) and three tabs; "Add to my list", the one loch action, counted in the header for this visit only.
+- Photos: src/data/trailPhotos.json, 1–4 per trail in route order, one marked cover. Photochrom prints shown as they are; modern Unsplash photos get treatment A (src/components/dawn/Toned.tsx): saturate .55, sepia .28, contrast .9, brightness 1.06, then a cream→sage→rock soft-light overlay at 55%. Never use a photo whose recorded location is off the route (Middle Tiger Leaping Gorge is closed; Cleddau Valley, Mer de Glace and Mirror Lake are not on their routes).
+- Filtering logic lives in src/app/trails/filters.ts and is tested (npm test).
+- Desktop first; phone layout to be adapted after desktop is approved.

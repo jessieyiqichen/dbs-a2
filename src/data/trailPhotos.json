@@ -1,0 +1,586 @@
+{
+ "inca-trail": [
+  {
+   "file": "/trails/inca-trail-4vvcls92EAY.jpg",
+   "kind": "modern",
+   "alt": "Hikers in a high valley on the Inca Trail",
+   "place": "Inca Trail, Cusco",
+   "author": "Juan Carlos",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/4vvcls92EAY",
+   "w": 1400,
+   "h": 788,
+   "cover": false
+  },
+  {
+   "file": "/trails/inca-trail-MLkUjIAsYgQ.jpg",
+   "kind": "modern",
+   "alt": "Stone ruins beside the Inca Trail",
+   "place": "Inca Trail",
+   "author": "Martin Casagrand",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/MLkUjIAsYgQ",
+   "w": 1400,
+   "h": 1050,
+   "cover": false
+  },
+  {
+   "file": "/trails/inca-trail-xAIPNO42iPg.jpg",
+   "kind": "modern",
+   "alt": "Terraces and steep green valleys at Wiñay Wayna",
+   "place": "Wiñay Wayna",
+   "author": "Emmanuel Cassar",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/xAIPNO42iPg",
+   "w": 1067,
+   "h": 1600,
+   "cover": true
+  },
+  {
+   "file": "/trails/inca-trail-Wrqk4RTvna0.jpg",
+   "kind": "modern",
+   "alt": "Signposts to the Sun Gate above Machu Picchu",
+   "place": "Signs to the Sun Gate (Inti Punku)",
+   "author": "Charles Nouwen",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/Wrqk4RTvna0",
+   "w": 1400,
+   "h": 1050,
+   "cover": false
+  }
+ ],
+ "w-trek": [
+  {
+   "file": "/trails/w-trek-LG3K7bTn-VQ.jpg",
+   "kind": "modern",
+   "alt": "The granite towers of Torres del Paine above a glacial lake",
+   "place": "Base of the Towers",
+   "author": "Mario La Pergola",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/LG3K7bTn-VQ",
+   "w": 1400,
+   "h": 933,
+   "cover": true
+  },
+  {
+   "file": "/trails/w-trek-AZxRJwCYg90.jpg",
+   "kind": "modern",
+   "alt": "Hikers on open hills in Torres del Paine National Park",
+   "place": "Torres del Paine National Park",
+   "author": "Diego Marín",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/AZxRJwCYg90",
+   "w": 1400,
+   "h": 933,
+   "cover": false
+  },
+  {
+   "file": "/trails/w-trek-IxvjyUu7mDo.jpg",
+   "kind": "modern",
+   "alt": "Hikers crossing a wooden bridge towards the mountains",
+   "place": "Torres del Paine National Park",
+   "author": "Diego Marín",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/IxvjyUu7mDo",
+   "w": 1400,
+   "h": 933,
+   "cover": false
+  },
+  {
+   "file": "/trails/w-trek-juaUy30-RJ8.jpg",
+   "kind": "modern",
+   "alt": "Blue ice at the front of Grey Glacier",
+   "place": "Grey Glacier",
+   "author": "Mario La Pergola",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/juaUy30-RJ8",
+   "w": 1400,
+   "h": 933,
+   "cover": false
+  }
+ ],
+ "ebc": [
+  {
+   "file": "/trails/ebc-Wj9ELwGXa6c.jpg",
+   "kind": "modern",
+   "alt": "A stupa with prayer flags above Namche Bazaar",
+   "place": "Namche Bazaar",
+   "author": "Sebastian Pena Lambarri",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/Wj9ELwGXa6c",
+   "w": 1400,
+   "h": 933,
+   "cover": false
+  },
+  {
+   "file": "/trails/ebc-JjytBsXOj30.jpg",
+   "kind": "modern",
+   "alt": "The gate at Tengboche monastery, with peaks behind",
+   "place": "Tengboche",
+   "author": "Nepal Visuals",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/JjytBsXOj30",
+   "w": 1400,
+   "h": 787,
+   "cover": false
+  },
+  {
+   "file": "/trails/ebc-vyUb6VxcH0c.jpg",
+   "kind": "modern",
+   "alt": "Lodges at Gorak Shep below the Khumbu peaks",
+   "place": "Gorak Shep",
+   "author": "Dylan Shaw",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/vyUb6VxcH0c",
+   "w": 1400,
+   "h": 933,
+   "cover": false
+  },
+  {
+   "file": "/trails/ebc-dQ2Qkc8ke38.jpg",
+   "kind": "modern",
+   "alt": "Snow peaks and prayer flags at Everest Base Camp",
+   "place": "Everest Base Camp",
+   "author": "Geetangey",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/dQ2Qkc8ke38",
+   "w": 1400,
+   "h": 933,
+   "cover": true
+  }
+ ],
+ "tongariro": [
+  {
+   "file": "/trails/tongariro-377pMA6stX8.jpg",
+   "kind": "modern",
+   "alt": "A hiker walking towards a volcanic cone on the crossing",
+   "place": "Tongariro",
+   "author": "Luca Calderone",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/377pMA6stX8",
+   "w": 1400,
+   "h": 933,
+   "cover": false
+  },
+  {
+   "file": "/trails/tongariro-4SptwEalwDg.jpg",
+   "kind": "modern",
+   "alt": "The red and black slopes of the Red Crater",
+   "place": "Red Crater, the high point",
+   "author": "Caleb Shong",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/4SptwEalwDg",
+   "w": 1067,
+   "h": 1600,
+   "cover": true
+  },
+  {
+   "file": "/trails/tongariro-AAvx9hyCuvQ.jpg",
+   "kind": "modern",
+   "alt": "A milky crater lake in mist on the crossing",
+   "place": "Tongariro Alpine Crossing",
+   "author": "Daniel Chen",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/AAvx9hyCuvQ",
+   "w": 1400,
+   "h": 933,
+   "cover": false
+  },
+  {
+   "file": "/trails/tongariro-DfXgxLkIq-8.jpg",
+   "kind": "modern",
+   "alt": "Hikers on a ridge in Tongariro National Park",
+   "place": "Tongariro National Park",
+   "author": "Olly Dow",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/DfXgxLkIq-8",
+   "w": 1400,
+   "h": 933,
+   "cover": false
+  }
+ ],
+ "kumano": [
+  {
+   "file": "/trails/kumano-USsgnbIgC-U.jpg",
+   "kind": "modern",
+   "alt": "A stream through dense forest on the Nakahechi route",
+   "place": "Nakahechi route, Tanabe",
+   "author": "Fabian Bächli",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/USsgnbIgC-U",
+   "w": 1067,
+   "h": 1600,
+   "cover": true
+  },
+  {
+   "file": "/trails/kumano-3KlC8MBhAWM.jpg",
+   "kind": "modern",
+   "alt": "Two walkers on a forest path of the Kumano Kodo",
+   "place": "Kumano Kodo, Wakayama",
+   "author": "Kieran",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/3KlC8MBhAWM",
+   "w": 1280,
+   "h": 1600,
+   "cover": false
+  },
+  {
+   "file": "/trails/kumano-14kilS2qZTk.jpg",
+   "kind": "modern",
+   "alt": "Tall cedars on the Kumano Kodo",
+   "place": "Kumano Kodo, Tanabe",
+   "author": "Halogen Condense",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/14kilS2qZTk",
+   "w": 1400,
+   "h": 933,
+   "cover": false
+  },
+  {
+   "file": "/trails/kumano-7A2K5XGt_3Q.jpg",
+   "kind": "modern",
+   "alt": "The halls of Kumano Hongu Taisha, where the route ends",
+   "place": "Kumano Hongu Taisha",
+   "author": "Michael Bai",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/7A2K5XGt_3Q",
+   "w": 1400,
+   "h": 1050,
+   "cover": false
+  }
+ ],
+ "laugavegur": [
+  {
+   "file": "/trails/laugavegur-f3uWi9G-lus.jpg",
+   "kind": "modern",
+   "alt": "A hiker above a braided river at Landmannalaugar",
+   "place": "Landmannalaugar, the start",
+   "author": "Joshua Sortino",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/f3uWi9G-lus",
+   "w": 1400,
+   "h": 934,
+   "cover": false
+  },
+  {
+   "file": "/trails/laugavegur-gDG_FkVvq98.jpg",
+   "kind": "modern",
+   "alt": "Hikers crossing steaming, snow-streaked hills",
+   "place": "Laugavegur",
+   "author": "Krisztián Korhetz",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/gDG_FkVvq98",
+   "w": 1400,
+   "h": 874,
+   "cover": false
+  },
+  {
+   "file": "/trails/laugavegur-RpiLVTxIQ0o.jpg",
+   "kind": "modern",
+   "alt": "Hikers climbing out of Landmannalaugar",
+   "place": "Landmannalaugar",
+   "author": "Lien Van Win",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/RpiLVTxIQ0o",
+   "w": 1067,
+   "h": 1600,
+   "cover": false
+  },
+  {
+   "file": "/trails/laugavegur-Gz3RXr93-Fo.jpg",
+   "kind": "modern",
+   "alt": "A braided river under low cloud at Þórsmörk",
+   "place": "Þórsmörk, the end",
+   "author": "Lien Van Win",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/Gz3RXr93-Fo",
+   "w": 1067,
+   "h": 1600,
+   "cover": true
+  }
+ ],
+ "camino": [
+  {
+   "file": "/trails/camino-5RZS0v9pv74.jpg",
+   "kind": "modern",
+   "alt": "Two walkers on a dirt track towards the hill town of Cirauqui",
+   "place": "Cirauqui, Navarre",
+   "author": "Burkard Meyendriesch",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/5RZS0v9pv74",
+   "w": 1400,
+   "h": 931,
+   "cover": true
+  },
+  {
+   "file": "/trails/camino-H6f6x31VEcg.jpg",
+   "kind": "modern",
+   "alt": "A dirt road across the Meseta at Hornillos del Camino",
+   "place": "Hornillos del Camino",
+   "author": "snap wander",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/H6f6x31VEcg",
+   "w": 1400,
+   "h": 652,
+   "cover": false
+  },
+  {
+   "file": "/trails/camino-aIskBiNgJLY.jpg",
+   "kind": "modern",
+   "alt": "A track between vineyards near Cacabelos",
+   "place": "Cacabelos, El Bierzo",
+   "author": "Marco Montero Pisani",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/aIskBiNgJLY",
+   "w": 1400,
+   "h": 1050,
+   "cover": false
+  },
+  {
+   "file": "/trails/camino-iGFhfBGtoSU.jpg",
+   "kind": "modern",
+   "alt": "Fields under a big sky near Sarria",
+   "place": "Camino Francés, Sarria",
+   "author": "Vlad D",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/iGFhfBGtoSU",
+   "w": 1400,
+   "h": 933,
+   "cover": false
+  }
+ ],
+ "tiger-leaping": [
+  {
+   "file": "/trails/tiger-leaping-NkCJUjgCp8s.jpg",
+   "kind": "modern",
+   "alt": "The Jinsha river deep in Tiger Leaping Gorge, seen from above",
+   "place": "Tiger Leaping Gorge",
+   "author": "Russ Lee",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/NkCJUjgCp8s",
+   "w": 1067,
+   "h": 1600,
+   "cover": true
+  },
+  {
+   "file": "/trails/tiger-leaping-byFFV7MjyJI.jpg",
+   "kind": "modern",
+   "alt": "A guesthouse on the High Trail in low cloud",
+   "place": "Halfway Guest House, High Trail",
+   "author": "Yulya Powell",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/byFFV7MjyJI",
+   "w": 1067,
+   "h": 1600,
+   "cover": false
+  },
+  {
+   "file": "/trails/tiger-leaping-kyDyOHkIbC8.jpg",
+   "kind": "modern",
+   "alt": "Sunlit walls of the gorge",
+   "place": "Tiger Leaping Gorge",
+   "author": "Marc-Olivier Jodoin",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/kyDyOHkIbC8",
+   "w": 1067,
+   "h": 1600,
+   "cover": false
+  }
+ ],
+ "milford": [
+  {
+   "file": "/moodboards/dawn/lake-te-anau.jpg",
+   "kind": "photochrom",
+   "alt": "Lake Te Anau, where the track begins, in a photochrom print",
+   "place": "Lake Te Anau",
+   "author": "Photoglob Co.",
+   "date": "c. 1890–1900",
+   "license": "No known restrictions (Library of Congress)",
+   "source": "https://www.loc.gov/item/2017658077/",
+   "w": 1024,
+   "h": 754,
+   "cover": false
+  },
+  {
+   "file": "/moodboards/dawn/clinton-river.jpg",
+   "kind": "photochrom",
+   "alt": "The Clinton River, the track's first valley, in a photochrom print",
+   "place": "Clinton River",
+   "author": "Photoglob Co.",
+   "date": "c. 1890–1900",
+   "license": "No known restrictions (Library of Congress)",
+   "source": "https://www.loc.gov/item/2017658066/",
+   "w": 1024,
+   "h": 756,
+   "cover": true
+  },
+  {
+   "file": "/moodboards/dawn/mitre-peak.jpg",
+   "kind": "photochrom",
+   "alt": "Mitre Peak in Milford Sound, at the end of the track, in a photochrom print",
+   "place": "Mitre Peak, Milford Sound",
+   "author": "Photoglob Co.",
+   "date": "c. 1890–1900",
+   "license": "No known restrictions (Library of Congress)",
+   "source": "https://www.loc.gov/item/2017658061/",
+   "w": 1024,
+   "h": 752,
+   "cover": false
+  }
+ ],
+ "tmb": [
+  {
+   "file": "/trails/tmb-kteBKtqQhUM.jpg",
+   "kind": "modern",
+   "alt": "A hiker crossing grassy slopes at the Col de la Seigne",
+   "place": "Col de la Seigne",
+   "author": "Ana Frantz",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/kteBKtqQhUM",
+   "w": 1400,
+   "h": 1050,
+   "cover": false
+  },
+  {
+   "file": "/trails/tmb-hSaTryMiQY8.jpg",
+   "kind": "modern",
+   "alt": "Champex-Lac between forest and mountains",
+   "place": "Champex-Lac, Switzerland",
+   "author": "Yann Lerjen",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/hSaTryMiQY8",
+   "w": 1400,
+   "h": 931,
+   "cover": false
+  },
+  {
+   "file": "/moodboards/dawn/chamonix-floria.jpg",
+   "kind": "photochrom",
+   "alt": "The Chamonix valley from the Aiguille du Floria, in a photochrom print",
+   "place": "The Chamonix valley",
+   "author": "Photochrom Print Collection",
+   "date": "c. 1890–1900",
+   "license": "No known restrictions (Library of Congress)",
+   "source": "https://www.loc.gov/item/2001697618/",
+   "w": 1024,
+   "h": 758,
+   "cover": false
+  },
+  {
+   "file": "/moodboards/dawn/mont-blanc-flegere.jpg",
+   "kind": "photochrom",
+   "alt": "The Mont Blanc range from La Flégère, in a photochrom print",
+   "place": "La Flégère",
+   "author": "Photochrom Print Collection",
+   "date": "c. 1890–1900",
+   "license": "No known restrictions (Library of Congress)",
+   "source": "https://www.loc.gov/item/2001697619/",
+   "w": 1024,
+   "h": 735,
+   "cover": true
+  }
+ ],
+ "whw": [
+  {
+   "file": "/trails/whw-9w7dm1IHmrw.jpg",
+   "kind": "modern",
+   "alt": "Rolling hills on Conic Hill above Loch Lomond and its islands",
+   "place": "Conic Hill",
+   "author": "Anguel Hristozov",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/9w7dm1IHmrw",
+   "w": 1400,
+   "h": 882,
+   "cover": false
+  },
+  {
+   "file": "/moodboards/dawn/loch-lomond-tarbet.jpg",
+   "kind": "photochrom",
+   "alt": "Loch Lomond from Tarbet, in a photochrom print",
+   "place": "Loch Lomond",
+   "author": "Photochrom Print Collection",
+   "date": "c. 1890–1900",
+   "license": "No known restrictions (Library of Congress)",
+   "source": "https://www.loc.gov/item/2002695019/",
+   "w": 1024,
+   "h": 765,
+   "cover": true
+  },
+  {
+   "file": "/trails/whw-_E07WwlywA.jpg",
+   "kind": "modern",
+   "alt": "A walker on a track near Kings House at Glencoe",
+   "place": "Kings House, Glencoe",
+   "author": "Krisjanis Mezulis",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/__E07WwlywA",
+   "w": 1400,
+   "h": 933,
+   "cover": false
+  },
+  {
+   "file": "/moodboards/dawn/fort-william-ben-nevis.jpg",
+   "kind": "photochrom",
+   "alt": "Fort William and Ben Nevis, where the way ends, in a photochrom print",
+   "place": "Fort William and Ben Nevis",
+   "author": "Photochrom Print Collection",
+   "date": "c. 1890–1900",
+   "license": "No known restrictions (Library of Congress)",
+   "source": "https://www.loc.gov/item/2001705996/",
+   "w": 1024,
+   "h": 764,
+   "cover": false
+  }
+ ],
+ "half-dome": [
+  {
+   "file": "/trails/half-dome-EzbX7eWD64Y.jpg",
+   "kind": "modern",
+   "alt": "Vernal Fall from the Mist Trail",
+   "place": "Vernal Fall, Mist Trail",
+   "author": "Mathew Benoit",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/EzbX7eWD64Y",
+   "w": 1067,
+   "h": 1600,
+   "cover": false
+  },
+  {
+   "file": "/trails/half-dome-Wam-2W1C1y8.jpg",
+   "kind": "modern",
+   "alt": "Granite and forest at Nevada Fall",
+   "place": "Nevada Fall",
+   "author": "Mathew Benoit",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/Wam-2W1C1y8",
+   "w": 1400,
+   "h": 933,
+   "cover": false
+  },
+  {
+   "file": "/trails/half-dome-f_SVTmEABZY.jpg",
+   "kind": "modern",
+   "alt": "Grey granite under cloud on the Half Dome Trail",
+   "place": "On the Half Dome Trail",
+   "author": "Artak Petrosyan",
+   "license": "Unsplash License",
+   "source": "https://unsplash.com/photos/f_SVTmEABZY",
+   "w": 1067,
+   "h": 1600,
+   "cover": false
+  },
+  {
+   "file": "/moodboards/dawn/south-dome.jpg",
+   "kind": "photochrom",
+   "alt": "Half Dome, then called South Dome, in a photochrom print",
+   "place": "South Dome",
+   "author": "Detroit Photographic Co.",
+   "date": "1898",
+   "license": "No known restrictions (Library of Congress)",
+   "source": "https://www.loc.gov/item/2008678186/",
+   "w": 778,
+   "h": 1024,
+   "cover": true
+  }
+ ]
+}

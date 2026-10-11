@@ -20,9 +20,11 @@ const primaryState: Record<ControlState, string> = {
 const primaryLive = `hover:bg-[#356677] hover:shadow-[0_0_0_0_#8eaaa6] active:translate-x-px active:translate-y-px active:bg-[#244a58] active:shadow-[inset_0_2px_4px_rgba(0,0,0,.4)] ${focusRing}`;
 
 /** Primary: loch ink with its tint plate printed a little off. Hover brings it into register; press sinks it. */
-export function PrimaryButton({ force, children = "See the walk" }: Forceable) {
+type ButtonProps = Forceable & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className">;
+
+export function PrimaryButton({ force, children = "See the walk", ...rest }: ButtonProps) {
   if (force) return <span className={`${primaryBase} ${primaryState[force]}`}>{children}</span>;
-  return <button type="button" className={`${primaryBase} ${primaryState.rest} ${primaryLive}`}>{children}</button>;
+  return <button type="button" {...rest} className={`${primaryBase} ${primaryState.rest} ${primaryLive}`}>{children}</button>;
 }
 
 const secondaryBase = `${caps} relative inline-flex items-center border px-5 py-3 ${slow}`;
@@ -36,10 +38,10 @@ const secondaryState: Record<ControlState, string> = {
 };
 
 /** Secondary: key-ink outline on the mount, a celadon plate off register. */
-export function SecondaryButton({ force, children = "Later" }: Forceable) {
+export function SecondaryButton({ force, children = "Later", ...rest }: ButtonProps) {
   if (force) return <span className={`${secondaryBase} ${secondaryState[force]}`}>{children}</span>;
   return (
-    <button type="button" className={`${secondaryBase} ${secondaryState.rest} hover:bg-[#c3d6c4] hover:shadow-[0_0_0_0_#c3d6c4] active:translate-x-px active:translate-y-px active:bg-[#8eaaa6] active:shadow-[inset_0_2px_4px_rgba(34,51,58,.45)] ${focusRing}`}>
+    <button type="button" {...rest} className={`${secondaryBase} ${secondaryState.rest} hover:bg-[#c3d6c4] hover:shadow-[0_0_0_0_#c3d6c4] active:translate-x-px active:translate-y-px active:bg-[#8eaaa6] active:shadow-[inset_0_2px_4px_rgba(34,51,58,.45)] ${focusRing}`}>
       {children}
     </button>
   );
@@ -95,13 +97,20 @@ export function MountInput({ force, id, label = "Trail name", placeholder = "a t
 }
 
 /** Select: the same field with a fine key-line chevron. */
-export function MountSelect({ force, id }: { force?: ControlState; id: string }) {
+const MONTHS = ["Nov", "Dec", "Jan", "Feb", "Mar", "Apr"].map((m) => ({ value: m, label: m }));
+
+export function MountSelect({ force, id, label = "Best month", options = MONTHS, value, onChange }: { force?: ControlState; id: string; label?: string; options?: { value: string; label: string }[]; value?: string; onChange?: (v: string) => void }) {
   return (
-    <Field id={id} label="Best month">
+    <Field id={id} label={label}>
       <span className={`block ${force === "focus" ? `${focusForced} relative` : force ? "relative" : focusWithin}`}>
-        <select id={id} defaultValue="Jan" disabled={force === "disabled"} className={`${fieldBase} appearance-none pr-9 ${fieldState[force ?? "rest"]} ${force ? "" : fieldLive}`}>
-          {["Nov", "Dec", "Jan", "Feb", "Mar", "Apr"].map((m) => (
-            <option key={m}>{m}</option>
+        <select
+          id={id}
+          {...(value === undefined ? { defaultValue: options[2]?.value ?? options[0].value } : { value, onChange: (e: React.ChangeEvent<HTMLSelectElement>) => onChange?.(e.target.value) })}
+          disabled={force === "disabled"}
+          className={`${fieldBase} appearance-none pr-9 ${fieldState[force ?? "rest"]} ${force ? "" : fieldLive}`}
+        >
+          {options.map((o) => (
+            <option key={o.value} value={o.value}>{o.label}</option>
           ))}
         </select>
         <svg viewBox="0 0 14 8" className="pointer-events-none absolute right-3 top-1/2 h-2 w-3.5 -translate-y-1/2" aria-hidden="true">
@@ -181,12 +190,12 @@ export function CountBadge({ n }: { n: number }) {
 }
 
 /** Search: "No." then the field, as in a print catalogue. */
-export function CatalogueSearch({ id }: { id: string }) {
+export function CatalogueSearch({ id, value, onChange, placeholder = "a trail, a country, a month…" }: { id: string; value?: string; onChange?: (v: string) => void; placeholder?: string }) {
   return (
     <label htmlFor={id} className="dw-crop dw-within relative flex items-stretch border border-[#6f8287] bg-[#f6f9f7] p-1 transition-colors duration-[600ms] focus-within:border-[#22333a] hover:border-[#22333a]">
       <span className={`${caps} grid place-items-center border-r border-[#6f8287]/50 px-3 text-[#4f5f66]`}>No.</span>
       <span className="sr-only">Search trails</span>
-      <input id={id} type="search" placeholder="a trail, a country, a month…" className={`${ui} w-full bg-transparent px-3 py-2 text-base text-[#22333a] placeholder:font-[family-name:var(--dw-display)] placeholder:italic placeholder:text-[#4f5f66] outline-none`} />
+      <input id={id} type="search" placeholder={placeholder} {...(value === undefined ? {} : { value, onChange: (e: React.ChangeEvent<HTMLInputElement>) => onChange?.(e.target.value) })} className={`${ui} w-full bg-transparent px-3 py-2 text-base text-[#22333a] placeholder:font-[family-name:var(--dw-display)] placeholder:italic placeholder:text-[#4f5f66] outline-none`} />
     </label>
   );
 }
