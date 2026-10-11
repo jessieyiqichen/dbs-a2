@@ -5,11 +5,11 @@ import Link from "next/link";
 import { DATA_AS_OF, hikes } from "@/data/hikes";
 import rawPhotos from "@/data/trailPhotos.json";
 import { TonedPhoto, creditLine, type TrailPhoto } from "@/components/dawn/Toned";
-import { CountBadge } from "@/components/dawn/ds/Primitives";
+import { CountBadge, SecondaryButton } from "@/components/dawn/ds/Primitives";
 import { focusRing } from "@/components/dawn/ds/tokens";
 import { t12, t14, t24, t96 } from "./type";
 import { NO_FILTERS, applyFilters, toggle, type Filters } from "./filters";
-import { Contents } from "./Contents";
+import { ContentsDrawer } from "./ContentsDrawer";
 import { Chapter } from "./Chapter";
 import { TrailDialog } from "./TrailDialog";
 
@@ -20,20 +20,26 @@ export default function TrailsApp() {
   const [f, setF] = useState<Filters>(NO_FILTERS);
   const [openId, setOpenId] = useState<string | null>(null);
   const [list, setList] = useState<string[]>([]);
+  const [contentsOpen, setContentsOpen] = useState(false);
   const matches = useMemo(() => new Set(applyFilters(hikes, f).map((h) => h.id)), [f]);
   const open = hikes.find((h) => h.id === openId) ?? null;
   const flip = (id: string) => setList((cur) => toggle(cur, id));
 
   return (
-    <div className="mx-auto max-w-6xl px-5 pb-20 pt-8">
-      <div className={`${t14} flex items-center justify-between gap-4`}>
-        <Link href="/" className="text-[#4f5f66] underline-offset-4 hover:text-[#22333a] hover:underline">← Hub</Link>
-        <p className="flex items-center gap-2" aria-live="polite">
-          <CountBadge n={list.length} />
-          <span className="text-[#4f5f66]">on your list</span>
-        </p>
+    <>
+    <div className="sticky top-0 z-30 border-b border-[#22333a]/15 bg-[#e6edeb]/95">
+      <div className={`${t14} mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3`}>
+        <Link href="/" className={`relative text-[#4f5f66] underline-offset-4 hover:text-[#22333a] hover:underline ${focusRing}`}>← Hub</Link>
+        <div className="flex items-center gap-5">
+          <p className="flex items-center gap-2" aria-live="polite">
+            <CountBadge n={list.length} />
+            <span className="text-[#4f5f66]">on your list</span>
+          </p>
+          <SecondaryButton aria-haspopup="dialog" onClick={() => setContentsOpen(true)}>Contents</SecondaryButton>
+        </div>
       </div>
-
+    </div>
+    <div className="mx-auto max-w-6xl px-5 pb-20 pt-4">
       <header className="mt-10 grid grid-cols-1 items-end gap-10 lg:grid-cols-[1fr_1.15fr]">
         <div>
           <p className={`${t12} text-[#4f5f66]`}>A guide to twelve famous walks</p>
@@ -41,9 +47,9 @@ export default function TrailsApp() {
           <p className={`${t24} mt-6 max-w-md italic text-[#4f5f66]`}>
             From a day on a volcano to a month across Spain: twelve walks, set out like a box of old travel prints.
           </p>
-          <a href="#contents" className={`${t12} relative mt-8 inline-block border-b-2 border-[#22333a] pb-1 hover:border-[#2c5868] hover:text-[#2c5868] active:translate-y-px ${focusRing}`}>
-            Open the contents ↓
-          </a>
+          <div className="mt-8">
+            <SecondaryButton aria-haspopup="dialog" onClick={() => setContentsOpen(true)}>Open the contents</SecondaryButton>
+          </div>
         </div>
         <figure className="m-0 bg-[#f6f9f7] p-3.5">
           <TonedPhoto photo={OPENING} sizes="(min-width: 1024px) 640px, 100vw" priority className="aspect-[4/3] border-[3px] border-[#22333a]" />
@@ -51,11 +57,8 @@ export default function TrailsApp() {
         </figure>
       </header>
 
-      <div className="mt-20">
-        <Contents all={hikes} f={f} setF={setF} matches={matches} />
-      </div>
 
-      <div className="mt-16">
+      <div className="mt-20">
         {hikes.map((h, i) => (
           <Chapter
             key={h.id}
@@ -69,6 +72,8 @@ export default function TrailsApp() {
           />
         ))}
       </div>
+
+      <ContentsDrawer open={contentsOpen} onClose={() => setContentsOpen(false)} all={hikes} f={f} setF={setF} matches={matches} />
 
       <TrailDialog
         h={open}
@@ -100,5 +105,6 @@ export default function TrailsApp() {
         </details>
       </footer>
     </div>
+    </>
   );
 }

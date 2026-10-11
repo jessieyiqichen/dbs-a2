@@ -23,7 +23,7 @@ export function TabSwatch({ force, label = "Route" }: { force: ControlState; lab
 }
 
 /** Tabs: the chosen one gets a celadon plate laid under it and a key rule. Arrow keys move between tabs. */
-export function PlateTabs({ tabs, panels }: { tabs: string[]; panels: React.ReactNode[] }) {
+export function PlateTabs({ tabs, panels, idPrefix = "dw", panelClassName }: { tabs: string[]; panels: React.ReactNode[]; idPrefix?: string; panelClassName?: string }) {
   const [at, setAt] = useState(0);
   return (
     <div>
@@ -33,18 +33,18 @@ export function PlateTabs({ tabs, panels }: { tabs: string[]; panels: React.Reac
           return (
             <button
               key={t}
-              id={`dw-tab-${i}`}
+              id={`${idPrefix}-tab-${i}`}
               type="button"
               role="tab"
               aria-selected={on}
-              aria-controls={`dw-panel-${i}`}
+              aria-controls={`${idPrefix}-panel-${i}`}
               tabIndex={on ? 0 : -1}
               onClick={() => setAt(i)}
               onKeyDown={(e) => {
                 if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
                 const next = (at + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length;
                 setAt(next);
-                document.getElementById(`dw-tab-${next}`)?.focus();
+                document.getElementById(`${idPrefix}-tab-${next}`)?.focus();
               }}
               className={`group relative whitespace-nowrap px-3 pb-2 pt-2.5 ${ui} text-sm ${on ? "font-semibold text-[#22333a]" : "text-[#22333a]"} active:translate-y-px ${focusRing}`}
             >
@@ -55,7 +55,7 @@ export function PlateTabs({ tabs, panels }: { tabs: string[]; panels: React.Reac
           );
         })}
       </div>
-      <div role="tabpanel" id={`dw-panel-${at}`} aria-labelledby={`dw-tab-${at}`} className={`${ui} min-h-20 bg-[#f6f9f7] px-4 py-3 text-base leading-relaxed text-[#22333a]`}>
+      <div role="tabpanel" id={`${idPrefix}-panel-${at}`} aria-labelledby={`${idPrefix}-tab-${at}`} className={panelClassName ?? `${ui} min-h-20 bg-[#f6f9f7] px-4 py-3 text-base leading-relaxed text-[#22333a]`}>
         {panels[at]}
       </div>
     </div>

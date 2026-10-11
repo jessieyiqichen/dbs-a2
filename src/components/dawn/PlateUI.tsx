@@ -2,7 +2,7 @@
 // Interaction brings the plates into register. Nothing glows, nothing is glass.
 import Image from "next/image";
 import { hikes, elevation, formatRange } from "@/data/hikes";
-import { KEY, LOCH, MOUNT, T } from "./PlateArt";
+import { KEY, MOUNT, T } from "./PlateArt";
 import { TONE_FILTER, TONE_OVERLAY } from "./Toned";
 
 const ui = "font-[family-name:var(--dw-ui)]";
@@ -83,21 +83,21 @@ export function CatalogueSearch() {
   );
 }
 
-/** Badge: an embossed publisher's stamp, the kind pressed into a print's mount. */
-export function EmbossStamp({ text = "Permit needed" }: { text?: string }) {
+/** Badge: an embossed publisher's stamp, the kind pressed into a print's mount. Key ink, never the action colour. */
+export function EmbossStamp({ text = "Permit needed", uid = "dw-ring", className = "h-32 w-32" }: { text?: string; uid?: string; className?: string }) {
   const ring = `${text} · ${text} · `.toUpperCase();
   return (
-    <svg viewBox="0 0 120 120" className="h-32 w-32 drop-shadow-[1px_1px_0_rgba(34,51,58,.28)]" role="img" aria-label={`Badge: ${text}`}>
+    <svg viewBox="0 0 120 120" className={`${className} drop-shadow-[1px_1px_0_rgba(34,51,58,.28)]`} role="img" aria-label={`Badge: ${text}`}>
       <defs>
-        <path id="dw-ring" d="M60 60 m-40 0 a40 40 0 1 1 80 0 a40 40 0 1 1 -80 0" />
+        <path id={uid} d="M60 60 m-40 0 a40 40 0 1 1 80 0 a40 40 0 1 1 -80 0" />
       </defs>
       <g style={{ filter: "drop-shadow(-1px -1px 0 rgba(255,255,255,.9))" }}>
-        <circle cx="60" cy="60" r="54" fill={MOUNT} stroke={LOCH} strokeWidth="1.2" />
-        <circle cx="60" cy="60" r="31" fill="none" stroke={LOCH} strokeWidth=".8" />
-        <text fontSize="10.5" letterSpacing="2.2" fill={LOCH} fontFamily="var(--dw-ui)" fontWeight="600">
-          <textPath href="#dw-ring">{ring}</textPath>
+        <circle cx="60" cy="60" r="54" fill={MOUNT} stroke={KEY} strokeWidth="1.2" />
+        <circle cx="60" cy="60" r="31" fill="none" stroke={KEY} strokeWidth=".8" />
+        <text fontSize="10.5" letterSpacing="2.2" fill={KEY} fontFamily="var(--dw-ui)" fontWeight="600">
+          <textPath href={`#${uid}`}>{ring}</textPath>
         </text>
-        <g transform="translate(36 34) scale(1)" fill="none" stroke={LOCH} strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round">
+        <g transform="translate(36 34) scale(1)" fill="none" stroke={KEY} strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round">
           <path d="M6 38 L20 16 L27 26 L33 19 L44 38 Z" fill={T.loch} fillOpacity=".35" />
           <path d="M16.5 22 L20 16 L23.5 21.5" />
         </g>

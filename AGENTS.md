@@ -68,12 +68,13 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Motion: snappy, 150–200ms; buttons press down and squash; rewards pop with overshoot (`cubic-bezier(.34,1.56,.64,1)`); idle loops (clouds, pulse on the next level, stripes on bars) stop under reduced motion.
 
 ## The site (/trails), in Dawn
-- A guide, not a search page: it reads like a book of old travel prints. Order: opening plate and title, Contents (a one-line chooser "Show me walks [of any length] [anywhere]" plus a no-permit toggle; entries that don't fit get a dashed square and grey italic, nothing disappears), then one chapter per walk (large plate, 2–3 sourced intro sentences, three stops along the way, distance / days / high point, best-months strip, permit line, "Add to my list" as the one loch button, "See all N plates", sources and data notes, back to contents), then "Before you go" with every credit.
-- Interactions (faked in the browser, nothing stored): the contents chooser; jump links; the plates viewer (native dialog, Esc closes, arrow keys move); "Add to my list", counted in the header for this visit only.
-- Intros: src/data/trailIntros.json, every sentence with its sources (researched 11 Oct 2026). Data notes shown to readers are written for readers, not for us.
-- Photos: src/data/trailPhotos.json, 3–4 per trail in route order, one marked cover. Photochrom prints shown as they are; modern Unsplash photos get treatment A (src/components/dawn/Toned.tsx). Never use a photo whose recorded location is off the route.
-- Heights use elevation(h): when no source publishes one (Kumano), the site says "not published" instead of guessing.
-- Filtering logic lives in src/app/trails/filters.ts and is tested (npm test).
+- A guide, not a search page, built from the Dawn design system's own components (PrimaryButton, SecondaryButton, CountBadge, PlateTabs, PlateChip, PlateToggle, CatalogueRow, EmbossStamp, crop-mark focus, toned photos). Add props to a design-system component rather than writing a look-alike.
+- Page: a sticky top bar (Hub, "N on your list", Contents button), the opening plate and title, then twelve chapters, then "Before you go".
+- Contents live in a side panel (native dialog from the right): printed filter chips (Where, How long), a no-permit toggle, "N of 12 fit", the print catalogue (CatalogueRow; walks that don't fit go grey italic but stay usable), the empty state when nothing fits. Choosing a row closes the panel and jumps to the chapter.
+- A chapter carries three things: the plate (itself the button to all plates, tagged "N plates →"), the name with one line on why it matters, and three numbers (distance, days, high point). The rest waits behind PlateTabs: "The walk" (2–3 sourced sentences), "Along the way" (a route line: start, three stops, finish), "When to go" (month strip, permit note, EmbossStamp "Permit needed" / "No permit needed"). Then Add to my list (the one loch button) and See all plates.
+- The plates panel holds every photo in route order plus sources (labelled site · page) and data notes.
 - Type: exactly six sizes, defined in src/app/trails/type.ts (96 title, 48 chapter/section, 24 names and numbers, 17 reading, 14 notes and credits, 12 small-capital labels and buttons). Never add a size inline.
-- Chapters hold only: plate (the photo is itself the button to all plates, with an "N plates →" tag), caption line, name, 2–3 intro sentences, three stops (one celadon number style), distance / days / high point, best months, one permit line, Add to my list + See all plates. Sources (labelled site · page) and data notes are in the plates panel.
+- Photos: src/data/trailPhotos.json, 3–4 per trail in route order, one marked cover; modern photos get treatment A (Toned.tsx). Never use a photo whose recorded location is off the route.
+- Heights use elevation(h): when no source publishes one (Kumano), the site says "not published".
+- Filtering logic lives in src/app/trails/filters.ts and is tested (npm test).
 - Desktop first; phone layout to be adapted after desktop is approved.
