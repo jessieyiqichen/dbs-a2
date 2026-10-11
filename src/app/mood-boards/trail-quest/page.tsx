@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fredoka, Nunito } from "next/font/google";
 import credits from "@/data/credits/trail-quest.json";
+import { Icon, IconArt, ICON_NAMES, type IconName } from "@/components/trail-quest/Icons";
+import { AchievementBadge, LevelMap } from "@/components/trail-quest/GameArt";
 
 const display = Fredoka({ subsets: ["latin"], weight: ["500", "600", "700"], variable: "--tq-display" });
 const ui = Nunito({ subsets: ["latin"], weight: ["600", "800", "900"], variable: "--tq-ui" });
@@ -32,6 +34,7 @@ const KEYFRAMES = `
 @keyframes tq-pop { 0% { transform: scale(0) } 70% { transform: scale(1.25) } 100% { transform: scale(1) } }
 @keyframes tq-shine { from { transform: translateX(-120%) skewX(-20deg) } to { transform: translateX(220%) skewX(-20deg) } }
 @keyframes tq-spin { to { transform: rotate(360deg) } }
+@keyframes tq-twinkle { 0%,100% { transform: scale(.6); opacity: .5 } 50% { transform: scale(1.15); opacity: 1 } }
 @keyframes tq-confetti { 0% { transform: translateY(-10px) rotate(0); opacity: 1 } 100% { transform: translateY(60px) rotate(240deg); opacity: 0 } }
 .tq-wiggle:hover { animation: tq-wiggle .35s ease-in-out }
 .tq-shine-wrap:hover .tq-shine { animation: tq-shine .8s ease-out }
@@ -80,86 +83,6 @@ const tile = "rounded-[26px] border-[3px] border-[#1d2b53] bg-white shadow-[0_6p
 
 /* ---------- pieces made for this board ---------- */
 
-function LevelMap() {
-  const nodes: [number, number, "done" | "now" | "locked", number][] = [
-    [40, 330, "done", 3],
-    [110, 300, "done", 2],
-    [170, 250, "done", 3],
-    [120, 200, "done", 1],
-    [175, 150, "now", 0],
-    [245, 120, "locked", 0],
-    [215, 70, "locked", 0],
-  ];
-  const road = "M40 330 C 80 330, 90 300, 110 300 S 170 280, 170 250 S 100 220, 120 200 S 170 175, 175 150 S 230 140, 245 120 S 200 85, 215 70";
-  return (
-    <svg viewBox="0 0 290 370" className="tq-anim block h-auto w-full" role="img" aria-label="A level map: a sandy road winds over green hills past seven stops to a summit flag">
-      <defs>
-        <linearGradient id="tq-sky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#4cc3ff" />
-          <stop offset="1" stopColor="#c8efff" />
-        </linearGradient>
-      </defs>
-      <rect width="290" height="370" rx="20" fill="url(#tq-sky)" />
-      <g style={{ animation: "tq-drift 18s linear infinite" }}>
-        <ellipse cx="0" cy="40" rx="26" ry="10" fill="#fff" />
-        <ellipse cx="18" cy="34" rx="18" ry="12" fill="#fff" />
-      </g>
-      <path d="M150 90 L215 20 L285 90 Z" fill="#8fa3d6" stroke={NAVY} strokeWidth="3" strokeLinejoin="round" />
-      <path d="M200 37 L215 20 L231 37 L222 33 L215 40 L207 33 Z" fill="#fff" />
-      <path d="M215 20 V2" stroke={NAVY} strokeWidth="3" />
-      <path d="M215 3 h18 l-5 5 l5 5 h-18 Z" fill="#ffd23f" stroke={NAVY} strokeWidth="2" />
-      <path d="M0 160 C 60 120, 130 150, 290 110 V370 H0 Z" fill="#8ee06b" stroke={NAVY} strokeWidth="3" />
-      <path d="M0 250 C 90 210, 180 260, 290 220 V370 H0 Z" fill="#58d36b" stroke={NAVY} strokeWidth="3" />
-      {[
-        [30, 200],
-        [262, 170],
-        [250, 290],
-        [80, 260],
-      ].map(([x, y]) => (
-        <g key={`${x}${y}`}>
-          <rect x={x - 2} y={y} width="4" height="12" fill="#6b4f2a" />
-          <circle cx={x} cy={y - 4} r="11" fill="#2f9e44" stroke={NAVY} strokeWidth="2.5" />
-        </g>
-      ))}
-      <path d={road} fill="none" stroke={NAVY} strokeWidth="22" strokeLinecap="round" />
-      <path d={road} fill="none" stroke="#f5e3a6" strokeWidth="16" strokeLinecap="round" />
-      <path d={road} fill="none" stroke="#fff" strokeWidth="2.5" strokeDasharray="6 9" strokeLinecap="round" opacity=".9" />
-      {nodes.map(([x, y, state, stars], i) => (
-        <g key={i}>
-          {state === "now" && <circle cx={x} cy={y} r="17" fill="#58d36b" style={{ transformOrigin: `${x}px ${y}px`, animation: "tq-ping 1.4s ease-out infinite" }} />}
-          <circle cx={x} cy={y + 4} r="16" fill={NAVY} />
-          <circle cx={x} cy={y} r="16" fill={state === "done" ? "#ffd23f" : state === "now" ? "#58d36b" : "#d5dbe8"} stroke={NAVY} strokeWidth="3" />
-          <ellipse cx={x - 4} cy={y - 7} rx="6" ry="3" fill="#fff" opacity=".6" />
-          {state === "locked" ? (
-            <path d={`M${x - 5} ${y - 1} h10 v8 h-10 Z M${x - 3} ${y - 1} v-3 a3 3 0 0 1 6 0 v3`} fill="none" stroke={NAVY} strokeWidth="2" />
-          ) : (
-            <text x={x} y={y + 5} textAnchor="middle" fontSize="14" fontWeight="800" fill={NAVY}>
-              {i + 1}
-            </text>
-          )}
-          {state === "done" &&
-            [0, 1, 2].map((s) => (
-              <path
-                key={s}
-                transform={`translate(${x - 17 + s * 12} ${y - 32}) scale(.42)`}
-                d="M12 2.2l3 6.1 6.7.9-4.9 4.6 1.3 6.6L12 17.1l-6.1 3.3 1.3-6.6L2.3 9.2 9 8.3z"
-                fill={s < stars ? "#ffd23f" : "#fff"}
-                stroke={NAVY}
-                strokeWidth="3"
-              />
-            ))}
-          {state === "now" && (
-            <g style={{ animation: "tq-hop 1s ease-in-out infinite" }}>
-              <path d={`M${x} ${y - 22} c -10 -12 -10 -26 0 -26 s 10 14 0 26 z`} fill="#6741d9" stroke={NAVY} strokeWidth="2.5" />
-              <circle cx={x} cy={y - 38} r="4" fill="#fff" />
-            </g>
-          )}
-        </g>
-      ))}
-    </svg>
-  );
-}
-
 const made: Record<string, React.ReactNode> = {
   palette: (
     <div className="grid grid-cols-6 gap-1.5">
@@ -186,19 +109,21 @@ const made: Record<string, React.ReactNode> = {
   ),
   hud: (
     <div className="flex flex-wrap items-center gap-2 py-3">
-      {[
-        ["🥾", "5/5"],
-        ["⛰", "4,215 m"],
-        ["⭐", "23"],
-      ].map(([i, v]) => (
-        <span key={v} className="flex items-center gap-1.5 rounded-full border-[3px] border-[#1d2b53] bg-[#1d2b53]/90 py-0.5 pl-1 pr-3 text-sm font-black text-white">
-          <span className="grid h-7 w-7 place-items-center rounded-full bg-white text-base" aria-hidden="true">
-            {i}
+      {(
+        [
+          ["boot", "5/5"],
+          ["mountain", "4,215 m"],
+          ["star", "23"],
+        ] as [IconName, string][]
+      ).map(([i, v]) => (
+        <span key={v} className="flex items-center gap-1 rounded-full border-[3px] border-[#1d2b53] bg-[#1d2b53] py-0.5 pl-0.5 pr-3 text-sm font-black text-white">
+          <span className="grid h-8 w-8 place-items-center rounded-full bg-white">
+            <Icon name={i} size={24} />
           </span>
           {v}
         </span>
       ))}
-      <span className="grid h-8 w-8 place-items-center rounded-full border-[3px] border-[#1d2b53] bg-[#58d36b] text-lg font-black shadow-[0_3px_0_#1d2b53]">+</span>
+      <Icon name="plus" size={34} label="Add" />
     </div>
   ),
   "level-card": (
@@ -235,18 +160,9 @@ const made: Record<string, React.ReactNode> = {
   ),
   "round-buttons": (
     <div className="flex items-center justify-center gap-3 py-4">
-      {[
-        ["#4cc3ff", "i"],
-        ["#ffd23f", "?"],
-        ["#6741d9", "⚙"],
-      ].map(([bg, g]) => (
-        <span
-          key={g}
-          className="tq-wiggle relative grid h-14 w-14 place-items-center rounded-full border-[3px] border-[#1d2b53] text-2xl font-black shadow-[0_5px_0_#1d2b53]"
-          style={{ background: bg, color: bg === "#6741d9" ? "#fff" : NAVY }}
-        >
-          <span className="absolute inset-x-2 top-1 h-4 rounded-full bg-white/40" />
-          <span className="relative">{g}</span>
+      {(["info", "gear", "chest"] as IconName[]).map((g) => (
+        <span key={g} className="tq-wiggle relative grid h-16 w-16 place-items-center rounded-full border-[3px] border-[#1d2b53] bg-white shadow-[0_5px_0_#1d2b53]">
+          <Icon name={g} size={40} />
         </span>
       ))}
     </div>
@@ -277,26 +193,11 @@ const made: Record<string, React.ReactNode> = {
     </div>
   ),
   badges: (
-    <div className="grid grid-cols-3 gap-2 py-2">
-      {[
-        ["4,000 m club", "#ffd23f", "M3 20 L10 8 L14 14 L17 10 L21 20 Z", false],
-        ["Permit holder", "#58d36b", "M7 4 h10 v16 H7 Z M10 9 h4 M10 13 h4", false],
-        ["30-day walker", "#d5dbe8", "M6 18 L12 4 L18 18 M8.5 13 h7", true],
-      ].map(([label, fill, d, locked]) => (
-        <div key={label as string} className="tq-shine-wrap flex flex-col items-center">
-          <span className="relative">
-            <svg viewBox="0 0 64 70" className="h-20 w-[72px]" aria-hidden="true">
-              <path d="M32 3 L59 18 V48 L32 66 L5 48 V18 Z" fill={fill as string} stroke={NAVY} strokeWidth="4" strokeLinejoin="round" />
-              <path d="M32 11 L52 22 V45 L32 58 L12 45 V22 Z" fill="#fff" opacity=".35" />
-              <g transform="translate(20 22)" fill="none" stroke={NAVY} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
-                <path d={d as string} />
-              </g>
-            </svg>
-            {locked && <span className="absolute inset-0 grid place-items-center text-xl">🔒</span>}
-          </span>
-          <span className="-mt-2 rounded-md border-2 border-[#1d2b53] bg-[#6741d9] px-1.5 py-0.5 text-center text-[10px] font-black leading-tight text-white">{label as string}</span>
-        </div>
-      ))}
+    <div className="grid grid-cols-2 gap-x-2 gap-y-3 py-2">
+      <AchievementBadge id="b1" tier="stone" icon="boot" label="Day Tripper" stars={1} />
+      <AchievementBadge id="b2" tier="silver" icon="ticket" label="Permit Holder" stars={2} />
+      <AchievementBadge id="b3" tier="gold" icon="mountain" label="4,000 m Club" stars={3} />
+      <AchievementBadge id="b4" tier="gem" icon="compass" label="Pilgrim" stars={0} locked />
     </div>
   ),
   tabs: (
@@ -341,10 +242,10 @@ const made: Record<string, React.ReactNode> = {
       ].map(([l, n]) => (
         <div key={l as string} className="flex items-center justify-between">
           <span>{l}</span>
-          <span className="flex gap-1 text-xl" aria-label={`${n} of 4 boots`}>
+          <span className="flex gap-0.5" aria-label={`${n} of 4 boots`}>
             {[1, 2, 3, 4].map((i) => (
-              <span key={i} className={i <= (n as number) ? "" : "opacity-25 grayscale"} aria-hidden="true">
-                🥾
+              <span key={i} className={i <= (n as number) ? "" : "opacity-30 grayscale"}>
+                <Icon name="boot" size={26} />
               </span>
             ))}
           </span>
@@ -370,8 +271,8 @@ const made: Record<string, React.ReactNode> = {
     <div className="relative overflow-hidden rounded-2xl border-[3px] border-[#1d2b53] bg-[#d5dbe8] p-4 pb-5">
       <p className="font-[family-name:var(--tq-display)] text-2xl font-bold text-[#4a5a85]">Half Dome</p>
       <p className="text-sm font-extrabold text-[#4a5a85]">Cables up late May to mid-October</p>
-      <span className="absolute -right-3 top-3 rotate-12 text-5xl" aria-hidden="true">
-        🔒
+      <span className="absolute -right-2 top-2 rotate-12">
+        <Icon name="lock" size={60} />
       </span>
       <div className="mt-3">
         <GameButton tone="grape">Enter lottery</GameButton>
@@ -407,13 +308,21 @@ const made: Record<string, React.ReactNode> = {
         <circle cx="65" cy="65" r="44" fill="#fff" stroke={NAVY} strokeWidth="3" />
         <circle cx="65" cy="65" r="38" fill="none" stroke="#d5dbe8" strokeWidth="10" />
         <circle cx="65" cy="65" r="38" fill="none" stroke="url(#tq-ring)" strokeWidth="10" strokeLinecap="round" strokeDasharray={`${(5 / 12) * 238.8} 238.8`} transform="rotate(-90 65 65)" />
-        <text x="65" y="62" textAnchor="middle" fontSize="20">
-          🏆
-        </text>
+        <IconArt name="trophy" x={51} y={36} size={28} />
         <text x="65" y="84" textAnchor="middle" fontSize="15" fontWeight="800" fill={NAVY}>
           5 / 12
         </text>
       </svg>
+    </div>
+  ),
+  "icon-sheet": (
+    <div className="grid grid-cols-5 gap-x-1 gap-y-2 py-2">
+      {ICON_NAMES.map((n) => (
+        <div key={n} className="flex flex-col items-center">
+          <Icon name={n} size={36} />
+          <span className="mt-0.5 text-[9px] font-black uppercase tracking-wide text-[#4a5a85]">{n}</span>
+        </div>
+      ))}
     </div>
   ),
   "sky-scene": (
@@ -500,6 +409,7 @@ type Tile = { kind: "photo"; file: string; caption: string } | { kind: "made"; i
 const tiles: Tile[] = [
   { kind: "map", caption: "Level map: a sandy road, glossy stops, a flag at the top" },
   { kind: "made", id: "palette", caption: "Sky, cloud, grass, sun, grape, navy: grass is the go button" },
+  { kind: "made", id: "icon-sheet", caption: "Our own icon set: navy outline, one shade, one highlight" },
   { kind: "photo", file: "turquoise-lake.jpg", caption: "Turquoise lake: colour turned up" },
   { kind: "made", id: "button-set", caption: "Buttons are glossy, outlined, and press down" },
   { kind: "made", id: "type-display", caption: "Fredoka with a navy outline: title-screen type" },
@@ -507,7 +417,7 @@ const tiles: Tile[] = [
   { kind: "photo", file: "arms-up.jpg", caption: "Arms up: the feeling after the last climb" },
   { kind: "made", id: "level-card", caption: "Each trail is a level card with its own scene" },
   { kind: "made", id: "xp-bar", caption: "Altitude as a moving XP bar" },
-  { kind: "made", id: "badges", caption: "Facts become shield badges; one still locked" },
+  { kind: "made", id: "badges", caption: "Achievements in four tiers: stone, silver, gold, gem" },
   { kind: "photo", file: "snow-jump.jpg", caption: "Snow jump: energy, mid-air" },
   { kind: "made", id: "tabs", caption: "Filters as raised tabs with counters" },
   { kind: "made", id: "reward", caption: "A reward screen: confetti, then Claim" },
@@ -517,7 +427,7 @@ const tiles: Tile[] = [
   { kind: "photo", file: "scramble.jpg", caption: "Scramble: hands on rock, a boss stage" },
   { kind: "made", id: "difficulty", caption: "Difficulty counted in boots" },
   { kind: "made", id: "stats", caption: "Stats as coloured blocks" },
-  { kind: "made", id: "round-buttons", caption: "Round buttons that wobble on hover" },
+  { kind: "made", id: "round-buttons", caption: "Round icon buttons that wobble on hover" },
   { kind: "photo", file: "glacier-lake.jpg", caption: "Glacier lake: saturated, but cool" },
   { kind: "made", id: "ring", caption: "Progress: a trophy and a turning sunburst" },
   { kind: "made", id: "type-ui", caption: "Nunito Black: labels you read in a glance" },
@@ -591,12 +501,13 @@ export default function TrailQuestBoard() {
             <Tag>The world</Tag>
             <p className={`${outlined} mt-4 text-5xl leading-tight`}>Twelve trails, one road</p>
             <p className="mt-3 max-w-md text-base font-extrabold text-[#4a5a85]">
-              A sandy road over two green hills. Finished trails are gold coins with their stars above; the next one pulses, with a pin
-              hopping over it; locked ones wait behind a padlock. The summit flag is the last level.
+              Three floating islands, ordered from the gentlest walk to the hardest. Stepping stones lead past finished levels with
+              their stars, to the next one, where the hiker waits; locked levels need a permit, and Everest Base Camp is the boss on
+              the summit.
             </p>
             <div className="mt-6">{made.hud}</div>
             <div className="mt-4 flex flex-wrap gap-4">
-              <GameButton size="lg">▶ Play level 5</GameButton>
+              <GameButton size="lg">▶ Play W Trek</GameButton>
             </div>
           </div>
         </section>
