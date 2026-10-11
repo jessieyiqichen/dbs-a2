@@ -1,9 +1,9 @@
 // Field Notes: everything is something you would find in a trail notebook.
 // Icon rules: a wobbly graphite line, hatching on the side away from the light, one small watercolour dab.
 
-const G = "#55524b"; // graphite
-const MOSS = "#6f8a5b";
-const INK = "#2f4a6b";
+export const G = "#55524b"; // graphite
+export const MOSS = "#6f8a5b";
+export const INK = "#2f4a6b";
 
 /** Shared filters and patterns; render once per page. */
 export function FieldDefs() {
@@ -41,7 +41,7 @@ function Dab({ d, c = MOSS }: { d: string; c?: string }) {
 function Hatch({ d }: { d: string }) {
   return <path d={d} fill="url(#fn-hatch)" filter="url(#fn-rough)" />;
 }
-function Pencil({ children, w = 1.6 }: { children: React.ReactNode; w?: number }) {
+export function Pencil({ children, w = 1.6 }: { children: React.ReactNode; w?: number }) {
   return (
     <g fill="none" stroke={G} strokeWidth={w} strokeLinecap="round" strokeLinejoin="round" filter="url(#fn-pencil)">
       {children}
@@ -331,21 +331,6 @@ export function RulerSlider({ at = 0.45 }: { at?: number }) {
   );
 }
 
-/** On: a moss wash fills the pencil pill. Off: just the pencil outline. */
-export function WashToggle({ on, label }: { on: boolean; label: string }) {
-  return (
-    <span className="flex items-center gap-3">
-      <svg viewBox="0 0 64 34" className="h-9 w-[68px]" aria-hidden="true">
-        {on && <rect x="5" y="5" width="54" height="24" rx="12" fill={MOSS} opacity=".55" filter="url(#fn-wash)" />}
-        <rect x="3" y="4" width="58" height="26" rx="13" fill="none" stroke={G} strokeWidth="1.6" filter="url(#fn-rough)" />
-        <circle cx={on ? 47 : 17} cy="17" r="9" fill="#fbf7ec" stroke={G} strokeWidth="1.6" filter="url(#fn-rough)" />
-        <circle cx={on ? 47 : 17} cy="17" r="9" fill="url(#fn-hatch)" opacity=".5" />
-      </svg>
-      <span className={`${hand} text-2xl ${on ? "text-[#2b2a26]" : "text-[#625e56]"}`}>{label}</span>
-    </span>
-  );
-}
-
 /** Search: one ruled line and a pencil. */
 export function SearchLine() {
   return (
@@ -399,66 +384,3 @@ export function PermitStamp() {
     </div>
   );
 }
-
-/** Progress: a pencil route with an X where you are. */
-export function RouteProgress() {
-  return (
-    <svg viewBox="0 0 300 90" className="block h-auto w-full" role="img" aria-label="Route progress: day 2 of 4, marked with an X">
-      <path d="M12 70 C 60 70, 70 30, 120 34 S 200 70, 240 40 S 280 20, 292 22" fill="none" stroke={G} strokeWidth="1.6" strokeDasharray="5 6" strokeLinecap="round" filter="url(#fn-rough)" />
-      <path d="M12 70 C 60 70, 70 30, 120 34 S 140 40, 150 45" fill="none" stroke={MOSS} strokeWidth="3" strokeLinecap="round" opacity=".7" filter="url(#fn-wash)" />
-      <path d="M144 38 l12 12 M156 38 l-12 12" stroke={INK} strokeWidth="2.4" strokeLinecap="round" />
-      <text x="118" y="70" fontSize="19" fill={INK} fontFamily="var(--fn-hand)">
-        you are here · day 2 of 4
-      </text>
-      <circle cx="12" cy="70" r="4" fill={G} />
-      <path d="M288 22 V4 h12 l-4 4 l4 4 h-12" fill="none" stroke={G} strokeWidth="1.4" />
-    </svg>
-  );
-}
-
-/** Loading: a pencil drawing a mountain, stroke by stroke. */
-export function PencilLoader() {
-  return (
-    <div>
-      <svg viewBox="0 0 220 110" className="block h-auto w-full" role="img" aria-label="Loading: a pencil sketching a mountain">
-        <path
-          className="fn-draw"
-          d="M10 96 L70 30 L100 64 L140 14 L210 96"
-          fill="none"
-          stroke={G}
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          pathLength={100}
-          filter="url(#fn-pencil)"
-        />
-        <path className="fn-draw-2" d="M120 40 L140 14 L160 40" fill="none" stroke={G} strokeWidth="1.4" strokeLinecap="round" pathLength={100} filter="url(#fn-pencil)" />
-      </svg>
-      <p className={`${hand} text-center text-xl text-[#625e56]`}>sketching the route…</p>
-    </div>
-  );
-}
-
-/** A stack of papers: kraft, graph, ruled. */
-export function PaperStack() {
-  return (
-    <div className="relative h-48">
-      <div className="absolute inset-x-6 top-2 h-36 -rotate-6 bg-[#e3d2a8] shadow-[0_1px_2px_rgba(0,0,0,.15)]" style={{ backgroundImage: "radial-gradient(rgba(120,90,40,.18) 1px, transparent 1.4px)", backgroundSize: "5px 5px" }} />
-      <div
-        className="absolute inset-x-4 top-5 h-36 rotate-3 shadow-[0_1px_2px_rgba(0,0,0,.15)]"
-        style={{ backgroundColor: "#f7f1e3", backgroundImage: "linear-gradient(#cfd8c4 1px, transparent 1px), linear-gradient(90deg, #cfd8c4 1px, transparent 1px)", backgroundSize: "10px 10px" }}
-      />
-      <div className="absolute inset-x-8 top-9 h-36 -rotate-1 border-l-2 border-[#2f4a6b]/50 shadow-[0_1px_3px_rgba(0,0,0,.18)]" style={{ background: "repeating-linear-gradient(#fbf7ec 0 17px, #c9d3df 17px 18px)" }}>
-        <span className={`${hand} absolute left-3 top-1 text-xl text-[#2b2a26]`}>kraft · graph · ruled</span>
-      </div>
-    </div>
-  );
-}
-
-export const FIELD_KEYFRAMES = `
-.fn-draw { stroke-dasharray: 100; animation: fn-draw 4s cubic-bezier(.4,0,.2,1) infinite }
-.fn-draw-2 { stroke-dasharray: 100; animation: fn-draw-2 4s cubic-bezier(.4,0,.2,1) infinite }
-@keyframes fn-draw { 0% { stroke-dashoffset: 100 } 55%, 85% { stroke-dashoffset: 0 } 100% { stroke-dashoffset: 0; opacity: 0 } }
-@keyframes fn-draw-2 { 0%, 50% { stroke-dashoffset: 100 } 70%, 85% { stroke-dashoffset: 0 } 100% { stroke-dashoffset: 0; opacity: 0 } }
-@media (prefers-reduced-motion: reduce) { .fn-draw, .fn-draw-2 { animation: none; stroke-dashoffset: 0 } }
-`;

@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Caveat, Crimson_Pro } from "next/font/google";
 import credits from "@/data/credits/field-notes.json";
-import { CircledChoice, FIELD_ICON_NAMES, FIELD_KEYFRAMES, FieldDefs, FieldIcon, NotebookTabs, PaperStack, PencilLoader, PermitStamp, RouteProgress, RulerSlider, SearchLine, WashToggle } from "@/components/field-notes/FieldArt";
+import { CircledChoice, FIELD_ICON_NAMES, FieldDefs, FieldIcon, NotebookTabs, PermitStamp, RulerSlider, SearchLine } from "@/components/field-notes/FieldArt";
+import { FIELD_KEYFRAMES, PaintSwatch, PaperStack, PencilLoader, RouteProgress, TapeLabel, WashToggle } from "@/components/field-notes/FieldSketches";
 
 const hand = Caveat({ subsets: ["latin"], weight: ["400", "600"], variable: "--fn-hand" });
 const serif = Crimson_Pro({ subsets: ["latin"], weight: ["400", "600"], style: ["normal", "italic"], variable: "--fn-serif" });
@@ -24,23 +25,11 @@ const PALETTE = [
 
 /* ---------- pieces made for this board ---------- */
 
-function Rough({ children, viewBox, label }: { children: React.ReactNode; viewBox: string; label: string }) {
-  return (
-    <svg viewBox={viewBox} role="img" aria-label={label} className="h-auto w-full" fill="none" stroke={INK} strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
-      <g filter="url(#fn-rough)">{children}</g>
-    </svg>
-  );
-}
-
 const made: Record<string, React.ReactNode> = {
   palette: (
-    <div className="grid grid-cols-5">
-      {PALETTE.map((c) => (
-        <div key={c.hex}>
-          <div className="h-20" style={{ background: c.hex }} />
-          <p className="mt-1 font-[family-name:var(--fn-hand)] text-base leading-tight">{c.name}</p>
-          <p className="text-[10px] tracking-wide text-black/50">{c.hex}</p>
-        </div>
+    <div className="grid grid-cols-5 gap-1.5">
+      {PALETTE.map((c, i) => (
+        <PaintSwatch key={c.hex} name={c.name} hex={c.hex} seed={i} />
       ))}
     </div>
   ),
@@ -69,19 +58,30 @@ const made: Record<string, React.ReactNode> = {
   ),
   "profile-sketch": (
     <div>
-      <Rough viewBox="0 0 260 110" label="Pencil sketch of an elevation profile">
-        <path d="M6 96 C 30 92, 40 70, 62 66 S 96 40, 118 22 C 130 14, 140 30, 158 44 S 200 80, 254 88" stroke="#55524b" />
-        <path d="M6 100 h248" strokeWidth={1.2} />
-        <path d="M118 22 v78" strokeDasharray="3 5" strokeWidth={1.2} />
-      </Rough>
-      <p className="mt-1 font-[family-name:var(--fn-hand)] text-lg">a profile, sketched — not to scale</p>
+      <svg viewBox="0 0 260 130" role="img" aria-label="Pencil sketch of the Inca Trail's profile, highest at Dead Woman's Pass, 4,215 m" className="h-auto w-full">
+        <path d="M8 112 C 30 104, 46 92, 62 70 C 74 52, 84 34, 92 30 C 100 28, 104 44, 114 62 C 122 74, 130 70, 140 56 C 148 46, 154 52, 162 66 C 170 78, 178 70, 188 64 C 198 60, 206 76, 220 92 C 232 104, 244 108, 252 110 L 252 116 L 8 116 Z" fill="url(#fn-hatch)" opacity=".35" />
+        <g fill="none" stroke="#55524b" strokeLinecap="round" strokeLinejoin="round" filter="url(#fn-pencil)">
+          <path d="M8 112 C 30 104, 46 92, 62 70 C 74 52, 84 34, 92 30 C 100 28, 104 44, 114 62 C 122 74, 130 70, 140 56 C 148 46, 154 52, 162 66 C 170 78, 178 70, 188 64 C 198 60, 206 76, 220 92 C 232 104, 244 108, 252 110" strokeWidth={1.8} />
+          <path d="M10 113 C 34 104, 48 90, 63 71 C 76 52, 85 36, 93 31.5 C 99 30, 104 42, 113 60" strokeWidth={1} opacity=".55" />
+          <path d="M4 117 C 70 115, 180 118, 256 116" strokeWidth={1.1} />
+        </g>
+        <g fill="none" stroke="#2f4a6b" strokeWidth={1.5} strokeLinecap="round" filter="url(#fn-rough)">
+          <path d="M108 11 C 100 10, 95 16, 94 26" />
+          <path d="M90 21 C 91.5 23, 93 25, 94 27 C 95.5 25, 97 23.5, 99 22" />
+        </g>
+        <text x="111" y="15" fontSize="17" fill="#2f4a6b" fontFamily="var(--fn-hand)">Dead Woman&apos;s Pass</text>
+        <text x="112" y="31" fontSize="14" fill="#2f4a6b" fontFamily="var(--fn-serif)">4,215 m</text>
+        <text x="8" y="129" fontSize="13" fill="#625e56" fontFamily="var(--fn-hand)">Km 82</text>
+        <text x="252" y="129" textAnchor="end" fontSize="13" fill="#625e56" fontFamily="var(--fn-hand)">Sun Gate</text>
+      </svg>
+      <p className="mt-1 font-[family-name:var(--fn-hand)] text-lg">Inca Trail, sketched: only the high point is to scale</p>
     </div>
   ),
   "tape-chip": (
     <div className="flex flex-wrap items-center gap-3 py-4">
-      <span className="-rotate-2 bg-[#e8dfc6]/90 px-3 py-1 font-[family-name:var(--fn-hand)] text-xl shadow-sm">moderate</span>
-      <span className="rotate-1 bg-[#cfdcc4]/90 px-3 py-1 font-[family-name:var(--fn-hand)] text-xl shadow-sm">4 days</span>
-      <span className="-rotate-1 bg-[#c9d4e2]/90 px-3 py-1 font-[family-name:var(--fn-hand)] text-xl shadow-sm">huts</span>
+      <TapeLabel tint="#e8dfc6" tilt="-rotate-2">moderate</TapeLabel>
+      <TapeLabel tint="#cfdcc4" tilt="rotate-1">4 days</TapeLabel>
+      <TapeLabel tint="#c9d4e2" tilt="-rotate-1">huts</TapeLabel>
     </div>
   ),
   "stamp-button": (
@@ -181,11 +181,9 @@ function Overview() {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-5 gap-2 lg:col-span-2">
-        {PALETTE.map((c) => (
-          <div key={c.hex} className="flex h-28 items-end border border-black/10 p-2" style={{ background: c.hex, color: ["#55524b", "#6f8a5b", "#2f4a6b"].includes(c.hex) ? "#fbf7ec" : INK }}>
-            <span className="font-[family-name:var(--fn-hand)] text-xl leading-none">{c.name}</span>
-          </div>
+      <div className="grid grid-cols-5 gap-3 bg-[#fbf7ec] p-4 lg:col-span-2">
+        {PALETTE.map((c, i) => (
+          <PaintSwatch key={c.hex} name={c.name} hex={c.hex} seed={i + 1} />
         ))}
       </div>
       <div className="flex flex-col justify-center gap-4 bg-[#fbf7ec] p-5">
@@ -210,14 +208,14 @@ type Tile = { kind: "photo"; file: string; caption: string } | { kind: "made"; i
 
 const tiles: Tile[] = [
   { kind: "photo", file: "notebook-map.jpg", caption: "Field notebook on a map: kraft for every card" },
-  { kind: "made", id: "palette", caption: "Kraft, paper, graphite, moss, ink: one accent" },
+  { kind: "made", id: "palette", caption: "Paint chart: kraft, paper, graphite, moss, ink; one accent" },
   { kind: "photo", file: "fern.jpg", caption: "Fern: the only green, kept for the one action" },
   { kind: "made", id: "type-hand", caption: "Caveat: the hand, for titles and labels" },
   { kind: "photo", file: "birch-path.jpg", caption: "Birch path: pale light and plenty of air" },
   { kind: "made", id: "icons", caption: "Pencil icons: wobbly graphite, hatched shade, one watercolour dab" },
   { kind: "photo", file: "pressed-petals.jpg", caption: "Pressed petals: things kept between pages" },
   { kind: "made", id: "ruled-note", caption: "Ruled note: facts written down plainly" },
-  { kind: "made", id: "tape-chip", caption: "Tape labels: filters as tape, not pills" },
+  { kind: "made", id: "tape-chip", caption: "Tape labels: torn ends, filters as tape, not pills" },
   { kind: "photo", file: "tree-sketch.jpg", caption: "Trees in pencil: graphite for text, never black" },
   { kind: "made", id: "type-serif", caption: "Crimson Pro: a book serif for names and numbers" },
   { kind: "photo", file: "alpine-hut.jpg", caption: "Hut above the treeline: shelter and warmth" },
@@ -237,7 +235,7 @@ const tiles: Tile[] = [
   { kind: "made", id: "profile-sketch", caption: "Elevation by hand: charts drawn, not plotted" },
   { kind: "photo", file: "swiss-trail.jpg", caption: "Up the ridge: what the notebook is for" },
   { kind: "made", id: "stamp", caption: "Badge: a perforated stamp" },
-  { kind: "made", id: "progress", caption: "Progress: an X on the pencilled route" },
+  { kind: "made", id: "progress", caption: "Progress: the walked part traced over, an arrow for now" },
   { kind: "made", id: "loader", caption: "Loading: a pencil sketching the mountain" },
 ];
 
