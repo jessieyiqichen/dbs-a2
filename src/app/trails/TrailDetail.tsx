@@ -9,7 +9,8 @@ import { creditLine, type TrailPhoto } from "@/components/dawn/Toned";
 import { EmbossStamp } from "@/components/dawn/PlateUI";
 import { PlateTabs } from "@/components/dawn/ds/Interactive";
 import { PlateLink, PrimaryButton } from "@/components/dawn/ds/Primitives";
-import { HeroPlate, MonthStrip, NeighbourLink, PlateThumb, RouteLine } from "@/components/dawn/ds/Guide";
+import { FACT_ICON, HeroPlate, MonthStrip, NeighbourLink, PlateThumb, RouteLine } from "@/components/dawn/ds/Guide";
+import { PlateIcon } from "@/components/dawn/PlateArt";
 import { PlatesViewer } from "@/components/dawn/ds/Viewer";
 import { plateNo, sourceLabel } from "./plate";
 import { useTrails } from "./state";
@@ -21,13 +22,13 @@ const photos = rawPhotos as Record<string, TrailPhoto[]>;
 function Facts({ h }: { h: Hike }) {
   return (
     <dl className="mt-5 flex flex-wrap gap-x-8 gap-y-3 border-y border-[#22333a]/20 py-3 sm:mt-8 sm:gap-x-10 sm:gap-y-4 sm:py-4">
-      {[
-        ["Distance", `${formatRange(h.distance_km)} km`],
-        ["Days", formatRange(h.days)],
-        ["High point", elevation(h)],
-      ].map(([k, v]) => (
+      {([
+        ["Distance", `${formatRange(h.distance_km)} km`, FACT_ICON.distance],
+        ["Days", formatRange(h.days), FACT_ICON.days],
+        ["High point", elevation(h), FACT_ICON.high],
+      ] as const).map(([k, v, icon]) => (
         <div key={k}>
-          <dt className={`${t12} text-[#4f5f66]`}>{k}</dt>
+          <dt className={`${t12} flex items-center gap-1.5 text-[#4f5f66]`}><PlateIcon name={icon} size={22} />{k}</dt>
           <dd className={`${t24} mt-1 whitespace-nowrap`}>{v}</dd>
         </div>
       ))}
@@ -50,7 +51,7 @@ function Details({ h }: { h: Hike }) {
         <RouteLine key="route" h={h} stops={t.along_the_way} />,
         <div key="when" className="flex flex-wrap items-start gap-8">
           <div className="min-w-0 flex-1">
-            <p className={`${t12} text-[#4f5f66]`}>Best months</p>
+            <p className={`${t12} flex items-center gap-1.5 text-[#4f5f66]`}><PlateIcon name="sunrise" size={22} />Best months</p>
             <div className="mt-2"><MonthStrip best={h.best_months} /></div>
             <p className={`${t14} mt-4 max-w-prose text-[#4f5f66]`}>{h.permit_note}</p>
           </div>
@@ -64,7 +65,7 @@ function Details({ h }: { h: Hike }) {
 function Plates({ list, onOpen }: { list: TrailPhoto[]; onOpen: (i: number) => void }) {
   return (
     <section aria-labelledby="plates-h">
-      <h2 id="plates-h" className={t24}>The plates</h2>
+      <h2 id="plates-h" className={`${t24} flex items-center gap-2`}><PlateIcon name="camera" size={28} />The plates</h2>
       <p className={`${t14} mt-1 text-[#4f5f66]`}>{list.length} photographs, in route order.</p>
       {/* a sliding strip on a phone; two columns from 640px */}
       <ul className="-mx-5 mt-2 flex gap-3 overflow-x-auto px-5 py-2 [scrollbar-width:none] sm:mx-0 sm:mt-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:p-0">

@@ -5,15 +5,20 @@ import type { ControlState } from "@/lib/contrast";
 import type { Hike } from "@/data/hikes";
 import type { Sourced } from "@/data/intros";
 import { TonedPhoto, type TrailPhoto } from "../Toned";
+import { PlateIcon, type PlateIconName } from "../PlateArt";
 import { card, cardLive, colourUp } from "./tokens";
 import { t12, t12caption, t14, t17, t24 } from "./type";
 
+/** The icon that names each of a walk's three figures, wherever they appear. */
+export const FACT_ICON = { distance: "boot", days: "calendar", high: "mountain" } as const satisfies Record<string, PlateIconName>;
+
 /** Along the way, drawn as a route rather than written as a list: start, three stops, finish, on one key line. */
 export function RouteLine({ h, stops }: { h: Pick<Hike, "start" | "end">; stops: Pick<Sourced, "text">[] }) {
-  const nodes = [
-    { mark: "S", label: h.start, end: true },
+  // the ends carry an icon (a boot to set out, a hut to arrive), the stops their number
+  const nodes: { mark: string; icon?: PlateIconName; label: string; end: boolean }[] = [
+    { mark: "", icon: "boot", label: h.start, end: true },
     ...stops.map((s, i) => ({ mark: String(i + 1), label: s.text, end: false })),
-    { mark: "F", label: h.end, end: true },
+    { mark: "", icon: "hut", label: h.end, end: true },
   ];
   return (
     <ol>
@@ -26,7 +31,7 @@ export function RouteLine({ h, stops }: { h: Pick<Hike, "start" | "end">; stops:
             aria-hidden="true"
             className={`${t12caption} relative z-10 grid h-7 w-7 shrink-0 place-items-center border-[1.5px] border-[#22333a] ${n.end ? "rounded-full bg-[#f6f9f7]" : "bg-[#c3d6c4] shadow-[2px_2px_0_0_#8eaaa6]"}`}
           >
-            {n.mark}
+            {n.icon ? <PlateIcon name={n.icon} size={22} /> : n.mark}
           </span>
           <span className="min-w-0 pt-0.5">
             {n.end && <span className={`${t12} block text-[#4f5f66]`}>{i === 0 ? "Start" : "Finish"}</span>}
@@ -82,7 +87,7 @@ export function HeroPlate({ photo, count, onOpen, label, priority = false }: { p
   return (
     <button type="button" onClick={onOpen} aria-label={label} className={`group block w-full text-left sm:p-3.5 ${card.rest} ${cardLive}`}>
       <TonedPhoto photo={photo} sizes="(min-width: 1024px) 660px, 100vw" priority={priority} className={`aspect-[3/2] sm:aspect-[4/3] sm:border-[3px] sm:border-[#22333a] ${colourUp}`} />
-      <span className={`${t12} absolute bottom-3 right-3 border sm:bottom-7 sm:right-7 border-[#22333a] bg-[#f6f9f7] px-3 py-2 transition-colors duration-[600ms] group-hover:bg-[#c3d6c4]`}>{count} plates →</span>
+      <span className={`${t12} absolute bottom-3 right-3 flex items-center gap-1.5 border sm:bottom-7 sm:right-7 border-[#22333a] bg-[#f6f9f7] px-3 py-2 transition-colors duration-[600ms] group-hover:bg-[#c3d6c4]`}><PlateIcon name="camera" size={20} />{count} plates →</span>
     </button>
   );
 }

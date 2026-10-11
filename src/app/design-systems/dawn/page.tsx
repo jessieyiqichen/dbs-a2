@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Libre_Franklin, Old_Standard_TT } from "next/font/google";
 import { CONTROL_STATES, ratio, type ControlState } from "@/lib/contrast";
 import { hikes } from "@/data/hikes";
-import { PlateDefs } from "@/components/dawn/PlateArt";
+import { PLATE_ICON_NAMES, PlateDefs, PlateIcon, type PlateIconName } from "@/components/dawn/PlateArt";
 import { DayPlates, EmbossStamp, PLATE_KEYFRAMES } from "@/components/dawn/PlateUI";
 import { DAWN_FOCUS_CSS, DW, caps, display, ui } from "@/components/dawn/ds/tokens";
 import { CatalogueSearch, CountBadge, MountInput, MountSelect, PlateCheck, PlateLink, PlateRadio, PrimaryButton, RadioSwatch, SecondaryButton } from "@/components/dawn/ds/Primitives";
@@ -162,6 +162,33 @@ function SpacingShape() {
 
 /* ---------- 4. components ---------- */
 
+// Where the site puts each icon; the rest are kept for the guide as it grows.
+const ICON_USE: Partial<Record<PlateIconName, string>> = {
+  boot: "Distance · route start",
+  calendar: "Days",
+  mountain: "High point",
+  compass: "Filter: where",
+  clock: "Filter: how long",
+  permit: "Filter: no permit",
+  camera: "Plates · empty state",
+  sunrise: "Best months",
+  hut: "Route finish",
+};
+
+function Icons() {
+  return (
+    <ul className="grid grid-cols-4 gap-x-3 gap-y-4 sm:grid-cols-8">
+      {PLATE_ICON_NAMES.map((n) => (
+        <li key={n} className="flex flex-col items-center text-center">
+          <PlateIcon name={n} size={40} />
+          <span className={`${ui} mt-1 text-xs font-semibold text-[#22333a]`}>{n}</span>
+          <span className={`${ui} text-[11px] leading-tight text-[#4f5f66] ${ICON_USE[n] ? "" : "italic"}`}>{ICON_USE[n] ?? "not on the site yet"}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 function Components() {
   return (
     <div className="grid gap-4 lg:grid-cols-2">
@@ -220,6 +247,9 @@ function Components() {
             { label: "Oceania", tint: DW.aqua },
           ]}
         />
+      </Block>
+      <Block title="Icons" note="Drawn like the prints: tint plates a little off register under a fine key line. Each sits beside a word, never alone." className="lg:col-span-2">
+        <Icons />
       </Block>
       <Block title="Badges">
         <div className="flex flex-wrap items-center gap-6">

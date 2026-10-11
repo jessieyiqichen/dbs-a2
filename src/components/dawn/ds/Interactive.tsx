@@ -115,7 +115,7 @@ export function PlateChips({ options }: { options: { label: string; tint: string
 /* ---------- toggle ---------- */
 
 /** Toggle: square track and knob. Off, the knob's loch plate sits off register; on, it locks in and the track is printed. */
-export function PlateToggle({ label, initial = false, force, checked, onChange }: { label: string; initial?: boolean; force?: ControlState; checked?: boolean; onChange?: (on: boolean) => void }) {
+export function PlateToggle({ label, icon, initial = false, force, checked, onChange }: { label: string; icon?: React.ReactNode; initial?: boolean; force?: ControlState; checked?: boolean; onChange?: (on: boolean) => void }) {
   const [live, setLive] = useState(initial);
   const on = force ? force === "selected" : (checked ?? live);
   const disabled = force === "disabled";
@@ -132,7 +132,7 @@ export function PlateToggle({ label, initial = false, force, checked, onChange }
       />
     </span>
   );
-  const text = <span className={`${ui} whitespace-nowrap text-[14px] ${disabled ? "text-[#4f5f66] line-through" : on ? "text-[#22333a]" : "text-[#4f5f66]"}`}>{label}</span>;
+  const text = <span className={`${ui} inline-flex items-center gap-1.5 whitespace-nowrap text-[14px] ${disabled ? "text-[#4f5f66] line-through" : on ? "text-[#22333a]" : "text-[#4f5f66]"}`}>{icon}{label}</span>;
   if (force) return <span className="flex items-center gap-3">{track}{text}</span>;
   return (
     <button type="button" role="switch" aria-checked={on} onClick={() => (onChange ? onChange(!on) : setLive(!live))} className="group flex items-center gap-3 text-left outline-none">

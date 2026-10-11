@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { ControlState } from "@/lib/contrast";
 import { hikes, elevation, formatRange, type Hike } from "@/data/hikes";
 import { PlateIcon } from "../PlateArt";
+import { FACT_ICON } from "./Guide";
 import { PrintingLoader } from "../PlateUI";
 import Link from "next/link";
 import { TonedPhoto, type TrailPhoto } from "../Toned";
@@ -29,10 +30,10 @@ export function PrintCard({ id, photo, href = "#card", footer, sizes = "(min-wid
       <TonedPhoto photo={photo} sizes={sizes} className={`row-span-3 aspect-[4/3] self-start border-2 border-[#22333a] sm:border-[3px] ${colourUp}`} />
       <span className={`${t12caption} block text-[#4f5f66] sm:mt-4`}>{no(h)}. {h.country.join(", ")}</span>
       <span id={`${h.id}-card`} className={`${t24} mt-1 block decoration-[#8eaaa6] decoration-2 underline-offset-4 group-hover:underline`}>{h.name}</span>
-      <span className={`${t14} mt-2 block text-[#4f5f66]`}>
-        {/* each figure stays whole when the line wraps */}
-        {[`${formatRange(h.distance_km)} km`, `${formatRange(h.days)} ${h.days[1] === 1 ? "day" : "days"}`, elevation(h)].map((x, i) => (
-          <span key={x}>{i > 0 && " · "}<span className="whitespace-nowrap">{x}</span></span>
+      <span className={`${t14} mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-[#4f5f66]`}>
+        {/* each figure with its icon, kept whole when the line wraps */}
+        {([[FACT_ICON.distance, `${formatRange(h.distance_km)} km`], [FACT_ICON.days, `${formatRange(h.days)} ${h.days[1] === 1 ? "day" : "days"}`], [FACT_ICON.high, elevation(h)]] as const).map(([icon, x]) => (
+          <span key={icon} className="inline-flex items-center gap-1 whitespace-nowrap"><PlateIcon name={icon} size={20} />{x}</span>
         ))}
       </span>
     </>
