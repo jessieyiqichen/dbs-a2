@@ -234,7 +234,7 @@ const ROWS: Row[] = [
 const STATE_NOTES: Record<ControlState, string> = {
   rest: "Nothing is happening to it",
   hover: "The mouse is over it: the paper lifts",
-  focus: "Reached with Tab: an ink scribble underneath",
+  focus: "Reached with Tab: one ink pen stroke under it",
   pressed: "While being clicked: pressed into the page",
   selected: "Chosen, and stays chosen",
   disabled: "Can't be used right now: dashed, muted",
