@@ -6,6 +6,7 @@ import credits from "@/data/credits/dawn.json";
 import skies from "@/data/dawn-skies.json";
 import { DAWN_ICON_NAMES, DAWN_KEYFRAMES, DawnDefs, DawnIcon, StartSlider, SunArc, SunriseLoader } from "@/components/dawn/DawnArt";
 import SunToggle from "@/components/dawn/SunToggle";
+import { PhotoBookPreview } from "@/components/dawn/PhotoBook";
 
 const display = Cormorant_Garamond({ subsets: ["latin"], weight: ["300", "400", "500"], style: ["normal", "italic"], variable: "--dw-display" });
 const ui = Mulish({ subsets: ["latin"], weight: ["300", "400", "600"], variable: "--dw-ui" });
@@ -315,6 +316,8 @@ export default function DawnBoard() {
             collected
           </p>
         </header>
+
+        <PhotoBookPreview />
 
         <Overview />
 
