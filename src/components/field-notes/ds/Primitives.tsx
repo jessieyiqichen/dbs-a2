@@ -2,7 +2,7 @@
 // without it, the control responds live to hover, focus and press.
 import type { ControlState } from "@/lib/contrast";
 import { FieldIcon } from "../FieldArt";
-import { FN, focusForced, focusRing, focusWithin, hand, serif } from "./tokens";
+import { FN, focusForced, focusLine, focusLineForced, focusRing, focusWithin, hand, serif } from "./tokens";
 
 type Forceable = { force?: ControlState; children?: React.ReactNode };
 
@@ -61,10 +61,10 @@ export function NoteLink({ force, children = "Read the route notes" }: Forceable
   const state: Partial<Record<ControlState, string>> = {
     rest: "text-[#2f4a6b] decoration-[#2f4a6b]/40",
     hover: "text-[#2f4a6b] decoration-[#2f4a6b] decoration-2",
-    focus: `text-[#2f4a6b] decoration-[#2f4a6b]/40 ${focusForced}`,
+    focus: `text-[#2f4a6b] decoration-[#2f4a6b]/40 ${focusLineForced}`,
     pressed: "bg-[#2f4a6b]/15 text-[#1f3550] decoration-[#1f3550] decoration-2",
   };
-  const live = `hover:decoration-[#2f4a6b] hover:decoration-2 active:bg-[#2f4a6b]/15 active:text-[#1f3550] ${focusRing}`;
+  const live = `hover:decoration-[#2f4a6b] hover:decoration-2 active:bg-[#2f4a6b]/15 active:text-[#1f3550] ${focusLine}`;
   const arrow = force === "hover" ? "translate-x-1" : force === "pressed" ? "translate-x-0.5" : "group-hover:translate-x-1";
   return (
     <a href="#links" className={`group ${serif} relative inline-flex items-baseline gap-1 px-0.5 text-lg underline decoration-1 underline-offset-4 transition duration-300 ${state[force ?? "rest"]} ${force ? "" : live}`}>
@@ -92,7 +92,7 @@ export function RuledInput({ force, label = "Trail name", placeholder = "where t
   return (
     <label htmlFor={id} className="block">
       <span className={`${hand} text-xl text-[#3d3a34]`}>{label}</span>
-      <span className={`block ${force === "focus" ? `${focusForced} relative` : force ? "relative" : focusWithin}`}>
+      <span className={`block ${force === "focus" ? `${focusLineForced} relative` : force ? "relative" : focusWithin}`}>
       <input
         id={id}
         type="text"
@@ -111,7 +111,7 @@ export function RuledSelect({ force, id }: { force?: ControlState; id: string })
   return (
     <label htmlFor={id} className="block">
       <span className={`${hand} text-xl text-[#3d3a34]`}>Best month</span>
-      <span className={`block ${force === "focus" ? `${focusForced} relative` : force ? "relative" : focusWithin}`}>
+      <span className={`block ${force === "focus" ? `${focusLineForced} relative` : force ? "relative" : focusWithin}`}>
         <select
           id={id}
           disabled={force === "disabled"}
@@ -213,7 +213,7 @@ export function CountBadge({ n }: { n: number }) {
 /** Search: a magnifier drawn in pencil and one ruled line. */
 export function SearchField({ id }: { id: string }) {
   return (
-    <label htmlFor={id} className="fn-scrib fn-within relative flex items-end gap-2">
+    <label htmlFor={id} className="fn-scrib fn-within fn-line relative flex items-end gap-2">
       <FieldIcon name="magnifier" size={30} />
       <span className="sr-only">Search trails</span>
       <input id={id} type="search" placeholder="search a trail or a country" className={`${fieldBase} ${lineState.rest} hover:border-[#3d3a34] focus:border-[#2f4a6b] focus:bg-[#2f4a6b]/10`} />

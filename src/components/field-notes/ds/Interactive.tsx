@@ -2,7 +2,7 @@
 // Field Notes controls that hold state: index tabs, tape chips, the wash toggle.
 import { useState } from "react";
 import type { ControlState } from "@/lib/contrast";
-import { FN, focusForced, focusRing, hand } from "./tokens";
+import { FN, focusForced, focusInside, focusRing, hand } from "./tokens";
 
 /* ---------- index tabs ---------- */
 
@@ -10,7 +10,7 @@ const tabBase = `relative -mb-px rounded-t-[3px] border border-b-0 px-4 pb-2 pt-
 const tabState: Record<ControlState, string> = {
   rest: "translate-y-1 border-[#7d776b]/60 bg-[#e9dcc0] text-[#625e56]",
   hover: "translate-y-0.5 border-[#7d776b] bg-[#efe4cb] text-[#3d3a34]",
-  focus: `translate-y-1 border-[#7d776b]/60 bg-[#e9dcc0] text-[#625e56] ${focusForced}`,
+  focus: "fn-scrib fn-inside is-focus translate-y-1 border-[#7d776b]/60 bg-[#e9dcc0] text-[#625e56]",
   pressed: "translate-y-1.5 border-[#7d776b] bg-[#dccaa3] text-[#3d3a34] shadow-[inset_0_2px_3px_rgba(60,45,20,.3)]",
   selected: "z-10 translate-y-0 border-[#7d776b] bg-[#fbf7ec] text-[#3d3a34]",
   disabled: "translate-y-1 cursor-not-allowed border-dashed border-[#7d776b]/60 bg-transparent text-[#625e56] line-through decoration-1",
@@ -48,7 +48,7 @@ export function IndexTabs({ tabs, panels }: { tabs: string[]; panels: React.Reac
                 document.getElementById(`fn-tab-${next}`)?.focus();
               }
             }}
-            className={`${tabBase} ${at === i ? tabState.selected : `${tabState.rest} hover:translate-y-0.5 hover:bg-[#efe4cb] hover:text-[#3d3a34] active:translate-y-1.5 active:bg-[#dccaa3]`} ${focusRing}`}
+            className={`${tabBase} ${at === i ? tabState.selected : `${tabState.rest} hover:translate-y-0.5 hover:bg-[#efe4cb] hover:text-[#3d3a34] active:translate-y-1.5 active:bg-[#dccaa3]`} ${focusInside}`}
           >
             {t}
           </button>

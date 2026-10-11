@@ -4,7 +4,7 @@ import { hikes, formatRange, type Hike } from "@/data/hikes";
 import { FieldIcon, PermitStamp } from "../FieldArt";
 import { PencilLoader } from "../FieldSketches";
 import { PrimaryButton, SecondaryButton, NoteLink, PencilFrame } from "./Primitives";
-import { FN, focusForced, focusRing, hand, serif } from "./tokens";
+import { FN, focusForced, focusLine, focusLineForced, focusRing, hand, serif } from "./tokens";
 
 const byId = (id: string) => hikes.find((h) => h.id === id) as Hike;
 const months = (h: Hike) => `${h.best_months[0]}–${h.best_months[h.best_months.length - 1]}`;
@@ -75,7 +75,7 @@ export function CardSwatch({ force, id = "milford" }: { force: ControlState; id?
 const rowState: Record<ControlState, string> = {
   rest: "",
   hover: "bg-[#6f8a5b]/15",
-  focus: focusForced,
+  focus: focusLineForced,
   pressed: "bg-[#6f8a5b]/35 shadow-[inset_0_2px_3px_rgba(60,45,20,.25)]",
   selected: "border-l-2 border-l-[#2f4a6b] bg-[#2f4a6b]/[0.05]",
   disabled: "cursor-not-allowed text-[#625e56]",
@@ -90,7 +90,7 @@ export function TrailRow({ id, force, note, compact = false }: { id: string; for
     <a
       href="#rows"
       aria-disabled={disabled || undefined}
-      className={`relative grid items-center border-b ${compact ? "grid-cols-[1rem_1fr_auto] gap-2 px-1" : "grid-cols-[1.5rem_1fr_auto] gap-3"} border-[#c9d3df] ${compact ? "" : "px-2"} py-2.5 transition-colors duration-300 ${rowState[state]} ${force ? "" : `hover:bg-[#6f8a5b]/15 active:bg-[#6f8a5b]/35 active:shadow-[inset_0_2px_3px_rgba(60,45,20,.25)] ${focusRing}`}`}
+      className={`relative grid items-center border-b ${compact ? "grid-cols-[1rem_1fr_auto] gap-2 px-1" : "grid-cols-[1.5rem_1fr_auto] gap-3"} border-[#c9d3df] ${compact ? "" : "px-2"} py-2.5 transition-colors duration-300 ${rowState[state]} ${force ? "" : `hover:bg-[#6f8a5b]/15 active:bg-[#6f8a5b]/35 active:shadow-[inset_0_2px_3px_rgba(60,45,20,.25)] ${focusLine}`}`}
     >
       <span aria-hidden="true">
         {state === "selected" && (
