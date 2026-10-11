@@ -16,7 +16,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## Structure (the brief)
 - `/` is the hub: links to three mood boards, three design systems, and the site.
-- Three styles: **Mist** (quiet, matte, restrained), **Summit** (bold, clear, decisive), **Trailhead '74** (nostalgic, sun-faded, earthy).
+- Three styles: **Field Notes** (handmade, curious, warm), **Dawn** (quiet, light, hopeful), **Trail Quest** (playful, bright, game-like).
 - `/mood-boards/<style>/`: 25–30 artifacts each (collected or generated), the three must feel different.
 - `/design-systems/<style>/`: colour roles with contrast ratios, type roles, spacing and shape, components in every state, UI states (empty, loading, error, success).
 - `/trails/`: the site, in the chosen style; at least two faked interactions; every control in its states; accent only for the primary action; works at 390px and 1440px.

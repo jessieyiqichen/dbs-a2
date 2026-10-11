@@ -1,5 +1,5 @@
 import Placeholder from "@/components/Placeholder";
 
 export default function Page() {
-  return <Placeholder title="Mist · Mood board" />;
+  return <Placeholder title="Trail Quest · Design system" />;
 }

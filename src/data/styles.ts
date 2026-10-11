@@ -1,4 +1,4 @@
-export type StyleId = "mist" | "summit" | "trailhead";
+export type StyleId = "field-notes" | "dawn" | "trail-quest";
 
 export type StyleMeta = {
   id: StyleId;
@@ -9,7 +9,7 @@ export type StyleMeta = {
 };
 
 export const styles: StyleMeta[] = [
-  { id: "mist", name: "Mist", keywords: ["Quiet", "Matte", "Restrained"], swatches: ["#f1f0eb", "#b9bcb6", "#3f5a4a", "#22262a"] },
-  { id: "summit", name: "Summit", keywords: ["Bold", "Clear", "Decisive"], swatches: ["#f4c430", "#111111", "#fafaf7", "#2d5da8"] },
-  { id: "trailhead", name: "Trailhead '74", keywords: ["Nostalgic", "Sun-faded", "Earthy"], swatches: ["#efe4cc", "#6b6b3a", "#c99a2e", "#8fb3c4"] },
+  { id: "field-notes", name: "Field Notes", keywords: ["Handmade", "Curious", "Warm"], swatches: ["#e9dcc0", "#55524b", "#6f8a5b", "#2f4a6b"] },
+  { id: "dawn", name: "Dawn", keywords: ["Quiet", "Light", "Hopeful"], swatches: ["#f6f3f8", "#cfc4e6", "#a9c3e6", "#3b3f5c"] },
+  { id: "trail-quest", name: "Trail Quest", keywords: ["Playful", "Bright", "Game-like"], swatches: ["#14162b", "#3b5bff", "#5ef08a", "#ffe14d"] },
 ];
