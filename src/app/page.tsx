@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Caveat, Fredoka, Old_Standard_TT } from "next/font/google";
 import { styles, type StyleId } from "@/data/styles";
@@ -51,10 +52,16 @@ function Section({ n, title, children }: { n: number; title: string; children: R
 // What was checked on the site, and what the check turned up. Kept to what was actually tried.
 const CHECKS: [string, string][] = [
   ["Both widths", "Every page, hub to walk pages, fits at 1440 and at 390 with no sideways scrolling."],
-  ["Keyboard", "On the site, Tab reaches every link and button in reading order, and each shows Dawn's crop marks. Arrow keys move between tabs."],
+  ["Keyboard", "On the site, Tab reaches every link and button in reading order, and each shows Dawn's crop marks. Arrow keys move between tabs and along the route map."],
   ["Filters", "Choosing where, how long or no permit changes the cards and the count at once; Clear all brings all twelve back."],
   ["My list", "Adding a walk updates the count in the top bar, and it stays while moving between pages. A reload clears it: nothing is stored."],
   ["Plates viewer", "Enter opens it on the chosen plate, arrow keys move, Esc closes it and focus returns to the print."],
+];
+
+const SHOTS: [string, string][] = [
+  ["hub", "Hub"],
+  ["trails", "Twelve Trails"],
+  ["milford", "A walk: Milford Track"],
 ];
 
 const FIXED = [
@@ -62,6 +69,8 @@ const FIXED = [
   "On a phone the walk cards were a screen tall each: they became rows, print beside caption, five walks to a screen.",
   "Figures broke in the middle (\"4,215 / m\"): each figure now stays whole.",
   "The mood boards ran very long on a phone: two columns, with the made pieces shown smaller rather than squeezed.",
+  "Small capitals over the opening print on a phone measured 4.1:1: the print's lower half was darkened to 8:1.",
+  "Best months were shown by colour alone: the range is now written out, and each best month has a rule beneath.",
 ];
 
 const card =
@@ -147,6 +156,29 @@ export default function Hub() {
               <li key={what} className="grid gap-x-4 sm:grid-cols-[9rem_1fr]">
                 <span className="text-sm font-medium text-foreground">{what}</span>
                 <span>{result}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-5 text-sm font-medium text-foreground">Screenshots</p>
+          <p className="text-sm text-black/60">The first screen of each page, at 1440 and at 390. Open one to see it full size.</p>
+          <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-4">
+            {SHOTS.map(([file, name]) => (
+              <li key={file}>
+                <p className="mb-1 text-xs text-black/60">{name}</p>
+                <span className="flex items-end gap-2">
+                  {[1440, 390].map((w) => (
+                    <a
+                      key={w}
+                      href={`/browser-check/${file}-${w}.jpg`}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${name} at ${w} wide, full size`}
+                      className="block rounded border border-black/15 transition hover:border-black/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+                    >
+                      <Image src={`/browser-check/${file}-${w}.jpg`} alt="" width={w === 1440 ? 1440 : 390} height={w === 1440 ? 900 : 844} className="h-28 w-auto rounded" />
+                    </a>
+                  ))}
+                </span>
               </li>
             ))}
           </ul>
