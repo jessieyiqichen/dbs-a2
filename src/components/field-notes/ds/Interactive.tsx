@@ -89,7 +89,7 @@ function Tape({ state, children }: { state: ControlState; children: React.ReactN
 }
 
 export function ChipSwatch({ force, label = "huts" }: { force: ControlState; label?: string }) {
-  const wrap = force === "focus" ? focusForced : "";
+  const wrap = force === "focus" ? `${focusForced} relative` : "";
   const edge = force === "disabled" ? "outline-1 outline-dashed outline-[#7d776b]" : force === "pressed" ? "" : force === "hover" ? "drop-shadow-[0_4px_4px_rgba(60,45,20,.3)]" : "drop-shadow-[0_1px_1px_rgba(60,45,20,.25)]";
   return (
     <span className={`inline-block ${wrap} ${edge}`}>
@@ -112,7 +112,7 @@ export function TapeChips({ options, initial }: { options: string[]; initial: st
             type="button"
             aria-pressed={sel}
             onClick={() => flip(o)}
-            className={`group drop-shadow-[0_1px_1px_rgba(60,45,20,.25)] transition hover:-translate-y-0.5 hover:drop-shadow-[0_4px_4px_rgba(60,45,20,.3)] active:translate-y-0.5 active:drop-shadow-none ${focusRing}`}
+            className={`group relative drop-shadow-[0_1px_1px_rgba(60,45,20,.25)] transition hover:-translate-y-0.5 hover:drop-shadow-[0_4px_4px_rgba(60,45,20,.3)] active:translate-y-0.5 active:drop-shadow-none ${focusRing}`}
           >
             <span className={`${chipBase} ${sel ? chipState.selected : `${chipState.rest} group-hover:bg-[#e9dcc0] group-hover:text-[#3d3a34] group-active:bg-[#d4bf93]`}`} style={{ clipPath: torn, backgroundImage: "repeating-linear-gradient(90deg, rgba(255,255,255,.18) 0 2px, transparent 2px 7px)" }}>
               {o}
@@ -135,7 +135,7 @@ export function WashSwitch({ label, initial = false, disabled = false, force }: 
   const cx = on ? 46 : 18;
   const knob = force === "pressed" ? "scale(1.15, .85)" : "scale(1)";
   const svg = (
-    <span className={`shrink-0 rounded-full ${force === "focus" ? focusForced : force ? "" : "group-focus-visible:outline-2 group-focus-visible:outline-dashed group-focus-visible:outline-offset-4 group-focus-visible:outline-[#2f4a6b]"}`}>
+    <span className={`relative shrink-0 ${force === "focus" ? focusForced : force ? "" : "fn-scrib"}`}>
     <svg viewBox="0 0 64 34" className="block h-9 w-[68px] overflow-visible" aria-hidden="true">
       <path d="M9 15 C 10 7, 30 7.5, 46 7 C 60 7.5, 60 26, 46 27 C 30 28, 13 28.5, 9.5 22 Z" fill={FN.wash} filter="url(#fn-wash)" style={{ opacity: on ? 0.55 : force === "pressed" ? 0.2 : 0, transition: "opacity 300ms ease-out" }} />
       <g style={{ transform: `translateX(${cx - 18}px)`, transition: "transform 300ms ease-out" }}>

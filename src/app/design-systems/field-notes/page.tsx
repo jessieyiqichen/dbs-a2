@@ -5,7 +5,7 @@ import { CONTROL_STATES, ratio, type ControlState } from "@/lib/contrast";
 import { hikes } from "@/data/hikes";
 import { FieldDefs, FieldIcon } from "@/components/field-notes/FieldArt";
 import { FIELD_KEYFRAMES, RouteProgress } from "@/components/field-notes/FieldSketches";
-import { FN, hand, serif } from "@/components/field-notes/ds/tokens";
+import { FIELD_FOCUS_CSS, FN, hand, serif } from "@/components/field-notes/ds/tokens";
 import { CircleRadio, CountBadge, NoteLink, PencilFrame, PrimaryButton, RadioSwatch, RuledInput, RuledSelect, SearchField, SecondaryButton, TickBox } from "@/components/field-notes/ds/Primitives";
 import { ChipSwatch, IndexTabs, TabSwatch, TapeChips, WashSwitch } from "@/components/field-notes/ds/Interactive";
 import { CardSwatch, DetailPanel, DifficultyTape, PermitStamp, TrailCard, TrailRow, UIStates } from "@/components/field-notes/ds/Pieces";
@@ -234,7 +234,7 @@ const ROWS: Row[] = [
 const STATE_NOTES: Record<ControlState, string> = {
   rest: "Nothing is happening to it",
   hover: "The mouse is over it: the paper lifts",
-  focus: "Reached with the Tab key: a dashed ink ring, on every control",
+  focus: "Reached with Tab: an ink scribble underneath",
   pressed: "While being clicked: pressed into the page",
   selected: "Chosen, and stays chosen",
   disabled: "Can't be used right now: dashed, muted",
@@ -276,7 +276,7 @@ export default function FieldNotesSystem() {
   return (
     <main className={`${handFont.variable} ${serifFont.variable} min-h-screen bg-[#f7f1e3] text-[#3d3a34]`}>
       <FieldDefs />
-      <style>{FIELD_KEYFRAMES}</style>
+      <style>{FIELD_KEYFRAMES + FIELD_FOCUS_CSS}</style>
       <div className="mx-auto max-w-6xl space-y-14 px-5 pb-24 pt-10">
         <header>
           <div className={`${serif} flex flex-wrap gap-x-6 text-base`}>

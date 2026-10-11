@@ -2,7 +2,7 @@
 // without it, the control responds live to hover, focus and press.
 import type { ControlState } from "@/lib/contrast";
 import { FieldIcon } from "../FieldArt";
-import { FN, focusForced, focusRing, hand, serif } from "./tokens";
+import { FN, focusForced, focusRing, focusWithin, hand, serif } from "./tokens";
 
 type Forceable = { force?: ControlState; children?: React.ReactNode };
 
@@ -67,7 +67,7 @@ export function NoteLink({ force, children = "Read the route notes" }: Forceable
   const live = `hover:decoration-[#2f4a6b] hover:decoration-2 active:bg-[#2f4a6b]/15 active:text-[#1f3550] ${focusRing}`;
   const arrow = force === "hover" ? "translate-x-1" : force === "pressed" ? "translate-x-0.5" : "group-hover:translate-x-1";
   return (
-    <a href="#links" className={`group ${serif} inline-flex items-baseline gap-1 px-0.5 text-lg underline decoration-1 underline-offset-4 transition duration-300 ${state[force ?? "rest"]} ${force ? "" : live}`}>
+    <a href="#links" className={`group ${serif} relative inline-flex items-baseline gap-1 px-0.5 text-lg underline decoration-1 underline-offset-4 transition duration-300 ${state[force ?? "rest"]} ${force ? "" : live}`}>
       {children}
       <span aria-hidden="true" className={`transition-transform duration-300 ${arrow}`}>→</span>
     </a>
@@ -79,12 +79,12 @@ export function NoteLink({ force, children = "Read the route notes" }: Forceable
 const lineState: Record<ControlState, string> = {
   rest: "border-[#7d776b]",
   hover: "border-[#3d3a34]",
-  focus: `border-[#2f4a6b] bg-[#2f4a6b]/10 ${focusForced}`,
+  focus: "border-[#2f4a6b] bg-[#2f4a6b]/10",
   pressed: "border-[#2f4a6b]",
   selected: "border-[#2f4a6b]",
   disabled: "cursor-not-allowed border-dashed border-[#7d776b] text-[#625e56]",
 };
-const fieldBase = `${serif} w-full border-0 border-b-2 bg-transparent px-1 pb-1 pt-1 text-lg text-[#3d3a34] transition-colors duration-300 placeholder:font-[family-name:var(--fn-hand)] placeholder:text-xl placeholder:text-[#625e56]`;
+const fieldBase = `${serif} w-full border-0 border-b-2 bg-transparent px-1 pb-1 pt-1 text-lg text-[#3d3a34] outline-none transition-colors duration-300 placeholder:font-[family-name:var(--fn-hand)] placeholder:text-xl placeholder:text-[#625e56]`;
 
 /** Text input: one ruled line. Focus turns the line ink blue and leaves a faint wash. */
 export function RuledInput({ force, label = "Trail name", placeholder = "where to next?", id }: { force?: ControlState; label?: string; placeholder?: string; id: string }) {
@@ -92,13 +92,15 @@ export function RuledInput({ force, label = "Trail name", placeholder = "where t
   return (
     <label htmlFor={id} className="block">
       <span className={`${hand} text-xl text-[#3d3a34]`}>{label}</span>
+      <span className={`block ${force === "focus" ? `${focusForced} relative` : force ? "relative" : focusWithin}`}>
       <input
         id={id}
         type="text"
         placeholder={placeholder}
         disabled={force === "disabled"}
-        className={`${fieldBase} ${lineState[state]} ${force ? "" : "hover:border-[#3d3a34] focus:border-[#2f4a6b] focus:bg-[#2f4a6b]/10 ${focusRing}"}`}
+        className={`${fieldBase} ${lineState[state]} ${force ? "" : "hover:border-[#3d3a34] focus:border-[#2f4a6b] focus:bg-[#2f4a6b]/10"}`}
       />
+      </span>
     </label>
   );
 }
@@ -109,12 +111,12 @@ export function RuledSelect({ force, id }: { force?: ControlState; id: string })
   return (
     <label htmlFor={id} className="block">
       <span className={`${hand} text-xl text-[#3d3a34]`}>Best month</span>
-      <span className="relative block">
+      <span className={`block ${force === "focus" ? `${focusForced} relative` : force ? "relative" : focusWithin}`}>
         <select
           id={id}
           disabled={force === "disabled"}
           defaultValue="Jul"
-          className={`${fieldBase} appearance-none pr-8 ${lineState[state]} ${force ? "" : "hover:border-[#3d3a34] focus:border-[#2f4a6b] focus:bg-[#2f4a6b]/10 ${focusRing}"}`}
+          className={`${fieldBase} appearance-none pr-8 ${lineState[state]} ${force ? "" : "hover:border-[#3d3a34] focus:border-[#2f4a6b] focus:bg-[#2f4a6b]/10"}`}
         >
           {["Jun", "Jul", "Aug", "Sep"].map((m) => (
             <option key={m}>{m}</option>
@@ -138,7 +140,7 @@ export function TickBox({ force, label = "Permit needed", defaultChecked = false
     <label className={`group relative flex items-center gap-3 ${disabled ? "cursor-not-allowed" : "cursor-pointer"}`}>
       <input type="checkbox" className="peer sr-only" defaultChecked={checked} disabled={disabled} />
       <span
-        className={`relative h-7 w-7 shrink-0 transition duration-300 peer-checked:[&_.tick]:opacity-100 ${force === "hover" ? "bg-[#e9dcc0]/70" : force === "pressed" ? "" : "group-hover:bg-[#e9dcc0]/70"} ${force === "pressed" ? "scale-[.82] bg-[#dccaa3] shadow-[inset_0_2px_3px_rgba(60,45,20,.35)]" : "peer-active:scale-[.82] peer-active:bg-[#dccaa3]"} ${force === "focus" ? focusForced : "peer-focus-visible:outline-2 peer-focus-visible:outline-dashed peer-focus-visible:outline-offset-4 peer-focus-visible:outline-[#2f4a6b]"}`}
+        className={`relative h-7 w-7 shrink-0 transition duration-300 peer-checked:[&_.tick]:opacity-100 ${force === "hover" ? "bg-[#e9dcc0]/70" : force === "pressed" ? "" : "group-hover:bg-[#e9dcc0]/70"} ${force === "pressed" ? "scale-[.82] bg-[#dccaa3] shadow-[inset_0_2px_3px_rgba(60,45,20,.35)]" : "peer-active:scale-[.82] peer-active:bg-[#dccaa3]"} ${force === "focus" ? focusForced : "fn-scrib"}`}
       >
         <PencilFrame dashed={disabled} className={force === "hover" ? "text-[#3d3a34]" : "text-[#7d776b] group-hover:text-[#3d3a34]"} />
         <svg viewBox="0 0 28 28" className={`tick absolute -right-1 -top-2 h-8 w-8 transition-opacity duration-300 ${checked ? "opacity-100" : "opacity-0"}`} aria-hidden="true">
@@ -167,7 +169,7 @@ export function CircleRadio({ name, options, defaultValue, force }: { name: stri
             <svg viewBox="0 0 120 50" preserveAspectRatio="none" className="pointer-events-none absolute -inset-x-2 -inset-y-1 h-[calc(100%+8px)] w-[calc(100%+16px)] opacity-0 transition-opacity duration-300 peer-checked:opacity-100" aria-hidden="true">
               <path d="M8 26 C 6 10, 40 4, 70 6 C 100 8, 116 18, 112 30 C 108 44, 60 48, 30 44 C 10 41, 4 32, 14 20" fill="none" stroke={FN.ink} strokeWidth="2.2" strokeLinecap="round" filter="url(#fn-rough)" vectorEffect="non-scaling-stroke" />
             </svg>
-            <span className={`${hand} relative text-2xl peer-checked:text-[#3d3a34] ${disabled ? "text-[#625e56] line-through" : "text-[#625e56]"} peer-focus-visible:outline-2 peer-focus-visible:outline-dashed peer-focus-visible:outline-offset-4 peer-focus-visible:outline-[#2f4a6b] ${force === "focus" && isDefault ? focusForced : ""}`}>
+            <span className={`${hand} relative text-2xl peer-checked:text-[#3d3a34] ${disabled ? "text-[#625e56] line-through" : "text-[#625e56]"} fn-scrib ${force === "focus" && isDefault ? "is-focus" : ""}`}>
               {o}
             </span>
           </label>
@@ -211,10 +213,10 @@ export function CountBadge({ n }: { n: number }) {
 /** Search: a magnifier drawn in pencil and one ruled line. */
 export function SearchField({ id }: { id: string }) {
   return (
-    <label htmlFor={id} className="flex items-end gap-2">
+    <label htmlFor={id} className="fn-scrib fn-within relative flex items-end gap-2">
       <FieldIcon name="magnifier" size={30} />
       <span className="sr-only">Search trails</span>
-      <input id={id} type="search" placeholder="search a trail or a country" className={`${fieldBase} ${lineState.rest} hover:border-[#3d3a34] focus:border-[#2f4a6b] focus:bg-[#2f4a6b]/10 ${focusRing}`} />
+      <input id={id} type="search" placeholder="search a trail or a country" className={`${fieldBase} ${lineState.rest} hover:border-[#3d3a34] focus:border-[#2f4a6b] focus:bg-[#2f4a6b]/10`} />
     </label>
   );
 }

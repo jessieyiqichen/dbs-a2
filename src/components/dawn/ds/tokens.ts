@@ -17,9 +17,20 @@ export const DW = {
 export const display = "font-[family-name:var(--dw-display)]";
 export const ui = "font-[family-name:var(--dw-ui)]";
 export const caps = `${ui} whitespace-nowrap text-xs font-semibold uppercase tracking-[0.16em]`;
-/** Focus everywhere: a solid key-ink ring, like the rule around a mounted print. */
-export const focusRing = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#22333a]";
-export const focusForced = "outline outline-2 outline-offset-[3px] outline-[#22333a]";
+/** Focus everywhere: crop marks at the four corners, the marks a printer puts round a print to show where to cut.
+ *  The element needs a positioning context (`relative`, or already absolute). */
+export const focusRing = "dw-crop focus-visible:outline-none";
+export const focusForced = "dw-crop is-focus";
 export const slow = "transition duration-[600ms] ease-[cubic-bezier(.45,0,.2,1)]";
-/** Fields show the ring on any focus, mouse included. */
-export const focusRingField = "focus:outline focus:outline-2 focus:outline-offset-[3px] focus:outline-[#22333a]";
+/** Fields can't draw marks on themselves: their wrapper shows the crop marks while the field inside has focus. */
+export const focusWithin = "dw-crop dw-within relative";
+
+const mark = "linear-gradient(#22333a,#22333a)";
+/** Crop-mark focus, shared by every Dawn control. Render once per page. */
+export const DAWN_FOCUS_CSS = `
+.dw-crop::after{content:"";position:absolute;inset:-7px;pointer-events:none;opacity:0;transition:opacity 300ms cubic-bezier(.45,0,.2,1);
+background:${mark} top left/10px 2px,${mark} top left/2px 10px,${mark} top right/10px 2px,${mark} top right/2px 10px,
+${mark} bottom left/10px 2px,${mark} bottom left/2px 10px,${mark} bottom right/10px 2px,${mark} bottom right/2px 10px;background-repeat:no-repeat}
+.dw-crop:focus-visible::after,.dw-crop.is-focus::after,:focus-visible>.dw-crop::after,.peer:focus-visible~.dw-crop::after,.dw-within:focus-within::after{opacity:1}
+@media (prefers-reduced-motion: reduce){.dw-crop::after{transition:none}}
+`;

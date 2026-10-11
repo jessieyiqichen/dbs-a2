@@ -63,7 +63,7 @@ export function CardSwatch({ force, id = "milford" }: { force: ControlState; id?
     pressed: "translate-y-0.5 bg-[#f3ead6] shadow-[inset_0_2px_4px_rgba(60,45,20,.2)]",
   };
   return (
-    <span className={`block bg-[#fbf7ec] px-3 py-2 ${look[force]}`}>
+    <span className={`relative block bg-[#fbf7ec] px-3 py-2 ${look[force]}`}>
       <span className={`${serif} block text-base font-semibold leading-tight text-[#3d3a34]`}>{h.name}</span>
       <span className={`${hand} block text-lg text-[#625e56]`}>{formatRange(h.distance_km)} km</span>
     </span>
@@ -90,7 +90,7 @@ export function TrailRow({ id, force, note, compact = false }: { id: string; for
     <a
       href="#rows"
       aria-disabled={disabled || undefined}
-      className={`grid items-center border-b ${compact ? "grid-cols-[1rem_1fr_auto] gap-2 px-1" : "grid-cols-[1.5rem_1fr_auto] gap-3"} border-[#c9d3df] ${compact ? "" : "px-2"} py-2.5 transition-colors duration-300 ${rowState[state]} ${force ? "" : `hover:bg-[#6f8a5b]/15 active:bg-[#6f8a5b]/35 active:shadow-[inset_0_2px_3px_rgba(60,45,20,.25)] ${focusRing}`}`}
+      className={`relative grid items-center border-b ${compact ? "grid-cols-[1rem_1fr_auto] gap-2 px-1" : "grid-cols-[1.5rem_1fr_auto] gap-3"} border-[#c9d3df] ${compact ? "" : "px-2"} py-2.5 transition-colors duration-300 ${rowState[state]} ${force ? "" : `hover:bg-[#6f8a5b]/15 active:bg-[#6f8a5b]/35 active:shadow-[inset_0_2px_3px_rgba(60,45,20,.25)] ${focusRing}`}`}
     >
       <span aria-hidden="true">
         {state === "selected" && (

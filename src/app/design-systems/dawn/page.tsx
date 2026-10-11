@@ -5,7 +5,7 @@ import { CONTROL_STATES, ratio, type ControlState } from "@/lib/contrast";
 import { hikes } from "@/data/hikes";
 import { PlateDefs } from "@/components/dawn/PlateArt";
 import { DayPlates, EmbossStamp, PLATE_KEYFRAMES } from "@/components/dawn/PlateUI";
-import { DW, caps, display, ui } from "@/components/dawn/ds/tokens";
+import { DAWN_FOCUS_CSS, DW, caps, display, ui } from "@/components/dawn/ds/tokens";
 import { CatalogueSearch, CountBadge, MountInput, MountSelect, PlateCheck, PlateLink, PlateRadio, PrimaryButton, RadioSwatch, SecondaryButton } from "@/components/dawn/ds/Primitives";
 import { ChipSwatch, PlateChips, PlateTabs, PlateToggle, TabSwatch } from "@/components/dawn/ds/Interactive";
 import { CardSwatch, CatalogueRow, DetailPanel, PrintCard, UIStates } from "@/components/dawn/ds/Pieces";
@@ -234,7 +234,7 @@ function Components() {
 const STATE_NOTES: Record<ControlState, string> = {
   rest: "Nothing is happening to it: the plate sits a little off",
   hover: "The mouse is over it: plates come into register",
-  focus: "Reached with Tab: a solid key-ink ring, on every control",
+  focus: "Reached with Tab: crop marks at the corners",
   pressed: "While being clicked: sinks, ink pressed in",
   selected: "Chosen, and stays chosen: a tint plate laid under",
   disabled: "Can't be used right now: unprinted, dashed",
@@ -292,7 +292,7 @@ export default function DawnSystem() {
   return (
     <main className={`${displayFont.variable} ${uiFont.variable} min-h-screen font-[family-name:var(--dw-ui)] text-[#22333a] [font-variant-numeric:lining-nums]`} style={{ background: "linear-gradient(180deg, #e6edeb 0%, #eaf0ee 45%, #f0f5f3 100%)" }}>
       <PlateDefs />
-      <style>{PLATE_KEYFRAMES}</style>
+      <style>{PLATE_KEYFRAMES + DAWN_FOCUS_CSS}</style>
       <div className="mx-auto max-w-6xl space-y-14 px-5 pb-24 pt-10">
         <header>
           <div className={`${ui} flex flex-wrap gap-x-6 text-sm`}>

@@ -2,13 +2,13 @@
 // rest = tint plate a little off register; hover = plates in register, colour lifts; pressed = sinks, a shade darker, ink pressed in;
 // focus = solid key-ink ring; selected = a tint plate laid under, in register; disabled = unprinted (dashed key line, no plates).
 import type { ControlState } from "@/lib/contrast";
-import { DW, caps, display, focusForced, focusRing, focusRingField, slow, ui } from "./tokens";
+import { DW, caps, display, focusForced, focusRing, focusWithin, slow, ui } from "./tokens";
 
 type Forceable = { force?: ControlState; children?: React.ReactNode };
 
 /* ---------- buttons ---------- */
 
-const primaryBase = `${caps} inline-flex items-center px-5 py-3 ${slow}`;
+const primaryBase = `${caps} relative inline-flex items-center px-5 py-3 ${slow}`;
 const primaryState: Record<ControlState, string> = {
   rest: "bg-[#2c5868] text-[#f6f9f7] shadow-[3px_3px_0_0_#8eaaa6]",
   hover: "bg-[#356677] text-[#f6f9f7] shadow-[0_0_0_0_#8eaaa6]",
@@ -25,7 +25,7 @@ export function PrimaryButton({ force, children = "See the walk" }: Forceable) {
   return <button type="button" className={`${primaryBase} ${primaryState.rest} ${primaryLive}`}>{children}</button>;
 }
 
-const secondaryBase = `${caps} inline-flex items-center border px-5 py-3 ${slow}`;
+const secondaryBase = `${caps} relative inline-flex items-center border px-5 py-3 ${slow}`;
 const secondaryState: Record<ControlState, string> = {
   rest: "border-[#22333a] bg-[#f6f9f7] text-[#22333a] shadow-[3px_3px_0_0_#c3d6c4]",
   hover: "border-[#22333a] bg-[#c3d6c4] text-[#22333a] shadow-[0_0_0_0_#c3d6c4]",
@@ -55,7 +55,7 @@ export function PlateLink({ force, children = "Read the route" }: Forceable) {
   };
   const live = `hover:decoration-[#22333a] hover:underline-offset-[3px] active:bg-[#c9dcdc] ${focusRing}`;
   return (
-    <a href="#links" className={`${ui} px-0.5 text-base font-semibold text-[#22333a] underline decoration-2 ${slow} ${state[force ?? "rest"]} ${force ? "" : live}`}>
+    <a href="#links" className={`${ui} relative px-0.5 text-base font-semibold text-[#22333a] underline decoration-2 ${slow} ${state[force ?? "rest"]} ${force ? "" : live}`}>
       {children}
     </a>
   );
@@ -66,13 +66,13 @@ export function PlateLink({ force, children = "Read the route" }: Forceable) {
 const fieldState: Record<ControlState, string> = {
   rest: "border-[#6f8287]",
   hover: "border-[#22333a]",
-  focus: `border-[#22333a] ${focusForced}`,
+  focus: "border-[#22333a]",
   pressed: "border-[#22333a]",
   selected: "border-[#22333a]",
   disabled: "cursor-not-allowed border-dashed border-[#4f5f66] text-[#4f5f66]",
 };
-const fieldBase = `${ui} w-full border bg-[#f6f9f7] px-3 py-2.5 text-base text-[#22333a] ${slow} placeholder:font-[family-name:var(--dw-display)] placeholder:italic placeholder:text-[#4f5f66]`;
-const fieldLive = `hover:border-[#22333a] ${focusRingField}`;
+const fieldBase = `${ui} w-full border bg-[#f6f9f7] outline-none px-3 py-2.5 text-base text-[#22333a] ${slow} placeholder:font-[family-name:var(--dw-display)] placeholder:italic placeholder:text-[#4f5f66]`;
+const fieldLive = "hover:border-[#22333a] focus:border-[#22333a]";
 
 function Field({ id, label, children }: { id: string; label: string; children: React.ReactNode }) {
   return (
@@ -87,7 +87,9 @@ function Field({ id, label, children }: { id: string; label: string; children: R
 export function MountInput({ force, id, label = "Trail name", placeholder = "a trail or a country" }: { force?: ControlState; id: string; label?: string; placeholder?: string }) {
   return (
     <Field id={id} label={label}>
-      <input id={id} type="text" placeholder={placeholder} disabled={force === "disabled"} className={`${fieldBase} ${fieldState[force ?? "rest"]} ${force ? "" : fieldLive}`} />
+      <span className={`block ${force === "focus" ? `${focusForced} relative` : force ? "relative" : focusWithin}`}>
+        <input id={id} type="text" placeholder={placeholder} disabled={force === "disabled"} className={`${fieldBase} ${fieldState[force ?? "rest"]} ${force ? "" : fieldLive}`} />
+      </span>
     </Field>
   );
 }
@@ -96,7 +98,7 @@ export function MountInput({ force, id, label = "Trail name", placeholder = "a t
 export function MountSelect({ force, id }: { force?: ControlState; id: string }) {
   return (
     <Field id={id} label="Best month">
-      <span className="relative block">
+      <span className={`block ${force === "focus" ? `${focusForced} relative` : force ? "relative" : focusWithin}`}>
         <select id={id} defaultValue="Jan" disabled={force === "disabled"} className={`${fieldBase} appearance-none pr-9 ${fieldState[force ?? "rest"]} ${force ? "" : fieldLive}`}>
           {["Nov", "Dec", "Jan", "Feb", "Mar", "Apr"].map((m) => (
             <option key={m}>{m}</option>
@@ -125,7 +127,7 @@ export function PlateCheck({ force, label = "Huts on the way", defaultChecked = 
     <label className={`group relative flex items-center gap-3 ${disabled ? "cursor-not-allowed" : "cursor-pointer"}`}>
       <input type="checkbox" className="peer sr-only" defaultChecked={checked} disabled={disabled} />
       <span
-        className={`relative grid h-5 w-5 shrink-0 place-items-center border-[1.5px] bg-[#f6f9f7] ${slow} peer-checked:!bg-[#8eaaa6] peer-checked:[&_.tick]:opacity-100 ${box} ${force ? "" : "group-hover:bg-[#c9dcdc] peer-active:translate-x-px peer-active:translate-y-px peer-active:bg-[#a7b4b1] peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-[3px] peer-focus-visible:outline-[#22333a]"} ${checked ? "bg-[#8eaaa6]" : ""}`}
+        className={`relative grid h-5 w-5 shrink-0 place-items-center border-[1.5px] bg-[#f6f9f7] ${slow} peer-checked:!bg-[#8eaaa6] peer-checked:[&_.tick]:opacity-100 ${box} ${force ? "" : "group-hover:bg-[#c9dcdc] peer-active:translate-x-px peer-active:translate-y-px peer-active:bg-[#a7b4b1] dw-crop"} ${checked ? "bg-[#8eaaa6]" : ""}`}
       >
         <svg viewBox="0 0 16 16" className={`tick h-3.5 w-3.5 transition-opacity duration-300 ${checked ? "opacity-100" : "opacity-0"}`} aria-hidden="true">
           <path d="M2.5 8.5 L6.5 12 L13.5 3.5" fill="none" stroke={DW.text} strokeWidth="2" strokeLinecap="square" />
@@ -144,7 +146,7 @@ export function PlateRadio({ name, options, defaultValue }: { name: string; opti
       {options.map((o) => (
         <label key={o} className="group relative flex cursor-pointer items-center gap-2.5">
           <input type="radio" name={name} value={o} defaultChecked={o === defaultValue} className="peer sr-only" />
-          <span className={`relative grid h-5 w-5 place-items-center rounded-full border-[1.5px] border-[#22333a] bg-[#f6f9f7] ${slow} group-hover:bg-[#c9dcdc] peer-active:translate-y-px peer-active:bg-[#a7b4b1] peer-checked:[&_.dot]:scale-100 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-[3px] peer-focus-visible:outline-[#22333a]`}>
+          <span className={`relative grid h-5 w-5 place-items-center rounded-full border-[1.5px] border-[#22333a] bg-[#f6f9f7] ${slow} group-hover:bg-[#c9dcdc] peer-active:translate-y-px peer-active:bg-[#a7b4b1] peer-checked:[&_.dot]:scale-100 dw-crop`}>
             <span className={`dot h-2.5 w-2.5 scale-0 rounded-full bg-[#2c5868] ${slow}`} />
           </span>
           <span className={`${ui} text-base text-[#22333a]`}>{o}</span>
@@ -163,7 +165,7 @@ export function RadioSwatch({ force, label = "A few days" }: { force: ControlSta
     force === "disabled" ? "border-dashed !border-[#4f5f66]" : "";
   return (
     <span className="flex items-center gap-2.5">
-      <span className={`grid h-5 w-5 place-items-center rounded-full border-[1.5px] border-[#22333a] bg-[#f6f9f7] ${ring}`}>
+      <span className={`relative grid h-5 w-5 place-items-center rounded-full border-[1.5px] border-[#22333a] bg-[#f6f9f7] ${ring}`}>
         {force === "selected" && <span className="h-2.5 w-2.5 rounded-full bg-[#2c5868]" />}
       </span>
       <span className={`${ui} whitespace-nowrap text-base ${force === "disabled" ? "text-[#4f5f66] line-through" : "text-[#22333a]"}`}>{label}</span>
@@ -181,10 +183,10 @@ export function CountBadge({ n }: { n: number }) {
 /** Search: "No." then the field, as in a print catalogue. */
 export function CatalogueSearch({ id }: { id: string }) {
   return (
-    <label htmlFor={id} className="flex items-stretch border border-[#6f8287] bg-[#f6f9f7] p-1 transition-colors duration-[600ms] focus-within:border-[#22333a] hover:border-[#22333a]">
+    <label htmlFor={id} className="dw-crop dw-within relative flex items-stretch border border-[#6f8287] bg-[#f6f9f7] p-1 transition-colors duration-[600ms] focus-within:border-[#22333a] hover:border-[#22333a]">
       <span className={`${caps} grid place-items-center border-r border-[#6f8287]/50 px-3 text-[#4f5f66]`}>No.</span>
       <span className="sr-only">Search trails</span>
-      <input id={id} type="search" placeholder="a trail, a country, a month…" className={`${ui} w-full bg-transparent px-3 py-2 text-base text-[#22333a] placeholder:font-[family-name:var(--dw-display)] placeholder:italic placeholder:text-[#4f5f66] ${focusRingField}`} />
+      <input id={id} type="search" placeholder="a trail, a country, a month…" className={`${ui} w-full bg-transparent px-3 py-2 text-base text-[#22333a] placeholder:font-[family-name:var(--dw-display)] placeholder:italic placeholder:text-[#4f5f66] outline-none`} />
     </label>
   );
 }

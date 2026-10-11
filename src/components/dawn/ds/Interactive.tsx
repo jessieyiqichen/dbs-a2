@@ -80,7 +80,7 @@ const chipState: Record<ControlState, string> = {
   selected: "border-[#22333a] font-semibold text-[#22333a] shadow-[inset_0_-3px_0_0_#22333a] [background:var(--tint)]",
   disabled: "cursor-not-allowed border-dashed border-[#4f5f66] bg-transparent text-[#4f5f66] line-through",
 };
-const chipBase = `${ui} inline-block border px-3 py-1.5 text-sm ${slow}`;
+const chipBase = `${ui} relative inline-block border px-3 py-1.5 text-sm ${slow}`;
 
 export function ChipSwatch({ force, label = "Lakes", tint = DW.loch }: { force: ControlState; label?: string; tint?: string }) {
   return (
@@ -127,7 +127,7 @@ export function PlateToggle({ label, initial = false, force }: { label: string; 
   const knobShadow = on || force === "hover" ? `0 0 0 0 ${DW.loch}` : force === "pressed" ? `inset 0 1px 2px rgba(34,51,58,.4)` : `3px 3px 0 0 ${DW.loch}`;
   const track = (
     <span
-      className={`relative block h-[26px] w-[50px] shrink-0 border-[1.5px] ${disabled ? "border-dashed border-[#4f5f66]" : "border-[#22333a]"} ${force ? "" : "group-hover:!bg-[#c9dcdc] group-active:!bg-[#a7b4b1] group-focus-visible:outline group-focus-visible:outline-2 group-focus-visible:outline-offset-[3px] group-focus-visible:outline-[#22333a]"} ${on && !force ? "group-hover:!bg-[#8eaaa6]" : ""} ${force === "focus" ? focusForced : ""}`}
+      className={`relative block h-[26px] w-[50px] shrink-0 border-[1.5px] ${disabled ? "border-dashed border-[#4f5f66]" : "border-[#22333a]"} ${force ? "" : "group-hover:!bg-[#c9dcdc] group-active:!bg-[#a7b4b1] dw-crop"} ${on && !force ? "group-hover:!bg-[#8eaaa6]" : ""} ${force === "focus" ? focusForced : ""}`}
       style={{ background: on ? DW.loch : force === "pressed" ? DW.stone : force === "hover" ? DW.aqua : DW.surface, transition: move }}
     >
       <span

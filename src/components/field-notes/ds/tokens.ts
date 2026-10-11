@@ -15,6 +15,20 @@ export const FN = {
 
 export const hand = "font-[family-name:var(--fn-hand)]";
 export const serif = "font-[family-name:var(--fn-serif)]";
-/** Focus everywhere: a dashed ink loop around the thing, like a pencil ring in the margin. */
-export const focusRing = "focus-visible:outline-2 focus-visible:outline-dashed focus-visible:outline-offset-4 focus-visible:outline-[#2f4a6b]";
-export const focusForced = "outline-2 outline-dashed outline-offset-4 outline-[#2f4a6b]";
+/** Focus everywhere: a quick wavy ink line underneath, the way you underline something in a notebook.
+ *  The element needs a positioning context (`relative`, or already absolute). */
+export const focusRing = "fn-scrib focus-visible:outline-none";
+export const focusForced = "fn-scrib is-focus";
+/** Fields can't draw on themselves: their wrapper shows the scribble while the field inside has focus. */
+export const focusWithin = "fn-scrib fn-within relative";
+
+const wave = encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M1 6 C 12 2, 22 9, 34 5 S 56 2, 68 6 S 90 8, 99 4" fill="none" stroke="#2f4a6b" stroke-width="2.4" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>',
+);
+/** Scribble focus, shared by every Field Notes control. Render once per page. */
+export const FIELD_FOCUS_CSS = `
+.fn-scrib::after{content:"";position:absolute;left:-4px;right:-4px;bottom:-13px;height:10px;pointer-events:none;opacity:0;
+background:url("data:image/svg+xml,${wave}") center/100% 100% no-repeat;transition:opacity 300ms ease-out}
+.fn-scrib:focus-visible::after,.fn-scrib.is-focus::after,:focus-visible>.fn-scrib::after,.peer:focus-visible~.fn-scrib::after,.fn-within:focus-within::after{opacity:1}
+@media (prefers-reduced-motion: reduce){.fn-scrib::after{transition:none}}
+`;

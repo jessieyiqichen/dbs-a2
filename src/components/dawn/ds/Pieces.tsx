@@ -20,7 +20,7 @@ export function Caption({ h }: { h: Hike }) {
 export function PrintCard({ id, photo, plateNote }: { id: string; photo: string; plateNote: string }) {
   const h = byId(id);
   return (
-    <a href="#card" className={`group block bg-[#f6f9f7] p-3.5 shadow-[0_1px_0_rgba(34,51,58,.15)] ${slow} hover:shadow-[4px_4px_0_0_#c9dcdc] active:translate-y-px active:shadow-[inset_0_2px_4px_rgba(34,51,58,.2)] ${focusRing}`}>
+    <a href="#card" className={`group relative block bg-[#f6f9f7] p-3.5 shadow-[0_1px_0_rgba(34,51,58,.15)] ${slow} hover:shadow-[4px_4px_0_0_#c9dcdc] active:translate-y-px active:shadow-[inset_0_2px_4px_rgba(34,51,58,.2)] ${focusRing}`}>
       <span className="relative block aspect-[4/3] overflow-hidden border-[3px] border-[#22333a]">
         <Image src={photo} alt={`Photochrom print: ${h.name}`} fill sizes="(min-width: 1024px) 40vw, 100vw" className={`object-cover ${slow} group-hover:saturate-[1.2]`} />
       </span>
@@ -51,7 +51,7 @@ export function CardSwatch({ force }: { force: ControlState }) {
     pressed: "translate-y-px shadow-[inset_0_2px_4px_rgba(34,51,58,.2)]",
   };
   return (
-    <span className={`flex items-center gap-2 bg-[#f6f9f7] p-1.5 ${look[force]}`}>
+    <span className={`relative flex items-center gap-2 bg-[#f6f9f7] p-1.5 ${look[force]}`}>
       <span className="relative block h-9 w-12 shrink-0 overflow-hidden border-2 border-[#22333a]">
         <Image src={PRINT} alt="" fill sizes="48px" className={`object-cover ${force === "hover" ? "saturate-[1.2]" : ""}`} />
       </span>
@@ -80,7 +80,7 @@ export function CatalogueRow({ id, force, note, compact = false }: { id: string;
     <a
       href="#rows"
       aria-disabled={disabled || undefined}
-      className={`flex items-baseline gap-3 border-b border-[#22333a]/20 ${compact ? "px-1.5" : "px-3"} py-2.5 ${slow} ${rowState[state]} ${force ? "" : `hover:bg-[#c9dcdc] active:bg-[#8eaaa6]/60 active:shadow-[inset_0_2px_3px_rgba(34,51,58,.25)] ${focusRing}`}`}
+      className={`relative flex items-baseline gap-3 border-b border-[#22333a]/20 ${compact ? "px-1.5" : "px-3"} py-2.5 ${slow} ${rowState[state]} ${force ? "" : `hover:bg-[#c9dcdc] active:bg-[#8eaaa6]/60 active:shadow-[inset_0_2px_3px_rgba(34,51,58,.25)] ${focusRing}`}`}
     >
       {!compact && <span className={`${display} w-14 shrink-0 text-sm text-[#4f5f66]`}>{no(h)}</span>}
       <span className={`${display} ${compact ? "text-base" : "text-lg"} ${disabled ? "text-[#4f5f66] line-through" : "text-[#22333a]"}`}>{compact ? h.name.split(" ")[0] : h.name}</span>
