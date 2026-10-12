@@ -18,7 +18,7 @@ export function TabSwatch({ force, label = "Route" }: { force: ControlState; lab
     force === "pressed" ? { bg: DW.lake, t: "translate(0,0)", o: 0.6 } : null;
   return (
     <span className={`relative inline-block border border-b-0 px-3 pb-2 pt-2.5 ${ui} text-sm ${force === "selected" ? "border-dw-ink font-semibold text-dw-ink" : force === "disabled" ? "border-dashed border-dw-muted text-dw-muted line-through" : "border-dw-border text-dw-ink"} ${force === "focus" ? focusForced : ""} ${force === "pressed" ? "translate-y-px" : ""}`}>
-      {plate && <span aria-hidden="true" className="absolute inset-x-0 bottom-0 top-1" style={{ background: plate.bg, opacity: plate.o, transform: plate.t }} />}
+      {plate && <span aria-hidden="true" className="absolute inset-0" style={{ background: plate.bg, opacity: plate.o, transform: plate.t }} />}
       <span className="relative">{label}</span>
       <span aria-hidden="true" className={`absolute inset-x-0 -bottom-px h-[3px] ${force === "selected" ? "bg-dw-ink" : "bg-transparent"}`} />
       <span aria-hidden="true" className={`absolute inset-x-0 -bottom-px h-px ${force === "disabled" ? "border-b border-dashed border-dw-muted" : "bg-dw-ink"}`} />
@@ -52,7 +52,7 @@ export function PlateTabs({ tabs, panels, idPrefix = "dw", panelClassName }: { t
               }}
               className={`group relative whitespace-nowrap border border-b-0 px-3 pb-2 pt-2.5 ${ui} text-sm ${on ? "border-dw-ink font-semibold text-dw-ink" : "border-dw-border text-dw-ink"} active:translate-y-px ${focusRing}`}
             >
-              <span aria-hidden="true" className={`absolute inset-x-0 bottom-0 top-1 ${slow} ${on ? "translate-x-0 translate-y-0 bg-dw-sun opacity-100" : "translate-x-[3px] translate-y-[6px] bg-dw-sky opacity-0 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-active:bg-dw-lake/60"}`} />
+              <span aria-hidden="true" className={`absolute inset-0 ${slow} ${on ? "translate-x-0 translate-y-0 bg-dw-sun opacity-100" : "translate-x-[3px] translate-y-[6px] bg-dw-sky opacity-0 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-active:bg-dw-lake/60"}`} />
               <span className="relative">{t}</span>
               <span aria-hidden="true" className={`absolute inset-x-0 -bottom-px h-[3px] bg-dw-ink ${slow} ${on ? "scale-x-100" : "scale-x-0"}`} />
             </button>
