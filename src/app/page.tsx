@@ -73,6 +73,7 @@ const FIXED = [
   "Best months were shown by colour alone: the range is now written out, and each best month has a rule beneath.",
   "Hover and selected tints were almost the same (1.07:1 apart in lightness): new sky, pine and lake tints, one per state.",
   "The Dawn design system page was 528px wide on a phone: its component grid now has one column there.",
+  "The guide looked cold and grey for a travel site: photos are back in their own colour, a dawn sky sits behind the opening, and chosen things wear first-light gold.",
 ];
 
 const card =

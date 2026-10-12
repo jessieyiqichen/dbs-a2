@@ -1,6 +1,7 @@
 "use client";
 // The index: the title beside one opening print, then all twelve walks as mounted prints you can take in at a glance.
 import { useMemo } from "react";
+import { DAWN_FIELD } from "@/components/dawn/ds/tokens";
 import { hikes } from "@/data/hikes";
 import rawPhotos from "@/data/trailPhotos.json";
 import { TonedPhoto, creditLine, type TrailPhoto } from "@/components/dawn/Toned";
@@ -39,23 +40,24 @@ export default function TrailsIndex() {
         </figure>
       </header>
 
-      {/* From 640px: the title beside the mounted print. */}
-      <header className="mt-14 hidden grid-cols-1 items-center gap-8 sm:grid lg:grid-cols-[1fr_1.1fr] lg:gap-12">
+      {/* From 640px: the title beside the mounted print, on the dawn field (sky to first light), the full width of the window. */}
+      <header className="relative isolate hidden grid-cols-1 items-center gap-8 py-14 sm:grid lg:grid-cols-[1fr_1.1fr] lg:gap-12">
+        <span aria-hidden="true" className="absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2" style={{ background: DAWN_FIELD }} />
         <div>
-          <p className={`${t12} text-dw-muted`}>A guide to twelve famous walks</p>
+          <p className={`${t12} text-dw-ink`}>A guide to twelve famous walks</p>
           <h1 className={`${t96} mt-4`}>Twelve Trails</h1>
-          <p className={`${t24} mt-6 max-w-md italic text-dw-muted`}>From a day on a volcano to a month across Spain: twelve walks, set out like a box of old travel prints.</p>
+          <p className={`${t24} mt-6 max-w-md italic text-dw-ink`}>From a day on a volcano to a month across Spain: twelve walks, set out like a box of old travel prints.</p>
           <p className="mt-8"><PlateLink href="#walks" size="note">See the twelve walks ↓</PlateLink></p>
         </div>
         <figure className="m-0">
           <div className="bg-dw-mount p-3.5 shadow-[0_1px_0_rgba(34,51,58,.15)]">
             <TonedPhoto photo={OPENING} sizes="(min-width: 1024px) 600px, 100vw" priority className="aspect-[4/3] border-[3px] border-dw-ink" />
           </div>
-          <figcaption className={`${t14} mt-3 text-dw-muted`}>{creditLine(OPENING)}</figcaption>
+          <figcaption className={`${t14} mt-3 text-dw-ink`}>{creditLine(OPENING)}</figcaption>
         </figure>
       </header>
 
-      <section id="walks" aria-labelledby="walks-title" className="mt-8 scroll-mt-16 sm:mt-28">
+      <section id="walks" aria-labelledby="walks-title" className="mt-8 scroll-mt-16 sm:mt-16">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
           <h2 id="walks-title" className={t48}>The twelve walks</h2>
           <p className={`${t14} text-dw-muted`}>Choose a print to read about the walk.</p>

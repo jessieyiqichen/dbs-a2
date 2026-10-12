@@ -1,20 +1,27 @@
 // Dawn design tokens: the cool half of the photochrom prints (sky, water, ice). The classes use the @theme tokens in
 // globals.css (text-dw-ink, bg-dw-mount …); these hex values mirror them for SVG fills and contrast checks.
 export const DW = {
-  page: "#e6edeb", // background: pale sky
-  surface: "#f6f9f7", // the mount a print sits on
+  page: "#fbfcfb", // background: a white reading page
+  surface: "#ffffff", // the mount a print sits on
   text: "#22333a", // key plate ink
   muted: "#4f5f66",
   border: "#6f8287", // control borders, 3:1 or more on the page
   accent: "#2c5868", // loch: the one primary action
   accentHover: "#356677",
   accentPressed: "#244a58",
-  // tint plates, each a clearly different hue so states read apart: sky = hover, pine = selected, lake = pressed and best
+  // tint plates, each a clearly different hue so states read apart: sky = hover, sun = selected and best, lake = pressed
+  sun: "#f3d36e", // selected, best months: first light
+  dawnTop: "#a8d4f0", // the dawn field: sky at the top
+  dawnMid: "#cfe6f3",
+  dawnLow: "#f6e6b0", // first light on the horizon
   pine: "#b7cea5",
   sky: "#d5e5f0",
   lake: "#79a8b8",
   heather: "#bdb8d4",
 } as const;
+
+/** The dawn field behind the opening and the bar: sky at the top to first light on the horizon. */
+export const DAWN_FIELD = "linear-gradient(180deg, var(--color-dw-dawn-top) 0%, var(--color-dw-dawn-mid) 55%, var(--color-dw-dawn-low) 100%)";
 
 export const display = "font-[family-name:var(--dw-display)]";
 export const ui = "font-[family-name:var(--dw-ui)]";
@@ -32,7 +39,7 @@ export const card = {
   hover: "bg-dw-mount shadow-[4px_4px_0_0_var(--color-dw-lake)]",
   focus: "bg-dw-mount shadow-[0_1px_0_rgba(34,51,58,.15)] dw-crop is-focus",
   pressed: "bg-dw-mount translate-y-px shadow-[inset_0_2px_4px_rgba(34,51,58,.2)]",
-  selected: "bg-dw-pine shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]",
+  selected: "bg-dw-sun shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]",
   disabled: "",
 } as const;
 /** Live card states on the element itself. */

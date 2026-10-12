@@ -16,19 +16,23 @@
    `static` keeps every variable in the CSS, so arbitrary values and inline styles can use var(--color-dw-*) too.
    src/components/dawn/ds/tokens.ts mirrors these for SVG and contrast checks; a test keeps the two equal. */
 @theme static {
-  --color-dw-page: #e6edeb;      /* background: pale sky */
-  --color-dw-page-mid: #eaf0ee;  /* the page gradient, lower down */
-  --color-dw-page-low: #f0f5f3;
-  --color-dw-mount: #f6f9f7;     /* surface: the mount a print sits on */
+  --color-dw-page: #fbfcfb;      /* background: a white reading page */
+  --color-dw-page-mid: #fbfcfb;  /* (kept flat: the colour lives in the dawn field) */
+  --color-dw-page-low: #fbfcfb;
+  --color-dw-mount: #ffffff;     /* surface: the mount a print sits on */
   --color-dw-ink: #22333a;       /* text: key plate ink */
   --color-dw-muted: #4f5f66;     /* captions, meta, placeholders */
   --color-dw-border: #6f8287;    /* control borders */
   --color-dw-loch: #2c5868;      /* accent: the one primary action */
   --color-dw-loch-hover: #356677;
   --color-dw-loch-pressed: #244a58;
+  --color-dw-dawn-top: #a8d4f0;  /* the dawn field: sky at the top … */
+  --color-dw-dawn-mid: #cfe6f3;
+  --color-dw-dawn-low: #f6e6b0;  /* … to first light on the horizon */
+  --color-dw-sun: #f3d36e;       /* tint plate: selected (chosen), best months */
   --color-dw-sky: #d5e5f0;       /* tint plate: hover (a look) */
-  --color-dw-pine: #b7cea5;      /* tint plate: selected (chosen) */
-  --color-dw-lake: #79a8b8;      /* tint plate: pressed, best months */
+  --color-dw-pine: #b7cea5;      /* tint plate: chips and marks */
+  --color-dw-lake: #79a8b8;      /* tint plate: pressed, every off-register plate */
   --color-dw-heather: #bdb8d4;   /* tint plate: a fourth hue for chips and marks */
 }
 

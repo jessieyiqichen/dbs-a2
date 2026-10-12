@@ -4,7 +4,7 @@ import { CONTROL_STATES, ratio, type ControlState } from "@/lib/contrast";
 import { hikes } from "@/data/hikes";
 import { PLATE_ICON_NAMES, PlateDefs, PlateIcon, type PlateIconName } from "@/components/dawn/PlateArt";
 import { DayPlates, EmbossStamp, PLATE_KEYFRAMES } from "@/components/dawn/PlateUI";
-import { DAWN_FOCUS_CSS, DW, caps, display, ui } from "@/components/dawn/ds/tokens";
+import { DAWN_FIELD, DAWN_FOCUS_CSS, DW, caps, display, ui } from "@/components/dawn/ds/tokens";
 import { CatalogueSearch, CountBadge, MountInput, MountSelect, PlateCheck, PlateLink, PlateRadio, PrimaryButton, RadioSwatch, SecondaryButton } from "@/components/dawn/ds/Primitives";
 import { ChipSwatch, PlateChips, PlateTabs, PlateToggle, RouteMap, TabSwatch } from "@/components/dawn/ds/Interactive";
 import { CardSwatch, CatalogueRow, DetailPanel, UIStates } from "@/components/dawn/ds/Pieces";
@@ -55,13 +55,14 @@ function Block({ title, note, children, className = "" }: { title: string; note?
 /* ---------- 1. colour roles ---------- */
 
 const ROLES = [
-  { role: "Background", hex: DW.page, use: "The pale sky of the prints", checks: [] as [string, string, string][] },
+  { role: "Background", hex: DW.page, use: "A white page for reading", checks: [] as [string, string, string][] },
+  { role: "Dawn field", hex: DW.dawnTop, use: "Sky to first light, behind the opening and the bar", checks: [["key ink at the top", DW.text, DW.dawnTop], ["key ink at the horizon", DW.text, DW.dawnLow]] },
   { role: "Surface", hex: DW.surface, use: "The mount a print sits on", checks: [] },
   { role: "Text", hex: DW.text, use: "Key-plate ink, never black", checks: [["on background", DW.text, DW.page], ["on surface", DW.text, DW.surface]] },
   { role: "Muted text", hex: DW.muted, use: "Captions, meta, placeholders", checks: [["on background", DW.muted, DW.page], ["on surface", DW.muted, DW.surface]] },
   { role: "Border", hex: DW.border, use: "Field and control edges", checks: [["on background (3:1 needed)", DW.border, DW.page]] },
   { role: "Accent", hex: DW.accent, use: "Loch, for the one primary action", checks: [["mount text on it", DW.surface, DW.accent]] },
-  { role: "Tints", hex: DW.pine, use: "Sky (hover), pine (selected), lake (pressed, best), heather: plates only, key ink on top", checks: [["key ink on pine", DW.text, DW.pine], ["key ink on lake", DW.text, DW.lake]] },
+  { role: "Tints", hex: DW.sun, use: "Sun (selected, best), sky (hover), lake (pressed), pine and heather (chips): plates only, key ink on top", checks: [["key ink on sun", DW.text, DW.sun], ["key ink on lake", DW.text, DW.lake]] },
 ] satisfies { role: string; hex: string; use: string; checks: [string, string, string][] }[];
 
 function ColourRoles() {
@@ -70,14 +71,16 @@ function ColourRoles() {
       {ROLES.map((r) => (
         <div key={r.role} className="bg-dw-mount p-3">
           {r.role === "Tints" ? (
-            <div className="grid h-12 grid-cols-4 border border-dw-ink sm:h-20">
-              {[DW.pine, DW.sky, DW.lake, DW.heather].map((c) => <span key={c} style={{ background: c }} />)}
+            <div className="grid h-12 grid-cols-5 border border-dw-ink sm:h-20">
+              {[DW.sun, DW.sky, DW.lake, DW.pine, DW.heather].map((c) => <span key={c} style={{ background: c }} />)}
             </div>
+          ) : r.role === "Dawn field" ? (
+            <div className="h-12 border border-dw-ink sm:h-20" style={{ background: DAWN_FIELD }} />
           ) : (
-            <div className="h-12 border border-dw-ink shadow-[3px_3px_0_0_var(--color-dw-sky)] sm:h-20" style={{ background: r.hex }} />
+            <div className="h-12 border border-dw-ink shadow-[3px_3px_0_0_var(--color-dw-lake)] sm:h-20" style={{ background: r.hex }} />
           )}
           <p className={`${display} mt-3 text-xl leading-none`}>{r.role}</p>
-          <p className={`${ui} mt-1 text-xs text-dw-muted`}>{r.role === "Tints" ? `${DW.pine} ${DW.sky} ${DW.lake} ${DW.heather}` : r.hex} · {r.use}</p>
+          <p className={`${ui} mt-1 text-xs text-dw-muted`}>{r.role === "Tints" ? `${DW.sun} ${DW.sky} ${DW.lake} ${DW.pine} ${DW.heather}` : r.role === "Dawn field" ? `${DW.dawnTop} → ${DW.dawnLow}` : r.hex} · {r.use}</p>
           {r.checks.map(([label, fg, bg]) => (
             <p key={label} className={`${ui} text-xs`}>
               <span className="font-semibold">{ratio(fg, bg)}</span> <span className="text-dw-muted">{label}</span>

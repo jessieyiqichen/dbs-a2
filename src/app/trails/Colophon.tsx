@@ -17,7 +17,7 @@ export function Colophon() {
           sources and notes. Rules, closures and permits change, so check them before you travel. Your list lasts for this visit only: nothing is stored.
         </p>
         <p className="mt-2 max-w-prose">
-          Photochrom prints: Library of Congress, Photochrom Print Collection (no known restrictions). Other photographs: Unsplash (Unsplash License), toned to sit with the prints.
+          Photochrom prints: Library of Congress, Photochrom Print Collection (no known restrictions). Other photographs: Unsplash (Unsplash License), shown in their own colour.
         </p>
         <details className="mt-3">
           <summary className={`w-fit cursor-pointer ${plateLinkClass("note")}`}>Every photograph and its credit</summary>

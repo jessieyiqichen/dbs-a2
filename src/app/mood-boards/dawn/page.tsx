@@ -22,10 +22,11 @@ const PAGE = "linear-gradient(180deg, var(--color-dw-page) 0%, var(--color-dw-pa
 const PALETTE = [
   { name: "Key", hex: "#22333a", role: "Text, key lines · 12.36:1", swatch: "key", from: "Deep water, Milford Sound, darkened" },
   { name: "Loch", hex: "#2c5868", role: "The one action · 7.33:1", swatch: "loch", from: "Loch Linnhe, darkened for contrast" },
+  { name: "Sun", hex: T.sun, role: "Selected, best", swatch: "sun", from: "Sunlit sky over Chamonix, moved toward yellow" },
   { name: "Sky", hex: T.sky, role: "Hover", swatch: "sky", from: "Sky over the Mer de Glace, cooled toward blue" },
-  { name: "Pine", hex: T.pine, role: "Selected", swatch: "pine", from: "The meadow by Mirror Lake, as printed" },
-  { name: "Lake", hex: T.lake, role: "Pressed, best", swatch: "lake", from: "Water of Milford Sound, lightened and cooled" },
-  { name: "Heather", hex: T.heather, role: "Tint", swatch: null, from: "Derived: a cool lilac for rock in shadow" },
+  { name: "Lake", hex: T.lake, role: "Pressed", swatch: "lake", from: "Water of Milford Sound, lightened and cooled" },
+  { name: "Pine", hex: T.pine, role: "Chips, marks", swatch: "pine", from: "The meadow by Mirror Lake, as printed" },
+  { name: "Heather", hex: T.heather, role: "Chips, marks", swatch: null, from: "Derived: a cool lilac for rock in shadow" },
 ];
 
 /* ---------- pieces made for this board ---------- */
@@ -177,7 +178,7 @@ const tiles: Tile[] = [
   { kind: "made", id: "stamp", caption: "Badge: an embossed stamp, pressed into the mount" },
   { kind: "made", id: "button-states", caption: "Button states: rest, in register, pressed, focus, unprinted" },
   { kind: "photo", file: "lake-te-anau.jpg", caption: "Lake Te Anau: still water, one small boat" },
-  { kind: "made", id: "treatment", caption: "A modern photo joins the set: toned like the prints, half the colour out, warm cream highlights" },
+  { kind: "made", id: "treatment", caption: "Early idea: tone modern photos like the prints. Dropped on the site: it made the guide grey" },
   { kind: "photo", file: "chamonix-floria.jpg", caption: "The Chamonix valley, where the Tour du Mont Blanc begins" },
   { kind: "photo", file: "cleddau-valley.jpg", caption: "Cleddau Valley, Milford Sound: one figure for scale" },
   { kind: "photo", file: "milford-windbound.jpg", caption: "Milford Sound from Windbound Point: depth from paler, not darker" },

@@ -10,6 +10,7 @@ export const SKY = "#e6edeb"; // page
 export const LOCH = "#2c5868"; // primary action, Loch Linnhe darkened for contrast (7.33:1 with mount)
 // Dawn keeps only the cool half of the prints (sky, water, ice); the warm earth tones belong to Field Notes.
 export const T = {
+  sun: "#f3d36e", // sunlit sky over Chamonix, moved toward yellow (no orange)
   pine: "#b7cea5", // the meadow by Mirror Lake, as printed
   sky: "#d5e5f0", // sky over the Mer de Glace, cooled toward blue
   lake: "#79a8b8", // water of Milford Sound, lightened and cooled

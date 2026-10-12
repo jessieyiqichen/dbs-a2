@@ -1,6 +1,7 @@
 "use client";
-// A trail photo. Photochrom prints are shown as they are; modern photos get treatment A, the photochrom look:
-// half the colour lifted out, warm cream in the highlights, soft contrast, lifted blacks. Chosen 11 Oct 2026.
+// A trail photo, shown in its own colour: photochrom prints as printed, modern photos as taken. (Until 11 Oct 2026
+// modern photos were toned to look old, treatment A; it made the guide feel grey, so the site dropped it. The mood
+// board still shows the treatment as an early decision.)
 // While it loads, the frame shows the tint plates printing, sky first; once loaded the photo's colour fades in.
 // If it fails, the frame says so in Dawn's error state.
 import { useEffect, useRef, useState } from "react";
@@ -53,7 +54,6 @@ function NotPrinted({ alt }: { alt: string }) {
 
 /** `force` shows a state on purpose, for the design system. */
 export function TonedPhoto({ photo, sizes, priority = false, className = "", force }: { photo: TrailPhoto; sizes: string; priority?: boolean; className?: string; force?: PhotoState }) {
-  const modern = photo.kind === "modern";
   const ref = useRef<HTMLImageElement>(null);
   const [live, setLive] = useState<PhotoState>("loading");
   // an image can finish before the page wakes up; read where it got to
@@ -77,9 +77,7 @@ export function TonedPhoto({ photo, sizes, priority = false, className = "", for
             onLoad={() => setLive("ready")}
             onError={() => setLive("error")}
             className={`object-cover transition-opacity duration-[600ms] ease-[cubic-bezier(.45,0,.2,1)] ${state === "ready" ? "opacity-100" : "opacity-0"}`}
-            style={modern ? { filter: TONE_FILTER } : undefined}
           />
-          {modern && state === "ready" && <span aria-hidden="true" className="absolute inset-0 opacity-55 mix-blend-soft-light" style={{ background: TONE_OVERLAY }} />}
         </>
       )}
       {state === "error" && <NotPrinted alt={photo.alt} />}
@@ -89,5 +87,5 @@ export function TonedPhoto({ photo, sizes, priority = false, className = "", for
 
 /** One line of credit, as the prints carried theirs. */
 export function creditLine(p: TrailPhoto): string {
-  return p.kind === "photochrom" ? `${p.place} · photochrom, ${p.author}, ${p.date}` : `${p.place} · photo ${p.author} / Unsplash, toned`;
+  return p.kind === "photochrom" ? `${p.place} · photochrom, ${p.author}, ${p.date}` : `${p.place} · photo ${p.author} / Unsplash`;
 }

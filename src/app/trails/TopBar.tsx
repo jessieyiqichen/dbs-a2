@@ -10,7 +10,7 @@ export function TopBar() {
   const { list } = useTrails();
   const [open, setOpen] = useState(false);
   return (
-    <div className="sticky top-0 z-30 border-b border-dw-ink/15 bg-dw-page/95">
+    <div className="sticky top-0 z-30 border-b border-dw-ink/15 bg-dw-dawn-top">
       <div className={`${t14} mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-2.5`}>
         <div className="flex items-baseline gap-5 sm:gap-6">
           <PlateLink href="/" size="note">← Hub</PlateLink>

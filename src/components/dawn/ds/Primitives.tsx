@@ -19,7 +19,7 @@ export function Tick() {
 }
 
 /** Selected, for every button: a pine plate laid under in register, a key rule beneath, and a tick. */
-const selectedLook = "border-dw-ink bg-dw-pine text-dw-ink shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]";
+const selectedLook = "border-dw-ink bg-dw-sun text-dw-ink shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]";
 const selectedLive = `active:translate-x-px active:translate-y-px active:bg-dw-lake active:shadow-[inset_0_2px_4px_rgba(34,51,58,.45)] ${focusRing}`;
 
 /** `selected` makes a button a toggle (aria-pressed); `small` is for buttons that sit inside cards and panels. */
@@ -176,7 +176,7 @@ export function PlateCheck({ force, label = "Huts on the way", defaultChecked = 
     <label className={`group relative flex items-center gap-3 ${disabled ? "cursor-not-allowed" : "cursor-pointer"}`}>
       <input type="checkbox" className="peer sr-only" defaultChecked={checked} disabled={disabled} />
       <span
-        className={`relative grid h-5 w-5 shrink-0 place-items-center border-[1.5px] bg-dw-mount ${slow} peer-checked:!bg-dw-pine peer-checked:[&_.tick]:opacity-100 ${box} ${force ? "" : "group-hover:bg-dw-sky peer-active:translate-x-px peer-active:translate-y-px peer-active:bg-dw-lake dw-crop"} ${checked ? "bg-dw-pine" : ""}`}
+        className={`relative grid h-5 w-5 shrink-0 place-items-center border-[1.5px] bg-dw-mount ${slow} peer-checked:!bg-dw-sun peer-checked:[&_.tick]:opacity-100 ${box} ${force ? "" : "group-hover:bg-dw-sky peer-active:translate-x-px peer-active:translate-y-px peer-active:bg-dw-lake dw-crop"} ${checked ? "bg-dw-sun" : ""}`}
       >
         <svg viewBox="0 0 16 16" className={`tick h-3.5 w-3.5 transition-opacity duration-300 ${checked ? "opacity-100" : "opacity-0"}`} aria-hidden="true">
           <path d="M2.5 8.5 L6.5 12 L13.5 3.5" fill="none" stroke={DW.text} strokeWidth="2" strokeLinecap="square" />

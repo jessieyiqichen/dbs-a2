@@ -66,7 +66,7 @@ const rowState: Record<ControlState, string> = {
   hover: "bg-dw-sky",
   focus: focusForced,
   pressed: "bg-dw-lake/60 shadow-[inset_0_2px_3px_rgba(34,51,58,.25)]",
-  selected: "bg-dw-pine shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]",
+  selected: "bg-dw-sun shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]",
   disabled: "cursor-not-allowed text-dw-muted",
 };
 

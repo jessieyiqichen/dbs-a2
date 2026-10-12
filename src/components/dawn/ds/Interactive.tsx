@@ -13,7 +13,7 @@ import { t12, t14, t24 } from "./type";
 /** One tab in a forced state. Selected: a pine plate under the label, a key rule beneath, in register. */
 export function TabSwatch({ force, label = "Route" }: { force: ControlState; label?: string }) {
   const plate =
-    force === "selected" ? { bg: DW.pine, t: "translate(0,0)", o: 1 } :
+    force === "selected" ? { bg: DW.sun, t: "translate(0,0)", o: 1 } :
     force === "hover" ? { bg: DW.sky, t: "translate(0,0)", o: 1 } :
     force === "pressed" ? { bg: DW.lake, t: "translate(0,0)", o: 0.6 } : null;
   return (
@@ -52,7 +52,7 @@ export function PlateTabs({ tabs, panels, idPrefix = "dw", panelClassName }: { t
               }}
               className={`group relative whitespace-nowrap px-3 pb-2 pt-2.5 ${ui} text-sm ${on ? "font-semibold text-dw-ink" : "text-dw-ink"} active:translate-y-px ${focusRing}`}
             >
-              <span aria-hidden="true" className={`absolute inset-x-0 bottom-0 top-1 ${slow} ${on ? "translate-x-0 translate-y-0 bg-dw-pine opacity-100" : "translate-x-[3px] translate-y-[6px] bg-dw-sky opacity-0 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-active:bg-dw-lake/60"}`} />
+              <span aria-hidden="true" className={`absolute inset-x-0 bottom-0 top-1 ${slow} ${on ? "translate-x-0 translate-y-0 bg-dw-sun opacity-100" : "translate-x-[3px] translate-y-[6px] bg-dw-sky opacity-0 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-active:bg-dw-lake/60"}`} />
               <span className="relative">{t}</span>
               <span aria-hidden="true" className={`absolute inset-x-0 -bottom-px h-[3px] bg-dw-ink ${slow} ${on ? "scale-x-100" : "scale-x-0"}`} />
             </button>
@@ -126,8 +126,8 @@ export function PlateToggle({ label, icon, initial = false, force, checked, onCh
   const knobShadow = on || force === "hover" ? `0 0 0 0 ${DW.lake}` : force === "pressed" ? `inset 0 1px 2px rgba(34,51,58,.4)` : `3px 3px 0 0 ${DW.lake}`;
   const track = (
     <span
-      className={`relative block h-[26px] w-[50px] shrink-0 border-[1.5px] ${disabled ? "border-dashed border-dw-muted" : "border-dw-ink"} ${force ? "" : "group-hover:!bg-dw-sky group-active:!bg-dw-lake dw-crop"} ${on && !force ? "group-hover:!bg-dw-pine" : ""} ${force === "focus" ? focusForced : ""}`}
-      style={{ background: on ? DW.pine : force === "pressed" ? DW.lake : force === "hover" ? DW.sky : DW.surface, transition: move }}
+      className={`relative block h-[26px] w-[50px] shrink-0 border-[1.5px] ${disabled ? "border-dashed border-dw-muted" : "border-dw-ink"} ${force ? "" : "group-hover:!bg-dw-sky group-active:!bg-dw-lake dw-crop"} ${on && !force ? "group-hover:!bg-dw-sun" : ""} ${force === "focus" ? focusForced : ""}`}
+      style={{ background: on ? DW.sun : force === "pressed" ? DW.lake : force === "hover" ? DW.sky : DW.surface, transition: move }}
     >
       <span
         className={`absolute top-[3px] h-[17px] w-[17px] border-[1.5px] bg-dw-mount ${disabled ? "border-dashed border-dw-muted" : "border-dw-ink"} ${force ? "" : "group-hover:!shadow-none group-active:translate-y-px"}`}
