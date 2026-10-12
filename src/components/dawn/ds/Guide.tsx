@@ -81,19 +81,17 @@ const LEVEL: Record<Level, { label: string; fill: string }> = {
   closed: { label: "Closed or not advised", fill: "bg-dw-mount" },
 };
 
-/** One line on top (the best range and any closure), the year as a thin band with the months beneath, a legend,
- *  and the reasons behind "Why these months?". Not a control. */
-export function SeasonStrip({ season }: { season: Season }) {
+/** Three steps, largest first: the best months in big type; the year as a thin band with the months beneath; one
+ *  small line (closures, then the walk's own note) and the reasons and key behind "Why these months?". Not a control. */
+export function SeasonStrip({ season, note }: { season: Season; note?: string }) {
   const levels = MONTHS.map((m) => season.months[m] ?? "possible");
   const best = MONTHS.filter((_, i) => levels[i] === "best");
   const closed = season.notes.filter((n) => n.level === "closed");
   const used = (["best", "possible", "closed"] as const).filter((l) => levels.includes(l));
+  const small = [...closed.map((n) => `${n.short ?? "Closed"} ${monthRange(n.months)}`), note].filter(Boolean).join(". ");
   return (
     <div>
-      <p className={`${t14} font-semibold text-dw-ink`}>
-        Best {monthRange(best)}
-        {closed.map((n) => <span key={n.text} className="font-normal text-dw-muted"> · {n.short ?? "closed"} {monthRange(n.months)}</span>)}
-      </p>
+      <p className={`${t24} flex items-center gap-2`}><PlateIcon name="sunrise" size={26} />Best {monthRange(best)}</p>
       <div aria-hidden="true" className="mt-3 max-w-xl">
         <div className="grid h-3 grid-cols-12 border border-dw-border">
           {MONTHS.map((m, i) => <span key={m} className={`${LEVEL[levels[i]].fill} ${i > 0 ? "border-l border-dw-mount" : ""}`} />)}
@@ -107,24 +105,23 @@ export function SeasonStrip({ season }: { season: Season }) {
       <ul className="sr-only">
         {MONTHS.map((m, i) => <li key={m}>{m}: {LEVEL[levels[i]].label}</li>)}
       </ul>
-      <ul aria-hidden="true" className={`${t14} mt-2 flex flex-wrap gap-x-4 gap-y-1 text-dw-muted`}>
-        {used.map((l) => (
-          <li key={l} className="flex items-center gap-1.5">
-            <span className={`inline-block h-2.5 w-5 border border-dw-border ${LEVEL[l].fill}`} />
-            {LEVEL[l].label}
-          </li>
-        ))}
-      </ul>
-      {season.notes.length > 0 && (
-        <details className="mt-3">
-          <summary className={`w-fit cursor-pointer ${plateLinkClass("note")}`}>Why these months?</summary>
-          <ul className={`${t14} mt-2 space-y-1 text-dw-muted`}>
-            {season.notes.map((n) => (
-              <li key={n.text}><span className="font-semibold text-dw-ink">{monthRange(n.months)}</span> · {n.text}</li>
-            ))}
-          </ul>
-        </details>
-      )}
+      {small && <p className={`${t14} mt-4 max-w-prose text-dw-muted`}>{small.charAt(0).toUpperCase() + small.slice(1)}</p>}
+      <details className="mt-2">
+        <summary className={`w-fit cursor-pointer ${plateLinkClass("note")}`}>Why these months?</summary>
+        <ul aria-hidden="true" className={`${t14} mt-2 flex flex-wrap gap-x-4 gap-y-1 text-dw-muted`}>
+          {used.map((l) => (
+            <li key={l} className="flex items-center gap-1.5">
+              <span className={`inline-block h-2.5 w-5 border border-dw-border ${LEVEL[l].fill}`} />
+              {LEVEL[l].label}
+            </li>
+          ))}
+        </ul>
+        <ul className={`${t14} mt-2 space-y-1 text-dw-muted`}>
+          {season.notes.map((n) => (
+            <li key={n.text}><span className="font-semibold text-dw-ink">{monthRange(n.months)}</span> · {n.text}</li>
+          ))}
+        </ul>
+      </details>
     </div>
   );
 }

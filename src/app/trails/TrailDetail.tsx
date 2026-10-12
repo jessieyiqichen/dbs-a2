@@ -53,9 +53,7 @@ function Details({ h }: { h: Hike }) {
         <RouteMap key="route" nodes={routeNodes(h, routes[h.id])} idPrefix={h.id} />,
         <div key="when" className="flex flex-wrap items-start gap-x-8 gap-y-4">
           <div className="min-w-0 flex-1 basis-full sm:basis-0">
-            <p className={`${t12} flex items-center gap-1.5 text-dw-muted`}><PlateIcon name="sunrise" size={22} />Month by month</p>
-            <div className="mt-2"><SeasonStrip season={seasons[h.id]} /></div>
-            <p className={`${t14} mt-4 max-w-prose text-dw-muted`}>{h.permit_note}</p>
+            <SeasonStrip season={seasons[h.id]} note={h.permit_note} />
           </div>
           <EmbossStamp text={h.permit ? "Permit needed" : "No permit needed"} uid={`${h.id}-stamp`} className="h-24 w-24 shrink-0" />
         </div>,
