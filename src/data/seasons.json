@@ -1,0 +1,517 @@
+{
+ "inca-trail": {
+  "months": {
+   "Jan": "possible",
+   "Feb": "closed",
+   "Mar": "possible",
+   "Apr": "possible",
+   "May": "best",
+   "Jun": "best",
+   "Jul": "best",
+   "Aug": "best",
+   "Sep": "best",
+   "Oct": "possible",
+   "Nov": "possible",
+   "Dec": "possible"
+  },
+  "notes": [
+   {
+    "months": [
+     "Feb"
+    ],
+    "level": "closed",
+    "text": "Closed every February for maintenance and conservation work",
+    "sources": [
+     "https://andina.pe/ingles/noticia.aspx?id=651711",
+     "https://www.peru.travel/stories/inka-trail-5-tips-for-exploring-one-of-the-best-trekking-routes-in-the-world"
+    ]
+   },
+   {
+    "months": [
+     "Mar"
+    ],
+    "level": "possible",
+    "text": "Rainy season continues; reopening after February can be delayed",
+    "sources": [
+     "https://www.peru.travel/useful-data/climate",
+     "https://www.infobae.com/peru/2025/03/13/cierre-del-camino-inca-se-extiende-hasta-el-31-de-marzo-intensas-lluvias-y-deslizamientos-obligan-a-prolongar-la-medida/"
+    ]
+   },
+   {
+    "months": [
+     "Apr",
+     "Oct"
+    ],
+    "level": "possible",
+    "text": "Dry season; official tourism board calls April-October ideal",
+    "sources": [
+     "https://www.peru.travel/stories/inka-trail-5-tips-for-exploring-one-of-the-best-trekking-routes-in-the-world"
+    ]
+   },
+   {
+    "months": [
+     "Nov",
+     "Dec",
+     "Jan"
+    ],
+    "level": "possible",
+    "text": "Andean rainy season: abundant rain, trail open",
+    "sources": [
+     "https://www.peru.travel/useful-data/climate"
+    ]
+   }
+  ]
+ },
+ "tmb": {
+  "months": {
+   "Jan": "closed",
+   "Feb": "closed",
+   "Mar": "closed",
+   "Apr": "closed",
+   "May": "closed",
+   "Jun": "possible",
+   "Jul": "best",
+   "Aug": "best",
+   "Sep": "possible",
+   "Oct": "closed",
+   "Nov": "closed",
+   "Dec": "closed"
+  },
+  "notes": [
+   {
+    "months": [
+     "Jun",
+     "Sep"
+    ],
+    "level": "possible",
+    "text": "Classic season mid-June to mid-September; some refuges not yet open or closed",
+    "sources": [
+     "https://www2.montourdumontblanc.com/en/faq"
+    ]
+   },
+   {
+    "months": [
+     "Oct",
+     "Nov",
+     "Dec",
+     "Jan",
+     "Feb",
+     "Mar",
+     "Apr",
+     "May"
+    ],
+    "level": "closed",
+    "text": "Outside official season: refuges closed, passes not free of snow",
+    "sources": [
+     "https://www2.montourdumontblanc.com/en/faq",
+     "https://montourdumontblanc.com/en/refuges/refuge-des-mottets"
+    ]
+   }
+  ]
+ },
+ "w-trek": {
+  "months": {
+   "Jan": "best",
+   "Feb": "best",
+   "Mar": "best",
+   "Apr": "best",
+   "May": "possible",
+   "Jun": "closed",
+   "Jul": "closed",
+   "Aug": "possible",
+   "Sep": "possible",
+   "Oct": "best",
+   "Nov": "best",
+   "Dec": "best"
+  },
+  "notes": [
+   {
+    "months": [
+     "May",
+     "Aug"
+    ],
+    "level": "possible",
+    "text": "Winter rules: the W only with an accredited guide",
+    "sources": [
+     "https://parquetorresdelpaine.cl/wp-content/uploads/2026/06/Reglamento-para-actividades-turaisticas-en-condiciones-invernales-PNTP_Junio-2026.pdf"
+    ]
+   },
+   {
+    "months": [
+     "Jun",
+     "Jul"
+    ],
+    "level": "closed",
+    "text": "Closed in June and July 2026 by CONAF (resolution 288)",
+    "sources": [
+     "https://parquetorresdelpaine.cl/wp-content/uploads/2026/06/Reglamento-para-actividades-turaisticas-en-condiciones-invernales-PNTP_Junio-2026.pdf"
+    ]
+   }
+  ]
+ },
+ "ebc": {
+  "months": {
+   "Jan": "possible",
+   "Feb": "possible",
+   "Mar": "best",
+   "Apr": "best",
+   "May": "best",
+   "Jun": "possible",
+   "Jul": "possible",
+   "Aug": "possible",
+   "Sep": "possible",
+   "Oct": "best",
+   "Nov": "best",
+   "Dec": "possible"
+  },
+  "notes": [
+   {
+    "months": [
+     "Jun",
+     "Jul",
+     "Aug",
+     "Sep"
+    ],
+    "level": "possible",
+    "text": "Monsoon: about 80% of Nepal's rain falls June-September",
+    "sources": [
+     "https://ntb.gov.np/plan-your-trip/about-nepal/climate"
+    ]
+   },
+   {
+    "months": [
+     "Dec",
+     "Jan",
+     "Feb"
+    ],
+    "level": "possible",
+    "text": "Winter: snowfall at altitude, sub-zero temperatures, shorter days",
+    "sources": [
+     "https://trade.ntb.gov.np/tourist-destination/everest-region-2/",
+     "https://ntb.gov.np/plan-your-trip/about-nepal/climate",
+     "https://ntb.gov.np/things-to-do/trekking"
+    ]
+   }
+  ]
+ },
+ "milford": {
+  "months": {
+   "Jan": "best",
+   "Feb": "best",
+   "Mar": "best",
+   "Apr": "best",
+   "May": "closed",
+   "Jun": "closed",
+   "Jul": "closed",
+   "Aug": "closed",
+   "Sep": "closed",
+   "Oct": "closed",
+   "Nov": "best",
+   "Dec": "best"
+  },
+  "notes": [
+   {
+    "months": [
+     "May",
+     "Jun",
+     "Jul",
+     "Aug",
+     "Sep",
+     "Oct"
+    ],
+    "level": "closed",
+    "text": "Off-season: reduced facilities, bridges removed, avalanches; experienced trampers only",
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/tracks/milford-track/"
+    ]
+   }
+  ]
+ },
+ "tongariro": {
+  "months": {
+   "Jan": "best",
+   "Feb": "best",
+   "Mar": "best",
+   "Apr": "best",
+   "May": "closed",
+   "Jun": "closed",
+   "Jul": "closed",
+   "Aug": "closed",
+   "Sep": "closed",
+   "Oct": "closed",
+   "Nov": "best",
+   "Dec": "best"
+  },
+  "notes": [
+   {
+    "months": [
+     "May",
+     "Jun",
+     "Jul",
+     "Aug",
+     "Sep",
+     "Oct"
+    ],
+    "level": "closed",
+    "text": "Winter: snow, ice, avalanche terrain; alpine skills, crampons, ice axe essential",
+    "sources": [
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/things-to-do/tracks/tongariro-alpine-crossing/"
+    ]
+   }
+  ]
+ },
+ "kumano": {
+  "months": {
+   "Jan": "possible",
+   "Feb": "possible",
+   "Mar": "best",
+   "Apr": "best",
+   "May": "best",
+   "Jun": "possible",
+   "Jul": "possible",
+   "Aug": "possible",
+   "Sep": "best",
+   "Oct": "best",
+   "Nov": "best",
+   "Dec": "possible"
+  },
+  "notes": [
+   {
+    "months": [
+     "Jun",
+     "Jul",
+     "Aug"
+    ],
+    "level": "possible",
+    "text": "Hot and humid summer; beware heat exhaustion",
+    "sources": [
+     "https://www.tb-kumano.jp/en/kumano-kodo/tips/"
+    ]
+   },
+   {
+    "months": [
+     "Dec",
+     "Jan",
+     "Feb"
+    ],
+    "level": "possible",
+    "text": "Late Dec to Feb: chance of freezing temperatures and snow",
+    "sources": [
+     "https://www.tb-kumano.jp/en/kumano-kodo/tips/"
+    ]
+   }
+  ]
+ },
+ "laugavegur": {
+  "months": {
+   "Jan": "closed",
+   "Feb": "closed",
+   "Mar": "closed",
+   "Apr": "closed",
+   "May": "closed",
+   "Jun": "possible",
+   "Jul": "best",
+   "Aug": "best",
+   "Sep": "possible",
+   "Oct": "closed",
+   "Nov": "closed",
+   "Dec": "closed"
+  },
+  "notes": [
+   {
+    "months": [
+     "Jun",
+     "Sep"
+    ],
+    "level": "possible",
+    "text": "Hiking season runs late June to early September",
+    "sources": [
+     "https://www.fi.is/en/mountain-huts/faq"
+    ]
+   },
+   {
+    "months": [
+     "Oct",
+     "Nov",
+     "Dec",
+     "Jan",
+     "Feb",
+     "Mar",
+     "Apr",
+     "May"
+    ],
+    "level": "closed",
+    "text": "Outside hiking season; highland F-roads to trailhead closed in winter",
+    "sources": [
+     "https://www.fi.is/en/mountain-huts/faq",
+     "https://safetravel.is/highland",
+     "https://www.fi.is/en/hiking-trails/safety"
+    ]
+   }
+  ]
+ },
+ "whw": {
+  "months": {
+   "Jan": "possible",
+   "Feb": "possible",
+   "Mar": "possible",
+   "Apr": "best",
+   "May": "best",
+   "Jun": "best",
+   "Jul": "best",
+   "Aug": "best",
+   "Sep": "best",
+   "Oct": "best",
+   "Nov": "possible",
+   "Dec": "possible"
+  },
+  "notes": [
+   {
+    "months": [
+     "Nov",
+     "Dec",
+     "Jan",
+     "Feb",
+     "Mar"
+    ],
+    "level": "possible",
+    "text": "Winter conditions expected; only for fit walkers with winter navigation skills",
+    "sources": [
+     "https://www.westhighlandway.org/getting-started/frequently-asked-questions/"
+    ]
+   }
+  ]
+ },
+ "camino": {
+  "months": {
+   "Jan": "possible",
+   "Feb": "possible",
+   "Mar": "possible",
+   "Apr": "best",
+   "May": "best",
+   "Jun": "best",
+   "Jul": "possible",
+   "Aug": "possible",
+   "Sep": "best",
+   "Oct": "best",
+   "Nov": "possible",
+   "Dec": "possible"
+  },
+  "notes": [
+   {
+    "months": [
+     "Jul",
+     "Aug"
+    ],
+    "level": "possible",
+    "text": "Summer is workable; avoid walking in the hottest midday hours",
+    "sources": [
+     "https://www.spain.info/en/camino-santiago/"
+    ]
+   },
+   {
+    "months": [
+     "Nov",
+     "Dec",
+     "Jan",
+     "Feb",
+     "Mar"
+    ],
+    "level": "possible",
+    "text": "Napoleon route closed 1 Nov-31 Mar; walk via Luzaide/Valcarlos instead",
+    "sources": [
+     "https://www.visitnavarra.es/en/french-route"
+    ]
+   }
+  ]
+ },
+ "tiger-leaping": {
+  "months": {
+   "Jan": "possible",
+   "Feb": "possible",
+   "Mar": "possible",
+   "Apr": "possible",
+   "May": "best",
+   "Jun": "possible",
+   "Jul": "possible",
+   "Aug": "possible",
+   "Sep": "possible",
+   "Oct": "best",
+   "Nov": "best",
+   "Dec": "possible"
+  },
+  "notes": [
+   {
+    "months": [
+     "Jun",
+     "Jul",
+     "Aug",
+     "Sep"
+    ],
+    "level": "possible",
+    "text": "Rainy season runs June to September",
+    "sources": [
+     "https://visityunnanchina.com/node/199"
+    ]
+   },
+   {
+    "months": [
+     "Dec",
+     "Jan",
+     "Feb",
+     "Mar",
+     "Apr"
+    ],
+    "level": "possible",
+    "text": "Cold in winter, says Yunnan's tourism department",
+    "sources": [
+     "https://visityunnanchina.com/node/199"
+    ]
+   }
+  ]
+ },
+ "half-dome": {
+  "months": {
+   "Jan": "closed",
+   "Feb": "closed",
+   "Mar": "closed",
+   "Apr": "closed",
+   "May": "possible",
+   "Jun": "best",
+   "Jul": "best",
+   "Aug": "best",
+   "Sep": "best",
+   "Oct": "possible",
+   "Nov": "closed",
+   "Dec": "closed"
+  },
+  "notes": [
+   {
+    "months": [
+     "May",
+     "Oct"
+    ],
+    "level": "possible",
+    "text": "Cables up late May (Friday before Memorial Day) to mid-October",
+    "sources": [
+     "https://www.nps.gov/yose/planyourvisit/halfdome.htm"
+    ]
+   },
+   {
+    "months": [
+     "Nov",
+     "Dec",
+     "Jan",
+     "Feb",
+     "Mar",
+     "Apr"
+    ],
+    "level": "closed",
+    "text": "Cables down for winter; the park says do not attempt the ascent",
+    "sources": [
+     "https://www.nps.gov/yose/planyourvisit/halfdome.htm"
+    ]
+   }
+  ]
+ }
+}

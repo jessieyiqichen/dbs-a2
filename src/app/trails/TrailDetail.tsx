@@ -10,7 +10,8 @@ import { creditLine, type TrailPhoto } from "@/components/dawn/Toned";
 import { EmbossStamp } from "@/components/dawn/PlateUI";
 import { PlateTabs, RouteMap } from "@/components/dawn/ds/Interactive";
 import { PlateLink, PrimaryButton } from "@/components/dawn/ds/Primitives";
-import { FACT_ICON, HeroPlate, MonthStrip, NeighbourLink, PlateThumb, routeNodes } from "@/components/dawn/ds/Guide";
+import { FACT_ICON, HeroPlate, NeighbourLink, PlateThumb, SeasonStrip, routeNodes } from "@/components/dawn/ds/Guide";
+import { seasonSources, seasons } from "@/data/seasons";
 import { PlateIcon } from "@/components/dawn/PlateArt";
 import { PlatesViewer } from "@/components/dawn/ds/Viewer";
 import { plateNo, sourceLabel } from "./plate";
@@ -52,8 +53,8 @@ function Details({ h }: { h: Hike }) {
         <RouteMap key="route" nodes={routeNodes(h, routes[h.id])} idPrefix={h.id} />,
         <div key="when" className="flex flex-wrap items-start gap-8">
           <div className="min-w-0 flex-1">
-            <p className={`${t12} flex items-center gap-1.5 text-dw-muted`}><PlateIcon name="sunrise" size={22} />Best months</p>
-            <div className="mt-2"><MonthStrip best={h.best_months} /></div>
+            <p className={`${t12} flex items-center gap-1.5 text-dw-muted`}><PlateIcon name="sunrise" size={22} />Month by month</p>
+            <div className="mt-2"><SeasonStrip season={seasons[h.id]} /></div>
             <p className={`${t14} mt-4 max-w-prose text-dw-muted`}>{h.permit_note}</p>
           </div>
           <EmbossStamp text={h.permit ? "Permit needed" : "No permit needed"} uid={`${h.id}-stamp`} className="h-24 w-24 shrink-0" />
@@ -129,7 +130,7 @@ export default function TrailDetail({ id }: { id: string }) {
       <section aria-labelledby="sources-h" className={`${t14} mt-10 sm:mt-20 border-t border-dw-ink/20 pt-6 text-dw-muted`}>
         <h2 id="sources-h" className={`${t12} text-dw-ink`}>Sources</h2>
         <ul className="mt-3 grid gap-x-8 gap-y-2 sm:grid-cols-2">
-          {[...new Set([...h.sources, ...introSources(h.id), ...stopSources(h.id)])].map((s) => (
+          {[...new Set([...h.sources, ...introSources(h.id), ...stopSources(h.id), ...seasonSources(h.id)])].map((s) => (
             <li key={s}><PlateLink href={s} size="note" external>{sourceLabel(s)}</PlateLink></li>
           ))}
         </ul>

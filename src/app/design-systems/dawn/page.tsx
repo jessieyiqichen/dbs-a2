@@ -8,7 +8,8 @@ import { DAWN_FOCUS_CSS, DW, caps, display, ui } from "@/components/dawn/ds/toke
 import { CatalogueSearch, CountBadge, MountInput, MountSelect, PlateCheck, PlateLink, PlateRadio, PrimaryButton, RadioSwatch, SecondaryButton } from "@/components/dawn/ds/Primitives";
 import { ChipSwatch, PlateChips, PlateTabs, PlateToggle, RouteMap, TabSwatch } from "@/components/dawn/ds/Interactive";
 import { CardSwatch, CatalogueRow, DetailPanel, UIStates } from "@/components/dawn/ds/Pieces";
-import { HeroPlate, MonthStrip, NeighbourLink, PlateThumb, StopSwatch, routeNodes } from "@/components/dawn/ds/Guide";
+import { HeroPlate, NeighbourLink, PlateThumb, SeasonStrip, StopSwatch, routeNodes } from "@/components/dawn/ds/Guide";
+import { seasons } from "@/data/seasons";
 import { Gallery } from "@/components/dawn/ds/Viewer";
 import { AddToListDemo, CardDemo, SidePanelDemo } from "@/components/dawn/ds/Demos";
 import { t12, t12caption, t14, t17, t24, t48, t96 } from "@/components/dawn/ds/type";
@@ -316,9 +317,9 @@ function Components() {
       <Block title="Route map" note="Along the way: one line through every stop's icon; choose a stop to read about it. Arrow keys move.">
         <RouteMap nodes={routeNodes(milford, routes.milford)} idPrefix="ds-route" />
       </Block>
-      <Block title="Month strip and stamp" note="Best months carry a celadon plate. Neither is a control.">
+      <Block title="Season band and stamp" note="Twelve months as one band: best is the deepest plate with a rule beneath, possible a pale wash, closed is hatched. The words say it too. Neither is a control.">
         <div className="flex flex-wrap items-start gap-6">
-          <div className="min-w-0 flex-1"><MonthStrip best={milford.best_months} /></div>
+          <div className="min-w-0 flex-1"><SeasonStrip season={seasons.milford} /></div>
           <div className="[&_svg]:h-24 [&_svg]:w-24"><EmbossStamp text="Permit needed" uid="ds-stamp" /></div>
         </div>
       </Block>

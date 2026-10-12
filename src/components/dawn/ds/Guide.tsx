@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { ControlState } from "@/lib/contrast";
 import type { Hike } from "@/data/hikes";
 import type { Route, StopKind } from "@/data/stops";
+import type { Level, Season } from "@/data/seasons";
 import { TonedPhoto, type TrailPhoto } from "../Toned";
 import { PlateIcon, type PlateIconName } from "../PlateArt";
 import { card, cardLive, colourUp } from "./tokens";
@@ -69,23 +70,64 @@ export function StopSwatch({ force }: { force: ControlState }) {
   return <span className={`${stopBase} ${stopState[force]}`}><PlateIcon name="mountain" size={28} /></span>;
 }
 
-/** Twelve months as small printed squares. The best months carry a celadon plate and a key rule beneath, and the
- *  range is written out in words, so the strip never relies on colour alone. Not a control. */
-export function MonthStrip({ best }: { best: string[] }) {
-  const range = monthRange(best);
+/** Each level's plate. Best is the deepest tint with a key rule beneath; possible a pale wash; closed is unprinted,
+ *  hatched in key ink. The words in the legend carry the meaning too, so colour is never alone. */
+export const LEVEL = {
+  best: { colour: "var(--color-dw-loch-tint)", label: "Best" },
+  possible: { colour: "var(--color-dw-aqua)", label: "Possible" },
+  closed: { colour: "var(--color-dw-mount)", label: "Closed or not advised" },
+} as const satisfies Record<Level, { colour: string; label: string }>;
+
+const HATCH = "repeating-linear-gradient(135deg, rgba(34,51,58,.55) 0 1.5px, transparent 1.5px 6px)";
+
+/** The colour band: each month solid in its middle, blending into the next at the edges, like a spectrum. */
+function band(months: Level[]): string {
+  const stops = months.flatMap((l, i) => {
+    const c = LEVEL[l].colour;
+    return [`${c} ${((i + 0.18) / 12) * 100}%`, `${c} ${((i + 0.82) / 12) * 100}%`];
+  });
+  return `linear-gradient(90deg, ${stops.join(", ")})`;
+}
+
+/** Twelve months as one band, best to closed; the range and any closure are written out above it, and the
+ *  levels are named in a legend beneath. Not a control. */
+export function SeasonStrip({ season }: { season: Season }) {
+  const levels = MONTHS.map((m) => season.months[m] ?? "possible");
+  const best = MONTHS.filter((m, i) => levels[i] === "best");
+  const used = (["best", "possible", "closed"] as const).filter((l) => levels.includes(l));
   return (
     <div>
-      <p className={`${t14} mb-2 font-semibold text-dw-ink`}>{range}</p>
-      <div className="grid max-w-md grid-cols-12 gap-1" aria-hidden="true">
-        {MONTHS.map((m) => {
-          const on = best.includes(m);
-          return (
-            <span key={m} className={`${t12} grid h-9 place-items-center border !tracking-normal ${on ? "border-dw-ink bg-dw-celadon text-dw-ink shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]" : "border-dw-border/40 font-normal text-dw-muted"}`}>
-              {m[0]}
-            </span>
-          );
-        })}
+      <p className={`${t14} font-semibold text-dw-ink`}>Best {monthRange(best)}</p>
+      {season.notes.map((n) => (
+        <p key={n.text} className={`${t14} text-dw-muted`}>{monthRange(n.months)}: {n.text}</p>
+      ))}
+      <div aria-hidden="true" className="mt-3 max-w-md">
+        <div className="relative h-8 border-[1.5px] border-dw-ink" style={{ background: band(levels) }}>
+          {levels.map((l, i) => (
+            <span
+              key={MONTHS[i]}
+              className={`absolute inset-y-0 ${l === "best" ? "shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]" : ""}`}
+              style={{ left: `${(i / 12) * 100}%`, width: `${100 / 12}%`, backgroundImage: l === "closed" ? HATCH : undefined }}
+            />
+          ))}
+        </div>
+        <div className="mt-1 grid grid-cols-12">
+          {MONTHS.map((m, i) => (
+            <span key={m} className={`${t12} text-center !tracking-normal font-normal text-dw-muted ${i % 3 === 0 ? "" : "max-sm:invisible"}`}>{m}</span>
+          ))}
+        </div>
       </div>
+      <ul className={`${t12} mt-2 flex flex-wrap gap-x-4 gap-y-1 font-normal !tracking-normal normal-case text-dw-muted`} aria-hidden="true">
+        {used.map((l) => (
+          <li key={l} className="flex items-center gap-1.5">
+            <span className={`inline-block h-3 w-5 border border-dw-ink ${l === "best" ? "shadow-[inset_0_-2px_0_0_var(--color-dw-ink)]" : ""}`} style={{ background: l === "closed" ? `${HATCH}, ${LEVEL[l].colour}` : LEVEL[l].colour }} />
+            {LEVEL[l].label}
+          </li>
+        ))}
+      </ul>
+      <ul className="sr-only">
+        {MONTHS.map((m, i) => <li key={m}>{m}: {LEVEL[levels[i]].label}</li>)}
+      </ul>
     </div>
   );
 }
