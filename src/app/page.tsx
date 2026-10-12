@@ -64,18 +64,6 @@ const SHOTS: [string, string][] = [
   ["milford", "A walk: Milford Track"],
 ];
 
-const FIXED = [
-  "Old prints showed their printed border inside the frame, so they sat differently from the modern photos: cropped to the picture.",
-  "On a phone the walk cards were a screen tall each: they became rows, print beside caption, five walks to a screen.",
-  "Figures broke in the middle (\"4,215 / m\"): each figure now stays whole.",
-  "The mood boards ran very long on a phone: two columns, with the made pieces shown smaller rather than squeezed.",
-  "Small capitals over the opening print on a phone measured 4.1:1: the print's lower half was darkened to 8:1.",
-  "Best months were shown by colour alone: the range is now written out, and each best month has a rule beneath.",
-  "Hover and selected tints were almost the same (1.07:1 apart in lightness): new sky, pine and lake tints, one per state.",
-  "The Dawn design system page was 528px wide on a phone: its component grid now has one column there.",
-  "The guide looked cold and grey for a travel site: photos are back in their own colour, a dawn sky sits behind the opening, and chosen things wear first-light gold.",
-];
-
 const card =
   "group flex h-full flex-col overflow-hidden rounded-lg border border-black/15 bg-white transition hover:border-black/40 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground active:translate-y-px";
 
@@ -184,10 +172,6 @@ export default function Hub() {
                 </span>
               </li>
             ))}
-          </ul>
-          <p className="mt-5 text-sm font-medium text-foreground">Found and fixed</p>
-          <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-black/70">
-            {FIXED.map((f) => <li key={f}>{f}</li>)}
           </ul>
         </Section>
       </div>
