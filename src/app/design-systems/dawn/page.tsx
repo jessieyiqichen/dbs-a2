@@ -126,7 +126,7 @@ function TypeRoles() {
 function SpacingShape() {
   const note = `${ui} mt-1 text-xs text-dw-muted`;
   return (
-    <div className="grid gap-4 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <Block title="Spacing" note="Seven steps, in px. Generous: the prints need air.">
         <div className="flex flex-wrap items-end gap-4">
           {[4, 8, 12, 16, 24, 32, 48].map((s) => (
@@ -198,7 +198,7 @@ function Icons() {
 
 function Components() {
   return (
-    <div className="grid gap-4 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <Block title="Buttons and links" note="Loch is kept for the one primary action on a screen. Chosen, a button gives the loch up.">
         <div className="space-y-5">
           <div className="flex flex-wrap items-center gap-5">

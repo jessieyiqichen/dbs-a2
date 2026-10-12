@@ -106,7 +106,7 @@ function TypeRoles() {
 
 function SpacingShape() {
   return (
-    <div className="grid gap-4 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <Block title="Spacing" note="Seven steps, in px. Most gaps are 12 or 24.">
         <div className="flex flex-wrap items-end gap-4">
           {[4, 8, 12, 16, 24, 32, 48].map((s) => (
@@ -145,7 +145,7 @@ function SpacingShape() {
 
 function Components() {
   return (
-    <div className="grid gap-4 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <Block title="Buttons and link" note="Moss is kept for the one primary action on a screen.">
         <div className="flex flex-wrap items-center gap-5">
           <PrimaryButton />

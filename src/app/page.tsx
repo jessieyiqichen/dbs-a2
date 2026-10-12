@@ -71,6 +71,8 @@ const FIXED = [
   "The mood boards ran very long on a phone: two columns, with the made pieces shown smaller rather than squeezed.",
   "Small capitals over the opening print on a phone measured 4.1:1: the print's lower half was darkened to 8:1.",
   "Best months were shown by colour alone: the range is now written out, and each best month has a rule beneath.",
+  "Hover and selected tints were almost the same (1.07:1 apart in lightness): new sky, pine and lake tints, one per state.",
+  "The Dawn design system page was 528px wide on a phone: its component grid now has one column there.",
 ];
 
 const card =
