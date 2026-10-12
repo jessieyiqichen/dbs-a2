@@ -71,6 +71,25 @@ export function SecondaryButton({ force, selected, small, children = "Later", ..
   );
 }
 
+/** List mark: the list button folded to a square on a print's corner, for phones, where a button under every card
+ *  is one line too many. The secondary button's states; chosen, it shows the tick on sun. Needs an aria-label. */
+export function ListMark({ force, selected, ...rest }: Omit<ButtonProps, "small" | "children">) {
+  const on = (force ?? (selected ? "selected" : "rest")) === "selected";
+  const ink = force === "disabled" ? DW.muted : DW.text;
+  const glyph = (
+    <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden="true">
+      <path d={on ? "M4 10.5 L8 14.5 L16 5.5" : "M10 3.5 V16.5 M3.5 10 H16.5"} fill="none" stroke={ink} strokeWidth={on ? 2.4 : 2} strokeLinecap="square" />
+    </svg>
+  );
+  const base = `relative grid h-10 w-10 place-items-center border ${slow}`;
+  if (force) return <span className={`${base} ${secondaryState[force]}`}>{glyph}</span>;
+  return (
+    <button type="button" aria-pressed={selected} {...rest} className={`${base} ${selected ? `${secondaryState.selected} ${selectedLive}` : `${secondaryState.rest} ${secondaryLive}`}`}>
+      {glyph}
+    </button>
+  );
+}
+
 /* ---------- link ---------- */
 
 /** Link sizes, from the six: reading text, notes, and walk names. */

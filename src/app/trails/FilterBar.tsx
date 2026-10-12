@@ -51,17 +51,20 @@ export function FilterBar({ f, setF, shown, total }: { f: Filters; setF: (f: Fil
     <span><span className="font-semibold text-dw-ink">{shown}</span> of {total} walks</span>
   );
   return (
-    <div className="mt-4 border-y border-dw-ink/20 py-3 sm:mt-8 sm:py-4">
-      <div className="mb-3 max-w-md sm:mb-4">
-        <CatalogueSearch id="walk-search" label="Search the walks" placeholder="a walk, a country, a place on the way" value={f.query} onChange={(query) => setF({ ...f, query })} />
-      </div>
-      <div className="hidden sm:block"><Choices f={f} setF={setF} idPrefix="inline" /></div>
-      <p className={`${t14} mt-2 flex min-h-9 flex-wrap items-center gap-x-4 gap-y-2 text-dw-muted sm:mt-3`} aria-live="polite">
-        <span className="sm:hidden">
+    <div className="mt-4 border-b border-dw-ink/20 pb-2 sm:mt-8 sm:border-t sm:py-4">
+      {/* on a phone the Filters button sits beside the search, the two of equal height */}
+      <div className="mb-1 flex items-stretch gap-2 sm:mb-4 sm:max-w-md">
+        <div className="min-w-0 flex-1">
+          <CatalogueSearch id="walk-search" label="Search the walks" placeholder="walk, country, place" value={f.query} onChange={(query) => setF({ ...f, query })} />
+        </div>
+        <span className="flex sm:hidden [&>button]:h-full">
           <SecondaryButton small selected={active > 0} aria-haspopup="dialog" onClick={() => setOpen(true)}>
             Filters{active > 0 && <span className="ml-1.5">{active}</span>}
           </SecondaryButton>
         </span>
+      </div>
+      <div className="hidden sm:block"><Choices f={f} setF={setF} idPrefix="inline" /></div>
+      <p className={`${t14} mt-2 flex min-h-9 flex-wrap items-center gap-x-4 gap-y-2 text-dw-muted sm:mt-3`} aria-live="polite">
         {result}
         {isFiltered(f) && <SecondaryButton small onClick={() => setF(NO_FILTERS)}>Clear all</SecondaryButton>}
       </p>

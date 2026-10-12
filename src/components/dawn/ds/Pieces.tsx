@@ -21,28 +21,30 @@ export function Caption({ h }: { h: Hike }) {
 }
 
 /** Card: a mounted print. The print and its caption are one link; `footer` (a small button) sits under it, outside
- *  the link. Hover lifts an sky plate and brings the colour up; press sinks the mount. */
-export function PrintCard({ id, photo, href = "#card", footer, sizes = "(min-width: 1024px) 360px, (min-width: 640px) 50vw, 120px" }: { id: string; photo: TrailPhoto; href?: string; footer?: React.ReactNode; sizes?: string }) {
+ *  the link. On a phone `mark` (a ListMark) takes the footer's place on the print's corner, so each card is the print,
+ *  the name and one line of figures. Hover lifts an sky plate and brings the colour up; press sinks the mount. */
+export function PrintCard({ id, photo, href = "#card", footer, mark, sizes = "(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" }: { id: string; photo: TrailPhoto; href?: string; footer?: React.ReactNode; mark?: React.ReactNode; sizes?: string }) {
   const h = byId(id);
-  // On a phone the print sits beside its caption, so a screen shows several walks; from 640px it stands above it.
   const inner = (
     <>
-      <TonedPhoto photo={photo} sizes={sizes} className={`row-span-3 aspect-[4/3] self-start border-2 border-dw-ink sm:border-[3px] ${colourUp}`} />
-      <span className={`${t12caption} block text-dw-muted sm:mt-4`}>{no(h)}. {h.country.join(", ")}</span>
-      <span id={`${h.id}-card`} className={`${t24} mt-1 block underline decoration-dw-lake decoration-2 underline-offset-[6px] ${slow} group-hover:decoration-dw-ink group-hover:underline-offset-[3px]`}>{h.name}</span>
-      <span className={`${t14} mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-dw-muted`}>
+      <TonedPhoto photo={photo} sizes={sizes} className={`aspect-[3/2] border-2 border-dw-ink sm:aspect-[4/3] sm:border-[3px] ${colourUp}`} />
+      <span className={`${t12caption} mt-3 block text-dw-muted sm:mt-4`}>{no(h)}. {h.country.join(", ")}</span>
+      {/* a walk name on a phone card takes the section size (24), the print above it being the only thing larger */}
+      <span id={`${h.id}-card`} className={`${t24} max-sm:text-[24px] max-sm:leading-[1.15] mt-1 block underline decoration-dw-lake decoration-2 underline-offset-[6px] ${slow} group-hover:decoration-dw-ink group-hover:underline-offset-[3px]`}>{h.name}</span>
+      <span className={`${t14} mt-2 flex flex-wrap gap-x-2.5 gap-y-0.5 text-dw-muted sm:mt-1.5 sm:gap-x-3`}>
         {/* each figure with its icon, kept whole when the line wraps */}
         {([[FACT_ICON.distance, `${formatRange(h.distance_km)} km`], [FACT_ICON.days, `${formatRange(h.days)} ${h.days[1] === 1 ? "day" : "days"}`], [FACT_ICON.high, elevation(h)]] as const).map(([icon, x]) => (
-          <span key={icon} className="inline-flex items-center gap-1 whitespace-nowrap"><PlateIcon name={icon} size={20} />{x}</span>
+          <span key={icon} className="inline-flex items-center gap-0.5 whitespace-nowrap sm:gap-1"><PlateIcon name={icon} size={20} />{x}</span>
         ))}
       </span>
     </>
   );
-  const cls = `group relative grid grid-cols-[5rem_1fr] content-start gap-x-3 sm:block ${focusRing}`;
+  const cls = `group relative block ${focusRing}`;
   return (
-    <article aria-labelledby={`${h.id}-card`} className={`flex w-full flex-col p-2.5 sm:p-3.5 ${card.rest} ${cardLiveHas}`}>
+    <article aria-labelledby={`${h.id}-card`} className={`relative flex w-full flex-col p-2.5 sm:p-3.5 ${card.rest} ${cardLiveHas}`}>
       {href.startsWith("/") ? <Link href={href} className={cls}>{inner}</Link> : <a href={href} className={cls}>{inner}</a>}
-      {footer && <div className="mt-auto pl-[5.75rem] pt-1.5 sm:pl-0 sm:pt-4">{footer}</div>}
+      {mark && <div className="absolute right-[1.125rem] top-[1.125rem] sm:hidden">{mark}</div>}
+      {footer && <div className={`mt-auto pt-4 ${mark ? "hidden sm:block" : ""}`}>{footer}</div>}
     </article>
   );
 }

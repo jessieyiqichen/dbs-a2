@@ -6,13 +6,13 @@ import { hikes } from "@/data/hikes";
 import { PLACES } from "@/data/stops";
 import rawPhotos from "@/data/trailPhotos.json";
 import { TonedPhoto, creditLine, type TrailPhoto } from "@/components/dawn/Toned";
-import { SecondaryButton } from "@/components/dawn/ds/Primitives";
+import { ListMark, SecondaryButton } from "@/components/dawn/ds/Primitives";
 import { PrintCard } from "@/components/dawn/ds/Pieces";
 import { PlateIcon } from "@/components/dawn/PlateArt";
 import { NO_FILTERS, applyFilters } from "./filters";
 import { FilterBar } from "./FilterBar";
 import { useTrails } from "./state";
-import { t12, t14, t24, t48, t96 } from "./type";
+import { t12, t14, t17, t24, t48, t96 } from "./type";
 
 const photos = rawPhotos as Record<string, TrailPhoto[]>;
 // Mitre Peak: a Milford print that is not any card's cover, so the opening plate is not repeated below.
@@ -25,19 +25,20 @@ export default function TrailsIndex() {
 
   return (
     <div className="mx-auto max-w-6xl px-5">
-      {/* Phone: the title is printed over the lower part of the opening print, so one screen holds both. */}
+      {/* Phone: the title and one line printed over the opening print, its credit along the foot, so the first walk
+          is on the first screen. */}
       <header className="relative -mx-5 sm:hidden">
-        <figure className="m-0">
-          <div className="relative h-[280px]">
-            <TonedPhoto photo={OPENING} sizes="100vw" priority className="h-full w-full" />
-            <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgba(22,37,43,0)_15%,rgba(22,37,43,.68)_45%,rgba(22,37,43,.92)_100%)]" />
-            <div className="absolute inset-x-5 bottom-4 text-dw-mount">
-              <p className={`${t12} !tracking-[0.08em] text-dw-page/80`}>A guide to twelve famous walks</p>
-              <h1 className={`${t96} mt-1`}>The Walking Atlas</h1>
-              <p className={`${t24} mt-2 italic text-dw-page`}>From a day on a volcano to a month across Spain: twelve walks, set out like a box of old travel prints.</p>
-            </div>
+        <figure className="relative m-0 h-[260px]">
+          <TonedPhoto photo={OPENING} sizes="100vw" priority className="h-full w-full" />
+          <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgba(22,37,43,0)_25%,rgba(22,37,43,.7)_58%,rgba(22,37,43,.92)_100%)]" />
+          <div className="absolute inset-x-5 bottom-3 text-dw-mount">
+            <h1 className={t96}>The Walking Atlas</h1>
+            <p className={`${t17} mt-2 text-dw-page/90`}>Twelve famous walks, from a day on a volcano to a month across Spain.</p>
+            <figcaption className="mt-3 font-[family-name:var(--dw-ui)] text-[11px] leading-[15px] text-dw-page/80">
+              {/* the place, then who printed it and when, each kept whole */}
+              {creditLine(OPENING).split(" · ").map((part) => <span key={part} className="block">{part}</span>)}
+            </figcaption>
           </div>
-          <figcaption className={`${t14} mt-2 px-5 text-dw-muted`}>{creditLine(OPENING)}</figcaption>
         </figure>
       </header>
 
@@ -57,8 +58,9 @@ export default function TrailsIndex() {
         </figure>
       </header>
 
-      <section id="walks" aria-labelledby="walks-title" className="mt-8 scroll-mt-16 sm:mt-16">
-        <div className="flex flex-wrap items-baseline justify-between gap-3">
+      <section id="walks" aria-labelledby="walks-title" className="scroll-mt-16 sm:mt-16">
+        {/* on a phone the prints say this for themselves; the heading stays for screen readers */}
+        <div className="flex flex-wrap items-baseline justify-between gap-3 max-sm:sr-only">
           <h2 id="walks-title" className={t48}>The twelve walks</h2>
           <p className={`${t14} text-dw-muted`}>Choose a print to read about the walk.</p>
         </div>
@@ -72,13 +74,14 @@ export default function TrailsIndex() {
             <SecondaryButton onClick={() => setFilters(NO_FILTERS)}>Clear filters</SecondaryButton>
           </div>
         ) : (
-          <ul className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:mt-10 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-3">
+          <ul className="mt-6 grid grid-cols-1 gap-x-8 gap-y-5 sm:mt-10 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-3">
             {shown.map((h) => (
               <li key={h.id} className="flex">
                 <PrintCard
                   id={h.id}
                   photo={coverOf(h.id)}
                   href={`/trails/${h.id}/`}
+                  mark={<ListMark selected={list.includes(h.id)} onClick={() => toggleList(h.id)} aria-label={`${h.name}: on my list`} />}
                   footer={
                     <SecondaryButton small selected={list.includes(h.id)} onClick={() => toggleList(h.id)} aria-label={`${h.name}: on my list`}>
                       {list.includes(h.id) ? "On my list" : "+ My list"}

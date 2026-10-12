@@ -5,7 +5,7 @@ import { hikes } from "@/data/hikes";
 import { PLATE_ICON_NAMES, PlateDefs, PlateIcon, type PlateIconName } from "@/components/dawn/PlateArt";
 import { DayPlates, EmbossStamp, PLATE_KEYFRAMES } from "@/components/dawn/PlateUI";
 import { DAWN_FIELD, DAWN_FOCUS_CSS, DW, caps, display, ui } from "@/components/dawn/ds/tokens";
-import { CatalogueSearch, CountBadge, MountInput, MountSelect, PlateCheck, PlateLink, PlateRadio, PrimaryButton, RadioSwatch, SecondaryButton } from "@/components/dawn/ds/Primitives";
+import { CatalogueSearch, CountBadge, ListMark, MountInput, MountSelect, PlateCheck, PlateLink, PlateRadio, PrimaryButton, RadioSwatch, SecondaryButton } from "@/components/dawn/ds/Primitives";
 import { ChipSwatch, PlateChips, PlateTabs, PlateToggle, RouteMap, TabSwatch } from "@/components/dawn/ds/Interactive";
 import { CardSwatch, CatalogueRow, DetailPanel, UIStates } from "@/components/dawn/ds/Pieces";
 import { HeroPlate, NeighbourLink, PlateThumb, SeasonStrip, StopSwatch, routeNodes } from "@/components/dawn/ds/Guide";
@@ -209,6 +209,8 @@ function Components() {
             <SecondaryButton>Later</SecondaryButton>
             <SecondaryButton small>Clear all</SecondaryButton>
             <SecondaryButton small selected>On my list</SecondaryButton>
+            <ListMark aria-label="Milford Track: on my list" />
+            <ListMark selected aria-label="Tongariro Alpine Crossing: on my list" />
           </div>
           <div className="flex flex-wrap items-baseline gap-6">
             <PlateLink>Read the route</PlateLink>
@@ -268,7 +270,7 @@ function Components() {
           <span className="flex items-center gap-2"><CountBadge n={12} /><span className={`${ui} text-sm text-dw-muted`}>trails</span></span>
         </div>
       </Block>
-      <Block title="Card" note="A mounted print; the print and name open the walk. The list button sits outside the link.">
+      <Block title="Card" note="A mounted print; the print and name open the walk. The list button sits outside the link: under the card from 640px, folded into the list mark on the print's corner on a phone.">
         <div className="max-w-sm"><CardDemo id="milford" photo={cover} /></div>
       </Block>
       <div className="space-y-4">
@@ -359,6 +361,7 @@ const STATE_NOTES: Record<ControlState, { tells: string; looks: string }> = {
 const CUES: Record<string, string> = {
   "Primary button": "a solid loch block on an offset plate",
   "Secondary button": "a key-line box on an offset plate",
+  "List mark": "a key-line square with a plus, on a print's corner",
   "Link": "an underline that is always there",
   "Filter chip": "an outlined label with its count",
   "Tab": "labels sitting on a key line",
@@ -378,6 +381,7 @@ type Row = { name: string; render: (s: ControlState) => React.ReactNode | null }
 const ROWS: Row[] = [
   { name: "Primary button", render: (s) => <PrimaryButton force={s}>{s === "selected" ? "On list" : "Add"}</PrimaryButton> },
   { name: "Secondary button", render: (s) => <SecondaryButton force={s} small>{s === "selected" ? "On list" : "My list"}</SecondaryButton> },
+  { name: "List mark", render: (s) => <ListMark force={s} /> },
   { name: "Link", render: (s) => (s === "selected" || s === "disabled" ? null : <PlateLink force={s}>Sources</PlateLink>) },
   { name: "Filter chip", render: (s) => <ChipSwatch force={s} /> },
   { name: "Tab", render: (s) => <TabSwatch force={s} /> },

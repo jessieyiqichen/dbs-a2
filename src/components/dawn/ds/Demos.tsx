@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { TrailPhoto } from "../Toned";
 import { PrintCard } from "./Pieces";
-import { CatalogueSearch, PrimaryButton, SecondaryButton } from "./Primitives";
+import { CatalogueSearch, ListMark, PrimaryButton, SecondaryButton } from "./Primitives";
 import { CatalogueRow } from "./Pieces";
 import { SidePanel } from "./Viewer";
 
@@ -13,6 +13,7 @@ export function CardDemo({ id, photo }: { id: string; photo: TrailPhoto }) {
     <PrintCard
       id={id}
       photo={photo}
+      mark={<ListMark selected={on} onClick={() => setOn(!on)} aria-label="Milford Track: on my list" />}
       footer={<SecondaryButton small selected={on} onClick={() => setOn(!on)}>{on ? "On my list" : "+ My list"}</SecondaryButton>}
     />
   );
