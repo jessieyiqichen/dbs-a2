@@ -9,7 +9,7 @@ import { FIELD_KEYFRAMES, PaintSwatch, PaperStack, PencilLoader, RouteProgress, 
 const hand = Caveat({ subsets: ["latin"], weight: ["400", "600"], variable: "--fn-hand" });
 const serif = Crimson_Pro({ subsets: ["latin"], weight: ["400", "600"], style: ["normal", "italic"], variable: "--fn-serif" });
 
-export const metadata: Metadata = { title: "Field Notes · Mood board · Twelve Trails" };
+export const metadata: Metadata = { title: "Field Notes · Mood board · The Walking Atlas" };
 
 type Credit = (typeof credits)[number];
 const photo = (file: string) => credits.find((c) => c.file === file) as Credit;

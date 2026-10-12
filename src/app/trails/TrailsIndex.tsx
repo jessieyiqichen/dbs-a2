@@ -33,7 +33,7 @@ export default function TrailsIndex() {
             <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgba(22,37,43,0)_15%,rgba(22,37,43,.68)_45%,rgba(22,37,43,.92)_100%)]" />
             <div className="absolute inset-x-5 bottom-4 text-dw-mount">
               <p className={`${t12} !tracking-[0.08em] text-dw-page/80`}>A guide to twelve famous walks</p>
-              <h1 className={`${t96} mt-1`}>Twelve Trails</h1>
+              <h1 className={`${t96} mt-1`}>The Walking Atlas</h1>
               <p className={`${t24} mt-2 italic text-dw-page`}>From a day on a volcano to a month across Spain: twelve walks, set out like a box of old travel prints.</p>
             </div>
           </div>
@@ -46,7 +46,7 @@ export default function TrailsIndex() {
         <span aria-hidden="true" className="absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2" style={{ background: DAWN_FIELD }} />
         <div>
           <p className={`${t12} text-dw-ink`}>A guide to twelve famous walks</p>
-          <h1 className={`${t96} mt-4`}>Twelve Trails</h1>
+          <h1 className={`${t96} mt-4`}>The Walking Atlas</h1>
           <p className={`${t24} mt-6 max-w-md italic text-dw-ink`}>From a day on a volcano to a month across Spain: twelve walks, set out like a box of old travel prints.</p>
         </div>
         <figure className="m-0">

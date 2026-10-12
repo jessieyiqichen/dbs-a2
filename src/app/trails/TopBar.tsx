@@ -25,7 +25,7 @@ export function TopBar() {
       <div className={`${t14} mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-2.5`}>
         <div className="flex items-baseline gap-5 sm:gap-6">
           <PlateLink href="/" size="note">← Hub</PlateLink>
-          <PlateLink href="/trails/" size="name">Twelve Trails</PlateLink>
+          <PlateLink href="/trails/" size="name">The Walking Atlas</PlateLink>
         </div>
         <span className={`inline-flex transition-shadow duration-[600ms] ${glow ? "shadow-[0_0_0_5px_var(--color-dw-sun)]" : "shadow-[0_0_0_0_var(--color-dw-sun)]"}`}>
         <SecondaryButton small aria-haspopup="dialog" aria-label={`My list, ${list.length} ${list.length === 1 ? "walk" : "walks"}`} onClick={() => setOpen(true)}>

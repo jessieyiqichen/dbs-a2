@@ -13,7 +13,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
   const h = hikes.find((x) => x.id === id);
-  return h ? { title: `${h.name} · Twelve Trails`, description: h.why } : {};
+  return h ? { title: `${h.name} · The Walking Atlas`, description: h.why } : {};
 }
 
 export default async function TrailPage({ params }: { params: Promise<{ id: string }> }) {

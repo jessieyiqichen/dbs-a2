@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Twelve Trails · UI/UX & Visual Design",
+  title: "The Walking Atlas · UI/UX & Visual Design",
   description: "Three visual styles explored for a guide to twelve famous hikes, and the site built in the one that won.",
 };
 

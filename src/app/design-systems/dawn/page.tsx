@@ -20,7 +20,7 @@ import { TonedPhoto, type TrailPhoto } from "@/components/dawn/Toned";
 const displayFont = Old_Standard_TT({ subsets: ["latin"], weight: ["400", "700"], style: ["normal", "italic"], variable: "--dw-display" });
 const uiFont = Libre_Franklin({ subsets: ["latin"], weight: ["400", "600"], variable: "--dw-ui" });
 
-export const metadata: Metadata = { title: "Dawn · Design system · Twelve Trails" };
+export const metadata: Metadata = { title: "Dawn · Design system · The Walking Atlas" };
 
 const milford = hikes.find((h) => h.id === "milford")!;
 const photos = rawPhotos as Record<string, TrailPhoto[]>;
@@ -99,7 +99,7 @@ function ColourRoles() {
 /* ---------- 2. type roles ---------- */
 
 const TYPE = [
-  { role: "Title · 96", spec: "Old Standard 400 · 96 / 91 (112 on wide screens, 38 on phones) · once per page", cls: t96, sample: "Twelve Trails" },
+  { role: "Title · 96", spec: "Old Standard 400 · 96 / 91 (112 on wide screens, 38 on phones) · once per page", cls: t96, sample: "The Walking Atlas" },
   { role: "Section · 48", spec: "Old Standard 400 · 48 / 50 (24 on phones) · section titles, a walk's name on its page", cls: t48, sample: milford.name },
   { role: "Name · 24", spec: "Old Standard 400 · 24 / 29 (17 on phones) · walk names on cards, numbers, lead lines", cls: t24, sample: "53.5 km · 4 days" },
   { role: "Reading · 17", spec: "Libre Franklin 400 · 17 / 27 (15 / 23 on phones) · everything read as text", cls: `${t17} max-w-xl`, sample: milford.why },
@@ -213,7 +213,7 @@ function Components() {
           <div className="flex flex-wrap items-baseline gap-6">
             <PlateLink>Read the route</PlateLink>
             <PlateLink size="note">wikipedia · Milford Track</PlateLink>
-            <PlateLink size="name">Twelve Trails</PlateLink>
+            <PlateLink size="name">The Walking Atlas</PlateLink>
           </div>
         </div>
       </Block>

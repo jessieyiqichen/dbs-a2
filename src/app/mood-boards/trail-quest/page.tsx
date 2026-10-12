@@ -9,7 +9,7 @@ import { AchievementBadge, LevelMap } from "@/components/trail-quest/GameArt";
 const display = Fredoka({ subsets: ["latin"], weight: ["500", "600", "700"], variable: "--tq-display" });
 const ui = Nunito({ subsets: ["latin"], weight: ["600", "800", "900"], variable: "--tq-ui" });
 
-export const metadata: Metadata = { title: "Trail Quest · Mood board · Twelve Trails" };
+export const metadata: Metadata = { title: "Trail Quest · Mood board · The Walking Atlas" };
 
 type Credit = (typeof credits)[number];
 const photo = (file: string) => credits.find((c) => c.file === file) as Credit;

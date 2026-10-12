@@ -10,7 +10,7 @@ const display = Old_Standard_TT({ subsets: ["latin"], weight: ["400", "700"], st
 const ui = Libre_Franklin({ subsets: ["latin"], weight: ["400", "600"], variable: "--dw-ui" });
 
 export const metadata: Metadata = {
-  title: "Twelve Trails",
+  title: "The Walking Atlas",
   description: "Twelve famous walks of the world, set like a box of old travel prints.",
 };
 

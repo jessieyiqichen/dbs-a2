@@ -60,7 +60,7 @@ const CHECKS: [string, string][] = [
 
 const SHOTS: [string, string][] = [
   ["hub", "Hub"],
-  ["trails", "Twelve Trails"],
+  ["trails", "The Walking Atlas"],
   ["milford", "A walk: Milford Track"],
 ];
 
@@ -71,7 +71,7 @@ export default function Hub() {
   return (
     <main className={`${caveat.variable} ${oldStandard.variable} ${fredoka.variable} mx-auto w-full max-w-3xl px-5 py-14`}>
       <p className="font-mono text-xs uppercase tracking-[0.14em] text-black/60">UI/UX &amp; Visual Design · Hub</p>
-      <h1 className="mt-2 text-4xl font-semibold tracking-tight">Twelve Trails</h1>
+      <h1 className="mt-2 text-4xl font-semibold tracking-tight">The Walking Atlas</h1>
       <p className="mt-3 max-w-xl text-black/70">
         A guide to twelve famous hikes around the world, for people who love hiking, from those just browsing to those
         picking their next trip. Three visual styles were explored, each with a mood board and a design system; the site is
@@ -119,7 +119,7 @@ export default function Hub() {
             href="/trails/"
             className="inline-flex rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition hover:bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground active:translate-y-px"
           >
-            Open Twelve Trails →
+            Open The Walking Atlas →
           </Link>
         </Section>
 

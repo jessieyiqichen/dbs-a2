@@ -12,7 +12,7 @@ import { AltitudeBar, Boots, CardSwatch, LevelCard, LevelDialog, LevelRow, TQ_KE
 const displayFont = Fredoka({ subsets: ["latin"], weight: ["500", "600", "700"], variable: "--tq-display" });
 const uiFont = Nunito({ subsets: ["latin"], weight: ["600", "800", "900"], variable: "--tq-ui" });
 
-export const metadata: Metadata = { title: "Trail Quest · Design system · Twelve Trails" };
+export const metadata: Metadata = { title: "Trail Quest · Design system · The Walking Atlas" };
 
 const tmb = hikes.find((h) => h.id === "tmb")!;
 const outlined = `${display} text-white [paint-order:stroke_fill] [-webkit-text-stroke:6px_#1d2b53] [text-shadow:0_5px_0_#1d2b53]`;
@@ -77,7 +77,7 @@ function ColourRoles() {
 /* ---------- 2. type roles ---------- */
 
 const TYPE = [
-  { role: "Display", spec: "Fredoka 700 · 56 / 56, white with a 6px navy outline", cls: `${outlined} text-[56px] leading-[1]`, sample: "Twelve Trails" },
+  { role: "Display", spec: "Fredoka 700 · 56 / 56, white with a 6px navy outline", cls: `${outlined} text-[56px] leading-[1]`, sample: "The Walking Atlas" },
   { role: "Heading", spec: "Fredoka 700 · 30 / 34", cls: `${display} text-[30px] leading-[34px]`, sample: tmb.name },
   { role: "Number", spec: "Fredoka 700 · 24 / 28", cls: `${display} text-[24px] leading-[28px]`, sample: "165–170 km" },
   { role: "Body", spec: "Nunito 700 · 16 / 24", cls: `${ui} max-w-xl text-[16px] font-bold leading-[24px]`, sample: tmb.why },

@@ -13,7 +13,7 @@ import { DAWN_FIELD } from "@/components/dawn/ds/tokens";
 const display = Old_Standard_TT({ subsets: ["latin"], weight: ["400", "700"], style: ["normal", "italic"], variable: "--dw-display" });
 const ui = Libre_Franklin({ subsets: ["latin"], weight: ["400", "600"], variable: "--dw-ui" });
 
-export const metadata: Metadata = { title: "Dawn · Mood board · Twelve Trails" };
+export const metadata: Metadata = { title: "Dawn · Mood board · The Walking Atlas" };
 
 type Credit = (typeof credits)[number];
 const print = (file: string) => credits.find((c) => c.file === file) as Credit;

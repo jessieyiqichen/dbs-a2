@@ -13,7 +13,7 @@ import { CardSwatch, DetailPanel, DifficultyTape, PermitStamp, TrailCard, TrailR
 const handFont = Caveat({ subsets: ["latin"], weight: ["400", "600"], variable: "--fn-hand" });
 const serifFont = Crimson_Pro({ subsets: ["latin"], weight: ["400", "600"], style: ["normal", "italic"], variable: "--fn-serif" });
 
-export const metadata: Metadata = { title: "Field Notes · Design system · Twelve Trails" };
+export const metadata: Metadata = { title: "Field Notes · Design system · The Walking Atlas" };
 
 const laugavegur = hikes.find((h) => h.id === "laugavegur")!;
 
@@ -79,7 +79,7 @@ function ColourRoles() {
 /* ---------- 2. type roles ---------- */
 
 const TYPE = [
-  { role: "Display", spec: "Caveat 600 · 56 / 56", cls: `${hand} text-[56px] font-semibold leading-[1]`, sample: "Twelve Trails" },
+  { role: "Display", spec: "Caveat 600 · 56 / 56", cls: `${hand} text-[56px] font-semibold leading-[1]`, sample: "The Walking Atlas" },
   { role: "Heading", spec: "Caveat 600 · 36 / 40", cls: `${hand} text-[36px] font-semibold leading-[1.1]`, sample: laugavegur.name },
   { role: "Number", spec: "Crimson Pro 600 · 32 / 36", cls: `${serif} text-[32px] font-semibold leading-[1.1]`, sample: "54–55 km" },
   { role: "Body", spec: "Crimson Pro 400 · 18 / 28", cls: `${serif} text-[18px] leading-[28px] max-w-xl`, sample: laugavegur.why },

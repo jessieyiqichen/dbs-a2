@@ -1,4 +1,4 @@
-# Twelve Trails · Design, Build, Ship, Assignment 2
+# The Walking Atlas · Design, Build, Ship, Assignment 2
 
 A guide to twelve famous hikes, for people who love hiking, from those just browsing to those picking their next trip.
 
