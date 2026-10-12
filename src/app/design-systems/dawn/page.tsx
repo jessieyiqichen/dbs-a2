@@ -329,6 +329,13 @@ function Components() {
       <Block title="Side panel" note="Slides in from the right over a dimmed page; Esc, Close or a click outside shuts it, and focus returns to the button. The site uses it for My list.">
         <SidePanelDemo />
       </Block>
+      <Block title="Not clickable" note="Things that only inform lie flat: no plate off register, no border to press, no underline. So nobody tries to click them." className="lg:col-span-2">
+        <div className="grid grid-cols-1 items-start gap-6 sm:grid-cols-[1fr_auto_auto]">
+          <div className="min-w-0"><SeasonStrip season={seasons["half-dome"]} /></div>
+          <div className="[&_svg]:h-20 [&_svg]:w-20"><EmbossStamp text="Permit needed" uid="ds-flat-stamp" /></div>
+          <span className="flex items-center gap-2"><CountBadge n={12} /><span className={`${ui} text-sm text-dw-muted`}>walks</span></span>
+        </div>
+      </Block>
       <Block title="Detail panel" note="Opens over the list when a card or row is chosen." className="lg:col-span-2">
         <div className="max-w-xl"><DetailPanel id="milford" /></div>
       </Block>
@@ -338,13 +345,32 @@ function Components() {
 
 /* ---------- 5. control states ---------- */
 
-const STATE_NOTES: Record<ControlState, string> = {
-  rest: "Nothing is happening to it: the plate sits a little off",
-  hover: "The mouse is over it: plates come into register",
-  focus: "Reached with Tab: crop marks at the corners",
-  pressed: "While being clicked: sinks, ink pressed in",
-  selected: "Chosen, and stays chosen: a tint plate laid under",
-  disabled: "Can't be used right now: unprinted, dashed",
+/** For each state: what it tells the person, then what it looks like in this style. */
+const STATE_NOTES: Record<ControlState, { tells: string; looks: string }> = {
+  rest: { tells: "You can use this", looks: "a lake plate sits a little off register" },
+  hover: { tells: "Pointing at it: a click will act", looks: "sky fills it; plates come into register" },
+  focus: { tells: "The keyboard is here", looks: "crop marks at the four corners" },
+  pressed: { tells: "Your click landed", looks: "sinks, a deeper plate, ink pressed in" },
+  selected: { tells: "This is chosen, and stays chosen", looks: "a sun plate laid under, a rule beneath, a tick" },
+  disabled: { tells: "Can't be used right now", looks: "unprinted: dashed line, muted text" },
+};
+
+/** How someone can tell, before touching it, that each control can be used. */
+const CUES: Record<string, string> = {
+  "Primary button": "a solid loch block on an offset plate",
+  "Secondary button": "a key-line box on an offset plate",
+  "Link": "an underline that is always there",
+  "Filter chip": "an outlined label with its count",
+  "Tab": "labels sitting on a key line",
+  "Checkbox": "an empty key-line square",
+  "Radio": "an empty key-line ring",
+  "Toggle": "a track with a knob on a plate",
+  "Text input": "a labelled empty field",
+  "Select": "a field with a chevron",
+  "Card": "a mounted print; lifts on hover, name underlines",
+  "Route stop": "icons on a line, with \"choose one\" above",
+  "Plate thumbnail": "a small mounted print; lifts on hover",
+  "List row": "a catalogue line that fills on hover",
 };
 
 type Row = { name: string; render: (s: ControlState) => React.ReactNode | null };
@@ -375,7 +401,8 @@ function ControlStates() {
             {CONTROL_STATES.map((s) => (
               <th key={s} scope="col" className="pb-3 pr-3 text-left align-bottom">
                 <span className={`${display} block text-xl font-normal capitalize text-dw-ink`}>{s}</span>
-                <span className={`${ui} block text-[11px] font-normal leading-snug text-dw-muted`}>{STATE_NOTES[s]}</span>
+                <span className={`${ui} block text-[12px] font-semibold leading-snug text-dw-ink`}>{STATE_NOTES[s].tells}</span>
+                <span className={`${ui} block text-[11px] font-normal leading-snug text-dw-muted`}>{STATE_NOTES[s].looks}</span>
               </th>
             ))}
           </tr>
@@ -383,7 +410,7 @@ function ControlStates() {
         <tbody>
           {ROWS.map((r) => (
             <tr key={r.name} className="border-t border-dw-ink/15">
-              <th scope="row" className={`${ui} py-5 pr-4 text-left text-sm font-normal text-dw-muted`}>{r.name}</th>
+              <th scope="row" className={`${ui} py-5 pr-4 text-left text-sm font-normal text-dw-muted`}>{r.name}<span className={`${ui} mt-1 block text-[11px] leading-snug text-dw-muted`}>{CUES[r.name]}</span></th>
               {CONTROL_STATES.map((s) => (
                 <td key={s} className="py-5 pr-4 align-middle">{r.render(s) ?? <span className={`${ui} text-dw-muted`} aria-label="Not used">—</span>}</td>
               ))}
@@ -429,7 +456,7 @@ export default function DawnSystem() {
         <Section n={4} title="Components" note="Everything the site needs, filled with real trails. Try them.">
           <Components />
         </Section>
-        <Section n={5} title="Control states" note="Rest, hover, focus, pressed, selected, disabled. A dash means the state doesn't apply.">
+        <Section n={5} title="Control states" note="Each column: what the state tells the person, then how it looks. Each row: how you can tell it can be used. A dash means the state doesn't apply.">
           <ControlStates />
         </Section>
         <Section n={6} title="UI states" note="Empty, loading, error, success.">

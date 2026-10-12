@@ -203,6 +203,13 @@ function Components() {
           <AltitudeBar />
         </Block>
       </div>
+      <Block title="Not clickable" note="Only things standing on a ground shadow can be pressed. Coins, boots and bars sit flat on the page, so nobody tries to click them." className="lg:col-span-2">
+        <div className="flex flex-wrap items-center gap-8">
+          <span className="flex items-center gap-2"><CountBubble n={12} /><span className={`${ui} text-sm font-black text-[#1d2b53]`}>trails</span></span>
+          <Boots h={tmb} />
+          <div className="w-64 max-w-full"><AltitudeBar /></div>
+        </div>
+      </Block>
       <Block title="Detail panel" note="A pop-up over the map when a level is chosen." className="lg:col-span-2">
         <div className="mx-auto max-w-lg pt-6"><LevelDialog id="tmb" /></div>
       </Block>
@@ -212,13 +219,30 @@ function Components() {
 
 /* ---------- 5. control states ---------- */
 
-const STATE_NOTES: Record<ControlState, string> = {
-  rest: "Standing on its ground shadow",
-  hover: "Lifts higher and brightens; a shine sweeps",
-  focus: "Reached with Tab: a selection arrow bobs above",
-  pressed: "Drops onto its shadow and squashes",
-  selected: "Turns grape and pops up",
-  disabled: "Locked: grey, with a lock",
+/** For each state: what it tells the person, then what it looks like in this style. */
+const STATE_NOTES: Record<ControlState, { tells: string; looks: string }> = {
+  rest: { tells: "You can use this", looks: "standing on a hard ground shadow" },
+  hover: { tells: "Pointing at it: a click will act", looks: "lifts higher, brightens, a shine sweeps" },
+  focus: { tells: "The keyboard is here", looks: "a selection arrow bobs above" },
+  pressed: { tells: "Your click landed", looks: "drops onto its shadow and squashes" },
+  selected: { tells: "This is chosen, and stays chosen", looks: "turns grape and pops up" },
+  disabled: { tells: "Can't be used right now", looks: "locked: grey, with a lock" },
+};
+
+/** How someone can tell, before touching it, that each control can be used. */
+const CUES: Record<string, string> = {
+  "Primary button": "a glossy grass button on its shadow",
+  "Secondary button": "a glossy grape button on its shadow",
+  "Link": "a heavy grape underline",
+  "Filter chip": "a round pill on its shadow",
+  "Tab": "raised tiles with coin counters",
+  "Checkbox": "a chunky empty box",
+  "Radio": "a chunky empty ring",
+  "Toggle": "a chunky pill with a cross",
+  "Text input": "a labelled chunky field",
+  "Select": "a field with a round chevron button",
+  "Card": "a level tile; lifts on hover",
+  "List row": "a level line that lifts on hover",
 };
 
 type Row = { name: string; render: (s: ControlState) => React.ReactNode | null };
@@ -247,7 +271,8 @@ function ControlStates() {
             {CONTROL_STATES.map((s) => (
               <th key={s} scope="col" className="pb-4 pr-3 text-left align-bottom">
                 <span className={`${display} block text-lg capitalize text-[#1d2b53]`}>{s}</span>
-                <span className={`${ui} block text-[11px] font-bold leading-snug text-[#4a5a85]`}>{STATE_NOTES[s]}</span>
+                <span className={`${ui} block text-[12px] font-black leading-snug text-[#1d2b53]`}>{STATE_NOTES[s].tells}</span>
+                <span className={`${ui} block text-[11px] font-bold leading-snug text-[#4a5a85]`}>{STATE_NOTES[s].looks}</span>
               </th>
             ))}
           </tr>
@@ -255,7 +280,7 @@ function ControlStates() {
         <tbody>
           {ROWS.map((r) => (
             <tr key={r.name} className="border-t-[3px] border-[#1d2b53]/10">
-              <th scope="row" className={`${ui} py-6 pr-4 text-left text-sm font-black text-[#1d2b53]`}>{r.name}</th>
+              <th scope="row" className={`${ui} py-6 pr-4 text-left text-sm font-black text-[#1d2b53]`}>{r.name}<span className={`${ui} mt-1 block text-[11px] font-bold leading-snug text-[#4a5a85]`}>{CUES[r.name]}</span></th>
               {CONTROL_STATES.map((s) => (
                 <td key={s} className="py-6 pr-4 align-middle">{r.render(s) ?? <span className={`${ui} font-black text-[#4a5a85]`} aria-label="Not used">—</span>}</td>
               ))}
@@ -298,7 +323,7 @@ export default function TrailQuestSystem() {
         <Section n={4} title="Components" note="Everything the site needs, filled with real trails. Try them.">
           <Components />
         </Section>
-        <Section n={5} title="Control states" note="A dash means the state doesn't apply.">
+        <Section n={5} title="Control states" note="Each column: what the state tells the person, then how it looks. Each row: how you can tell it can be used. A dash means the state doesn't apply.">
           <ControlStates />
         </Section>
         <Section n={6} title="UI states" note="Empty, loading, error, success.">

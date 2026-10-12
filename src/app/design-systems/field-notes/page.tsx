@@ -199,6 +199,13 @@ function Components() {
         <TrailRow id="whw" />
         <TrailRow id="camino" />
       </Block>
+      <Block title="Not clickable" note="Notes written straight onto the page: no box, no tape, no pen line under them, and they never lift. So nobody tries to click them.">
+        <div className="flex flex-wrap items-center gap-6">
+          <div className="[&_svg]:h-20 [&_svg]:w-auto"><PermitStamp /></div>
+          <DifficultyTape h={laugavegur} />
+          <span className="flex items-center gap-2"><CountBadge n={12} /><span className={`${hand} text-xl text-[#625e56]`}>trails</span></span>
+        </div>
+      </Block>
       <Block title="Detail panel" note="Opens over the list when a row or card is chosen." className="lg:col-span-1">
         <DetailPanel id="laugavegur" />
       </Block>
@@ -231,13 +238,30 @@ const ROWS: Row[] = [
   { name: "List row", render: (s) => s === "disabled" ? <TrailRow compact id="inca-trail" force={s} note="closed Feb" /> : <TrailRow compact id="milford" force={s} /> },
 ];
 
-const STATE_NOTES: Record<ControlState, string> = {
-  rest: "Nothing is happening to it",
-  hover: "The mouse is over it: the paper lifts",
-  focus: "Reached with Tab: one ink pen stroke under it",
-  pressed: "While being clicked: pressed into the page",
-  selected: "Chosen, and stays chosen",
-  disabled: "Can't be used right now: dashed, muted",
+/** For each state: what it tells the person, then what it looks like in this style. */
+const STATE_NOTES: Record<ControlState, { tells: string; looks: string }> = {
+  rest: { tells: "You can use this", looks: "drawn on the page" },
+  hover: { tells: "Pointing at it: a click will act", looks: "the paper lifts off the desk" },
+  focus: { tells: "The keyboard is here", looks: "one ink-blue pen stroke under it" },
+  pressed: { tells: "Your click landed", looks: "pressed into the page" },
+  selected: { tells: "This is chosen, and stays chosen", looks: "ticked or circled in moss" },
+  disabled: { tells: "Can't be used right now", looks: "dashed and muted" },
+};
+
+/** How someone can tell, before touching it, that each control can be used. */
+const CUES: Record<string, string> = {
+  "Primary button": "a moss stamp",
+  "Secondary button": "handwriting in a pencilled box",
+  "Link": "a pencil underline and an arrow",
+  "Filter chip": "a strip of tape to stick down",
+  "Tab": "an index tab on the notebook edge",
+  "Checkbox": "an empty pencilled box",
+  "Radio": "an answer waiting to be circled",
+  "Toggle": "a pencilled pill with a knob",
+  "Text input": "a ruled line with a label",
+  "Select": "a ruled line with a drawn caret",
+  "Card": "a page clipped in; lifts on hover",
+  "List row": "a ruled line; a highlighter on hover",
 };
 
 function ControlStates() {
@@ -250,7 +274,8 @@ function ControlStates() {
             {CONTROL_STATES.map((s) => (
               <th key={s} scope="col" className="pb-3 pr-3 text-left align-bottom">
                 <span className={`${hand} block text-2xl font-semibold capitalize text-[#3d3a34]`}>{s}</span>
-                <span className={`${serif} block text-xs font-normal italic leading-snug text-[#625e56]`}>{STATE_NOTES[s]}</span>
+                <span className={`${serif} block text-sm font-semibold leading-snug text-[#3d3a34]`}>{STATE_NOTES[s].tells}</span>
+                <span className={`${serif} block text-xs font-normal italic leading-snug text-[#625e56]`}>{STATE_NOTES[s].looks}</span>
               </th>
             ))}
           </tr>
@@ -258,7 +283,7 @@ function ControlStates() {
         <tbody>
           {ROWS.map((r) => (
             <tr key={r.name} className="border-t border-[#c9d3df]">
-              <th scope="row" className={`${hand} py-5 pr-4 text-left text-xl font-normal text-[#625e56]`}>{r.name}</th>
+              <th scope="row" className={`${hand} py-5 pr-4 text-left text-xl font-normal text-[#625e56]`}>{r.name}<span className={`${serif} mt-1 block text-xs italic leading-snug text-[#625e56]`}>{CUES[r.name]}</span></th>
               {CONTROL_STATES.map((s) => (
                 <td key={s} className="py-5 pr-4 align-middle">{r.render(s) ?? <span className={`${serif} text-[#625e56]`} aria-label="Not used">—</span>}</td>
               ))}
@@ -303,7 +328,7 @@ export default function FieldNotesSystem() {
         <Section n={4} title="Components" note="Everything the site needs, filled with real trails. Try them.">
           <Components />
         </Section>
-        <Section n={5} title="Control states" note="Rest, hover, focus, pressed, selected, disabled. A dash means the state doesn't apply.">
+        <Section n={5} title="Control states" note="Each column: what the state tells the person, then how it looks. Each row: how you can tell it can be used. A dash means the state doesn't apply.">
           <ControlStates />
         </Section>
         <Section n={6} title="UI states" note="Empty, loading, error, success.">
