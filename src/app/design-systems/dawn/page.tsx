@@ -99,7 +99,7 @@ function ColourRoles() {
 /* ---------- 2. type roles ---------- */
 
 const TYPE = [
-  { role: "Title · 96", spec: "Old Standard 400 · 96 / 91 (112 on wide screens, 30 on phones) · once per page", cls: t96, sample: "Twelve Trails" },
+  { role: "Title · 96", spec: "Old Standard 400 · 96 / 91 (112 on wide screens, 38 on phones) · once per page", cls: t96, sample: "Twelve Trails" },
   { role: "Section · 48", spec: "Old Standard 400 · 48 / 50 (24 on phones) · section titles, a walk's name on its page", cls: t48, sample: milford.name },
   { role: "Name · 24", spec: "Old Standard 400 · 24 / 29 (17 on phones) · walk names on cards, numbers, lead lines", cls: t24, sample: "53.5 km · 4 days" },
   { role: "Reading · 17", spec: "Libre Franklin 400 · 17 / 27 (15 / 23 on phones) · everything read as text", cls: `${t17} max-w-xl`, sample: milford.why },
