@@ -28,7 +28,7 @@ export default function TrailsIndex() {
       {/* Phone: the title is printed over the lower part of the opening print, so one screen holds both. */}
       <header className="relative -mx-5 sm:hidden">
         <figure className="m-0">
-          <div className="relative h-[340px]">
+          <div className="relative h-[280px]">
             <TonedPhoto photo={OPENING} sizes="100vw" priority className="h-full w-full" />
             <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgba(22,37,43,0)_15%,rgba(22,37,43,.68)_45%,rgba(22,37,43,.92)_100%)]" />
             <div className="absolute inset-x-5 bottom-4 text-dw-mount">

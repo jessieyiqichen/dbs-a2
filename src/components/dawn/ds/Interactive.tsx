@@ -76,7 +76,7 @@ const chipState: Record<ControlState, string> = {
   selected: "border-dw-ink font-semibold text-dw-ink shadow-[inset_0_-3px_0_0_var(--color-dw-ink)] [background:var(--tint)]",
   disabled: "cursor-not-allowed border-dashed border-dw-muted bg-transparent text-dw-muted line-through",
 };
-const chipBase = `${ui} relative inline-block shrink-0 whitespace-nowrap border px-3 py-1.5 text-sm ${slow}`;
+const chipBase = `${ui} relative inline-block shrink-0 whitespace-nowrap border px-2.5 py-1 text-[13px] sm:px-3 sm:py-1.5 sm:text-sm ${slow}`;
 
 export function ChipSwatch({ force, label = "Lakes", tint = DW.lake }: { force: ControlState; label?: string; tint?: string }) {
   return (
@@ -136,7 +136,7 @@ export function PlateToggle({ label, icon, initial = false, force, checked, onCh
       />
     </span>
   );
-  const text = <span className={`${ui} inline-flex items-center gap-1.5 whitespace-nowrap text-[14px] ${disabled ? "text-dw-muted line-through" : on ? "text-dw-ink" : "text-dw-muted"}`}>{icon}{label}</span>;
+  const text = <span className={`${ui} inline-flex items-center gap-1.5 whitespace-nowrap text-[13px] sm:text-[14px] ${disabled ? "text-dw-muted line-through" : on ? "text-dw-ink" : "text-dw-muted"}`}>{icon}{label}</span>;
   if (force) return <span className="flex items-center gap-3">{track}{text}</span>;
   return (
     <button type="button" role="switch" aria-checked={on} onClick={() => (onChange ? onChange(!on) : setLive(!live))} className="group flex items-center gap-3 text-left outline-none">

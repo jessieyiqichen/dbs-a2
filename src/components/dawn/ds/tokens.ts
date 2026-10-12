@@ -25,7 +25,7 @@ export const DAWN_FIELD = "linear-gradient(180deg, var(--color-dw-dawn-top) 0%, 
 
 export const display = "font-[family-name:var(--dw-display)]";
 export const ui = "font-[family-name:var(--dw-ui)]";
-export const caps = `${ui} whitespace-nowrap text-xs font-semibold uppercase tracking-[0.16em]`;
+export const caps = `${ui} whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.14em] sm:text-xs sm:tracking-[0.16em]`;
 /** Focus everywhere: crop marks at the four corners, the marks a printer puts round a print to show where to cut.
  *  The element needs a positioning context (`relative`, or already absolute). */
 export const focusRing = "dw-crop focus-visible:outline-none";

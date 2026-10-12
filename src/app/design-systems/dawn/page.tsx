@@ -99,13 +99,13 @@ function ColourRoles() {
 /* ---------- 2. type roles ---------- */
 
 const TYPE = [
-  { role: "Title · 96", spec: "Old Standard 400 · 96 / 91 (112 on wide screens, 40 on phones) · once per page", cls: t96, sample: "Twelve Trails" },
-  { role: "Section · 48", spec: "Old Standard 400 · 48 / 50 (32 on phones) · section titles, a walk's name on its page", cls: t48, sample: milford.name },
-  { role: "Name · 24", spec: "Old Standard 400 · 24 / 29 (20 on phones) · walk names on cards, numbers, lead lines", cls: t24, sample: "53.5 km · 4 days" },
-  { role: "Reading · 17", spec: "Libre Franklin 400 · 17 / 27 (16 / 25 on phones) · everything read as text", cls: `${t17} max-w-xl`, sample: milford.why },
-  { role: "Note · 14", spec: "Libre Franklin 400 · 14 / 21 · captions, credits, chips, tabs", cls: t14, sample: "Clinton River · photochrom, Photoglob Co., c. 1890–1900" },
-  { role: "Label · 12", spec: "Libre Franklin 600 · 12 / 16, capitals, +0.16em · labels and buttons", cls: t12, sample: "Best months" },
-  { role: "Caption · 12", spec: "Old Standard 400 · 12 / 16, capitals, +0.14em · the printed caption", cls: t12caption, sample: "No. 05. New Zealand" },
+  { role: "Title · 96", spec: "Old Standard 400 · 96 / 91 (112 on wide screens, 30 on phones) · once per page", cls: t96, sample: "Twelve Trails" },
+  { role: "Section · 48", spec: "Old Standard 400 · 48 / 50 (24 on phones) · section titles, a walk's name on its page", cls: t48, sample: milford.name },
+  { role: "Name · 24", spec: "Old Standard 400 · 24 / 29 (17 on phones) · walk names on cards, numbers, lead lines", cls: t24, sample: "53.5 km · 4 days" },
+  { role: "Reading · 17", spec: "Libre Franklin 400 · 17 / 27 (15 / 23 on phones) · everything read as text", cls: `${t17} max-w-xl`, sample: milford.why },
+  { role: "Note · 14", spec: "Libre Franklin 400 · 14 / 21 (13 on phones) · captions, credits, chips, tabs", cls: t14, sample: "Clinton River · photochrom, Photoglob Co., c. 1890–1900" },
+  { role: "Label · 12", spec: "Libre Franklin 600 · 12 / 16 (11 on phones), capitals, +0.16em · labels and buttons", cls: t12, sample: "Best months" },
+  { role: "Caption · 12", spec: "Old Standard 400 · 12 / 16 (11 on phones), capitals, +0.14em · the printed caption", cls: t12caption, sample: "No. 05. New Zealand" },
 ];
 
 function TypeRoles() {

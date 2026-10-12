@@ -24,7 +24,7 @@ const selectedLive = `active:translate-x-px active:translate-y-px active:bg-dw-l
 
 /** `selected` makes a button a toggle (aria-pressed); `small` is for buttons that sit inside cards and panels. */
 type ButtonProps = Forceable & { selected?: boolean; small?: boolean } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className">;
-const pad = (small?: boolean) => (small ? "px-3 py-2" : "px-5 py-3");
+const pad = (small?: boolean) => (small ? "px-2.5 py-1.5 sm:px-3 sm:py-2" : "px-4 py-2.5 sm:px-5 sm:py-3");
 
 const primaryBase = `${caps} relative inline-flex items-center border border-transparent ${slow}`;
 const primaryState: Record<ControlState, string> = {
@@ -76,9 +76,9 @@ export function SecondaryButton({ force, selected, small, children = "Later", ..
 /** Link sizes, from the six: reading text, notes, and walk names. */
 export type LinkSize = "reading" | "note" | "name";
 const linkFace: Record<LinkSize, string> = {
-  reading: `${ui} text-[16px] leading-[25px] font-semibold sm:text-[17px] sm:leading-[27px]`,
-  note: `${ui} text-[14px] leading-[21px] font-semibold`,
-  name: `${display} text-[20px] leading-[1.25] sm:text-[24px] sm:leading-[1.2]`,
+  reading: `${ui} text-[15px] leading-[23px] font-semibold sm:text-[17px] sm:leading-[27px]`,
+  note: `${ui} text-[13px] leading-[19px] font-semibold sm:text-[14px] sm:leading-[21px]`,
+  name: `${display} text-[17px] leading-[1.3] sm:text-[24px] sm:leading-[1.2]`,
 };
 const linkState: Record<ControlState, string> = {
   rest: "decoration-dw-lake underline-offset-[6px]",
