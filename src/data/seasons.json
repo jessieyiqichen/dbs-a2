@@ -24,7 +24,8 @@
     "sources": [
      "https://andina.pe/ingles/noticia.aspx?id=651711",
      "https://www.peru.travel/stories/inka-trail-5-tips-for-exploring-one-of-the-best-trekking-routes-in-the-world"
-    ]
+    ],
+    "short": "closed for upkeep"
    },
    {
     "months": [
@@ -105,7 +106,8 @@
     "sources": [
      "https://www2.montourdumontblanc.com/en/faq",
      "https://montourdumontblanc.com/en/refuges/refuge-des-mottets"
-    ]
+    ],
+    "short": "refuges closed"
    }
   ]
  },
@@ -145,7 +147,8 @@
     "text": "Closed in June and July 2026 by CONAF (resolution 288)",
     "sources": [
      "https://parquetorresdelpaine.cl/wp-content/uploads/2026/06/Reglamento-para-actividades-turaisticas-en-condiciones-invernales-PNTP_Junio-2026.pdf"
-    ]
+    ],
+    "short": "closed in 2026"
    }
   ]
  },
@@ -223,7 +226,8 @@
     "text": "Off-season: reduced facilities, bridges removed, avalanches; experienced trampers only",
     "sources": [
      "https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/tracks/milford-track/"
-    ]
+    ],
+    "short": "off season"
    }
   ]
  },
@@ -256,7 +260,8 @@
     "text": "Winter: snow, ice, avalanche terrain; alpine skills, crampons, ice axe essential",
     "sources": [
      "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/things-to-do/tracks/tongariro-alpine-crossing/"
-    ]
+    ],
+    "short": "alpine skills only"
    }
   ]
  },
@@ -346,7 +351,8 @@
      "https://www.fi.is/en/mountain-huts/faq",
      "https://safetravel.is/highland",
      "https://www.fi.is/en/hiking-trails/safety"
-    ]
+    ],
+    "short": "out of season"
    }
   ]
  },
@@ -510,7 +516,8 @@
     "text": "Cables down for winter; the park says do not attempt the ascent",
     "sources": [
      "https://www.nps.gov/yose/planyourvisit/halfdome.htm"
-    ]
+    ],
+    "short": "cables down"
    }
   ]
  }

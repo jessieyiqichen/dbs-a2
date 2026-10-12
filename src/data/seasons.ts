@@ -4,7 +4,7 @@
 import raw from "./seasons.json";
 
 export type Level = "best" | "possible" | "closed";
-export type SeasonNote = { months: string[]; level: Level; text: string; sources: string[] };
+export type SeasonNote = { months: string[]; level: Level; text: string; short?: string; sources: string[] };
 export type Season = { months: Record<string, Level>; notes: SeasonNote[] };
 
 export const seasons = raw as Record<string, Season>;

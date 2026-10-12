@@ -317,7 +317,7 @@ function Components() {
       <Block title="Route map" note="Along the way: one line through every stop's icon; choose a stop to read about it. Arrow keys move.">
         <RouteMap nodes={routeNodes(milford, routes.milford)} idPrefix="ds-route" />
       </Block>
-      <Block title="Season band and stamp" note="Twelve months as one band: best is the deepest plate with a rule beneath, possible a pale wash, closed is hatched. The words say it too. Neither is a control.">
+      <Block title="Season plates and stamp" note="A plate per month: best printed deep with a rule beneath, possible a pale wash, closed left unprinted (dashed). One line of words on top; the reasons wait behind Why. Neither is a control.">
         <div className="flex flex-wrap items-start gap-6">
           <div className="min-w-0 flex-1"><SeasonStrip season={seasons.milford} /></div>
           <div className="[&_svg]:h-24 [&_svg]:w-24"><EmbossStamp text="Permit needed" uid="ds-stamp" /></div>
