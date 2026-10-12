@@ -76,7 +76,7 @@ const chipState: Record<ControlState, string> = {
   selected: "border-dw-ink font-semibold text-dw-ink shadow-[inset_0_-3px_0_0_var(--color-dw-ink)] [background:var(--tint)]",
   disabled: "cursor-not-allowed border-dashed border-dw-muted bg-transparent text-dw-muted line-through",
 };
-const chipBase = `${ui} relative inline-block border px-3 py-1.5 text-sm ${slow}`;
+const chipBase = `${ui} relative inline-block shrink-0 whitespace-nowrap border px-3 py-1.5 text-sm ${slow}`;
 
 export function ChipSwatch({ force, label = "Lakes", tint = DW.lake }: { force: ControlState; label?: string; tint?: string }) {
   return (
@@ -88,7 +88,7 @@ export function ChipSwatch({ force, label = "Lakes", tint = DW.lake }: { force: 
 }
 
 /** One filter chip, controlled by its parent. */
-export function PlateChip({ label, tint, on, onToggle }: { label: string; tint: string; on: boolean; onToggle: () => void }) {
+export function PlateChip({ label, tint, on, onToggle, count }: { label: string; tint: string; on: boolean; onToggle: () => void; count?: number }) {
   return (
     <button
       type="button"
@@ -99,6 +99,7 @@ export function PlateChip({ label, tint, on, onToggle }: { label: string; tint: 
     >
       {on && <Tick />}
       {label}
+      {count !== undefined && <span className="ml-1.5 text-dw-muted" aria-label={`, ${count} walks`}>{count}</span>}
     </button>
   );
 }

@@ -2,7 +2,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { applyFilters, fold, isFiltered, lengthOf, NO_FILTERS, regionOf, toggle } from "../src/app/trails/filters.ts";
+import { applyFilters, choose, counts, fold, isFiltered, lengthsOf, NO_FILTERS, REGIONS, regionOf, toggle } from "../src/app/trails/filters.ts";
 
 const hikes = JSON.parse(readFileSync(new URL("../src/data/hikes.json", import.meta.url), "utf8"));
 const ids = (list: { id: string }[]) => list.map((h) => h.id);
@@ -24,15 +24,31 @@ test("regions: the two Americas count as one", () => {
   assert.deepEqual(ids(applyFilters(hikes, { ...NO_FILTERS, regions: ["The Americas"] })), ["inca-trail", "w-trek", "half-dome"]);
 });
 
-test("length uses the shortest way to walk it", () => {
-  assert.equal(lengthOf(byId("tiger-leaping")), "day");
-  assert.equal(lengthOf(byId("ebc")), "weeks");
-  assert.equal(lengthOf(byId("tmb")), "days");
+test("a walk counts in every length its days reach", () => {
+  assert.deepEqual(lengthsOf(byId("tiger-leaping")), ["day", "few"]);
+  assert.deepEqual(lengthsOf(byId("tmb")), ["week"]);
+  assert.deepEqual(lengthsOf(byId("ebc")), ["week"]);
+  assert.deepEqual(lengthsOf(byId("whw")), ["few", "week"]);
+  assert.deepEqual(lengthsOf(byId("camino")), ["month"]);
 });
 
 test("chips within a group OR, across groups AND", () => {
   const r = applyFilters(hikes, { ...NO_FILTERS, regions: ["Europe", "Oceania"], lengths: ["day"] });
   assert.deepEqual(ids(r), ["tongariro"]);
+});
+
+test("choosing every option of a group is the same as All, and is stored as All", () => {
+  assert.deepEqual(choose(["Europe", "Asia", "Oceania"], "The Americas", REGIONS), []);
+  assert.deepEqual(choose([], "Asia", REGIONS), ["Asia"]);
+  assert.deepEqual(choose(["Asia"], "Asia", REGIONS), []);
+});
+
+test("each option shows how many walks it would leave, given the other choices", () => {
+  const c = counts(hikes, { ...NO_FILTERS, lengths: ["day"] });
+  assert.equal(c.regions.Oceania, 1);
+  assert.equal(c.regions.Europe, 0);
+  assert.equal(c.lengths.month, 1);
+  assert.equal(c.regions.Asia + c.regions.Oceania + c.regions["The Americas"], 3);
 });
 
 test("no-permit toggle drops permit walks", () => {

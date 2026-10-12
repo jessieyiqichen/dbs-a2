@@ -5,9 +5,10 @@ export const REGIONS = ["Europe", "Asia", "Oceania", "The Americas"] as const;
 export type Region = (typeof REGIONS)[number];
 
 export const LENGTHS = [
-  { key: "day", label: "In a day" },
-  { key: "days", label: "A few days" },
-  { key: "weeks", label: "Two weeks or more" },
+  { key: "day", label: "1 day", min: 1, max: 1 },
+  { key: "few", label: "2–5 days", min: 2, max: 5 },
+  { key: "week", label: "6–14 days", min: 6, max: 14 },
+  { key: "month", label: "A month", min: 15, max: Infinity },
 ] as const;
 export type Length = (typeof LENGTHS)[number]["key"];
 
@@ -26,10 +27,9 @@ export function regionOf(h: Hike): Region {
   return h.continent.endsWith("America") ? "The Americas" : (h.continent as Region);
 }
 
-/** Judged by the shortest way to walk it: Tiger Leaping Gorge (1–2 days) counts as a day. */
-export function lengthOf(h: Hike): Length {
-  if (h.days[0] <= 1) return "day";
-  return h.days[0] >= 12 ? "weeks" : "days";
+/** Every length a walk's days reach: Tiger Leaping Gorge (1–2 days) is both "1 day" and "2–5 days". */
+export function lengthsOf(h: Hike): Length[] {
+  return LENGTHS.filter((l) => h.days[0] <= l.max && h.days[1] >= l.min).map((l) => l.key);
 }
 
 /** Lower case, accents dropped, so "thorsmork" finds "Þórsmörk" and "winay" finds "Wiñay". */
@@ -60,7 +60,7 @@ export function applyFilters(all: Hike[], f: Filters): Hike[] {
     (h) =>
       matches(h, f.query) &&
       (f.regions.length === 0 || f.regions.includes(regionOf(h))) &&
-      (f.lengths.length === 0 || f.lengths.includes(lengthOf(h))) &&
+      (f.lengths.length === 0 || lengthsOf(h).some((l) => f.lengths.includes(l))) &&
       (!f.noPermit || !h.permit),
   );
   return [...kept].sort(order[f.sort]);
@@ -72,4 +72,17 @@ export function isFiltered(f: Filters): boolean {
 
 export function toggle<T>(list: readonly T[], item: T): T[] {
   return list.includes(item) ? list.filter((x) => x !== item) : [...list, item];
+}
+
+/** Pick or unpick one option. Choosing every option means the same as All, so it is stored as All (empty). */
+export function choose<T>(current: readonly T[], item: T, all: readonly T[]): T[] {
+  const next = toggle(current, item);
+  return next.length === all.length ? [] : next;
+}
+
+/** How many walks each option would leave, keeping the other group's choices and the permit switch. */
+export function counts(all: Hike[], f: Filters): { regions: Record<Region, number>; lengths: Record<Length, number> } {
+  const regions = Object.fromEntries(REGIONS.map((r) => [r, applyFilters(all, { ...f, regions: [r] }).length])) as Record<Region, number>;
+  const lengths = Object.fromEntries(LENGTHS.map((l) => [l.key, applyFilters(all, { ...f, lengths: [l.key] }).length])) as Record<Length, number>;
+  return { regions, lengths };
 }
