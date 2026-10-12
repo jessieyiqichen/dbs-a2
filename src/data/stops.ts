@@ -11,6 +11,9 @@ export type Route = { finish: StopKind; stops: Stop[] };
 
 export const routes = raw as Record<string, Route>;
 
+/** The names of every stop, per walk, for search: "Namche" finds Everest Base Camp. */
+export const PLACES: Record<string, string> = Object.fromEntries(Object.entries(routes).map(([id, r]) => [id, r.stops.map((s) => s.name).join(" ")]));
+
 export function stopSources(id: string): string[] {
   return [...new Set((routes[id]?.stops ?? []).flatMap((s) => s.sources))];
 }

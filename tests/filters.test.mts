@@ -18,6 +18,19 @@ test("search ignores case and accents", () => {
   assert.deepEqual(ids(applyFilters(hikes, { ...NO_FILTERS, query: "new zealand" })), ["milford", "tongariro"]);
 });
 
+test("search also finds places along the way", () => {
+  const places = { ebc: "Phakding Namche Bazaar Tengboche" };
+  assert.deepEqual(ids(applyFilters(hikes, { ...NO_FILTERS, query: "namche" }, places)), ["ebc"]);
+  assert.deepEqual(ids(applyFilters(hikes, { ...NO_FILTERS, query: "namche" })), []);
+});
+
+test("search and chips work together, and counts follow the search", () => {
+  const f = { ...NO_FILTERS, query: "new zealand" };
+  assert.deepEqual(ids(applyFilters(hikes, { ...f, lengths: ["day"] })), ["tongariro"]);
+  assert.equal(counts(hikes, f).regions.Oceania, 2);
+  assert.equal(counts(hikes, f).regions.Europe, 0);
+});
+
 test("regions: the two Americas count as one", () => {
   assert.equal(regionOf(byId("w-trek")), "The Americas");
   assert.equal(regionOf(byId("half-dome")), "The Americas");

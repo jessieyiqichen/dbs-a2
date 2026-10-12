@@ -41,10 +41,13 @@ export function fold(s: string): string {
     .toLowerCase();
 }
 
-function matches(h: Hike, query: string): boolean {
+/** Extra words to search per walk, by id: the places along the way. */
+export type Places = Partial<Record<string, string>>;
+
+function matches(h: Hike, query: string, places: Places): boolean {
   const q = fold(query.trim());
   if (!q) return true;
-  return fold([h.name, ...h.country, h.continent, h.start, h.end, h.high_point].join(" ")).includes(q);
+  return fold([h.name, ...h.country, h.continent, h.start, h.end, h.high_point, places[h.id] ?? ""].join(" ")).includes(q);
 }
 
 const order: Record<Sort, (a: Hike, b: Hike) => number> = {
@@ -55,10 +58,10 @@ const order: Record<Sort, (a: Hike, b: Hike) => number> = {
 };
 
 /** Within a group (regions, lengths) any chip matches; across groups all must. */
-export function applyFilters(all: Hike[], f: Filters): Hike[] {
+export function applyFilters(all: Hike[], f: Filters, places: Places = {}): Hike[] {
   const kept = all.filter(
     (h) =>
-      matches(h, f.query) &&
+      matches(h, f.query, places) &&
       (f.regions.length === 0 || f.regions.includes(regionOf(h))) &&
       (f.lengths.length === 0 || lengthsOf(h).some((l) => f.lengths.includes(l))) &&
       (!f.noPermit || !h.permit),
@@ -81,8 +84,8 @@ export function choose<T>(current: readonly T[], item: T, all: readonly T[]): T[
 }
 
 /** How many walks each option would leave, keeping the other group's choices and the permit switch. */
-export function counts(all: Hike[], f: Filters): { regions: Record<Region, number>; lengths: Record<Length, number> } {
-  const regions = Object.fromEntries(REGIONS.map((r) => [r, applyFilters(all, { ...f, regions: [r] }).length])) as Record<Region, number>;
-  const lengths = Object.fromEntries(LENGTHS.map((l) => [l.key, applyFilters(all, { ...f, lengths: [l.key] }).length])) as Record<Length, number>;
+export function counts(all: Hike[], f: Filters, places: Places = {}): { regions: Record<Region, number>; lengths: Record<Length, number> } {
+  const regions = Object.fromEntries(REGIONS.map((r) => [r, applyFilters(all, { ...f, regions: [r] }, places).length])) as Record<Region, number>;
+  const lengths = Object.fromEntries(LENGTHS.map((l) => [l.key, applyFilters(all, { ...f, lengths: [l.key] }, places).length])) as Record<Length, number>;
   return { regions, lengths };
 }

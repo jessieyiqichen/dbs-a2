@@ -230,13 +230,40 @@ export function CountBadge({ n, small = false }: { n: number; small?: boolean })
   return <span className={`${display} inline-grid h-8 min-w-8 place-items-center border border-dw-ink bg-dw-mount px-1.5 text-[17px] leading-none text-dw-ink shadow-[2px_2px_0_0_var(--color-dw-lake)]`}>{n}</span>;
 }
 
-/** Search: "No." then the field, as in a print catalogue. */
-export function CatalogueSearch({ id, value, onChange, placeholder = "a trail, a country, a month…" }: { id: string; value?: string; onChange?: (v: string) => void; placeholder?: string }) {
+/** Search: "No." then the field, as in a print catalogue. Rest: a border-grey frame. Hover: the frame turns key ink.
+ *  Focus: crop marks round the whole field. Filled: a small Clear button appears inside. Disabled: unprinted, dashed. */
+const searchState: Partial<Record<ControlState, string>> = {
+  rest: "border-dw-border",
+  hover: "border-dw-ink",
+  focus: `border-dw-ink ${focusForced}`,
+  disabled: "cursor-not-allowed border-dashed border-dw-muted",
+};
+
+export function CatalogueSearch({ id, value, onChange, placeholder = "a trail, a country, a month…", force, label = "Search trails" }: { id: string; value?: string; onChange?: (v: string) => void; placeholder?: string; force?: ControlState; label?: string }) {
+  const disabled = force === "disabled";
+  const filled = !!value;
   return (
-    <label htmlFor={id} className="dw-crop dw-within relative flex items-stretch border border-dw-border bg-dw-mount p-1 transition-colors duration-[600ms] focus-within:border-dw-ink hover:border-dw-ink">
-      <span className={`${caps} grid place-items-center border-r border-dw-border/50 px-3 text-dw-muted`}>No.</span>
-      <span className="sr-only">Search trails</span>
-      <input id={id} type="search" placeholder={placeholder} {...(value === undefined ? {} : { value, onChange: (e: React.ChangeEvent<HTMLInputElement>) => onChange?.(e.target.value) })} className={`${ui} w-full bg-transparent px-3 py-2 text-base text-dw-ink placeholder:font-[family-name:var(--dw-display)] placeholder:italic placeholder:text-dw-muted outline-none`} />
+    <label htmlFor={id} className={`relative flex items-stretch border bg-dw-mount p-1 transition-colors duration-[600ms] ${force ? searchState[force] ?? searchState.rest : `dw-crop dw-within ${searchState.rest} focus-within:border-dw-ink hover:border-dw-ink`}`}>
+      <span className={`${caps} grid place-items-center border-r border-dw-border/50 px-3 ${disabled ? "text-dw-muted line-through" : "text-dw-muted"}`}>No.</span>
+      <span className="sr-only">{label}</span>
+      <input
+        id={id}
+        type="search"
+        placeholder={placeholder}
+        disabled={disabled}
+        {...(value === undefined ? {} : { value, onChange: (e: React.ChangeEvent<HTMLInputElement>) => onChange?.(e.target.value) })}
+        className={`${ui} w-full min-w-0 bg-transparent px-3 py-2 text-base text-dw-ink placeholder:font-[family-name:var(--dw-display)] placeholder:italic placeholder:text-dw-muted outline-none [&::-webkit-search-cancel-button]:hidden ${disabled ? "cursor-not-allowed" : ""}`}
+      />
+      {filled && !disabled && (
+        <button
+          type="button"
+          onClick={() => onChange?.("")}
+          aria-label="Clear the search"
+          className={`${caps} relative my-0.5 mr-0.5 shrink-0 border border-dw-ink bg-dw-mount px-2.5 text-dw-ink ${slow} hover:bg-dw-sky active:translate-y-px active:bg-dw-lake ${focusRing}`}
+        >
+          Clear
+        </button>
+      )}
     </label>
   );
 }

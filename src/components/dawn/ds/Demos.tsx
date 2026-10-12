@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { TrailPhoto } from "../Toned";
 import { PrintCard } from "./Pieces";
-import { PrimaryButton, SecondaryButton } from "./Primitives";
+import { CatalogueSearch, PrimaryButton, SecondaryButton } from "./Primitives";
 import { CatalogueRow } from "./Pieces";
 import { SidePanel } from "./Viewer";
 
@@ -40,4 +40,9 @@ export function SidePanelDemo() {
       </SidePanel>
     </>
   );
+}
+
+export function SearchDemo() {
+  const [q, setQ] = useState("Namche");
+  return <CatalogueSearch id="dw-search-live" value={q} onChange={setQ} placeholder="a walk, a country, a place on the way" />;
 }

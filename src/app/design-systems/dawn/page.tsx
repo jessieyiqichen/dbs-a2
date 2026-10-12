@@ -11,7 +11,7 @@ import { CardSwatch, CatalogueRow, DetailPanel, UIStates } from "@/components/da
 import { HeroPlate, NeighbourLink, PlateThumb, SeasonStrip, StopSwatch, routeNodes } from "@/components/dawn/ds/Guide";
 import { seasons } from "@/data/seasons";
 import { Gallery } from "@/components/dawn/ds/Viewer";
-import { AddToListDemo, CardDemo, SidePanelDemo } from "@/components/dawn/ds/Demos";
+import { AddToListDemo, CardDemo, SearchDemo, SidePanelDemo } from "@/components/dawn/ds/Demos";
 import { t12, t12caption, t14, t17, t24, t48, t96 } from "@/components/dawn/ds/type";
 import { routes } from "@/data/stops";
 import rawPhotos from "@/data/trailPhotos.json";
@@ -221,7 +221,7 @@ function Components() {
         <div className="grid gap-4 sm:grid-cols-2">
           <MountInput id="dw-in-live" />
           <MountSelect id="dw-sel-live" />
-          <div className="sm:col-span-2"><CatalogueSearch id="dw-search-live" /></div>
+          <div className="sm:col-span-2"><SearchDemo /></div>
         </div>
       </Block>
       <Block title="Checkboxes, radios, toggle">
@@ -367,6 +367,7 @@ const CUES: Record<string, string> = {
   "Toggle": "a track with a knob on a plate",
   "Text input": "a labelled empty field",
   "Select": "a field with a chevron",
+  "Search field": "\"No.\" and a field; Clear appears once you type",
   "Card": "a mounted print; lifts on hover, name underlines",
   "Route stop": "icons on a line, with \"choose one\" above",
   "Plate thumbnail": "a small mounted print; lifts on hover",
@@ -385,6 +386,7 @@ const ROWS: Row[] = [
   { name: "Toggle", render: (s) => <PlateToggle force={s} label="On" /> },
   { name: "Text input", render: (s) => (s === "pressed" || s === "selected" ? null : <div className="max-w-36"><MountInput force={s} id={`dw-in-${s}`} label="Trail" placeholder="name" /></div>) },
   { name: "Select", render: (s) => (s === "pressed" || s === "selected" ? null : <div className="max-w-36"><MountSelect force={s} id={`dw-sel-${s}`} /></div>) },
+  { name: "Search field", render: (s) => (s === "pressed" || s === "selected" ? null : <div className="max-w-44"><CatalogueSearch force={s} id={`dw-search-${s}`} placeholder="a walk" /></div>) },
   { name: "Card", render: (s) => (s === "selected" || s === "disabled" ? null : <CardSwatch force={s} />) },
   { name: "Route stop", render: (s) => (s === "disabled" ? null : <StopSwatch force={s} />) },
   { name: "Plate thumbnail", render: (s) => (s === "disabled" ? null : <div className="max-w-32"><PlateThumb force={s} photo={plates[0]} n={1} /></div>) },

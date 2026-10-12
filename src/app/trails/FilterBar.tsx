@@ -1,7 +1,8 @@
 "use client";
 // One line of printed chips above the cards: where, how long, and no permit. The cards below change at once.
 import { DW } from "@/components/dawn/ds/tokens";
-import { SecondaryButton } from "@/components/dawn/ds/Primitives";
+import { CatalogueSearch, SecondaryButton } from "@/components/dawn/ds/Primitives";
+import { PLACES } from "@/data/stops";
 import { PlateIcon } from "@/components/dawn/PlateArt";
 import { PlateChip, PlateToggle } from "@/components/dawn/ds/Interactive";
 import { hikes } from "@/data/hikes";
@@ -14,9 +15,12 @@ const LENGTH_KEYS = LENGTHS.map((l) => l.key);
 
 /** Each group starts on All. Picking options narrows it; picking every option, or All, goes back to All. */
 export function FilterBar({ f, setF, shown, total }: { f: Filters; setF: (f: Filters) => void; shown: number; total: number }) {
-  const c = counts(hikes, f);
+  const c = counts(hikes, f, PLACES);
   return (
     <div className="mt-4 border-y border-dw-ink/20 py-3 sm:mt-8 sm:py-4">
+      <div className="mb-3 max-w-md sm:mb-4">
+        <CatalogueSearch id="walk-search" label="Search the walks" placeholder="a walk, a country, a place on the way" value={f.query} onChange={(query) => setF({ ...f, query })} />
+      </div>
       <div className="flex flex-wrap items-start gap-x-10 gap-y-3 sm:items-center sm:gap-y-4">
         <div role="group" aria-label="Where" className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
           <span className={`${t12} inline-flex items-center gap-1.5 text-dw-muted sm:mr-1`} aria-hidden="true"><PlateIcon name="compass" size={22} />Where</span>

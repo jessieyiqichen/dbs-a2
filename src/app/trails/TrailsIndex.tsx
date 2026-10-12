@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { DAWN_FIELD } from "@/components/dawn/ds/tokens";
 import { hikes } from "@/data/hikes";
+import { PLACES } from "@/data/stops";
 import rawPhotos from "@/data/trailPhotos.json";
 import { TonedPhoto, creditLine, type TrailPhoto } from "@/components/dawn/Toned";
 import { SecondaryButton } from "@/components/dawn/ds/Primitives";
@@ -20,7 +21,7 @@ const coverOf = (id: string) => photos[id].find((p) => p.cover) ?? photos[id][0]
 
 export default function TrailsIndex() {
   const { list, toggleList, filters, setFilters } = useTrails();
-  const shown = useMemo(() => applyFilters(hikes, filters), [filters]);
+  const shown = useMemo(() => applyFilters(hikes, filters, PLACES), [filters]);
 
   return (
     <div className="mx-auto max-w-6xl px-5">
@@ -67,7 +68,7 @@ export default function TrailsIndex() {
           <div className="mt-12 flex flex-col items-center gap-3 text-center">
             <span className="grid h-20 w-28 place-items-center border-[1.5px] border-dashed border-dw-muted"><PlateIcon name="camera" size={36} /></span>
             <p className={t24}>No prints in this drawer</p>
-            <p className={`${t14} text-dw-muted`}>No walk fits all of these at once. Take a filter off.</p>
+            <p className={`${t14} text-dw-muted`}>{filters.query.trim() ? `No walk matches “${filters.query.trim()}” with these choices. Try another word, or take a filter off.` : "No walk fits all of these at once. Take a filter off."}</p>
             <SecondaryButton onClick={() => setFilters(NO_FILTERS)}>Clear filters</SecondaryButton>
           </div>
         ) : (
