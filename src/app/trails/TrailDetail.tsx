@@ -68,7 +68,6 @@ function Plates({ list, onOpen }: { list: TrailPhoto[]; onOpen: (i: number) => v
   return (
     <section aria-labelledby="plates-h">
       <h2 id="plates-h" className={`${t24} flex items-center gap-2`}><PlateIcon name="camera" size={28} />The plates</h2>
-      <p className={`${t14} mt-1 text-dw-muted`}>{list.length} photographs, in route order.</p>
       {/* a sliding strip on a phone; two columns from 640px */}
       <ul className="-mx-5 mt-2 flex gap-3 overflow-x-auto px-5 py-2 [scrollbar-width:none] sm:mx-0 sm:mt-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:p-0">
         {list.map((p, i) => (

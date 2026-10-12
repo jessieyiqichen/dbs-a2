@@ -73,10 +73,12 @@ export function StopSwatch({ force }: { force: ControlState }) {
 
 /** Each month is a small plate. Best: the sun plate (first light), printed, with a key rule beneath. Possible: a pale wash.
  *  Closed or not advised: left unprinted, a dashed outline, the same mark as a disabled control. */
-const LEVEL: Record<Level, { label: string; look: string }> = {
-  best: { label: "Best", look: "border-dw-ink bg-dw-sun text-dw-ink shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]" },
-  possible: { label: "Possible", look: "border-dw-border bg-dw-sky text-dw-ink" },
-  closed: { label: "Closed or not advised", look: "border-dashed border-dw-border bg-transparent text-dw-muted" },
+// One band of cells, not twelve buttons: no gaps, no borders of their own, so nothing looks pressable.
+// Best: sun with a solid key rule beneath. Possible: a sky wash. Closed: left white, a dashed rule beneath.
+const LEVEL: Record<Level, { label: string; look: string; key: string }> = {
+  best: { label: "Best", look: "bg-dw-sun font-semibold text-dw-ink shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]", key: "bg-dw-sun shadow-[inset_0_-2px_0_0_var(--color-dw-ink)]" },
+  possible: { label: "Possible", look: "bg-dw-sky text-dw-ink", key: "bg-dw-sky" },
+  closed: { label: "Closed or not advised", look: "bg-dw-mount text-dw-muted bg-[linear-gradient(90deg,var(--color-dw-muted)_50%,transparent_50%)] bg-[length:6px_2px] bg-bottom bg-repeat-x", key: "bg-dw-mount bg-[linear-gradient(90deg,var(--color-dw-muted)_50%,transparent_50%)] bg-[length:4px_2px] bg-bottom bg-repeat-x" },
 };
 
 /** One line on top (the best range and any closure), twelve plates, a legend, and the reasons behind "Why these
@@ -92,9 +94,9 @@ export function SeasonStrip({ season }: { season: Season }) {
         Best {monthRange(best)}
         {closed.map((n) => <span key={n.text} className="font-normal text-dw-muted"> · {n.short ?? "closed"} {monthRange(n.months)}</span>)}
       </p>
-      <ol className="mt-3 grid max-w-xl grid-cols-6 gap-1.5 @min-[34rem]:grid-cols-12">
+      <ol className="mt-3 grid max-w-xl grid-cols-6 gap-px border border-dw-border bg-dw-border/50 @min-[34rem]:grid-cols-12">
         {MONTHS.map((m, i) => (
-          <li key={m} className={`${t12caption} grid h-10 place-items-center border-[1.5px] !tracking-[0.06em] ${LEVEL[levels[i]].look}`}>
+          <li key={m} className={`${t12caption} grid h-9 place-items-center !tracking-[0.04em] ${LEVEL[levels[i]].look}`}>
             <span aria-hidden="true">{m}</span>
             <span className="sr-only">{m}: {LEVEL[levels[i]].label}</span>
           </li>
@@ -103,7 +105,7 @@ export function SeasonStrip({ season }: { season: Season }) {
       <ul aria-hidden="true" className={`${t14} mt-2 flex flex-wrap gap-x-4 gap-y-1 text-dw-muted`}>
         {used.map((l) => (
           <li key={l} className="flex items-center gap-1.5">
-            <span className={`inline-block h-3 w-5 border-[1.5px] ${LEVEL[l].look}`} />
+            <span className={`inline-block h-3 w-5 border border-dw-border ${LEVEL[l].key}`} />
             {LEVEL[l].label}
           </li>
         ))}

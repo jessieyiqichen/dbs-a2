@@ -5,7 +5,7 @@ import { DAWN_FIELD } from "@/components/dawn/ds/tokens";
 import { hikes } from "@/data/hikes";
 import rawPhotos from "@/data/trailPhotos.json";
 import { TonedPhoto, creditLine, type TrailPhoto } from "@/components/dawn/Toned";
-import { PlateLink, SecondaryButton } from "@/components/dawn/ds/Primitives";
+import { SecondaryButton } from "@/components/dawn/ds/Primitives";
 import { PrintCard } from "@/components/dawn/ds/Pieces";
 import { PlateIcon } from "@/components/dawn/PlateArt";
 import { NO_FILTERS, applyFilters } from "./filters";
@@ -47,7 +47,6 @@ export default function TrailsIndex() {
           <p className={`${t12} text-dw-ink`}>A guide to twelve famous walks</p>
           <h1 className={`${t96} mt-4`}>Twelve Trails</h1>
           <p className={`${t24} mt-6 max-w-md italic text-dw-ink`}>From a day on a volcano to a month across Spain: twelve walks, set out like a box of old travel prints.</p>
-          <p className="mt-8"><PlateLink href="#walks" size="note">See the twelve walks ↓</PlateLink></p>
         </div>
         <figure className="m-0">
           <div className="bg-dw-mount p-3.5 shadow-[0_1px_0_rgba(34,51,58,.15)]">
