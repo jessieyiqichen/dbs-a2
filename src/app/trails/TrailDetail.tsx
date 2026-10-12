@@ -49,11 +49,12 @@ function Details({ h }: { h: Hike }) {
         <div key="walk" className={`${t17} max-w-prose space-y-4`}>
           {t.intro.map((s) => <p key={s.text}>{s.text}</p>)}
           <p className={`${t14} text-dw-muted`}>{h.start} to {h.end} · {h.route}</p>
+          <p className={`${t14} text-dw-muted`}>{h.permit_note}</p>
         </div>,
         <RouteMap key="route" nodes={routeNodes(h, routes[h.id])} idPrefix={h.id} />,
         <div key="when" className="flex flex-wrap items-start gap-x-8 gap-y-4">
           <div className="min-w-0 flex-1 basis-full sm:basis-0">
-            <SeasonStrip season={seasons[h.id]} note={h.permit_note} />
+            <SeasonStrip season={seasons[h.id]} />
           </div>
           <EmbossStamp text={h.permit ? "Permit needed" : "No permit needed"} uid={`${h.id}-stamp`} className="h-24 w-24 shrink-0" />
         </div>,
