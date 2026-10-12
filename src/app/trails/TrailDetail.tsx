@@ -17,7 +17,7 @@ import { PlatesViewer } from "@/components/dawn/ds/Viewer";
 import { plateNo, sourceLabel } from "./plate";
 import { useTrails } from "./state";
 import { coverIndex, neighbours } from "./walks";
-import { t12, t12caption, t14, t17, t24, t48 } from "./type";
+import { t12, t12caption, t14, t17, t24, t48, t96 } from "./type";
 
 const photos = rawPhotos as Record<string, TrailPhoto[]>;
 
@@ -40,6 +40,7 @@ function Facts({ h }: { h: Hike }) {
 
 function Details({ h }: { h: Hike }) {
   const t = intros[h.id];
+  const stamp = h.permit ? "Permit needed" : "No permit needed";
   return (
     <PlateTabs
       idPrefix={h.id}
@@ -54,9 +55,10 @@ function Details({ h }: { h: Hike }) {
         <RouteMap key="route" nodes={routeNodes(h, routes[h.id])} idPrefix={h.id} />,
         <div key="when" className="flex flex-wrap items-start gap-x-8 gap-y-4">
           <div className="min-w-0 flex-1 basis-full sm:basis-0">
-            <SeasonStrip season={seasons[h.id]} />
+            {/* on a phone the stamp sits beside "Best …", where the line leaves room; from 640px, beside the band */}
+            <SeasonStrip season={seasons[h.id]} aside={<EmbossStamp text={stamp} uid={`${h.id}-stamp-phone`} className="h-16 w-16 shrink-0 sm:hidden" />} />
           </div>
-          <EmbossStamp text={h.permit ? "Permit needed" : "No permit needed"} uid={`${h.id}-stamp`} className="h-24 w-24 shrink-0" />
+          <EmbossStamp text={stamp} uid={`${h.id}-stamp`} className="hidden h-24 w-24 shrink-0 sm:block" />
         </div>,
       ]}
     />
@@ -99,19 +101,31 @@ export default function TrailDetail({ id }: { id: string }) {
   const inList = list.includes(h.id);
 
   return (
-    <article aria-labelledby="walk-title" className="mx-auto max-w-6xl px-5">
+    <article aria-label={h.name} className="mx-auto max-w-6xl px-5">
       <p className="mt-4 sm:mt-8"><PlateLink href="/trails/#walks" size="note">← All twelve walks</PlateLink></p>
 
       <div className="mt-4 grid grid-cols-1 gap-5 sm:mt-6 sm:gap-10 lg:grid-cols-[1.45fr_1fr] lg:items-end">
-        <figure className="m-0 -mx-5 min-w-0 sm:mx-0">
+        <figure className="relative m-0 -mx-5 min-w-0 sm:mx-0">
           <HeroPlate photo={own[ci]} count={own.length} onOpen={() => setViewAt(ci)} label={`See all ${own.length} plates of ${h.name}`} priority />
-          <figcaption className={`${t14} mt-2 px-5 text-dw-muted sm:mt-3 sm:px-0`}>{creditLine(own[ci])}</figcaption>
+          {/* Phone: the number, the name and the credit printed over the foot of the print, as on the index. A tap
+              still reaches the print beneath. */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,rgba(22,37,43,0),rgba(22,37,43,.72)_45%,rgba(22,37,43,.92))] px-5 pb-3 pt-24 text-dw-mount sm:hidden">
+            <p className={`${t12caption} text-dw-page/80`}>{plateNo(n)}. {h.country.join(", ")}</p>
+            <h1 className={`${t96} mt-1.5`}>{h.name}</h1>
+            <p className="mt-2.5 font-[family-name:var(--dw-ui)] text-[11px] leading-[15px] text-dw-page/80">
+              {creditLine(own[ci]).split(" · ").map((part) => <span key={part} className="block">{part}</span>)}
+            </p>
+          </div>
+          <figcaption className={`${t14} mt-3 hidden text-dw-muted sm:block`}>{creditLine(own[ci])}</figcaption>
         </figure>
 
         <div className="min-w-0 lg:pb-8">
-          <p className={`${t12caption} text-dw-muted`}>{plateNo(n)}. {h.country.join(", ")}</p>
-          <h1 id="walk-title" className={`${t48} mt-2`}>{h.name}</h1>
-          <p className={`${t17} mt-3 text-dw-muted sm:mt-4`}>{h.why}</p>
+          {/* from 640px the name stands beside the print; only one of the two titles is ever shown */}
+          <div className="hidden sm:block">
+            <p className={`${t12caption} text-dw-muted`}>{plateNo(n)}. {h.country.join(", ")}</p>
+            <h1 className={`${t48} mt-2`}>{h.name}</h1>
+          </div>
+          <p className={`${t17} text-dw-ink sm:mt-4 sm:text-dw-muted`}>{h.why}</p>
           <Facts h={h} />
           {/* full width on a phone, where the thumb reaches for it */}
           <div className="mt-5 [&>button]:w-full [&>button]:justify-center sm:mt-8 sm:[&>button]:w-auto">

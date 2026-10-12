@@ -83,22 +83,28 @@ const LEVEL: Record<Level, { label: string; fill: string }> = {
 
 /** Largest first: the best months in big type with the key to the colours right beside it; then the year as a thin
  *  band with the months beneath; the reasons wait behind "Why these months?". Not a control. */
-export function SeasonStrip({ season }: { season: Season }) {
+/** `aside` (the permit stamp, on a phone) sits beside the headline and key, where the line leaves room. */
+export function SeasonStrip({ season, aside }: { season: Season; aside?: React.ReactNode }) {
   const levels = MONTHS.map((m) => season.months[m] ?? "possible");
   const best = MONTHS.filter((_, i) => levels[i] === "best");
   const closed = season.notes.filter((n) => n.level === "closed");
   const used = (["best", "possible", "closed"] as const).filter((l) => levels.includes(l));
   return (
     <div>
-      <p className={`${t24} flex items-center gap-2`}><PlateIcon name="sunrise" size={26} />Best {monthRange(best)}</p>
-      <ul aria-hidden="true" className={`${t14} mt-2 flex flex-wrap gap-x-4 gap-y-1 text-dw-ink`}>
-        {used.map((l) => (
-          <li key={l} className="flex items-center gap-1.5">
-            <span className={`inline-block h-1.5 w-6 ${LEVEL[l].fill} ${l === "closed" ? "outline outline-1 outline-dw-border" : ""}`} />
-            {l === "closed" && closed.length ? `${closed.map((n) => n.short ?? "Closed").join(", ").replace(/^./, (c) => c.toUpperCase())}` : LEVEL[l].label}
-          </li>
-        ))}
-      </ul>
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0">
+          <p className={`${t24} flex items-center gap-2`}><PlateIcon name="sunrise" size={26} />Best {monthRange(best)}</p>
+          <ul aria-hidden="true" className={`${t14} mt-2 flex flex-wrap gap-x-4 gap-y-1 text-dw-ink`}>
+            {used.map((l) => (
+              <li key={l} className="flex items-center gap-1.5">
+                <span className={`inline-block h-1.5 w-6 ${LEVEL[l].fill} ${l === "closed" ? "outline outline-1 outline-dw-border" : ""}`} />
+                {l === "closed" && closed.length ? `${closed.map((n) => n.short ?? "Closed").join(", ").replace(/^./, (c) => c.toUpperCase())}` : LEVEL[l].label}
+              </li>
+            ))}
+          </ul>
+        </div>
+        {aside}
+      </div>
       <div aria-hidden="true" className="mt-3 max-w-xl">
         <div className="grid h-3 grid-cols-12 border border-dw-border">
           {MONTHS.map((m, i) => <span key={m} className={`${LEVEL[levels[i]].fill} ${i > 0 ? "border-l border-dw-mount" : ""}`} />)}
@@ -146,8 +152,8 @@ export function PlateThumb({ photo, n, selected, force, onClick, label }: { phot
 export function HeroPlate({ photo, count, onOpen, label, priority = false }: { photo: TrailPhoto; count: number; onOpen?: () => void; label: string; priority?: boolean }) {
   return (
     <button type="button" onClick={onOpen} aria-label={label} className={`group block w-full text-left sm:p-3.5 ${card.rest} ${cardLive}`}>
-      <TonedPhoto photo={photo} sizes="(min-width: 1024px) 660px, 100vw" priority={priority} className={`aspect-[3/2] sm:aspect-[4/3] sm:border-[3px] sm:border-dw-ink ${colourUp}`} />
-      <span className={`${t12} absolute bottom-3 right-3 flex items-center gap-1.5 border sm:bottom-7 sm:right-7 border-dw-ink bg-dw-mount px-3 py-2 transition-colors duration-[600ms] group-hover:bg-dw-sky`}><PlateIcon name="camera" size={20} />{count} plates →</span>
+      <TonedPhoto photo={photo} sizes="(min-width: 1024px) 660px, 100vw" priority={priority} className={`aspect-[10/9] sm:aspect-[4/3] sm:border-[3px] sm:border-dw-ink ${colourUp}`} />
+      <span className={`${t12} absolute right-3 top-3 flex items-center gap-1.5 border sm:bottom-7 sm:right-7 sm:top-auto border-dw-ink bg-dw-mount px-3 py-2 transition-colors duration-[600ms] group-hover:bg-dw-sky`}><PlateIcon name="camera" size={20} />{count} plates →</span>
     </button>
   );
 }
@@ -159,7 +165,7 @@ export function NeighbourLink({ href, label, name, photo }: { href: string; labe
       <TonedPhoto photo={photo} sizes="120px" className={`aspect-[4/3] w-full shrink-0 border-2 border-dw-ink sm:w-28 ${colourUp}`} />
       <span className="min-w-0">
         <span className={`${t12} block text-dw-muted`}>{label}</span>
-        <span className={`${t24} mt-1 block decoration-dw-lake decoration-2 underline-offset-4 group-hover:underline`}>{name}</span>
+        <span className={`${t24} mt-1 block underline decoration-dw-lake decoration-2 underline-offset-[6px] ${slow} group-hover:decoration-dw-ink group-hover:underline-offset-[3px]`}>{name}</span>
       </span>
     </>
   );

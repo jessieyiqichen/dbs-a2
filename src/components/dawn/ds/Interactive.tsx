@@ -7,6 +7,7 @@ import { Tick } from "./Primitives";
 import { PlateIcon } from "../PlateArt";
 import { stopBase, stopState, type RouteNode } from "./Guide";
 import { t12, t14, t24 } from "./type";
+import { stopPosition } from "@/lib/route";
 
 /* ---------- tabs ---------- */
 
@@ -180,7 +181,7 @@ export function RouteMap({ nodes, idPrefix }: { nodes: RouteNode[]; idPrefix: st
               id={`${idPrefix}-stop-${i}`}
               type="button"
               aria-pressed={i === at}
-              aria-label={`${i + 1} of ${nodes.length}: ${s.name} (${s.label})`}
+              aria-label={`${s.name} (${[stopPosition(i, nodes.length), s.label].filter(Boolean).join(", ")})`}
               onClick={() => setAt(i)}
               className={`${stopBase} ${s.end ? "rounded-full" : ""} ${slow} ${i === at ? stopState.selected : `${stopState.rest} hover:bg-dw-sky hover:shadow-none`} active:translate-y-px active:bg-dw-lake active:shadow-[inset_0_2px_4px_rgba(34,51,58,.45)] ${focusRing}`}
             >
@@ -190,7 +191,7 @@ export function RouteMap({ nodes, idPrefix }: { nodes: RouteNode[]; idPrefix: st
         </div>
       </div>
       <div aria-live="polite" className="mt-2 min-h-28 border-t border-dw-ink/20 pt-3">
-        <p className={`${t12} text-dw-muted`}>{at + 1} of {nodes.length} · {n.label}</p>
+        <p className={`${t12} text-dw-muted`}>{[stopPosition(at, nodes.length), n.label].filter(Boolean).join(" · ")}</p>
         <p className={`${t24} mt-1`}>{n.name}</p>
         {n.note && <p className={`${t14} mt-1 text-dw-muted`}>{n.note}</p>}
       </div>

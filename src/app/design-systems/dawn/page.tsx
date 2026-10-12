@@ -293,7 +293,7 @@ function Components() {
           ))}
         </div>
       </Block>
-      <Block title="Hero plate" note="The large print on a walk's page. It is the button to every plate.">
+      <Block title="Hero plate" note="The large print on a walk's page. It is the button to every plate. On a phone the walk's number, name and credit are printed over its foot, and a tap still opens the plates.">
         <div className="relative"><HeroPlate photo={cover} count={plates.length} label={`See all ${plates.length} plates of Milford Track`} /></div>
       </Block>
       <div className="space-y-4">
@@ -303,7 +303,7 @@ function Components() {
             <PlateThumb photo={plates[1]} n={2} selected label={`Plate 2: ${plates[1].place}`} />
           </div>
         </Block>
-        <Block title="Next-walk link" note="The walks either side, at the foot of a walk's page.">
+        <Block title="Next-walk link" note="The walks either side, at the foot of a walk's page. The name is underlined at rest, as every link is.">
           <NeighbourLink href="#next" label="Next walk →" name="Tongariro Alpine Crossing" photo={photos.tongariro[0]} />
         </Block>
       </div>
@@ -319,10 +319,10 @@ function Components() {
           }
         />
       </Block>
-      <Block title="Route map" note="Along the way: one line through every stop's icon; choose a stop to read about it. Arrow keys move.">
+      <Block title="Route map" note="Along the way: one line through every stop's icon; choose a stop to read about it. The ends are named Start and Finish; the points between are counted as stops (Stop 2 of 7), the same count as the heading. Arrow keys move.">
         <RouteMap nodes={routeNodes(milford, routes.milford)} idPrefix="ds-route" />
       </Block>
-      <Block title="Season band and stamp" note="The year as one thin band: best in sun with its months in bold, possible a sky wash, closed left white. One line of words on top; the reasons wait behind Why. Neither is a control.">
+      <Block title="Season band and stamp" note="The year as one thin band: best in sun with its months in bold, possible a sky wash, closed left white. One line of words on top; the reasons wait behind Why. On a phone the stamp sits beside that line. Neither is a control.">
         <div className="flex flex-wrap items-start gap-6">
           <div className="min-w-0 flex-1"><SeasonStrip season={seasons.milford} /></div>
           <div className="[&_svg]:h-24 [&_svg]:w-24"><EmbossStamp text="Permit needed" uid="ds-stamp" /></div>
