@@ -225,7 +225,8 @@ export function RadioSwatch({ force, label = "A few days" }: { force: ControlSta
 /* ---------- small pieces ---------- */
 
 /** Count badge: a number set in a small key-line box, like a plate number. */
-export function CountBadge({ n }: { n: number }) {
+export function CountBadge({ n, small = false }: { n: number; small?: boolean }) {
+  if (small) return <span className={`${display} inline-grid h-5 min-w-5 place-items-center border border-dw-ink bg-dw-mount px-1 text-[14px] leading-none tracking-normal text-dw-ink`}>{n}</span>;
   return <span className={`${display} inline-grid h-8 min-w-8 place-items-center border border-dw-ink bg-dw-mount px-1.5 text-[17px] leading-none text-dw-ink shadow-[2px_2px_0_0_var(--color-dw-aqua)]`}>{n}</span>;
 }
 

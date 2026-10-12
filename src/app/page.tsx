@@ -54,7 +54,7 @@ const CHECKS: [string, string][] = [
   ["Both widths", "Every page, hub to walk pages, fits at 1440 and at 390 with no sideways scrolling."],
   ["Keyboard", "On the site, Tab reaches every link and button in reading order, and each shows Dawn's crop marks. Arrow keys move between tabs and along the route map."],
   ["Filters", "Choosing where, how long or no permit changes the cards and the count at once; Clear all brings all twelve back."],
-  ["My list", "Adding a walk updates the count in the top bar, and it stays while moving between pages. A reload clears it: nothing is stored."],
+  ["My list", "Adding a walk updates the count on My list in the top bar; My list opens a side panel listing the walks, each with Remove, or an empty state. The list stays while moving between pages; a reload clears it: nothing is stored."],
   ["Plates viewer", "Enter opens it on the chosen plate, arrow keys move, Esc closes it and focus returns to the print."],
 ];
 

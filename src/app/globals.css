@@ -38,6 +38,12 @@
   to { transform: none; opacity: 1; }
 }
 
+/* Dawn's side panel slides in from the right (ds/Viewer.tsx SidePanel). */
+@keyframes dw-drawer-in {
+  from { transform: translateX(28px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

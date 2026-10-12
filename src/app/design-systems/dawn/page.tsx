@@ -10,7 +10,7 @@ import { ChipSwatch, PlateChips, PlateTabs, PlateToggle, RouteMap, TabSwatch } f
 import { CardSwatch, CatalogueRow, DetailPanel, UIStates } from "@/components/dawn/ds/Pieces";
 import { HeroPlate, MonthStrip, NeighbourLink, PlateThumb, StopSwatch, routeNodes } from "@/components/dawn/ds/Guide";
 import { Gallery } from "@/components/dawn/ds/Viewer";
-import { AddToListDemo, CardDemo } from "@/components/dawn/ds/Demos";
+import { AddToListDemo, CardDemo, SidePanelDemo } from "@/components/dawn/ds/Demos";
 import { t12, t12caption, t14, t17, t24, t48, t96 } from "@/components/dawn/ds/type";
 import { routes } from "@/data/stops";
 import rawPhotos from "@/data/trailPhotos.json";
@@ -321,6 +321,9 @@ function Components() {
           <div className="min-w-0 flex-1"><MonthStrip best={milford.best_months} /></div>
           <div className="[&_svg]:h-24 [&_svg]:w-24"><EmbossStamp text="Permit needed" uid="ds-stamp" /></div>
         </div>
+      </Block>
+      <Block title="Side panel" note="Slides in from the right over a dimmed page; Esc, Close or a click outside shuts it, and focus returns to the button. The site uses it for My list.">
+        <SidePanelDemo />
       </Block>
       <Block title="Detail panel" note="Opens over the list when a card or row is chosen." className="lg:col-span-2">
         <div className="max-w-xl"><DetailPanel id="milford" /></div>

@@ -75,19 +75,18 @@ export function CatalogueRow({ id, force, note, compact = false, href = "#rows",
   const h = byId(id);
   const state = force ?? "rest";
   const disabled = state === "disabled";
-  return (
-    <a
-      href={href}
-      onClick={onClick}
-      aria-disabled={disabled || undefined}
-      className={`relative flex min-w-0 items-baseline border-b border-dw-ink/20 ${compact ? "gap-1.5 px-1.5" : "gap-3 px-3"} py-2.5 ${slow} ${rowState[state]} ${force ? "" : `hover:bg-dw-aqua active:bg-dw-loch-tint/60 active:shadow-[inset_0_2px_3px_rgba(34,51,58,.25)] ${focusRing}`}`}
-    >
+  const cls = `relative flex min-w-0 items-baseline border-b border-dw-ink/20 ${compact ? "gap-1.5 px-1.5" : "gap-3 px-3"} py-2.5 ${slow} ${rowState[state]} ${force ? "" : `hover:bg-dw-aqua active:bg-dw-loch-tint/60 active:shadow-[inset_0_2px_3px_rgba(34,51,58,.25)] ${focusRing}`}`;
+  const body = (
+    <>
       {!compact && <span className={`${display} w-14 shrink-0 text-sm text-dw-muted`}>{no(h)}</span>}
       <span className={`${display} ${compact ? "text-base" : "text-[17px]"} ${disabled ? "text-dw-muted line-through" : muted ? "italic text-dw-muted" : "text-dw-ink"}`}>{compact ? h.name.split(" ")[0] : h.name}</span>
       <span aria-hidden="true" className={`${compact ? "min-w-0" : "min-w-4"} flex-1 translate-y-[-3px] border-b border-dotted border-dw-ink/40`} />
       <span className={`${ui} whitespace-nowrap ${compact ? "text-xs" : "text-sm"} text-dw-muted`}>{note ?? `${formatRange(h.distance_km)} km`}</span>
-    </a>
+    </>
   );
+  // paths in the site move without a reload, so the visitor's list survives
+  if (href.startsWith("/") && !disabled) return <Link href={href} onClick={onClick} className={cls}>{body}</Link>;
+  return <a href={href} onClick={onClick} aria-disabled={disabled || undefined} className={cls}>{body}</a>;
 }
 
 /* ---------- detail panel ---------- */

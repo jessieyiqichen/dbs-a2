@@ -71,3 +71,32 @@ export function PlatesViewer({ photos, at, title, labelledBy, onClose }: { photo
     </dialog>
   );
 }
+
+/** A side panel that slides in from the right over a dimmed page (a native modal dialog): Esc, Close or a click
+ *  outside shuts it, and focus returns to the button that opened it. Full width on a phone. */
+export function SidePanel({ open, onClose, title, titleId, children }: { open: boolean; onClose: () => void; title: React.ReactNode; titleId: string; children: React.ReactNode }) {
+  const ref = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    const d = ref.current;
+    if (!d) return;
+    if (open && !d.open) d.showModal();
+    if (!open && d.open) d.close();
+  }, [open]);
+  return (
+    <dialog
+      ref={ref}
+      onClose={onClose}
+      onClick={(e) => e.target === ref.current && ref.current?.close()}
+      aria-labelledby={titleId}
+      className="m-0 ml-auto h-dvh max-h-dvh w-full max-w-full overflow-y-auto bg-dw-mount p-0 text-dw-ink shadow-[-8px_0_0_0_var(--color-dw-aqua)] backdrop:bg-dw-ink/45 sm:w-[min(440px,100%)] motion-safe:animate-[dw-drawer-in_.45s_cubic-bezier(.45,0,.2,1)]"
+    >
+      <div className="p-5 sm:p-6">
+        <div className="flex items-start justify-between gap-4">
+          {title}
+          <SecondaryButton small onClick={() => ref.current?.close()}>Close</SecondaryButton>
+        </div>
+        {children}
+      </div>
+    </dialog>
+  );
+}
