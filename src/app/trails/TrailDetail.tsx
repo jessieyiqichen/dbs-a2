@@ -51,8 +51,8 @@ function Details({ h }: { h: Hike }) {
           <p className={`${t14} text-dw-muted`}>{h.start} to {h.end} · {h.route}</p>
         </div>,
         <RouteMap key="route" nodes={routeNodes(h, routes[h.id])} idPrefix={h.id} />,
-        <div key="when" className="flex flex-wrap items-start gap-8">
-          <div className="min-w-0 flex-1">
+        <div key="when" className="flex flex-wrap items-start gap-x-8 gap-y-4">
+          <div className="min-w-0 flex-1 basis-full sm:basis-0">
             <p className={`${t12} flex items-center gap-1.5 text-dw-muted`}><PlateIcon name="sunrise" size={22} />Month by month</p>
             <div className="mt-2"><SeasonStrip season={seasons[h.id]} /></div>
             <p className={`${t14} mt-4 max-w-prose text-dw-muted`}>{h.permit_note}</p>

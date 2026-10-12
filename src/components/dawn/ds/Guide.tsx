@@ -73,39 +73,44 @@ export function StopSwatch({ force }: { force: ControlState }) {
 
 /** Each month is a small plate. Best: the sun plate (first light), printed, with a key rule beneath. Possible: a pale wash.
  *  Closed or not advised: left unprinted, a dashed outline, the same mark as a disabled control. */
-// One band of cells, not twelve buttons: no gaps, no borders of their own, so nothing looks pressable.
-// Best: sun with a solid key rule beneath. Possible: a sky wash. Closed: left white, a dashed rule beneath.
-const LEVEL: Record<Level, { label: string; look: string; key: string }> = {
-  best: { label: "Best", look: "bg-dw-sun font-semibold text-dw-ink shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]", key: "bg-dw-sun shadow-[inset_0_-2px_0_0_var(--color-dw-ink)]" },
-  possible: { label: "Possible", look: "bg-dw-sky text-dw-ink", key: "bg-dw-sky" },
-  closed: { label: "Closed or not advised", look: "bg-dw-mount text-dw-muted bg-[linear-gradient(90deg,var(--color-dw-muted)_50%,transparent_50%)] bg-[length:6px_2px] bg-bottom bg-repeat-x", key: "bg-dw-mount bg-[linear-gradient(90deg,var(--color-dw-muted)_50%,transparent_50%)] bg-[length:4px_2px] bg-bottom bg-repeat-x" },
+// One thin band across the year (it reads as a chart, never as buttons), the months named beneath it.
+// Best: the sun, and its month names in bold ink. Possible: a sky wash. Closed: left white.
+const LEVEL: Record<Level, { label: string; fill: string }> = {
+  best: { label: "Best", fill: "bg-dw-sun" },
+  possible: { label: "Possible", fill: "bg-dw-sky" },
+  closed: { label: "Closed or not advised", fill: "bg-dw-mount" },
 };
 
-/** One line on top (the best range and any closure), twelve plates, a legend, and the reasons behind "Why these
- *  months?". Twelve to a row where there is room, otherwise six. Not a control. */
+/** One line on top (the best range and any closure), the year as a thin band with the months beneath, a legend,
+ *  and the reasons behind "Why these months?". Not a control. */
 export function SeasonStrip({ season }: { season: Season }) {
   const levels = MONTHS.map((m) => season.months[m] ?? "possible");
   const best = MONTHS.filter((_, i) => levels[i] === "best");
   const closed = season.notes.filter((n) => n.level === "closed");
   const used = (["best", "possible", "closed"] as const).filter((l) => levels.includes(l));
   return (
-    <div className="@container">
+    <div>
       <p className={`${t14} font-semibold text-dw-ink`}>
         Best {monthRange(best)}
         {closed.map((n) => <span key={n.text} className="font-normal text-dw-muted"> · {n.short ?? "closed"} {monthRange(n.months)}</span>)}
       </p>
-      <ol className="mt-3 grid max-w-xl grid-cols-6 gap-px border border-dw-border bg-dw-border/50 @min-[34rem]:grid-cols-12">
-        {MONTHS.map((m, i) => (
-          <li key={m} className={`${t12caption} grid h-9 place-items-center !tracking-[0.04em] ${LEVEL[levels[i]].look}`}>
-            <span aria-hidden="true">{m}</span>
-            <span className="sr-only">{m}: {LEVEL[levels[i]].label}</span>
-          </li>
-        ))}
-      </ol>
+      <div aria-hidden="true" className="mt-3 max-w-xl">
+        <div className="grid h-3 grid-cols-12 border border-dw-border">
+          {MONTHS.map((m, i) => <span key={m} className={`${LEVEL[levels[i]].fill} ${i > 0 ? "border-l border-dw-mount" : ""}`} />)}
+        </div>
+        <div className="mt-1 grid grid-cols-12">
+          {MONTHS.map((m, i) => (
+            <span key={m} className={`${t12caption} text-center !tracking-[0.02em] ${levels[i] === "best" ? "font-bold text-dw-ink" : "text-dw-muted"}`}>{m}</span>
+          ))}
+        </div>
+      </div>
+      <ul className="sr-only">
+        {MONTHS.map((m, i) => <li key={m}>{m}: {LEVEL[levels[i]].label}</li>)}
+      </ul>
       <ul aria-hidden="true" className={`${t14} mt-2 flex flex-wrap gap-x-4 gap-y-1 text-dw-muted`}>
         {used.map((l) => (
           <li key={l} className="flex items-center gap-1.5">
-            <span className={`inline-block h-3 w-5 border border-dw-border ${LEVEL[l].key}`} />
+            <span className={`inline-block h-2.5 w-5 border border-dw-border ${LEVEL[l].fill}`} />
             {LEVEL[l].label}
           </li>
         ))}
