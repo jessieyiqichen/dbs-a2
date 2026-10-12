@@ -13,7 +13,7 @@ const slow = "transition-[box-shadow,background-color,text-shadow,translate] dur
 
 /** Primary: deep loch ink with its tint plate printed a little off. Hover: the plates come into register. */
 const primary = `${caps} bg-dw-loch px-5 py-3 text-dw-mount shadow-[3px_3px_0_0_var(--color-dw-lake)] [text-shadow:1px_0.5px_0_rgba(195,214,196,.75)] ${slow} hover:bg-dw-loch-hover hover:shadow-[0_0_0_0_var(--color-dw-lake)] hover:[text-shadow:0_0_0_rgba(195,214,196,0)] active:translate-y-px active:bg-dw-loch-pressed ${focus}`;
-const secondary = `${caps} border border-dw-ink bg-dw-mount px-5 py-3 text-dw-ink shadow-[3px_3px_0_0_var(--color-dw-pine)] ${slow} hover:shadow-[0_0_0_0_var(--color-dw-pine)] active:translate-y-px ${focus}`;
+const secondary = `${caps} border border-dw-ink bg-dw-mount px-5 py-3 text-dw-ink shadow-[3px_3px_0_0_var(--color-dw-lake)] ${slow} hover:bg-dw-sky hover:shadow-[0_0_0_0_var(--color-dw-lake)] active:translate-y-px ${focus}`;
 
 export function PlateButtons({ showStates = false }: { showStates?: boolean }) {
   if (!showStates) {

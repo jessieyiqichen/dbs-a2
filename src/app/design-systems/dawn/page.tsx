@@ -90,7 +90,7 @@ function ColourRoles() {
       ))}
       <div className="bg-dw-mount p-3">
         <p className={`${display} text-xl leading-none`}>Temperature</p>
-        <p className={`${ui} mt-2 text-sm leading-relaxed text-dw-muted`}>Only the cool half of the prints: sky, water, ice. Warm earth tones belong to Field Notes, so the two never read alike.</p>
+        <p className={`${ui} mt-2 text-sm leading-relaxed text-dw-muted`}>Sky to first light: blue fields and white pages, gold only for what is chosen. No kraft, cream or moss: those belong to Field Notes, so the two never read alike.</p>
       </div>
     </div>
   );

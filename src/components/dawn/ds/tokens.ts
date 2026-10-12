@@ -1,4 +1,4 @@
-// Dawn design tokens: the cool half of the photochrom prints (sky, water, ice). The classes use the @theme tokens in
+// Dawn design tokens: the sky of the photochrom prints, from blue to first light. The classes use the @theme tokens in
 // globals.css (text-dw-ink, bg-dw-mount …); these hex values mirror them for SVG fills and contrast checks.
 export const DW = {
   page: "#fbfcfb", // background: a white reading page

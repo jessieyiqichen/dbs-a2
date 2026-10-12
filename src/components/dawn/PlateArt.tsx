@@ -5,10 +5,10 @@
 export const KEY = "#22333a"; // key plate: text and lines, darkened from deep water (12.36:1 on mount)
 export const MUTED = "#4f5f66"; // 6.27:1 on mount
 export const BORDER = "#6f8287"; // control borders, 3.39:1 on the page
-export const MOUNT = "#f6f9f7"; // the card a print is mounted on, cooled
+export const MOUNT = "#ffffff"; // the card a print is mounted on
 export const SKY = "#e6edeb"; // page
 export const LOCH = "#2c5868"; // primary action, Loch Linnhe darkened for contrast (7.33:1 with mount)
-// Dawn keeps only the cool half of the prints (sky, water, ice); the warm earth tones belong to Field Notes.
+// Dawn takes the sky of the prints, from blue to first light; the warm earth tones (kraft, cream, moss) belong to Field Notes.
 export const T = {
   sun: "#f3d36e", // sunlit sky over Chamonix, moved toward yellow (no orange)
   pine: "#b7cea5", // the meadow by Mirror Lake, as printed

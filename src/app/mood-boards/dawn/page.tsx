@@ -7,6 +7,7 @@ import modern from "@/data/credits/dawn-modern.json";
 import { PLATE_ICON_NAMES, PlateDefs, PlateIcon, T } from "@/components/dawn/PlateArt";
 import { CatalogueSearch, DayPlates, EmbossStamp, PLATE_KEYFRAMES, PhotochromTreatment, PlateButtons, PlateCard, PlateChips, PrintCaption, PrintingLoader } from "@/components/dawn/PlateUI";
 import { ColourToggle, TintTabs } from "@/components/dawn/PlateControls";
+import { DAWN_FIELD } from "@/components/dawn/ds/tokens";
 
 // Old Standard is a revival of a late-1800s book face; Libre Franklin revives Franklin Gothic (1902). Both are from the prints' own years.
 const display = Old_Standard_TT({ subsets: ["latin"], weight: ["400", "700"], style: ["normal", "italic"], variable: "--dw-display" });
@@ -22,6 +23,7 @@ const PAGE = "linear-gradient(180deg, var(--color-dw-page) 0%, var(--color-dw-pa
 const PALETTE = [
   { name: "Key", hex: "#22333a", role: "Text, key lines · 12.36:1", swatch: "key", from: "Deep water, Milford Sound, darkened" },
   { name: "Loch", hex: "#2c5868", role: "The one action · 7.33:1", swatch: "loch", from: "Loch Linnhe, darkened for contrast" },
+  { name: "Dawn field", hex: "linear-gradient(180deg, #a8d4f0, #cfe6f3 55%, #f6e6b0)", role: "Big fields", swatch: null, from: "Sky to first light: the opening and the bar" },
   { name: "Sun", hex: T.sun, role: "Selected, best", swatch: "sun", from: "Sunlit sky over Chamonix, moved toward yellow" },
   { name: "Sky", hex: T.sky, role: "Hover", swatch: "sky", from: "Sky over the Mer de Glace, cooled toward blue" },
   { name: "Lake", hex: T.lake, role: "Pressed", swatch: "lake", from: "Water of Milford Sound, lightened and cooled" },
@@ -39,7 +41,7 @@ const made: Record<string, React.ReactNode> = {
           <div className="relative h-16 border border-dw-ink/30" style={{ background: c.hex }}>
             {c.swatch && <Image src={src(`swatch-${c.swatch}.jpg`)} alt="" width={120} height={120} className="absolute -bottom-2 -right-2 h-9 w-9 border-2 border-dw-mount object-cover" />}
           </div>
-          <p className="mt-2 text-sm font-semibold">{c.name} <span className="font-normal text-dw-muted">{c.hex}</span></p>
+          <p className="mt-2 text-sm font-semibold">{c.name} <span className="font-normal text-dw-muted">{c.hex.startsWith("linear") ? "#a8d4f0 → #f6e6b0" : c.hex}</span></p>
           <p className="text-[11px] leading-snug text-dw-muted">{c.from}</p>
         </div>
       ))}
@@ -113,7 +115,7 @@ function Ref({ file, note, className = "" }: { file: string; note: string; class
 
 function Overview() {
   return (
-    <section aria-label="Overview" className="mt-8 grid gap-3 bg-[#d9e3e1] p-3 lg:grid-cols-[1.1fr_1fr_1fr] lg:grid-rows-[240px_auto_auto]">
+    <section aria-label="Overview" style={{ background: DAWN_FIELD }} className="mt-8 grid gap-3 p-3 lg:grid-cols-[1.1fr_1fr_1fr] lg:grid-rows-[240px_auto_auto]">
       <div className="relative lg:row-span-2">
         <span className="absolute left-5 top-5 z-10"><Tag>References</Tag></span>
         <Ref file="clinton-river.jpg" note="Clinton River, Milford Track: colour laid on by hand" className="h-80 lg:h-full" />
@@ -128,7 +130,7 @@ function Overview() {
             <p className="font-[family-name:var(--dw-display)] text-4xl leading-none">
               53.5 km <span className="italic text-dw-muted">Milford Track</span>
             </p>
-            <p className="mt-2 max-w-md text-sm text-dw-muted">Old Standard for names, numbers and captions; Libre Franklin for everything else. Both from the prints&apos; own years. Key ink for text, never black. Only the cool half of the prints: sky, water, ice.</p>
+            <p className="mt-2 max-w-md text-sm text-dw-muted">Old Standard for names, numbers and captions; Libre Franklin for everything else. Both from the prints&apos; own years. Key ink for text, never black. Sky to first light: blue fields, a little gold for what you choose.</p>
           </div>
         </div>
       </div>
@@ -162,7 +164,7 @@ const tiles: Tile[] = [
   { kind: "photo", file: "mont-blanc-flegere.jpg", caption: "Mont Blanc from La Flégère: snow lit warm, valleys cool" },
   { kind: "made", id: "icons", caption: "Icons: flat tint plates, slightly off register, under a fine key line" },
   { kind: "photo", file: "te-anau-south-fjord.jpg", caption: "Lake Te Anau, South Fiord: still water, almost no contrast" },
-  { kind: "made", id: "tabs", caption: "Tabs: a pine plate slides under the chosen one (try it)" },
+  { kind: "made", id: "tabs", caption: "Tabs: a sun plate slides under the chosen one (try it)" },
   { kind: "made", id: "type-ui", caption: "Libre Franklin: plain words for the practical parts" },
   { kind: "photo", file: "fort-william-ben-nevis.jpg", caption: "Fort William and Ben Nevis: where the West Highland Way ends" },
   { kind: "made", id: "toggle", caption: "Toggle: off, the plate sits off register; on, it locks in and the track is printed" },
@@ -254,7 +256,7 @@ export default function DawnBoard() {
             Photochrom prints from the Library of Congress Photochrom Print Collection: no known restrictions on publication. The modern photo in the
             treatment piece is by{" "}
             <a href={modern[0].source} className="underline decoration-dw-lake underline-offset-2 hover:decoration-dw-ink">{modern[0].author}</a> on
-            Unsplash (Unsplash License). Everything marked ✦ was drawn or set for this board; its colours are sampled from the prints.
+            Unsplash (Unsplash License). Everything marked ✦ was drawn or set for this board; its colours are sampled from the prints, except heather, which is derived.
           </p>
         </section>
       </div>
