@@ -7,7 +7,7 @@ import type { Route, StopKind } from "@/data/stops";
 import type { Level, Season } from "@/data/seasons";
 import { TonedPhoto, type TrailPhoto } from "../Toned";
 import { PlateIcon, type PlateIconName } from "../PlateArt";
-import { card, cardLive, colourUp } from "./tokens";
+import { card, cardLive, colourUp, slow } from "./tokens";
 import { MONTHS, monthRange } from "@/lib/months";
 import { t12, t12caption, t14, t24 } from "./type";
 import { plateLinkClass } from "./Primitives";
@@ -94,7 +94,7 @@ export function SeasonStrip({ season }: { season: Season }) {
       <ul aria-hidden="true" className={`${t14} mt-2 flex flex-wrap gap-x-4 gap-y-1 text-dw-ink`}>
         {used.map((l) => (
           <li key={l} className="flex items-center gap-1.5">
-            <span className={`inline-block h-3 w-5 border border-dw-border ${LEVEL[l].fill}`} />
+            <span className={`inline-block h-1.5 w-6 ${LEVEL[l].fill} ${l === "closed" ? "outline outline-1 outline-dw-border" : ""}`} />
             {l === "closed" && closed.length ? `${closed.map((n) => n.short ?? "Closed").join(", ").replace(/^./, (c) => c.toUpperCase())}` : LEVEL[l].label}
           </li>
         ))}
@@ -131,7 +131,7 @@ export function PlateThumb({ photo, n, selected, force, onClick, label }: { phot
   const body = (
     <>
       <TonedPhoto photo={photo} sizes="200px" className={`aspect-[4/3] border-2 border-dw-ink ${force === "hover" ? "saturate-[1.25]" : colourUp}`} />
-      <span className={`${t14} mt-1 block truncate ${on ? "font-semibold text-dw-ink" : "text-dw-muted group-hover:text-dw-ink"}`}>{n}. {photo.place}</span>
+      <span className={`${t14} mt-1 block truncate underline decoration-2 underline-offset-[5px] ${slow} ${on ? "font-semibold text-dw-ink decoration-dw-ink" : "text-dw-ink decoration-dw-lake group-hover:decoration-dw-ink group-hover:underline-offset-[3px]"}`}>{n}. {photo.place}</span>
     </>
   );
   if (force) return <span className={`relative block p-1.5 ${look}`}>{body}</span>;

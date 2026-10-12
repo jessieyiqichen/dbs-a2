@@ -29,7 +29,7 @@ export function PrintCard({ id, photo, href = "#card", footer, sizes = "(min-wid
     <>
       <TonedPhoto photo={photo} sizes={sizes} className={`row-span-3 aspect-[4/3] self-start border-2 border-dw-ink sm:border-[3px] ${colourUp}`} />
       <span className={`${t12caption} block text-dw-muted sm:mt-4`}>{no(h)}. {h.country.join(", ")}</span>
-      <span id={`${h.id}-card`} className={`${t24} mt-1 block decoration-dw-lake decoration-2 underline-offset-4 group-hover:underline`}>{h.name}</span>
+      <span id={`${h.id}-card`} className={`${t24} mt-1 block underline decoration-dw-lake decoration-2 underline-offset-[6px] ${slow} group-hover:decoration-dw-ink group-hover:underline-offset-[3px]`}>{h.name}</span>
       <span className={`${t14} mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-dw-muted`}>
         {/* each figure with its icon, kept whole when the line wraps */}
         {([[FACT_ICON.distance, `${formatRange(h.distance_km)} km`], [FACT_ICON.days, `${formatRange(h.days)} ${h.days[1] === 1 ? "day" : "days"}`], [FACT_ICON.high, elevation(h)]] as const).map(([icon, x]) => (
