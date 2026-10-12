@@ -22,10 +22,10 @@ const PAGE = "linear-gradient(180deg, var(--color-dw-page) 0%, var(--color-dw-pa
 const PALETTE = [
   { name: "Key", hex: "#22333a", role: "Text, key lines · 12.36:1", swatch: "key", from: "Deep water, Milford Sound, darkened" },
   { name: "Loch", hex: "#2c5868", role: "The one action · 7.33:1", swatch: "loch", from: "Loch Linnhe, darkened for contrast" },
-  { name: "Celadon", hex: T.celadon, role: "Tint", swatch: "celadon", from: "Sky over Mirror Lake, cooled" },
-  { name: "Aqua", hex: T.aqua, role: "Tint", swatch: "aqua", from: "Sky over the Mer de Glace, cooled" },
-  { name: "Loch tint", hex: T.loch, role: "Tint", swatch: "loch", from: "Loch Linnhe, as printed" },
-  { name: "Stone", hex: T.stone, role: "Tint", swatch: null, from: "Derived: a cool grey for rock" },
+  { name: "Sky", hex: T.sky, role: "Hover", swatch: "sky", from: "Sky over the Mer de Glace, cooled toward blue" },
+  { name: "Pine", hex: T.pine, role: "Selected", swatch: "pine", from: "The meadow by Mirror Lake, as printed" },
+  { name: "Lake", hex: T.lake, role: "Pressed, best", swatch: "lake", from: "Water of Milford Sound, lightened and cooled" },
+  { name: "Heather", hex: T.heather, role: "Tint", swatch: null, from: "Derived: a cool lilac for rock in shadow" },
 ];
 
 /* ---------- pieces made for this board ---------- */
@@ -155,13 +155,13 @@ const tiles: Tile[] = [
   { kind: "photo", file: "clinton-river.jpg", caption: "Clinton River, Milford Track: the first valley, coloured by hand" },
   { kind: "made", id: "palette", caption: "Palette: every colour sampled from a print, the small crop shows where" },
   { kind: "made", id: "plate-card", caption: "Route card as a mounted print: dark edge, printed caption, then the facts" },
-  { kind: "photo", file: "mirror-lake.jpg", caption: "Mirror Lake, Yosemite: the celadon sky comes from here" },
+  { kind: "photo", file: "mirror-lake.jpg", caption: "Mirror Lake, Yosemite: the pine green comes from its meadow" },
   { kind: "made", id: "type-display", caption: "Old Standard: names and numbers, like the prints' captions" },
   { kind: "made", id: "buttons", caption: "Buttons: the tint plate sits a little off; hover brings it into register" },
   { kind: "photo", file: "mont-blanc-flegere.jpg", caption: "Mont Blanc from La Flégère: snow lit warm, valleys cool" },
   { kind: "made", id: "icons", caption: "Icons: flat tint plates, slightly off register, under a fine key line" },
   { kind: "photo", file: "te-anau-south-fjord.jpg", caption: "Lake Te Anau, South Fiord: still water, almost no contrast" },
-  { kind: "made", id: "tabs", caption: "Tabs: a celadon plate slides under the chosen one (try it)" },
+  { kind: "made", id: "tabs", caption: "Tabs: a pine plate slides under the chosen one (try it)" },
   { kind: "made", id: "type-ui", caption: "Libre Franklin: plain words for the practical parts" },
   { kind: "photo", file: "fort-william-ben-nevis.jpg", caption: "Fort William and Ben Nevis: where the West Highland Way ends" },
   { kind: "made", id: "toggle", caption: "Toggle: off, the plate sits off register; on, it locks in and the track is printed" },
@@ -176,7 +176,7 @@ const tiles: Tile[] = [
   { kind: "photo", file: "loch-lomond-tarbet.jpg", caption: "Loch Lomond from Tarbet: the West Highland Way follows the far shore" },
   { kind: "made", id: "stamp", caption: "Badge: an embossed stamp, pressed into the mount" },
   { kind: "made", id: "button-states", caption: "Button states: rest, in register, pressed, focus, unprinted" },
-  { kind: "photo", file: "lake-te-anau.jpg", caption: "Lake Te Anau: celadon water, one small boat" },
+  { kind: "photo", file: "lake-te-anau.jpg", caption: "Lake Te Anau: still water, one small boat" },
   { kind: "made", id: "treatment", caption: "A modern photo joins the set: toned like the prints, half the colour out, warm cream highlights" },
   { kind: "photo", file: "chamonix-floria.jpg", caption: "The Chamonix valley, where the Tour du Mont Blanc begins" },
   { kind: "photo", file: "cleddau-valley.jpg", caption: "Cleddau Valley, Milford Sound: one figure for scale" },
@@ -245,14 +245,14 @@ export default function DawnBoard() {
           <ul className="mt-3 grid gap-x-8 gap-y-1 sm:grid-cols-2">
             {credits.map((c) => (
               <li key={c.file}>
-                <a href={c.source} className="underline decoration-dw-loch-tint underline-offset-2 hover:decoration-dw-ink">{c.title}</a>, {c.author}, {c.date}
+                <a href={c.source} className="underline decoration-dw-lake underline-offset-2 hover:decoration-dw-ink">{c.title}</a>, {c.author}, {c.date}
               </li>
             ))}
           </ul>
           <p className="mt-3">
             Photochrom prints from the Library of Congress Photochrom Print Collection: no known restrictions on publication. The modern photo in the
             treatment piece is by{" "}
-            <a href={modern[0].source} className="underline decoration-dw-loch-tint underline-offset-2 hover:decoration-dw-ink">{modern[0].author}</a> on
+            <a href={modern[0].source} className="underline decoration-dw-lake underline-offset-2 hover:decoration-dw-ink">{modern[0].author}</a> on
             Unsplash (Unsplash License). Everything marked ✦ was drawn or set for this board; its colours are sampled from the prints.
           </p>
         </section>

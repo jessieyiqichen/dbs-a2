@@ -27,13 +27,13 @@ export const TONE_OVERLAY = "linear-gradient(180deg, #f6efd6 0%, #c1d1ad 45%, #b
 
 export type PhotoState = "loading" | "ready" | "error";
 
-/** The plates printing while a photo loads: aqua sky first, then celadon, then stone. */
+/** The plates printing while a photo loads: sky first, then pine, then heather. */
 function Printing() {
   return (
     <span aria-hidden="true" className="absolute inset-0 grid grid-rows-[45%_30%_25%] bg-dw-mount">
-      <span className="bg-dw-aqua motion-safe:animate-[dw-plate_1.6s_ease-in-out_infinite_alternate]" />
-      <span className="bg-dw-celadon motion-safe:animate-[dw-plate_1.6s_ease-in-out_.3s_infinite_alternate]" />
-      <span className="bg-dw-stone motion-safe:animate-[dw-plate_1.6s_ease-in-out_.6s_infinite_alternate]" />
+      <span className="bg-dw-sky motion-safe:animate-[dw-plate_1.6s_ease-in-out_infinite_alternate]" />
+      <span className="bg-dw-pine motion-safe:animate-[dw-plate_1.6s_ease-in-out_.3s_infinite_alternate]" />
+      <span className="bg-dw-heather motion-safe:animate-[dw-plate_1.6s_ease-in-out_.6s_infinite_alternate]" />
     </span>
   );
 }
@@ -43,7 +43,7 @@ function NotPrinted({ alt }: { alt: string }) {
   return (
     <span role="img" aria-label={`Photo did not load: ${alt}`} className="absolute inset-0 grid place-items-center bg-dw-mount p-2 text-center">
       <span className="flex flex-col items-center gap-1">
-        <span aria-hidden="true" className={`${display} grid h-7 w-7 place-items-center border-[1.5px] border-dw-ink bg-dw-stone text-lg text-dw-ink shadow-[2px_2px_0_0_var(--color-dw-ink)]`}>!</span>
+        <span aria-hidden="true" className={`${display} grid h-7 w-7 place-items-center border-[1.5px] border-dw-ink bg-dw-heather text-lg text-dw-ink shadow-[2px_2px_0_0_var(--color-dw-ink)]`}>!</span>
         <span aria-hidden="true" className={`${t14} hidden text-dw-ink @min-[11rem]:block`}>This print didn&apos;t come through</span>
         <span aria-hidden="true" className={`${t12} hidden text-dw-muted @min-[11rem]:block`}>Reload the page to try again</span>
       </span>

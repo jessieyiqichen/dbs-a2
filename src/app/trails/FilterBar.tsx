@@ -7,8 +7,8 @@ import { PlateChip, PlateToggle } from "@/components/dawn/ds/Interactive";
 import { LENGTHS, NO_FILTERS, REGIONS, isFiltered, toggle, type Filters } from "./filters";
 import { t12, t14 } from "./type";
 
-const REGION_TINT = { Europe: DW.celadon, Asia: DW.aqua, Oceania: DW.loch, "The Americas": DW.stone } as const;
-const LENGTH_TINT = { day: DW.aqua, days: DW.celadon, weeks: DW.stone } as const;
+const REGION_TINT = { Europe: DW.pine, Asia: DW.sky, Oceania: DW.lake, "The Americas": DW.heather } as const;
+const LENGTH_TINT = { day: DW.sky, days: DW.pine, weeks: DW.heather } as const;
 
 export function FilterBar({ f, setF, shown, total }: { f: Filters; setF: (f: Filters) => void; shown: number; total: number }) {
   return (

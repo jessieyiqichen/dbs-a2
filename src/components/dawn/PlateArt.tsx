@@ -10,10 +10,10 @@ export const SKY = "#e6edeb"; // page
 export const LOCH = "#2c5868"; // primary action, Loch Linnhe darkened for contrast (7.33:1 with mount)
 // Dawn keeps only the cool half of the prints (sky, water, ice); the warm earth tones belong to Field Notes.
 export const T = {
-  celadon: "#c3d6c4", // sky over Mirror Lake, cooled
-  aqua: "#c9dcdc", // sky over the Mer de Glace, cooled
-  loch: "#8eaaa6", // Loch Linnhe, Fort William
-  stone: "#a7b4b1", // distant rock, cooled
+  pine: "#b7cea5", // the meadow by Mirror Lake, as printed
+  sky: "#d5e5f0", // sky over the Mer de Glace, cooled toward blue
+  lake: "#79a8b8", // water of Milford Sound, lightened and cooled
+  heather: "#bdb8d4", // derived: a cool lilac for rock in shadow
 };
 
 /** Shared filter: the mottled grain of a litho stone. Render once per page. */
@@ -55,7 +55,7 @@ export type PlateIconName =
 const art: Record<PlateIconName, [React.ReactNode, React.ReactNode]> = {
   mountain: [
     <>
-      <path d="M5 38 L19 15 L27 26 L33 18 L44 38 Z" fill={T.stone} />
+      <path d="M5 38 L19 15 L27 26 L33 18 L44 38 Z" fill={T.heather} />
       <path d="M15.5 21 L19 15 L22.5 20.5 Z" fill={MOUNT} />
     </>,
     <>
@@ -66,8 +66,8 @@ const art: Record<PlateIconName, [React.ReactNode, React.ReactNode]> = {
   ],
   lake: [
     <>
-      <path d="M4 27 C 12 18, 18 20, 24 23 C 30 17, 38 18, 44 27 Z" fill={T.celadon} />
-      <path d="M4 27 H44 V39 H4 Z" fill={T.loch} />
+      <path d="M4 27 C 12 18, 18 20, 24 23 C 30 17, 38 18, 44 27 Z" fill={T.pine} />
+      <path d="M4 27 H44 V39 H4 Z" fill={T.lake} />
     </>,
     <>
       <path d="M4 27 C 12 18, 18 20, 24 23 C 30 17, 38 18, 44 27" />
@@ -76,9 +76,9 @@ const art: Record<PlateIconName, [React.ReactNode, React.ReactNode]> = {
   ],
   waterfall: [
     <>
-      <path d="M4 12 H31 L29 19 H4 Z M36 22 H44 V40 H36 Z" fill={T.stone} />
-      <path d="M21 15 C 23 24, 23 32, 25 40 H33 C 31 31, 31 23, 29 15 Z" fill={T.aqua} />
-      <ellipse cx="29" cy="40" rx="15" ry="3.5" fill={T.loch} />
+      <path d="M4 12 H31 L29 19 H4 Z M36 22 H44 V40 H36 Z" fill={T.heather} />
+      <path d="M21 15 C 23 24, 23 32, 25 40 H33 C 31 31, 31 23, 29 15 Z" fill={T.sky} />
+      <ellipse cx="29" cy="40" rx="15" ry="3.5" fill={T.lake} />
     </>,
     <>
       <path d="M4 12 H31 L29 19 H4 M44 22 H37 V38" />
@@ -87,7 +87,7 @@ const art: Record<PlateIconName, [React.ReactNode, React.ReactNode]> = {
     </>,
   ],
   pine: [
-    <path d="M24 6 L33 19 H28 L36 30 H12 L20 19 H15 Z" fill={T.celadon} />,
+    <path d="M24 6 L33 19 H28 L36 30 H12 L20 19 H15 Z" fill={T.pine} />,
     <>
       <path d="M24 6 L33 19 H28 L36 30 H12 L20 19 H15 Z" />
       <path d="M24 30 V40 M17 40 H31" />
@@ -95,8 +95,8 @@ const art: Record<PlateIconName, [React.ReactNode, React.ReactNode]> = {
   ],
   hut: [
     <>
-      <path d="M7 22 L24 9 L41 22 Z" fill={T.stone} />
-      <path d="M11 22 H37 V39 H11 Z" fill={T.aqua} />
+      <path d="M7 22 L24 9 L41 22 Z" fill={T.heather} />
+      <path d="M11 22 H37 V39 H11 Z" fill={T.sky} />
     </>,
     <>
       <path d="M6 23 L24 9 L42 23 M11 21 V39 H37 V21" />
@@ -104,14 +104,14 @@ const art: Record<PlateIconName, [React.ReactNode, React.ReactNode]> = {
     </>,
   ],
   tent: [
-    <path d="M6 38 L22 10 L42 38 Z" fill={T.aqua} />,
+    <path d="M6 38 L22 10 L42 38 Z" fill={T.sky} />,
     <>
       <path d="M5 38 L22 10 L43 38 Z M22 10 L28 38" />
       <path d="M22 10 L19 5 M3 38 H45" />
     </>,
   ],
   boot: [
-    <path d="M14 8 H26 V27 L39 31 C 42 32, 42 38, 38 38 H12 Z" fill={T.stone} />,
+    <path d="M14 8 H26 V27 L39 31 C 42 32, 42 38, 38 38 H12 Z" fill={T.heather} />,
     <>
       <path d="M14 8 H26 V27 L38 30.5 C 42 31.5, 42.5 38, 38 38 H12 C 12 30, 14 20, 14 8 Z" />
       <path d="M17 14 H23 M17 19 H23 M12 34 H41" />
@@ -119,8 +119,8 @@ const art: Record<PlateIconName, [React.ReactNode, React.ReactNode]> = {
   ],
   compass: [
     <>
-      <circle cx="24" cy="24" r="16" fill={T.aqua} />
-      <path d="M24 10 L28 24 H20 Z" fill={T.loch} />
+      <circle cx="24" cy="24" r="16" fill={T.sky} />
+      <path d="M24 10 L28 24 H20 Z" fill={T.lake} />
     </>,
     <>
       <circle cx="24" cy="24" r="16" />
@@ -130,8 +130,8 @@ const art: Record<PlateIconName, [React.ReactNode, React.ReactNode]> = {
   ],
   map: [
     <>
-      <path d="M6 12 L17 8 V36 L6 40 Z M31 12 L42 8 V36 L31 40 Z" fill={T.celadon} />
-      <path d="M17 8 L31 12 V40 L17 36 Z" fill={T.aqua} />
+      <path d="M6 12 L17 8 V36 L6 40 Z M31 12 L42 8 V36 L31 40 Z" fill={T.pine} />
+      <path d="M17 8 L31 12 V40 L17 36 Z" fill={T.sky} />
     </>,
     <>
       <path d="M6 12 L17 8 L31 12 L42 8 V36 L31 40 L17 36 L6 40 Z M17 8 V36 M31 12 V40" />
@@ -140,8 +140,8 @@ const art: Record<PlateIconName, [React.ReactNode, React.ReactNode]> = {
   ],
   sunrise: [
     <>
-      <path d="M3 30 H45 V16 H3 Z" fill={T.celadon} opacity=".7" />
-      <path d="M13 30 A11 11 0 0 1 35 30 Z" fill={T.aqua} />
+      <path d="M3 30 H45 V16 H3 Z" fill={T.pine} opacity=".7" />
+      <path d="M13 30 A11 11 0 0 1 35 30 Z" fill={T.sky} />
     </>,
     <>
       <path d="M13 30 A11 11 0 0 1 35 30" />
@@ -150,7 +150,7 @@ const art: Record<PlateIconName, [React.ReactNode, React.ReactNode]> = {
     </>,
   ],
   cloud: [
-    <path d="M10 33 C 3 33, 3 23, 11 23 C 11 14, 23 12, 26 19 C 30 14, 39 17, 37 24 C 44 24, 45 33, 38 33 Z" fill={T.aqua} />,
+    <path d="M10 33 C 3 33, 3 23, 11 23 C 11 14, 23 12, 26 19 C 30 14, 39 17, 37 24 C 44 24, 45 33, 38 33 Z" fill={T.sky} />,
     <>
       <path d="M10 33 C 3 33, 3 23, 11 23 C 11 14, 23 12, 26 19 C 30 14, 39 17, 37 24 C 44 24, 45 33, 38 33 Z" />
       <path d="M14 38 H34" />
@@ -158,8 +158,8 @@ const art: Record<PlateIconName, [React.ReactNode, React.ReactNode]> = {
   ],
   bridge: [
     <>
-      <path d="M3 34 H45 V41 H3 Z" fill={T.loch} />
-      <path d="M8 26 C 16 16, 32 16, 40 26 Z" fill={T.stone} opacity=".6" />
+      <path d="M3 34 H45 V41 H3 Z" fill={T.lake} />
+      <path d="M8 26 C 16 16, 32 16, 40 26 Z" fill={T.heather} opacity=".6" />
     </>,
     <>
       <path d="M3 26 H45 M8 26 C 16 16, 32 16, 40 26" />
@@ -169,8 +169,8 @@ const art: Record<PlateIconName, [React.ReactNode, React.ReactNode]> = {
   ],
   camera: [
     <>
-      <path d="M8 14 H40 V38 H8 Z" fill={T.stone} />
-      <circle cx="24" cy="26" r="7" fill={T.loch} />
+      <path d="M8 14 H40 V38 H8 Z" fill={T.heather} />
+      <circle cx="24" cy="26" r="7" fill={T.lake} />
     </>,
     <>
       <path d="M8 14 H40 V38 H8 Z M17 14 V10 H31 V14" />
@@ -180,7 +180,7 @@ const art: Record<PlateIconName, [React.ReactNode, React.ReactNode]> = {
     </>,
   ],
   permit: [
-    <path d="M6 14 H42 V20 C 39 20, 39 28, 42 28 V34 H6 V28 C 9 28, 9 20, 6 20 Z" fill={T.aqua} />,
+    <path d="M6 14 H42 V20 C 39 20, 39 28, 42 28 V34 H6 V28 C 9 28, 9 20, 6 20 Z" fill={T.sky} />,
     <>
       <path d="M6 14 H42 V20 C 39 20, 39 28, 42 28 V34 H6 V28 C 9 28, 9 20, 6 20 Z" />
       <path d="M15 21 H31 M15 26 H27 M34 14 V34" strokeDasharray="0" />
@@ -188,8 +188,8 @@ const art: Record<PlateIconName, [React.ReactNode, React.ReactNode]> = {
   ],
   calendar: [
     <>
-      <path d="M7 11 H41 V19 H7 Z" fill={T.loch} />
-      <path d="M7 19 H41 V40 H7 Z" fill={T.aqua} />
+      <path d="M7 11 H41 V19 H7 Z" fill={T.lake} />
+      <path d="M7 19 H41 V40 H7 Z" fill={T.sky} />
     </>,
     <>
       <path d="M7 11 H41 V40 H7 Z M7 19 H41 M15 7 V14 M33 7 V14" />
@@ -197,7 +197,7 @@ const art: Record<PlateIconName, [React.ReactNode, React.ReactNode]> = {
     </>,
   ],
   clock: [
-    <circle cx="24" cy="24" r="16" fill={T.celadon} />,
+    <circle cx="24" cy="24" r="16" fill={T.pine} />,
     <>
       <circle cx="24" cy="24" r="16" />
       <path d="M24 13 V24 L31 29" />

@@ -23,7 +23,7 @@ export const styles: StyleMeta[] = [
     id: "dawn",
     name: "Dawn",
     keywords: ["Quiet", "Light", "Hopeful"],
-    swatches: ["#e6edeb", "#c3d6c4", "#8eaaa6", "#2c5868", "#22333a"],
+    swatches: ["#d5e5f0", "#b7cea5", "#79a8b8", "#2c5868", "#22333a"],
     page: "#e6edeb",
     ink: "#22333a",
   },

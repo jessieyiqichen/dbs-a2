@@ -26,10 +26,10 @@
   --color-dw-loch: #2c5868;      /* accent: the one primary action */
   --color-dw-loch-hover: #356677;
   --color-dw-loch-pressed: #244a58;
-  --color-dw-celadon: #c3d6c4;   /* tint plates: selected */
-  --color-dw-aqua: #c9dcdc;      /* tint plates: hover */
-  --color-dw-loch-tint: #8eaaa6; /* tint plates: pressed, chips */
-  --color-dw-stone: #a7b4b1;
+  --color-dw-sky: #d5e5f0;       /* tint plate: hover (a look) */
+  --color-dw-pine: #b7cea5;      /* tint plate: selected (chosen) */
+  --color-dw-lake: #79a8b8;      /* tint plate: pressed, best months */
+  --color-dw-heather: #bdb8d4;   /* tint plate: a fourth hue for chips and marks */
 }
 
 /* Dawn's loading plates: each tint plate slides into register, sky first (Toned.tsx). */

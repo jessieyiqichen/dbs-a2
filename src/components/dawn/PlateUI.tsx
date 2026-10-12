@@ -12,8 +12,8 @@ const focus = "focus-visible:outline focus-visible:outline-2 focus-visible:outli
 const slow = "transition-[box-shadow,background-color,text-shadow,translate] duration-[600ms] ease-[cubic-bezier(.45,0,.2,1)]";
 
 /** Primary: deep loch ink with its tint plate printed a little off. Hover: the plates come into register. */
-const primary = `${caps} bg-dw-loch px-5 py-3 text-dw-mount shadow-[3px_3px_0_0_var(--color-dw-loch-tint)] [text-shadow:1px_0.5px_0_rgba(195,214,196,.75)] ${slow} hover:bg-dw-loch-hover hover:shadow-[0_0_0_0_var(--color-dw-loch-tint)] hover:[text-shadow:0_0_0_rgba(195,214,196,0)] active:translate-y-px active:bg-dw-loch-pressed ${focus}`;
-const secondary = `${caps} border border-dw-ink bg-dw-mount px-5 py-3 text-dw-ink shadow-[3px_3px_0_0_var(--color-dw-celadon)] ${slow} hover:shadow-[0_0_0_0_var(--color-dw-celadon)] active:translate-y-px ${focus}`;
+const primary = `${caps} bg-dw-loch px-5 py-3 text-dw-mount shadow-[3px_3px_0_0_var(--color-dw-lake)] [text-shadow:1px_0.5px_0_rgba(195,214,196,.75)] ${slow} hover:bg-dw-loch-hover hover:shadow-[0_0_0_0_var(--color-dw-lake)] hover:[text-shadow:0_0_0_rgba(195,214,196,0)] active:translate-y-px active:bg-dw-loch-pressed ${focus}`;
+const secondary = `${caps} border border-dw-ink bg-dw-mount px-5 py-3 text-dw-ink shadow-[3px_3px_0_0_var(--color-dw-pine)] ${slow} hover:shadow-[0_0_0_0_var(--color-dw-pine)] active:translate-y-px ${focus}`;
 
 export function PlateButtons({ showStates = false }: { showStates?: boolean }) {
   if (!showStates) {
@@ -51,10 +51,10 @@ export function PlateButtons({ showStates = false }: { showStates?: boolean }) {
 /** Filters: printed labels, each its own tint plate. Chosen: the plate drops into register and the key line darkens. */
 export function PlateChips() {
   const chips = [
-    { t: "Lakes", tint: T.loch, on: true },
-    { t: "Huts", tint: T.stone },
-    { t: "Glaciers", tint: T.aqua },
-    { t: "Forest", tint: T.celadon, on: true },
+    { t: "Lakes", tint: T.lake, on: true },
+    { t: "Huts", tint: T.heather },
+    { t: "Glaciers", tint: T.sky },
+    { t: "Forest", tint: T.pine, on: true },
   ];
   return (
     <div className="flex flex-wrap gap-2.5">
@@ -98,7 +98,7 @@ export function EmbossStamp({ text = "Permit needed", uid = "dw-ring", className
           <textPath href={`#${uid}`}>{ring}</textPath>
         </text>
         <g transform="translate(36 34) scale(1)" fill="none" stroke={KEY} strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round">
-          <path d="M6 38 L20 16 L27 26 L33 19 L44 38 Z" fill={T.loch} fillOpacity=".35" />
+          <path d="M6 38 L20 16 L27 26 L33 19 L44 38 Z" fill={T.lake} fillOpacity=".35" />
           <path d="M16.5 22 L20 16 L23.5 21.5" />
         </g>
       </g>
@@ -147,7 +147,7 @@ export function PlateCard({ id, photo, plateNote }: { id: string; photo: string;
 
 /** Progress: one colour plate per day. Printed days are in register; today is still a touch off; the rest are not printed yet. */
 export function DayPlates({ day = 2, of = 4 }: { day?: number; of?: number }) {
-  const tints = [T.celadon, T.loch, T.aqua, T.stone];
+  const tints = [T.pine, T.lake, T.sky, T.heather];
   return (
     <div>
       <div className="flex gap-2">

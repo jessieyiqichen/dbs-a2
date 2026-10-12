@@ -18,9 +18,9 @@ export function Tick() {
   );
 }
 
-/** Selected, for every button: a celadon plate laid under in register, a key rule beneath, and a tick. */
-const selectedLook = "border-dw-ink bg-dw-celadon text-dw-ink shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]";
-const selectedLive = `active:translate-x-px active:translate-y-px active:bg-dw-loch-tint active:shadow-[inset_0_2px_4px_rgba(34,51,58,.45)] ${focusRing}`;
+/** Selected, for every button: a pine plate laid under in register, a key rule beneath, and a tick. */
+const selectedLook = "border-dw-ink bg-dw-pine text-dw-ink shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]";
+const selectedLive = `active:translate-x-px active:translate-y-px active:bg-dw-lake active:shadow-[inset_0_2px_4px_rgba(34,51,58,.45)] ${focusRing}`;
 
 /** `selected` makes a button a toggle (aria-pressed); `small` is for buttons that sit inside cards and panels. */
 type ButtonProps = Forceable & { selected?: boolean; small?: boolean } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className">;
@@ -28,14 +28,14 @@ const pad = (small?: boolean) => (small ? "px-3 py-2" : "px-5 py-3");
 
 const primaryBase = `${caps} relative inline-flex items-center border border-transparent ${slow}`;
 const primaryState: Record<ControlState, string> = {
-  rest: "bg-dw-loch text-dw-mount shadow-[3px_3px_0_0_var(--color-dw-loch-tint)]",
-  hover: "bg-dw-loch-hover text-dw-mount shadow-[0_0_0_0_var(--color-dw-loch-tint)]",
-  focus: `bg-dw-loch text-dw-mount shadow-[3px_3px_0_0_var(--color-dw-loch-tint)] ${focusForced}`,
+  rest: "bg-dw-loch text-dw-mount shadow-[3px_3px_0_0_var(--color-dw-lake)]",
+  hover: "bg-dw-loch-hover text-dw-mount shadow-[0_0_0_0_var(--color-dw-lake)]",
+  focus: `bg-dw-loch text-dw-mount shadow-[3px_3px_0_0_var(--color-dw-lake)] ${focusForced}`,
   pressed: "translate-x-px translate-y-px bg-dw-loch-pressed text-dw-mount shadow-[inset_0_2px_4px_rgba(0,0,0,.4)]",
   selected: selectedLook,
   disabled: "cursor-not-allowed !border-dashed !border-dw-muted bg-transparent text-dw-muted shadow-none",
 };
-const primaryLive = `hover:bg-dw-loch-hover hover:shadow-[0_0_0_0_var(--color-dw-loch-tint)] active:translate-x-px active:translate-y-px active:bg-dw-loch-pressed active:shadow-[inset_0_2px_4px_rgba(0,0,0,.4)] ${focusRing}`;
+const primaryLive = `hover:bg-dw-loch-hover hover:shadow-[0_0_0_0_var(--color-dw-lake)] active:translate-x-px active:translate-y-px active:bg-dw-loch-pressed active:shadow-[inset_0_2px_4px_rgba(0,0,0,.4)] ${focusRing}`;
 
 /** Primary: loch ink with its tint plate printed a little off. Hover brings it into register; press sinks it.
  *  As a toggle, once chosen it gives up the loch: the thing is done, so the accent is free for the next action. */
@@ -51,16 +51,16 @@ export function PrimaryButton({ force, selected, small, children = "See the walk
 
 const secondaryBase = `${caps} relative inline-flex items-center border ${slow}`;
 const secondaryState: Record<ControlState, string> = {
-  rest: "border-dw-ink bg-dw-mount text-dw-ink shadow-[3px_3px_0_0_var(--color-dw-celadon)]",
-  hover: "border-dw-ink bg-dw-celadon text-dw-ink shadow-[0_0_0_0_var(--color-dw-celadon)]",
-  focus: `border-dw-ink bg-dw-mount text-dw-ink shadow-[3px_3px_0_0_var(--color-dw-celadon)] ${focusForced}`,
-  pressed: "translate-x-px translate-y-px border-dw-ink bg-dw-loch-tint text-dw-ink shadow-[inset_0_2px_4px_rgba(34,51,58,.45)]",
+  rest: "border-dw-ink bg-dw-mount text-dw-ink shadow-[3px_3px_0_0_var(--color-dw-lake)]",
+  hover: "border-dw-ink bg-dw-sky text-dw-ink shadow-[0_0_0_0_var(--color-dw-lake)]",
+  focus: `border-dw-ink bg-dw-mount text-dw-ink shadow-[3px_3px_0_0_var(--color-dw-lake)] ${focusForced}`,
+  pressed: "translate-x-px translate-y-px border-dw-ink bg-dw-lake text-dw-ink shadow-[inset_0_2px_4px_rgba(34,51,58,.45)]",
   selected: selectedLook,
   disabled: "cursor-not-allowed border-dashed border-dw-muted bg-transparent text-dw-muted shadow-none",
 };
-const secondaryLive = `hover:bg-dw-celadon hover:shadow-[0_0_0_0_var(--color-dw-celadon)] active:translate-x-px active:translate-y-px active:bg-dw-loch-tint active:shadow-[inset_0_2px_4px_rgba(34,51,58,.45)] ${focusRing}`;
+const secondaryLive = `hover:bg-dw-sky hover:shadow-[0_0_0_0_var(--color-dw-lake)] active:translate-x-px active:translate-y-px active:bg-dw-lake active:shadow-[inset_0_2px_4px_rgba(34,51,58,.45)] ${focusRing}`;
 
-/** Secondary: key-ink outline on the mount, a celadon plate off register. */
+/** Secondary: key-ink outline on the mount, a pine plate off register. */
 export function SecondaryButton({ force, selected, small, children = "Later", ...rest }: ButtonProps) {
   if (force) return <span className={`${secondaryBase} ${pad(small)} ${secondaryState[force]}`}>{force === "selected" && <Tick />}{children}</span>;
   return (
@@ -81,14 +81,14 @@ const linkFace: Record<LinkSize, string> = {
   name: `${display} text-[20px] leading-[1.25] sm:text-[24px] sm:leading-[1.2]`,
 };
 const linkState: Record<ControlState, string> = {
-  rest: "decoration-dw-loch-tint underline-offset-[6px]",
+  rest: "decoration-dw-lake underline-offset-[6px]",
   hover: "decoration-dw-ink underline-offset-[3px]",
-  focus: `decoration-dw-loch-tint underline-offset-[6px] ${focusForced}`,
-  pressed: "bg-dw-aqua decoration-dw-ink underline-offset-[3px]",
+  focus: `decoration-dw-lake underline-offset-[6px] ${focusForced}`,
+  pressed: "bg-dw-lake decoration-dw-ink underline-offset-[3px]",
   selected: "",
   disabled: "",
 };
-const linkLive = `hover:decoration-dw-ink hover:underline-offset-[3px] active:bg-dw-aqua ${focusRing}`;
+const linkLive = `hover:decoration-dw-ink hover:underline-offset-[3px] active:bg-dw-lake ${focusRing}`;
 
 /** The link look, for things that act as links but aren't anchors (a <summary>). */
 export function plateLinkClass(size: LinkSize = "reading", force?: ControlState): string {
@@ -168,15 +168,15 @@ export function PlateCheck({ force, label = "Huts on the way", defaultChecked = 
   const checked = force === "selected" || (!force && defaultChecked);
   const disabled = force === "disabled";
   const box =
-    force === "hover" ? "!bg-dw-aqua border-dw-ink" :
-    force === "pressed" ? "translate-x-px translate-y-px !bg-dw-stone border-dw-ink shadow-[inset_0_2px_3px_rgba(34,51,58,.45)]" :
+    force === "hover" ? "!bg-dw-sky border-dw-ink" :
+    force === "pressed" ? "translate-x-px translate-y-px !bg-dw-lake border-dw-ink shadow-[inset_0_2px_3px_rgba(34,51,58,.45)]" :
     force === "focus" ? `border-dw-ink ${focusForced}` :
     disabled ? "border-dashed border-dw-muted" : "border-dw-ink";
   return (
     <label className={`group relative flex items-center gap-3 ${disabled ? "cursor-not-allowed" : "cursor-pointer"}`}>
       <input type="checkbox" className="peer sr-only" defaultChecked={checked} disabled={disabled} />
       <span
-        className={`relative grid h-5 w-5 shrink-0 place-items-center border-[1.5px] bg-dw-mount ${slow} peer-checked:!bg-dw-loch-tint peer-checked:[&_.tick]:opacity-100 ${box} ${force ? "" : "group-hover:bg-dw-aqua peer-active:translate-x-px peer-active:translate-y-px peer-active:bg-dw-stone dw-crop"} ${checked ? "bg-dw-loch-tint" : ""}`}
+        className={`relative grid h-5 w-5 shrink-0 place-items-center border-[1.5px] bg-dw-mount ${slow} peer-checked:!bg-dw-pine peer-checked:[&_.tick]:opacity-100 ${box} ${force ? "" : "group-hover:bg-dw-sky peer-active:translate-x-px peer-active:translate-y-px peer-active:bg-dw-lake dw-crop"} ${checked ? "bg-dw-pine" : ""}`}
       >
         <svg viewBox="0 0 16 16" className={`tick h-3.5 w-3.5 transition-opacity duration-300 ${checked ? "opacity-100" : "opacity-0"}`} aria-hidden="true">
           <path d="M2.5 8.5 L6.5 12 L13.5 3.5" fill="none" stroke={DW.text} strokeWidth="2" strokeLinecap="square" />
@@ -195,7 +195,7 @@ export function PlateRadio({ name, options, defaultValue }: { name: string; opti
       {options.map((o) => (
         <label key={o} className="group relative flex cursor-pointer items-center gap-2.5">
           <input type="radio" name={name} value={o} defaultChecked={o === defaultValue} className="peer sr-only" />
-          <span className={`relative grid h-5 w-5 place-items-center rounded-full border-[1.5px] border-dw-ink bg-dw-mount ${slow} group-hover:bg-dw-aqua peer-active:translate-y-px peer-active:bg-dw-stone peer-checked:[&_.dot]:scale-100 dw-crop`}>
+          <span className={`relative grid h-5 w-5 place-items-center rounded-full border-[1.5px] border-dw-ink bg-dw-mount ${slow} group-hover:bg-dw-sky peer-active:translate-y-px peer-active:bg-dw-lake peer-checked:[&_.dot]:scale-100 dw-crop`}>
             <span className={`dot h-2.5 w-2.5 scale-0 rounded-full bg-dw-ink ${slow}`} />
           </span>
           <span className={`${ui} text-base text-dw-ink`}>{o}</span>
@@ -208,8 +208,8 @@ export function PlateRadio({ name, options, defaultValue }: { name: string; opti
 /** One radio option in a forced state, for the grid. */
 export function RadioSwatch({ force, label = "A few days" }: { force: ControlState; label?: string }) {
   const ring =
-    force === "hover" ? "!bg-dw-aqua" :
-    force === "pressed" ? "translate-y-px !bg-dw-stone shadow-[inset_0_2px_3px_rgba(34,51,58,.45)]" :
+    force === "hover" ? "!bg-dw-sky" :
+    force === "pressed" ? "translate-y-px !bg-dw-lake shadow-[inset_0_2px_3px_rgba(34,51,58,.45)]" :
     force === "focus" ? focusForced :
     force === "disabled" ? "border-dashed !border-dw-muted" : "";
   return (
@@ -227,7 +227,7 @@ export function RadioSwatch({ force, label = "A few days" }: { force: ControlSta
 /** Count badge: a number set in a small key-line box, like a plate number. */
 export function CountBadge({ n, small = false }: { n: number; small?: boolean }) {
   if (small) return <span className={`${display} inline-grid h-5 min-w-5 place-items-center border border-dw-ink bg-dw-mount px-1 text-[14px] leading-none tracking-normal text-dw-ink`}>{n}</span>;
-  return <span className={`${display} inline-grid h-8 min-w-8 place-items-center border border-dw-ink bg-dw-mount px-1.5 text-[17px] leading-none text-dw-ink shadow-[2px_2px_0_0_var(--color-dw-aqua)]`}>{n}</span>;
+  return <span className={`${display} inline-grid h-8 min-w-8 place-items-center border border-dw-ink bg-dw-mount px-1.5 text-[17px] leading-none text-dw-ink shadow-[2px_2px_0_0_var(--color-dw-lake)]`}>{n}</span>;
 }
 
 /** Search: "No." then the field, as in a print catalogue. */

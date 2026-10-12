@@ -9,10 +9,11 @@ export const DW = {
   accent: "#2c5868", // loch: the one primary action
   accentHover: "#356677",
   accentPressed: "#244a58",
-  celadon: "#c3d6c4",
-  aqua: "#c9dcdc",
-  loch: "#8eaaa6",
-  stone: "#a7b4b1",
+  // tint plates, each a clearly different hue so states read apart: sky = hover, pine = selected, lake = pressed and best
+  pine: "#b7cea5",
+  sky: "#d5e5f0",
+  lake: "#79a8b8",
+  heather: "#bdb8d4",
 } as const;
 
 export const display = "font-[family-name:var(--dw-display)]";
@@ -23,21 +24,21 @@ export const caps = `${ui} whitespace-nowrap text-xs font-semibold uppercase tra
 export const focusRing = "dw-crop focus-visible:outline-none";
 export const focusForced = "dw-crop is-focus";
 export const slow = "transition duration-[600ms] ease-[cubic-bezier(.45,0,.2,1)]";
-/** Cards and plates (anything that is a print you can choose): rest lies flat on the page; hover lifts an aqua plate
- *  off register and brings the colour up; pressed sinks, ink pressed in; selected lays a celadon plate under, in
+/** Cards and plates (anything that is a print you can choose): rest lies flat on the page; hover lifts an sky plate
+ *  off register and brings the colour up; pressed sinks, ink pressed in; selected lays a pine plate under, in
  *  register, with a key rule beneath. The same words as every other Dawn control. */
 export const card = {
   rest: "bg-dw-mount shadow-[0_1px_0_rgba(34,51,58,.15)]",
-  hover: "bg-dw-mount shadow-[4px_4px_0_0_var(--color-dw-aqua)]",
+  hover: "bg-dw-mount shadow-[4px_4px_0_0_var(--color-dw-lake)]",
   focus: "bg-dw-mount shadow-[0_1px_0_rgba(34,51,58,.15)] dw-crop is-focus",
   pressed: "bg-dw-mount translate-y-px shadow-[inset_0_2px_4px_rgba(34,51,58,.2)]",
-  selected: "bg-dw-celadon shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]",
+  selected: "bg-dw-pine shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]",
   disabled: "",
 } as const;
 /** Live card states on the element itself. */
-export const cardLive = `relative ${slow} hover:shadow-[4px_4px_0_0_var(--color-dw-aqua)] active:translate-y-px active:shadow-[inset_0_2px_4px_rgba(34,51,58,.2)] dw-crop focus-visible:outline-none`;
+export const cardLive = `relative ${slow} hover:shadow-[4px_4px_0_0_var(--color-dw-lake)] active:translate-y-px active:shadow-[inset_0_2px_4px_rgba(34,51,58,.2)] dw-crop focus-visible:outline-none`;
 /** Live card states on a mount whose link sits inside it. */
-export const cardLiveHas = `${slow} has-[a:hover]:shadow-[4px_4px_0_0_var(--color-dw-aqua)] has-[a:active]:translate-y-px has-[a:active]:shadow-[inset_0_2px_4px_rgba(34,51,58,.2)]`;
+export const cardLiveHas = `${slow} has-[a:hover]:shadow-[4px_4px_0_0_var(--color-dw-lake)] has-[a:active]:translate-y-px has-[a:active]:shadow-[inset_0_2px_4px_rgba(34,51,58,.2)]`;
 /** The print inside a card brings its colour up when the card is hovered. */
 export const colourUp = `${slow} group-hover:saturate-[1.25]`;
 

@@ -26,7 +26,7 @@ export function TintTabs({ tabs = ["Overview", "Route", "When to go"] }: { tabs?
             <span
               aria-hidden="true"
               className="absolute inset-x-0 bottom-0 top-1"
-              style={{ background: T.celadon, transform: on ? "translate(3px, -3px)" : "translate(3px, 6px)", opacity: on ? 1 : 0, transition: `opacity 600ms ${ease}, transform 600ms ${ease}` }}
+              style={{ background: T.pine, transform: on ? "translate(3px, -3px)" : "translate(3px, 6px)", opacity: on ? 1 : 0, transition: `opacity 600ms ${ease}, transform 600ms ${ease}` }}
             />
             <span className="relative">{t}</span>
             <span aria-hidden="true" className="absolute inset-x-0 -bottom-px h-[3px] bg-dw-ink" style={{ transform: `scaleX(${on ? 1 : 0})`, transition: `transform 600ms ${ease}` }} />
@@ -46,11 +46,11 @@ export function ColourToggle({ label, initial = false }: { label: string; initia
     <button type="button" role="switch" aria-checked={on} onClick={() => setOn(!on)} className={`group flex items-center gap-3 text-left ${focus}`}>
       <span
         className="relative block h-[26px] w-[50px] shrink-0 border-[1.5px] border-dw-ink"
-        style={{ background: on ? T.loch : "var(--color-dw-mount)", transition: move }}
+        style={{ background: on ? T.lake : "var(--color-dw-mount)", transition: move }}
       >
         <span
           className="absolute top-[3px] h-[17px] w-[17px] border-[1.5px] border-dw-ink bg-dw-mount"
-          style={{ left: on ? "calc(100% - 20px)" : "3px", boxShadow: on ? `0 0 0 0 ${T.loch}` : `3px 3px 0 0 ${T.loch}`, transition: move }}
+          style={{ left: on ? "calc(100% - 20px)" : "3px", boxShadow: on ? `0 0 0 0 ${T.lake}` : `3px 3px 0 0 ${T.lake}`, transition: move }}
         />
       </span>
       <span className={`${ui} text-[15px] ${on ? "text-dw-ink" : "text-dw-muted"}`}>{label}</span>

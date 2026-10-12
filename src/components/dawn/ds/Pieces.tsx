@@ -21,7 +21,7 @@ export function Caption({ h }: { h: Hike }) {
 }
 
 /** Card: a mounted print. The print and its caption are one link; `footer` (a small button) sits under it, outside
- *  the link. Hover lifts an aqua plate and brings the colour up; press sinks the mount. */
+ *  the link. Hover lifts an sky plate and brings the colour up; press sinks the mount. */
 export function PrintCard({ id, photo, href = "#card", footer, sizes = "(min-width: 1024px) 360px, (min-width: 640px) 50vw, 120px" }: { id: string; photo: TrailPhoto; href?: string; footer?: React.ReactNode; sizes?: string }) {
   const h = byId(id);
   // On a phone the print sits beside its caption, so a screen shows several walks; from 640px it stands above it.
@@ -29,7 +29,7 @@ export function PrintCard({ id, photo, href = "#card", footer, sizes = "(min-wid
     <>
       <TonedPhoto photo={photo} sizes={sizes} className={`row-span-3 aspect-[4/3] self-start border-2 border-dw-ink sm:border-[3px] ${colourUp}`} />
       <span className={`${t12caption} block text-dw-muted sm:mt-4`}>{no(h)}. {h.country.join(", ")}</span>
-      <span id={`${h.id}-card`} className={`${t24} mt-1 block decoration-dw-loch-tint decoration-2 underline-offset-4 group-hover:underline`}>{h.name}</span>
+      <span id={`${h.id}-card`} className={`${t24} mt-1 block decoration-dw-lake decoration-2 underline-offset-4 group-hover:underline`}>{h.name}</span>
       <span className={`${t14} mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-dw-muted`}>
         {/* each figure with its icon, kept whole when the line wraps */}
         {([[FACT_ICON.distance, `${formatRange(h.distance_km)} km`], [FACT_ICON.days, `${formatRange(h.days)} ${h.days[1] === 1 ? "day" : "days"}`], [FACT_ICON.high, elevation(h)]] as const).map(([icon, x]) => (
@@ -63,10 +63,10 @@ export function CardSwatch({ force }: { force: ControlState }) {
 
 const rowState: Record<ControlState, string> = {
   rest: "",
-  hover: "bg-dw-aqua",
+  hover: "bg-dw-sky",
   focus: focusForced,
-  pressed: "bg-dw-loch-tint/60 shadow-[inset_0_2px_3px_rgba(34,51,58,.25)]",
-  selected: "bg-dw-celadon shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]",
+  pressed: "bg-dw-lake/60 shadow-[inset_0_2px_3px_rgba(34,51,58,.25)]",
+  selected: "bg-dw-pine shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]",
   disabled: "cursor-not-allowed text-dw-muted",
 };
 
@@ -75,7 +75,7 @@ export function CatalogueRow({ id, force, note, compact = false, href = "#rows",
   const h = byId(id);
   const state = force ?? "rest";
   const disabled = state === "disabled";
-  const cls = `relative flex min-w-0 items-baseline border-b border-dw-ink/20 ${compact ? "gap-1.5 px-1.5" : "gap-3 px-3"} py-2.5 ${slow} ${rowState[state]} ${force ? "" : `hover:bg-dw-aqua active:bg-dw-loch-tint/60 active:shadow-[inset_0_2px_3px_rgba(34,51,58,.25)] ${focusRing}`}`;
+  const cls = `relative flex min-w-0 items-baseline border-b border-dw-ink/20 ${compact ? "gap-1.5 px-1.5" : "gap-3 px-3"} py-2.5 ${slow} ${rowState[state]} ${force ? "" : `hover:bg-dw-sky active:bg-dw-lake/60 active:shadow-[inset_0_2px_3px_rgba(34,51,58,.25)] ${focusRing}`}`;
   const body = (
     <>
       {!compact && <span className={`${display} w-14 shrink-0 text-sm text-dw-muted`}>{no(h)}</span>}
@@ -101,7 +101,7 @@ export function DetailPanel({ id }: { id: string }) {
     ["Best months", h.best_months.join(", ")],
   ];
   return (
-    <div role="dialog" aria-modal="false" aria-labelledby="dw-detail-title" className="relative bg-dw-mount p-5 shadow-[6px_6px_0_0_var(--color-dw-aqua)]">
+    <div role="dialog" aria-modal="false" aria-labelledby="dw-detail-title" className="relative bg-dw-mount p-5 shadow-[6px_6px_0_0_var(--color-dw-lake)]">
       <span className="absolute right-4 top-4"><SecondaryButton small>Close</SecondaryButton></span>
       <Caption h={h} />
       <h3 id="dw-detail-title" className={`${display} mt-1 text-4xl leading-tight text-dw-ink`}>{h.name}</h3>
@@ -154,13 +154,13 @@ export function UIStates() {
         </div>
       </StateCard>
       <StateCard title="Error">
-        <span className={`${display} grid h-12 w-12 place-items-center border-[1.5px] border-dw-ink bg-dw-stone text-2xl text-dw-ink shadow-[3px_3px_0_0_var(--color-dw-ink)]`}>!</span>
+        <span className={`${display} grid h-12 w-12 place-items-center border-[1.5px] border-dw-ink bg-dw-heather text-2xl text-dw-ink shadow-[3px_3px_0_0_var(--color-dw-ink)]`}>!</span>
         <p className={`${display} text-2xl text-dw-ink`}>This print didn&apos;t come through</p>
         <p className={`${ui} text-sm text-dw-muted`}>The page didn&apos;t load. Check your connection and try again.</p>
         <SecondaryButton>Try again</SecondaryButton>
       </StateCard>
       <StateCard title="Success">
-        <span className="grid h-12 w-12 place-items-center border-[1.5px] border-dw-ink bg-dw-loch-tint">
+        <span className="grid h-12 w-12 place-items-center border-[1.5px] border-dw-ink bg-dw-lake">
           <svg viewBox="0 0 16 16" className="h-6 w-6" aria-hidden="true"><path d="M2.5 8.5 L6.5 12 L13.5 3.5" fill="none" stroke={DW.text} strokeWidth="2" strokeLinecap="square" /></svg>
         </span>
         <p className={`${display} text-2xl text-dw-ink`}>Added to your list</p>

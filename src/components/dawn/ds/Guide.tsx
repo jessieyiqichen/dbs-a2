@@ -54,15 +54,15 @@ export function routeNodes(h: Pick<Hike, "start" | "end" | "route">, route: Rout
   ];
 }
 
-/** A stop on the route map. Rest: the mount with a celadon plate off register; hover: an aqua plate in register;
- *  pressed: sinks; selected: a celadon plate in register with a key rule beneath. Ends are round. */
+/** A stop on the route map. Rest: the mount with a pine plate off register; hover: an sky plate in register;
+ *  pressed: sinks; selected: a pine plate in register with a key rule beneath. Ends are round. */
 export const stopBase = "relative grid h-10 w-10 shrink-0 place-items-center border-[1.5px] border-dw-ink";
 export const stopState: Record<ControlState, string> = {
-  rest: "bg-dw-mount shadow-[2px_2px_0_0_var(--color-dw-celadon)]",
-  hover: "bg-dw-aqua shadow-none",
-  focus: "bg-dw-mount shadow-[2px_2px_0_0_var(--color-dw-celadon)] dw-crop is-focus",
-  pressed: "translate-y-px bg-dw-loch-tint shadow-[inset_0_2px_4px_rgba(34,51,58,.45)]",
-  selected: "bg-dw-celadon shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]",
+  rest: "bg-dw-mount shadow-[2px_2px_0_0_var(--color-dw-lake)]",
+  hover: "bg-dw-sky shadow-none",
+  focus: "bg-dw-mount shadow-[2px_2px_0_0_var(--color-dw-lake)] dw-crop is-focus",
+  pressed: "translate-y-px bg-dw-lake shadow-[inset_0_2px_4px_rgba(34,51,58,.45)]",
+  selected: "bg-dw-pine shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]",
   disabled: "",
 };
 
@@ -74,8 +74,8 @@ export function StopSwatch({ force }: { force: ControlState }) {
 /** Each month is a small plate. Best: the deepest tint, printed, with a key rule beneath. Possible: a pale wash.
  *  Closed or not advised: left unprinted, a dashed outline, the same mark as a disabled control. */
 const LEVEL: Record<Level, { label: string; look: string }> = {
-  best: { label: "Best", look: "border-dw-ink bg-dw-loch-tint text-dw-ink shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]" },
-  possible: { label: "Possible", look: "border-dw-border bg-dw-aqua text-dw-ink" },
+  best: { label: "Best", look: "border-dw-ink bg-dw-lake text-dw-ink shadow-[inset_0_-3px_0_0_var(--color-dw-ink)]" },
+  possible: { label: "Possible", look: "border-dw-border bg-dw-sky text-dw-ink" },
   closed: { label: "Closed or not advised", look: "border-dashed border-dw-border bg-transparent text-dw-muted" },
 };
 
@@ -145,7 +145,7 @@ export function HeroPlate({ photo, count, onOpen, label, priority = false }: { p
   return (
     <button type="button" onClick={onOpen} aria-label={label} className={`group block w-full text-left sm:p-3.5 ${card.rest} ${cardLive}`}>
       <TonedPhoto photo={photo} sizes="(min-width: 1024px) 660px, 100vw" priority={priority} className={`aspect-[3/2] sm:aspect-[4/3] sm:border-[3px] sm:border-dw-ink ${colourUp}`} />
-      <span className={`${t12} absolute bottom-3 right-3 flex items-center gap-1.5 border sm:bottom-7 sm:right-7 border-dw-ink bg-dw-mount px-3 py-2 transition-colors duration-[600ms] group-hover:bg-dw-celadon`}><PlateIcon name="camera" size={20} />{count} plates →</span>
+      <span className={`${t12} absolute bottom-3 right-3 flex items-center gap-1.5 border sm:bottom-7 sm:right-7 border-dw-ink bg-dw-mount px-3 py-2 transition-colors duration-[600ms] group-hover:bg-dw-pine`}><PlateIcon name="camera" size={20} />{count} plates →</span>
     </button>
   );
 }
@@ -157,7 +157,7 @@ export function NeighbourLink({ href, label, name, photo }: { href: string; labe
       <TonedPhoto photo={photo} sizes="120px" className={`aspect-[4/3] w-full shrink-0 border-2 border-dw-ink sm:w-28 ${colourUp}`} />
       <span className="min-w-0">
         <span className={`${t12} block text-dw-muted`}>{label}</span>
-        <span className={`${t24} mt-1 block decoration-dw-loch-tint decoration-2 underline-offset-4 group-hover:underline`}>{name}</span>
+        <span className={`${t24} mt-1 block decoration-dw-lake decoration-2 underline-offset-4 group-hover:underline`}>{name}</span>
       </span>
     </>
   );

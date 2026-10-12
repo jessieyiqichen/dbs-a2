@@ -1,5 +1,5 @@
 "use client";
-// The plates viewer: every photograph of one walk, large, in route order. The chosen plate is selected (a celadon
+// The plates viewer: every photograph of one walk, large, in route order. The chosen plate is selected (a pine
 // plate in register); arrow keys move between plates. As a dialog, Esc, Close or a click outside closes it.
 import { useEffect, useRef, useState } from "react";
 import { TonedPhoto, creditLine, type TrailPhoto } from "../Toned";
@@ -60,7 +60,7 @@ export function PlatesViewer({ photos, at, title, labelledBy, onClose }: { photo
       onClose={onClose}
       onClick={(e) => e.target === ref.current && ref.current?.close()}
       aria-labelledby={labelledBy}
-      className="m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-6xl overflow-y-auto bg-dw-mount p-0 text-dw-ink shadow-[8px_8px_0_0_var(--color-dw-aqua)] backdrop:bg-dw-ink/60"
+      className="m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-6xl overflow-y-auto bg-dw-mount p-0 text-dw-ink shadow-[8px_8px_0_0_var(--color-dw-lake)] backdrop:bg-dw-ink/60"
     >
       {at !== null && (
         <div key={at} className="relative p-5 pt-16 sm:p-7 sm:pt-16">
@@ -88,7 +88,7 @@ export function SidePanel({ open, onClose, title, titleId, children }: { open: b
       onClose={onClose}
       onClick={(e) => e.target === ref.current && ref.current?.close()}
       aria-labelledby={titleId}
-      className="m-0 ml-auto h-dvh max-h-dvh w-full max-w-full overflow-y-auto bg-dw-mount p-0 text-dw-ink shadow-[-8px_0_0_0_var(--color-dw-aqua)] backdrop:bg-dw-ink/45 sm:w-[min(440px,100%)] motion-safe:animate-[dw-drawer-in_.45s_cubic-bezier(.45,0,.2,1)]"
+      className="m-0 ml-auto h-dvh max-h-dvh w-full max-w-full overflow-y-auto bg-dw-mount p-0 text-dw-ink shadow-[-8px_0_0_0_var(--color-dw-lake)] backdrop:bg-dw-ink/45 sm:w-[min(440px,100%)] motion-safe:animate-[dw-drawer-in_.45s_cubic-bezier(.45,0,.2,1)]"
     >
       <div className="p-5 sm:p-6">
         <div className="flex items-start justify-between gap-4">

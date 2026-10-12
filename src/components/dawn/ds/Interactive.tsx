@@ -10,12 +10,12 @@ import { t12, t14, t24 } from "./type";
 
 /* ---------- tabs ---------- */
 
-/** One tab in a forced state. Selected: a celadon plate under the label, a key rule beneath, in register. */
+/** One tab in a forced state. Selected: a pine plate under the label, a key rule beneath, in register. */
 export function TabSwatch({ force, label = "Route" }: { force: ControlState; label?: string }) {
   const plate =
-    force === "selected" ? { bg: DW.celadon, t: "translate(0,0)", o: 1 } :
-    force === "hover" ? { bg: DW.aqua, t: "translate(0,0)", o: 1 } :
-    force === "pressed" ? { bg: DW.loch, t: "translate(0,0)", o: 0.6 } : null;
+    force === "selected" ? { bg: DW.pine, t: "translate(0,0)", o: 1 } :
+    force === "hover" ? { bg: DW.sky, t: "translate(0,0)", o: 1 } :
+    force === "pressed" ? { bg: DW.lake, t: "translate(0,0)", o: 0.6 } : null;
   return (
     <span className={`relative inline-block px-3 pb-2 pt-2.5 ${ui} text-sm ${force === "selected" ? "font-semibold text-dw-ink" : force === "disabled" ? "text-dw-muted line-through" : "text-dw-ink"} ${force === "focus" ? focusForced : ""} ${force === "pressed" ? "translate-y-px" : ""}`}>
       {plate && <span aria-hidden="true" className="absolute inset-x-0 bottom-0 top-1" style={{ background: plate.bg, opacity: plate.o, transform: plate.t }} />}
@@ -26,7 +26,7 @@ export function TabSwatch({ force, label = "Route" }: { force: ControlState; lab
   );
 }
 
-/** Tabs: the chosen one gets a celadon plate laid under it and a key rule. Arrow keys move between tabs. */
+/** Tabs: the chosen one gets a pine plate laid under it and a key rule. Arrow keys move between tabs. */
 export function PlateTabs({ tabs, panels, idPrefix = "dw", panelClassName }: { tabs: string[]; panels: React.ReactNode[]; idPrefix?: string; panelClassName?: string }) {
   const [at, setAt] = useState(0);
   return (
@@ -52,7 +52,7 @@ export function PlateTabs({ tabs, panels, idPrefix = "dw", panelClassName }: { t
               }}
               className={`group relative whitespace-nowrap px-3 pb-2 pt-2.5 ${ui} text-sm ${on ? "font-semibold text-dw-ink" : "text-dw-ink"} active:translate-y-px ${focusRing}`}
             >
-              <span aria-hidden="true" className={`absolute inset-x-0 bottom-0 top-1 ${slow} ${on ? "translate-x-0 translate-y-0 bg-dw-celadon opacity-100" : "translate-x-[3px] translate-y-[6px] bg-dw-aqua opacity-0 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-active:bg-dw-loch-tint/60"}`} />
+              <span aria-hidden="true" className={`absolute inset-x-0 bottom-0 top-1 ${slow} ${on ? "translate-x-0 translate-y-0 bg-dw-pine opacity-100" : "translate-x-[3px] translate-y-[6px] bg-dw-sky opacity-0 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-active:bg-dw-lake/60"}`} />
               <span className="relative">{t}</span>
               <span aria-hidden="true" className={`absolute inset-x-0 -bottom-px h-[3px] bg-dw-ink ${slow} ${on ? "scale-x-100" : "scale-x-0"}`} />
             </button>
@@ -78,7 +78,7 @@ const chipState: Record<ControlState, string> = {
 };
 const chipBase = `${ui} relative inline-block border px-3 py-1.5 text-sm ${slow}`;
 
-export function ChipSwatch({ force, label = "Lakes", tint = DW.loch }: { force: ControlState; label?: string; tint?: string }) {
+export function ChipSwatch({ force, label = "Lakes", tint = DW.lake }: { force: ControlState; label?: string; tint?: string }) {
   return (
     <span className={`${chipBase} ${chipState[force]}`} style={{ "--tint": tint } as React.CSSProperties}>
       {force === "selected" && <Tick />}
@@ -123,11 +123,11 @@ export function PlateToggle({ label, icon, initial = false, force, checked, onCh
   const on = force ? force === "selected" : (checked ?? live);
   const disabled = force === "disabled";
   const move = "left 600ms cubic-bezier(.45,0,.2,1), box-shadow 600ms cubic-bezier(.45,0,.2,1), background-color 600ms cubic-bezier(.45,0,.2,1)";
-  const knobShadow = on || force === "hover" ? `0 0 0 0 ${DW.loch}` : force === "pressed" ? `inset 0 1px 2px rgba(34,51,58,.4)` : `3px 3px 0 0 ${DW.loch}`;
+  const knobShadow = on || force === "hover" ? `0 0 0 0 ${DW.lake}` : force === "pressed" ? `inset 0 1px 2px rgba(34,51,58,.4)` : `3px 3px 0 0 ${DW.lake}`;
   const track = (
     <span
-      className={`relative block h-[26px] w-[50px] shrink-0 border-[1.5px] ${disabled ? "border-dashed border-dw-muted" : "border-dw-ink"} ${force ? "" : "group-hover:!bg-dw-aqua group-active:!bg-dw-stone dw-crop"} ${on && !force ? "group-hover:!bg-dw-loch-tint" : ""} ${force === "focus" ? focusForced : ""}`}
-      style={{ background: on ? DW.loch : force === "pressed" ? DW.stone : force === "hover" ? DW.aqua : DW.surface, transition: move }}
+      className={`relative block h-[26px] w-[50px] shrink-0 border-[1.5px] ${disabled ? "border-dashed border-dw-muted" : "border-dw-ink"} ${force ? "" : "group-hover:!bg-dw-sky group-active:!bg-dw-lake dw-crop"} ${on && !force ? "group-hover:!bg-dw-pine" : ""} ${force === "focus" ? focusForced : ""}`}
+      style={{ background: on ? DW.pine : force === "pressed" ? DW.lake : force === "hover" ? DW.sky : DW.surface, transition: move }}
     >
       <span
         className={`absolute top-[3px] h-[17px] w-[17px] border-[1.5px] bg-dw-mount ${disabled ? "border-dashed border-dw-muted" : "border-dw-ink"} ${force ? "" : "group-hover:!shadow-none group-active:translate-y-px"}`}
@@ -181,7 +181,7 @@ export function RouteMap({ nodes, idPrefix }: { nodes: RouteNode[]; idPrefix: st
               aria-pressed={i === at}
               aria-label={`${i + 1} of ${nodes.length}: ${s.name} (${s.label})`}
               onClick={() => setAt(i)}
-              className={`${stopBase} ${s.end ? "rounded-full" : ""} ${slow} ${i === at ? stopState.selected : `${stopState.rest} hover:bg-dw-aqua hover:shadow-none`} active:translate-y-px active:bg-dw-loch-tint active:shadow-[inset_0_2px_4px_rgba(34,51,58,.45)] ${focusRing}`}
+              className={`${stopBase} ${s.end ? "rounded-full" : ""} ${slow} ${i === at ? stopState.selected : `${stopState.rest} hover:bg-dw-sky hover:shadow-none`} active:translate-y-px active:bg-dw-lake active:shadow-[inset_0_2px_4px_rgba(34,51,58,.45)] ${focusRing}`}
             >
               <PlateIcon name={s.icon} size={28} />
             </button>

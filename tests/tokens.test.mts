@@ -12,7 +12,7 @@ test("every Dawn colour in tokens.ts equals its @theme token", () => {
   const pairs: [string, string][] = [
     ["page", "page"], ["surface", "mount"], ["text", "ink"], ["muted", "muted"], ["border", "border"],
     ["accent", "loch"], ["accentHover", "loch-hover"], ["accentPressed", "loch-pressed"],
-    ["celadon", "celadon"], ["aqua", "aqua"], ["loch", "loch-tint"], ["stone", "stone"],
+    ["pine", "pine"], ["sky", "sky"], ["lake", "lake"], ["heather", "heather"],
   ];
   for (const [key, name] of pairs) {
     assert.ok(mirror(key), `tokens.ts has ${key}`);

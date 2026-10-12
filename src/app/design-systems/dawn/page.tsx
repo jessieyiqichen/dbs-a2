@@ -61,7 +61,7 @@ const ROLES = [
   { role: "Muted text", hex: DW.muted, use: "Captions, meta, placeholders", checks: [["on background", DW.muted, DW.page], ["on surface", DW.muted, DW.surface]] },
   { role: "Border", hex: DW.border, use: "Field and control edges", checks: [["on background (3:1 needed)", DW.border, DW.page]] },
   { role: "Accent", hex: DW.accent, use: "Loch, for the one primary action", checks: [["mount text on it", DW.surface, DW.accent]] },
-  { role: "Tints", hex: DW.celadon, use: "Celadon, aqua, loch, stone: plates only, key ink on top", checks: [["key ink on celadon", DW.text, DW.celadon], ["key ink on loch", DW.text, DW.loch]] },
+  { role: "Tints", hex: DW.pine, use: "Sky (hover), pine (selected), lake (pressed, best), heather: plates only, key ink on top", checks: [["key ink on pine", DW.text, DW.pine], ["key ink on lake", DW.text, DW.lake]] },
 ] satisfies { role: string; hex: string; use: string; checks: [string, string, string][] }[];
 
 function ColourRoles() {
@@ -71,13 +71,13 @@ function ColourRoles() {
         <div key={r.role} className="bg-dw-mount p-3">
           {r.role === "Tints" ? (
             <div className="grid h-12 grid-cols-4 border border-dw-ink sm:h-20">
-              {[DW.celadon, DW.aqua, DW.loch, DW.stone].map((c) => <span key={c} style={{ background: c }} />)}
+              {[DW.pine, DW.sky, DW.lake, DW.heather].map((c) => <span key={c} style={{ background: c }} />)}
             </div>
           ) : (
-            <div className="h-12 border border-dw-ink shadow-[3px_3px_0_0_var(--color-dw-aqua)] sm:h-20" style={{ background: r.hex }} />
+            <div className="h-12 border border-dw-ink shadow-[3px_3px_0_0_var(--color-dw-sky)] sm:h-20" style={{ background: r.hex }} />
           )}
           <p className={`${display} mt-3 text-xl leading-none`}>{r.role}</p>
-          <p className={`${ui} mt-1 text-xs text-dw-muted`}>{r.role === "Tints" ? `${DW.celadon} ${DW.aqua} ${DW.loch} ${DW.stone}` : r.hex} · {r.use}</p>
+          <p className={`${ui} mt-1 text-xs text-dw-muted`}>{r.role === "Tints" ? `${DW.pine} ${DW.sky} ${DW.lake} ${DW.heather}` : r.hex} · {r.use}</p>
           {r.checks.map(([label, fg, bg]) => (
             <p key={label} className={`${ui} text-xs`}>
               <span className="font-semibold">{ratio(fg, bg)}</span> <span className="text-dw-muted">{label}</span>
@@ -131,7 +131,7 @@ function SpacingShape() {
         <div className="flex flex-wrap items-end gap-4">
           {[4, 8, 12, 16, 24, 32, 48].map((s) => (
             <div key={s} className="text-center">
-              <div className="border border-dw-ink bg-dw-aqua" style={{ width: s, height: s }} />
+              <div className="border border-dw-ink bg-dw-sky" style={{ width: s, height: s }} />
               <p className={note}>{s}</p>
             </div>
           ))}
@@ -152,9 +152,9 @@ function SpacingShape() {
       </Block>
       <Block title="Shadow" note="No soft shadows. Depth is a tint plate printed off register.">
         <div className="flex flex-wrap gap-8">
-          <div><div className="h-16 w-28 border border-dw-ink bg-dw-mount shadow-[3px_3px_0_0_var(--color-dw-loch-tint)]" /><p className={note}>Rest · plate 3px off</p></div>
+          <div><div className="h-16 w-28 border border-dw-ink bg-dw-mount shadow-[3px_3px_0_0_var(--color-dw-lake)]" /><p className={note}>Rest · plate 3px off</p></div>
           <div><div className="h-16 w-28 border border-dw-ink bg-dw-mount" /><p className={note}>Hover · in register</p></div>
-          <div><div className="h-16 w-28 border border-dw-ink bg-dw-aqua shadow-[inset_0_2px_4px_rgba(34,51,58,.3)]" /><p className={note}>Pressed · ink pressed in</p></div>
+          <div><div className="h-16 w-28 border border-dw-ink bg-dw-sky shadow-[inset_0_2px_4px_rgba(34,51,58,.3)]" /><p className={note}>Pressed · ink pressed in</p></div>
         </div>
       </Block>
     </div>
@@ -247,11 +247,11 @@ function Components() {
       <Block title="Filter chips" note="Each has its own tint plate. Tap to print it solid.">
         <PlateChips
           options={[
-            { label: "Lakes", tint: DW.loch, on: true },
-            { label: "Huts", tint: DW.stone },
-            { label: "Glaciers", tint: DW.aqua },
-            { label: "Forest", tint: DW.celadon, on: true },
-            { label: "Oceania", tint: DW.aqua },
+            { label: "Lakes", tint: DW.lake, on: true },
+            { label: "Huts", tint: DW.heather },
+            { label: "Glaciers", tint: DW.sky },
+            { label: "Forest", tint: DW.pine, on: true },
+            { label: "Oceania", tint: DW.sky },
           ]}
         />
       </Block>
@@ -261,7 +261,7 @@ function Components() {
       <Block title="Badges">
         <div className="flex flex-wrap items-center gap-6">
           <div className="[&_svg]:h-24 [&_svg]:w-24"><EmbossStamp /></div>
-          <span className={`${caps} border border-dw-ink bg-dw-celadon px-2.5 py-1 text-dw-ink`}>Great Walk</span>
+          <span className={`${caps} border border-dw-ink bg-dw-pine px-2.5 py-1 text-dw-ink`}>Great Walk</span>
           <span className="flex items-center gap-2"><CountBadge n={12} /><span className={`${ui} text-sm text-dw-muted`}>trails</span></span>
         </div>
       </Block>
@@ -269,7 +269,7 @@ function Components() {
         <div className="max-w-sm"><CardDemo id="milford" photo={cover} /></div>
       </Block>
       <div className="space-y-4">
-        <Block title="List rows" note="A page of the print catalogue. The chosen row gets a celadon plate.">
+        <Block title="List rows" note="A page of the print catalogue. The chosen row gets a pine plate.">
           <div className="mb-2 flex items-center gap-2"><CountBadge n={2} /><span className={`${ui} text-sm text-dw-muted`}>trails in Oceania</span></div>
           <CatalogueRow id="milford" force="selected" />
           <CatalogueRow id="tongariro" />
