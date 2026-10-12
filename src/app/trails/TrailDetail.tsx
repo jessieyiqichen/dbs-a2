@@ -120,14 +120,14 @@ export default function TrailDetail({ id }: { id: string }) {
         </div>
       </div>
 
-      <div className="mt-10 grid grid-cols-1 gap-10 sm:mt-24 sm:gap-14 lg:grid-cols-[1.45fr_1fr]">
+      <div className="mt-10 grid grid-cols-1 gap-10 sm:mt-24 lg:grid-cols-[1.45fr_1fr]">
         <div className="min-w-0"><Details h={h} /></div>
         <Plates list={own} onOpen={setViewAt} />
       </div>
 
       <section aria-labelledby="sources-h" className={`${t14} mt-10 sm:mt-20 border-t border-dw-ink/20 pt-6 text-dw-muted`}>
         <h2 id="sources-h" className={`${t12} text-dw-ink`}>Sources</h2>
-        <ul className="mt-3 grid gap-x-8 gap-y-2 sm:grid-cols-2">
+        <ul className="mt-3 grid gap-x-6 gap-y-2 sm:grid-cols-2">
           {[...new Set([...h.sources, ...introSources(h.id), ...stopSources(h.id), ...seasonSources(h.id)])].map((s) => (
             <li key={s}><PlateLink href={s} size="note" external>{sourceLabel(s)}</PlateLink></li>
           ))}
