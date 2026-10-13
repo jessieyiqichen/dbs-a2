@@ -514,7 +514,7 @@ export default function TrailQuestBoard() {
 
         <h2 className={`${outlined} mt-16 text-5xl`}>All {tiles.length} artifacts</h2>
         <ul className="mt-8 columns-2 gap-3 sm:gap-6 lg:columns-3 xl:columns-4">
-          {tiles.filter((t) => t.kind !== "map").map((t, i) => (
+          {tiles.map((t, i) => (
             <li key={i} className="mb-3 break-inside-avoid sm:mb-6">
               <figure className={`relative p-2 sm:p-3 transition-transform duration-200 [transition-timing-function:cubic-bezier(.34,1.56,.64,1)] hover:-translate-y-1.5 hover:-rotate-1 ${tile}`}>
                 {t.kind !== "photo" && (
@@ -534,7 +534,9 @@ export default function TrailQuestBoard() {
                 ) : t.kind === "made" ? (
                   // on a phone the tile is half the screen: the piece keeps its own layout and is shown smaller, like a thumbnail
                   <div className="max-sm:[zoom:.62]">{made[t.id]}</div>
-                ) : null}
+                ) : (
+                  <LevelMap uid="tqm-tile" />
+                )}
                 <figcaption className="mt-2 text-xs font-extrabold leading-snug text-[#4a5a85] sm:text-sm">{t.caption}</figcaption>
               </figure>
             </li>

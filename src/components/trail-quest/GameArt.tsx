@@ -128,17 +128,18 @@ function Banner({ s }: { s: Stop }) {
   );
 }
 
-export function LevelMap() {
+/** `uid` keeps the gradient id unique when the map is drawn more than once on a page. */
+export function LevelMap({ uid = "tqm" }: { uid?: string }) {
   return (
     <svg viewBox="0 0 340 600" className="tq-anim block h-auto w-full" role="img" aria-label="A game map of three floating islands. Stepping stones lead past eight levels, from Tongariro at the bottom to Everest Base Camp, the boss level, on the snowy summit.">
       <defs>
-        <linearGradient id="tqm-sky" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={`${uid}-sky`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#4cc3ff" />
           <stop offset=".6" stopColor="#9ee3ff" />
           <stop offset="1" stopColor="#e6f8ff" />
         </linearGradient>
       </defs>
-      <rect width="340" height="600" rx="22" fill="url(#tqm-sky)" />
+      <rect width="340" height="600" rx="22" fill={`url(#${uid}-sky)`} />
       <IconArt name="sun" x={14} y={14} size={48} />
       {[
         [40, 22, 0],
